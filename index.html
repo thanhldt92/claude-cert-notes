@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ôn chứng chỉ Claude</title>
+<meta name="description" content="Bài học, cheatsheet, quiz và đề thi thử cho các chứng chỉ Claude, viết bằng tiếng Việt.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start">
+      <h1>Ôn chứng chỉ Claude</h1>
+      <button class="iconbtn" type="button" data-theme-toggle>◐ Tự động</button>
+    </div>
+    <p>Bài học theo domain, cheatsheet, quiz và đề thi thử, viết bằng tiếng Việt. Tiến độ được lưu ngay trong trình duyệt của bạn.</p>
+  </header>
+
+  <div class="grid">
+    <section class="card" data-cert="ccar-f">
+      <span class="chip">CCAR-F</span>
+      <h2>Claude Certified Architect – Foundations</h2>
+      <p class="meta">Agent, MCP, Claude Code, prompt và context</p>
+      <span class="badge" data-deadline></span>
+      <div class="cardprog" hidden><span data-text></span><div class="pbar"><i></i></div></div>
+      <ul class="links">
+        <li><a href="ccar-f/notes.html"><b>Bài học</b><small data-lessons>Bài theo domain, cheatsheet, quiz</small></a></li>
+        <li><a href="ccar-f/exam.html"><b>Thi thử</b><small data-exam>Đề có hẹn giờ, chấm điểm theo domain</small></a></li>
+      </ul>
+    </section>
+
+    <section class="card" data-cert="ccao-f">
+      <span class="chip">CCAO-F</span>
+      <h2>Claude Certified Associate – Foundations</h2>
+      <p class="meta">Prompting, đánh giá output, chọn sản phẩm, quy trình, governance</p>
+      <span class="badge" data-deadline></span>
+      <div class="cardprog" hidden><span data-text></span><div class="pbar"><i></i></div></div>
+      <ul class="links">
+        <li><a href="ccao-f/notes.html"><b>Bài học</b><small data-lessons>Bài theo domain, cheatsheet, quiz</small></a></li>
+        <li><a href="ccao-f/exam.html"><b>Thi thử</b><small data-exam>Đề có hẹn giờ, chấm điểm theo domain</small></a></li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <span class="chip">CCDV-F</span>
+      <h2>Claude Developer – Foundations</h2>
+      <p class="meta">Claude API, SDK, tool use</p>
+      <span class="badge mute">Đang soạn</span>
+      <p class="soon">Phần này sẽ được bổ sung sau.</p>
+    </section>
+  </div>
+
+  <footer>Tài liệu tự soạn để ôn thi, không phải tài liệu chính thức của Anthropic. Luôn đối chiếu với exam guide và docs chính thức.</footer>
+</div>
+
+<script src="assets/common.js"></script>
+<script>
+  // Exam dates: "YYYY-MM-DD", or null when not booked yet.
+  var EXAM_DATES = { "ccar-f": null, "ccao-f": null };
+  var CERTS = {};
+</script>
+<script src="ccar-f/data.js"></script>
+<script>CERTS["ccar-f"] = window.CERT_DATA; window.CERT_DATA = null;</script>
+<script src="ccao-f/data.js"></script>
+<script>CERTS["ccao-f"] = window.CERT_DATA; window.CERT_DATA = null;</script>
+<script>
+(function () {
+  document.querySelectorAll(".card[data-cert]").forEach(function (card) {
+    var key = card.dataset.cert, D = CERTS[key];
+
+    var badge = card.querySelector("[data-deadline]");
+    var date = EXAM_DATES[key];
+    if (date) {
+      var p = date.split("-");
+      var days = Math.ceil((new Date(+p[0], +p[1] - 1, +p[2]) - new Date().setHours(0, 0, 0, 0)) / 864e5);
+      badge.className = "badge warn";
+      badge.textContent = "Ngày thi: " + p[2] + "/" + p[1] + "/" + p[0] + (days >= 0 ? " · còn " + days + " ngày" : "");
+    } else {
+      badge.className = "badge mute";
+      badge.textContent = "Chưa chốt ngày thi";
+    }
+
+    if (!D) return;
+    var total = 0, q = 0, mins = 0;
+    D.domains.forEach(function (d) {
+      total += d.lessons.length; q += d.quiz.length;
+      d.lessons.forEach(function (l) { mins += l.minutes || 0; });
+    });
+    card.querySelector("[data-lessons]").textContent =
+      D.domains.length + " domain · " + total + " bài · ~" + Math.round(mins / 6) / 10 + " giờ · " + q + " câu quiz";
+    card.querySelector("[data-exam]").textContent =
+      D.exam.questions + " câu / " + D.exam.minutes + " phút · ngân hàng " + q + " câu";
+
+    var done = CCN.store.get(D.storageKey, {}) || {};
+    var n = 0;
+    D.domains.forEach(function (d) { d.lessons.forEach(function (l) { if (done[l.id]) n++; }); });
+    var hist = CCN.store.get(D.storageKey + "-exam-history", []) || [];
+    var best = hist.reduce(function (m, h) { return Math.max(m, Math.round(h.right / h.n * 100)); }, -1);
+    if (n || best >= 0) {
+      var cp = card.querySelector(".cardprog");
+      cp.hidden = false;
+      cp.querySelector("[data-text]").textContent = "Đã học " + n + "/" + total + " bài" + (best >= 0 ? " · thi thử cao nhất " + best + "%" : "");
+      cp.querySelector("i").style.width = (n / total * 100) + "%";
+    }
+  });
+})();
+</script>
+</body>
+</html>
