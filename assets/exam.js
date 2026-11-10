@@ -15,7 +15,9 @@
 
   // pool: id = "<domainIndex>-<questionIndex>"
   var pool = {};
-  D.domains.forEach(function (d, di) { d.quiz.forEach(function (q, qi) { pool[di + "-" + qi] = q; }); });
+  // exam pool = end-of-domain quiz + extra exam-only bank
+  function qs(d) { return d.quiz.concat(d.bank || []); }
+  D.domains.forEach(function (d, di) { qs(d).forEach(function (q, qi) { pool[di + "-" + qi] = q; }); });
   var poolIds = Object.keys(pool);
 
   function shuffle(a) {
@@ -27,7 +29,7 @@
     n = Math.min(n, poolIds.length);
     var picked = [], left = [];
     D.domains.forEach(function (d, di) {
-      var ids = shuffle(d.quiz.map(function (_, qi) { return di + "-" + qi; }));
+      var ids = shuffle(qs(d).map(function (_, qi) { return di + "-" + qi; }));
       var quota = Math.min(ids.length, Math.round(n * d.weight / 100));
       picked = picked.concat(ids.slice(0, quota));
       left = left.concat(ids.slice(quota));

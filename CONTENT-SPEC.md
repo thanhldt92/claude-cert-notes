@@ -53,3 +53,38 @@ window.CERT_DATA = {
   code.claude.com, support.claude.com, anthropic.com, modelcontextprotocol.io, anthropic.skilljar.com).
 - Quiz: rải đều đáp án đúng giữa A/B/C/D; đáp án đúng không phải lúc nào cũng dài nhất;
   mỗi domain có ít nhất một câu "Choose TWO". Ưu tiên câu theo tình huống (scenario).
+
+## Ngân hàng câu hỏi thi thử (`bank`)
+
+Mỗi domain có thể có thêm mảng `bank` cùng định dạng với `quiz`. Câu trong `quiz` hiện ở cuối domain trên trang bài học;
+câu trong `bank` chỉ dùng cho đề thi thử. Đề thi thử bốc từ cả hai, theo tỉ trọng domain.
+
+## Bài nền tảng (`l-N-0`)
+
+Mỗi domain có thể có một bài mở đầu id `l-N-0`: dựng từ con số 0 những khái niệm cả domain dùng
+(cái này là gì → gồm những phần nào → chạy thế nào), kết thúc bằng bảng "bài nào trong domain đụng vào phần nào".
+
+## File soạn thêm (`<cert>/parts/*.js`)
+
+Khi nhiều người soạn song song, mỗi người viết một file riêng trong `<cert>/parts/`, gọi đúng một lần:
+
+```js
+CERT_PART({
+  lessons: { d1: [ { id: "l-1-0", title: "…", minutes: 12, html: `…`, keypoints: […], sources: […] } ] },
+  bank:    { d1: [ { q: "…", options: […], answer: 0, explain: "…" } ] },
+  cheat:   { d1: [ ["…", "…"] ] }      // tùy chọn: thêm dòng cheatsheet
+});
+```
+
+Kiểm tra một file: `node tools/content.mjs check <cert> <cert>/parts/<file>.js`.
+Gộp tất cả vào data.js: `node tools/content.mjs merge <cert>` (bài được sắp theo id).
+
+## Độ chính xác (bắt buộc)
+
+- Mỗi chi tiết kỹ thuật (tên tham số, giá trị, giới hạn, tên sự kiện, đường dẫn file, cờ CLI, tên model, giá, thời hạn)
+  phải được đối chiếu với trang chính thức **trong lúc viết** (WebFetch), và trang đó nằm trong `sources` của bài.
+- Không xác nhận được thì không viết. Không suy đoán, không "chắc là".
+- Thông tin hay thay đổi ghi "docs hiện ghi … (tháng 11/2026)".
+- Câu hỏi: đáp án đúng phải đúng theo docs chính thức; mỗi phương án sai phải sai rõ ràng (không có hai đáp án cùng bảo vệ được).
+  `explain` nêu lý do cho từng phương án.
+- Lời khuyên thiết kế (không phải fact trong docs) thì viết như lời khuyên, không gán cho docs.

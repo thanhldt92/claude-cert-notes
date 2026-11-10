@@ -93,11 +93,11 @@
     if (!D) return;
     var total = 0, q = 0, mins = 0;
     D.domains.forEach(function (d) {
-      total += d.lessons.length; q += d.quiz.length;
+      total += d.lessons.length; q += d.quiz.length + (d.bank ? d.bank.length : 0);
       d.lessons.forEach(function (l) { mins += l.minutes || 0; });
     });
     card.querySelector("[data-lessons]").textContent =
-      D.domains.length + " domain · " + total + " bài · ~" + Math.round(mins / 6) / 10 + " giờ · " + q + " câu quiz";
+      D.domains.length + " domain · " + total + " bài · ~" + Math.round(mins / 6) / 10 + " giờ · " + q + " câu hỏi";
     card.querySelector("[data-exam]").textContent =
       D.exam.questions + " câu / " + D.exam.minutes + " phút · ngân hàng " + q + " câu";
 

@@ -5,6 +5,8 @@
   if (!D) { document.getElementById("content").textContent = "Không tải được dữ liệu (data.js)."; return; }
 
   var esc = C.esc, el = C.el;
+  // lesson number from its id (l-2-0 -> "2.0"), falling back to position
+  function num(l, n, i) { var m = /^l-(\d+)-(\d+)$/.exec(l.id); return m ? m[1] + "." + m[2] : n + "." + (i + 1); }
   var done = C.store.get(D.storageKey, {}) || {};
   var allLessons = [];
   D.domains.forEach(function (d) { d.lessons.forEach(function (l) { allLessons.push(l.id); }); });
@@ -43,7 +45,7 @@
         return '<a href="' + esc(s.u) + '" target="_blank" rel="noopener">' + esc(s.t || s.u) + "</a>";
       }).join(" · ");
       art.innerHTML =
-        '<summary><span class="ts">' + n + "." + (li + 1) + '</span><h3>' + esc(l.title) + '</h3><span class="min">' +
+        '<summary><span class="ts">' + num(l, n, li) + '</span><h3>' + esc(l.title) + '</h3><span class="min">' +
         (l.minutes || "?") + ' phút</span><span class="chev" aria-hidden="true">›</span></summary>' +
         '<div class="lbody">' + l.html +
         (l.keypoints && l.keypoints.length ? '<div class="keys"><b>Phải nhớ</b><ul>' +
@@ -88,7 +90,7 @@
     var ul = el("ul");
     d.lessons.forEach(function (l, i) {
       ul.appendChild(el("li", null, '<a href="#' + esc(l.id) + '" data-goto="' + esc(l.id) + '"><span class="m"></span><span>' +
-        (di + 1) + "." + (i + 1) + " " + esc(l.title) + "</span></a>"));
+        num(l, di + 1, i) + " " + esc(l.title) + "</span></a>"));
     });
     if (d.cheat && d.cheat.length) ul.appendChild(el("li", { class: "extra" }, '<a href="#cheat-' + d.id + '"><span class="m" style="visibility:hidden"></span><span>Cheatsheet</span></a>'));
     if (d.quiz && d.quiz.length) ul.appendChild(el("li", { class: "extra" }, '<a href="#quiz-' + d.id + '"><span class="m" style="visibility:hidden"></span><span>Quiz</span></a>'));
