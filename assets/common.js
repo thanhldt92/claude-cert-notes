@@ -66,6 +66,8 @@
    *   onChange   – called with the selection array whenever it changes
    *   reveal     – true to render already graded (read-only)
    *   checkable  – true to add a "Kiểm tra" button (notes quiz)
+   *   onGrade    – called with (ok, selection) when the user checks an answer
+   *   meta       – small HTML line shown under the explanation (e.g. related lessons)
    */
   function renderQuestion(q, opts) {
     opts = opts || {};
@@ -121,10 +123,12 @@
         else if (sel.indexOf(i) !== -1) b.classList.add("wrong");
       });
       var ok = sameSet(sel, right);
+      if (opts.onGrade && !opts.reveal) opts.onGrade(ok, sel.slice());
       if (verdict) { verdict.textContent = ok ? "✓ Đúng" : "✗ Chưa đúng"; verdict.className = "verdict " + (ok ? "ok" : "bad"); }
       if (checkBtn) { checkBtn.textContent = "Làm lại"; checkBtn.className = "btn ghost"; checkBtn.disabled = false; }
       if (q.explain) {
-        explainBox = el("div", { class: "explain" }, "<b>Giải thích: </b>" + esc(q.explain));
+        explainBox = el("div", { class: "explain" }, "<b>Giải thích: </b>" + esc(q.explain) +
+          (opts.meta ? '<div class="qmeta">' + opts.meta + "</div>" : ""));
         wrap.appendChild(explainBox);
       }
       return ok;
@@ -145,8 +149,77 @@
     return wrap;
   }
 
+  // Stable id for a question: hash of its text (survives reordering of the bank).
+  function qid(q) {
+    var s = q.q, h = 5381;
+    for (var i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) >>> 0;
+    return "q" + h.toString(36);
+  }
+
+  // Every question of a cert with its domain index and stable id.
+  function allQuestions(D) {
+    var out = [];
+    D.domains.forEach(function (d, di) {
+      d.quiz.forEach(function (q) { out.push({ q: q, di: di, id: qid(q), kind: "quiz" }); });
+      (d.bank || []).forEach(function (q) { out.push({ q: q, di: di, id: qid(q), kind: "bank" }); });
+    });
+    return out;
+  }
+
+  /*
+   * Wrong-answer notebook, per cert: { [qid]: { n: times wrong, last: ms, streak: right answers since, done: bool } }.
+   * A question leaves the active list after 2 correct answers in a row (or when marked as learnt).
+   */
+  function notebook(D) {
+    var key = D.storageKey + "-wrong";
+    function load() { return store.get(key, {}) || {}; }
+    return {
+      all: load,
+      record: function (q, ok) {
+        var nb = load(), id = qid(q), e = nb[id];
+        if (!ok) { e = e || { n: 0 }; e.n++; e.last = Date.now(); e.streak = 0; e.done = false; nb[id] = e; }
+        else if (e) { e.streak = (e.streak || 0) + 1; if (e.streak >= 2) e.done = true; }
+        else return;
+        store.set(key, nb);
+      },
+      setDone: function (id, done) {
+        var nb = load();
+        if (nb[id]) { nb[id].done = done; if (!done) nb[id].streak = 0; store.set(key, nb); }
+      },
+      remove: function (id) { var nb = load(); delete nb[id]; store.set(key, nb); },
+      activeCount: function () { var nb = load(), n = 0; for (var k in nb) if (!nb[k].done) n++; return n; }
+    };
+  }
+
+  function lessonNum(id) {
+    var m = /^l-(\d+)-(\d+)$/.exec(id);
+    return m ? m[1] + "." + m[2] : id;
+  }
+
+  // HTML links to lessons that share a task statement with the question (prefix: "" on notes page, "notes.html" elsewhere).
+  function relatedLinks(D, q, prefix) {
+    if (!q.ts || !q.ts.length) return "";
+    var out = [];
+    D.domains.forEach(function (d) {
+      d.lessons.forEach(function (l) {
+        if (l.ts && l.ts.some(function (t) { return q.ts.indexOf(t) !== -1; }))
+          out.push('<a href="' + (prefix || "") + "#" + l.id + '">' + lessonNum(l.id) + " " + esc(l.title) + "</a>");
+      });
+    });
+    return (q.ts.length ? "Task statement " + q.ts.map(esc).join(", ") : "") +
+      (out.length ? " · Đọc lại: " + out.slice(0, 3).join(" · ") : "");
+  }
+
+  function scenarioOf(D, q) {
+    if (!q.sc || !D.scenarios) return null;
+    for (var i = 0; i < D.scenarios.length; i++) if (D.scenarios[i].id === q.sc) return D.scenarios[i];
+    return null;
+  }
+
   window.CCN = {
+    lessonNum: lessonNum, relatedLinks: relatedLinks, scenarioOf: scenarioOf,
     store: store, esc: esc, el: el, renderQuestion: renderQuestion,
-    answerSet: answerSet, sameSet: sameSet, LETTERS: LETTERS
+    answerSet: answerSet, sameSet: sameSet, LETTERS: LETTERS,
+    qid: qid, allQuestions: allQuestions, notebook: notebook
   };
 })();

@@ -56,6 +56,12 @@ window.CERT_DATA = {
        "t": "Effective context engineering for AI agents",
        "u": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"
       }
+     ],
+     "ts": [
+      "1.1",
+      "1.2",
+      "1.4",
+      "1.5"
      ]
     },
     {
@@ -87,6 +93,9 @@ window.CERT_DATA = {
        "t": "Building effective agents",
        "u": "https://www.anthropic.com/engineering/building-effective-agents"
       }
+     ],
+     "ts": [
+      "1.1"
      ]
     },
     {
@@ -114,6 +123,10 @@ window.CERT_DATA = {
        "t": "Subagents in the SDK",
        "u": "https://code.claude.com/docs/en/agent-sdk/subagents"
       }
+     ],
+     "ts": [
+      "1.2",
+      "1.3"
      ]
     },
     {
@@ -145,6 +158,10 @@ window.CERT_DATA = {
        "t": "How the agent loop works (hooks)",
        "u": "https://code.claude.com/docs/en/agent-sdk/agent-loop"
       }
+     ],
+     "ts": [
+      "1.4",
+      "1.5"
      ]
     },
     {
@@ -172,6 +189,11 @@ window.CERT_DATA = {
        "t": "Run Claude Code programmatically",
        "u": "https://code.claude.com/docs/en/headless"
       }
+     ],
+     "ts": [
+      "1.7",
+      "1.4",
+      "5.2"
      ]
     },
     {
@@ -199,6 +221,10 @@ window.CERT_DATA = {
        "t": "Prompting best practices (Chain complex prompts)",
        "u": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices"
       }
+     ],
+     "ts": [
+      "1.6",
+      "1.2"
      ]
     },
     {
@@ -226,6 +252,9 @@ window.CERT_DATA = {
        "t": "Configure permissions (Agent SDK)",
        "u": "https://code.claude.com/docs/en/agent-sdk/permissions"
       }
+     ],
+     "ts": [
+      "1.3"
      ]
     },
     {
@@ -253,6 +282,9 @@ window.CERT_DATA = {
        "t": "Hooks reference (PostToolUse decision control)",
        "u": "https://code.claude.com/docs/en/hooks"
       }
+     ],
+     "ts": [
+      "1.5"
      ]
     }
    ],
@@ -332,7 +364,11 @@ window.CERT_DATA = {
       "Stop the loop after a fixed number of iterations instead of inspecting the response content."
      ],
      "answer": 1,
-     "explain": "Claude hay viết một câu dẫn rồi mới gọi tool trong cùng response, nên dùng 'có text' làm điều kiện dừng là sai. Tín hiệu đúng là stop_reason: tool_use thì chạy tool rồi lặp, end_turn thì dừng. A không liên quan, vì response không bị cắt. C là vá bằng prompt, dễ gãy và không xử lý gốc. D biến lưới an toàn thành điều kiện dừng chính, vừa có thể dừng sớm vừa phí lượt."
+     "explain": "Claude hay viết một câu dẫn rồi mới gọi tool trong cùng response, nên dùng 'có text' làm điều kiện dừng là sai. Tín hiệu đúng là stop_reason: tool_use thì chạy tool rồi lặp, end_turn thì dừng. A không liên quan, vì response không bị cắt. C là vá bằng prompt, dễ gãy và không xử lý gốc. D biến lưới an toàn thành điều kiện dừng chính, vừa có thể dừng sớm vừa phí lượt.",
+     "sc": "s1",
+     "ts": [
+      "1.1"
+     ]
     },
     {
      "q": "An airline support agent may issue refunds through a process_refund tool. Policy says refunds above $500 require a human supervisor. The rule is in the system prompt and is followed about 97% of the time, but several large refunds were issued automatically last month. What should the architect do?",
@@ -343,7 +379,11 @@ window.CERT_DATA = {
       "Enforce the limit in code, e.g. a PreToolUse hook or a check inside process_refund that routes amounts above $500 to a human."
      ],
      "answer": 3,
-     "explain": "Quy tắc tài chính bắt buộc cần cơ chế xác định. Chặn trong code (hook hoặc kiểm tra trong tool) đảm bảo 100% lời gọi vượt ngưỡng đi tới người duyệt. A và B chỉ tăng xác suất tuân thủ, vẫn có thể sót. C dựa vào điểm tự tin do model tự báo, vốn không được hiệu chuẩn và không liên quan tới số tiền."
+     "explain": "Quy tắc tài chính bắt buộc cần cơ chế xác định. Chặn trong code (hook hoặc kiểm tra trong tool) đảm bảo 100% lời gọi vượt ngưỡng đi tới người duyệt. A và B chỉ tăng xác suất tuân thủ, vẫn có thể sót. C dựa vào điểm tự tin do model tự báo, vốn không được hiệu chuẩn và không liên quan tới số tiền.",
+     "sc": "s1",
+     "ts": [
+      "1.5"
+     ]
     },
     {
      "q": "A multi-agent research system is asked to report on \"grid-scale energy storage.\" The final report discusses only lithium-ion batteries. Logs show each subagent completed its assigned search thoroughly and returned well-sourced findings. What is the MOST likely root cause?",
@@ -354,7 +394,11 @@ window.CERT_DATA = {
       "Subagents need access to the coordinator's full conversation history so they can see the overall goal and broaden their searches on their own."
      ],
      "answer": 0,
-     "explain": "Từng subagent làm tốt phần được giao, vậy mà cả mảng bị thiếu. Lỗi nằm ở bước chia việc của coordinator. B sẽ làm chất lượng tìm kiếm kém, không giải thích được việc thiếu mảng khi log cho thấy kết quả tốt. C không có dấu hiệu gì trong log. D không đúng hướng: phạm vi do lời giao việc quyết định, lịch sử hội thoại không mở rộng được nó."
+     "explain": "Từng subagent làm tốt phần được giao, vậy mà cả mảng bị thiếu. Lỗi nằm ở bước chia việc của coordinator. B sẽ làm chất lượng tìm kiếm kém, không giải thích được việc thiếu mảng khi log cho thấy kết quả tốt. C không có dấu hiệu gì trong log. D không đúng hướng: phạm vi do lời giao việc quyết định, lịch sử hội thoại không mở rộng được nó.",
+     "sc": "s3",
+     "ts": [
+      "1.2"
+     ]
     },
     {
      "q": "A coordinator agent delegates to a custom subagent (not a fork) with the prompt \"Review the contracts we discussed and flag any risky clauses.\" The subagent returns a generic list of common contract risks unrelated to the actual files. What is the BEST change?",
@@ -365,7 +409,10 @@ window.CERT_DATA = {
       "Raise the subagent's maximum turn count so it has time to search for the earlier discussion."
      ],
      "answer": 2,
-     "explain": "Subagent bắt đầu với context mới. Thứ duy nhất nó nhận là prompt giao việc, nên 'các hợp đồng ta vừa bàn' là vô nghĩa với nó. Phải ghi rõ đường dẫn, tiêu chí và định dạng. A và B không cung cấp được thông tin còn thiếu. D cũng vậy: subagent không có cách nào 'tìm' cuộc trao đổi của agent cha."
+     "explain": "Subagent bắt đầu với context mới. Thứ duy nhất nó nhận là prompt giao việc, nên 'các hợp đồng ta vừa bàn' là vô nghĩa với nó. Phải ghi rõ đường dẫn, tiêu chí và định dạng. A và B không cung cấp được thông tin còn thiếu. D cũng vậy: subagent không có cách nào 'tìm' cuộc trao đổi của agent cha.",
+     "ts": [
+      "1.3"
+     ]
     },
     {
      "q": "You are designing escalation rules for an e-commerce support agent. Which TWO conditions are the MOST appropriate triggers for handing the case to a human? (Choose TWO.)",
@@ -380,7 +427,11 @@ window.CERT_DATA = {
       0,
       3
      ],
-     "explain": "(Lời khuyên thiết kế, không phải quy định trong docs.) Yêu cầu rõ ràng của khách và trường hợp chính sách không bao quát là hai tín hiệu đáng tin: agent không được tự bịa chính sách và phải tôn trọng mong muốn của khách. B: khách bực không có nghĩa là agent không giải quyết được. C: điểm tự tin model tự báo không được hiệu chuẩn. E: số lượt là ngưỡng tùy tiện, không phản ánh độ khó của vấn đề."
+     "explain": "(Lời khuyên thiết kế, không phải quy định trong docs.) Yêu cầu rõ ràng của khách và trường hợp chính sách không bao quát là hai tín hiệu đáng tin: agent không được tự bịa chính sách và phải tôn trọng mong muốn của khách. B: khách bực không có nghĩa là agent không giải quyết được. C: điểm tự tin model tự báo không được hiệu chuẩn. E: số lượt là ngưỡng tùy tiện, không phản ánh độ khó của vấn đề.",
+     "sc": "s1",
+     "ts": [
+      "5.2"
+     ]
     },
     {
      "q": "Using the Claude Agent SDK, a developer has a session in which the agent analyzed a legacy payment module. She wants to explore two different refactoring strategies from that same analysis without either attempt polluting the original session. What should she do?",
@@ -391,7 +442,11 @@ window.CERT_DATA = {
       "Resume the same session ID from two processes at once so both strategies share one history."
      ],
      "answer": 1,
-     "explain": "Fork tạo session mới có bản sao lịch sử, còn bản gốc giữ nguyên. Đây đúng là trường hợp 'thử hướng khác từ cùng một điểm'. A tốn token và dễ thiếu sót. C nối tiếp vào cùng một session, nên hai hướng trộn vào nhau. D làm hai hướng ghi chồng lên cùng một lịch sử. Lưu ý: fork chỉ rẽ nhánh hội thoại, còn file sửa thì vẫn là thật."
+     "explain": "Fork tạo session mới có bản sao lịch sử, còn bản gốc giữ nguyên. Đây đúng là trường hợp 'thử hướng khác từ cùng một điểm'. A tốn token và dễ thiếu sót. C nối tiếp vào cùng một session, nên hai hướng trộn vào nhau. D làm hai hướng ghi chồng lên cùng một lịch sử. Lưu ý: fork chỉ rẽ nhánh hội thoại, còn file sửa thì vẫn là thật.",
+     "sc": "s4",
+     "ts": [
+      "1.7"
+     ]
     },
     {
      "q": "A developer resumes yesterday's Claude Code session about a service's API layer. Overnight, teammates merged changes to four of the files the agent had read. The agent now references function signatures that no longer exist. What is the BEST next step?",
@@ -402,7 +457,11 @@ window.CERT_DATA = {
       "Run /compact so that outdated tool results are automatically discarded and replaced with the current contents of the files on disk."
      ],
      "answer": 0,
-     "explain": "Kết quả tool cũ trong lịch sử đã lỗi thời. Phải chỉ rõ file nào đã đổi để agent đọc lại, hoặc mở session mới với bản tóm tắt có cấu trúc. B sai vì session và fork lưu hội thoại, không lưu hệ thống file. C không làm dữ liệu cũ đúng trở lại. D: compaction chỉ tóm tắt lịch sử, không đọc lại file."
+     "explain": "Kết quả tool cũ trong lịch sử đã lỗi thời. Phải chỉ rõ file nào đã đổi để agent đọc lại, hoặc mở session mới với bản tóm tắt có cấu trúc. B sai vì session và fork lưu hội thoại, không lưu hệ thống file. C không làm dữ liệu cũ đúng trở lại. D: compaction chỉ tóm tắt lịch sử, không đọc lại file.",
+     "sc": "s2",
+     "ts": [
+      "1.7"
+     ]
     },
     {
      "q": "A team adds a PreToolUse hook in .claude/settings.json to stop Claude Code from running Bash commands that touch production config. The script detects the pattern, prints an error message to stderr, and exits with code 1, but the commands still run. Why?",
@@ -413,7 +472,11 @@ window.CERT_DATA = {
       "Exit code 1 is a non-blocking error; blocking requires exit code 2 or a deny permission decision."
      ],
      "answer": 3,
-     "explain": "Theo docs hooks, exit 2 là mã chặn (stderr thành lý do). Các mã khác như 1 (khi stdout không phải JSON hợp lệ, như ở đây) là lỗi không chặn, hành động vẫn chạy. A sai: 'Bash' là chuỗi khớp chính xác hợp lệ. B ngược: PreToolUse mới chặn được, còn PostToolUse chạy khi tool đã xong. C sai: .claude/settings.json là vị trí cấp project hợp lệ."
+     "explain": "Theo docs hooks, exit 2 là mã chặn (stderr thành lý do). Các mã khác như 1 (khi stdout không phải JSON hợp lệ, như ở đây) là lỗi không chặn, hành động vẫn chạy. A sai: 'Bash' là chuỗi khớp chính xác hợp lệ. B ngược: PreToolUse mới chặn được, còn PostToolUse chạy khi tool đã xong. C sai: .claude/settings.json là vị trí cấp project hợp lệ.",
+     "sc": "s2",
+     "ts": [
+      "1.5"
+     ]
     }
    ],
    "bank": [
@@ -426,7 +489,10 @@ window.CERT_DATA = {
       "Handle max_tokens exactly like end_turn and show whatever text was generated to the user as the final answer."
      ],
      "answer": 0,
-     "explain": "Đúng: theo trang Stop reasons, max_tokens nghĩa là response chạm giới hạn max_tokens; docs nói rõ nếu response bị cắt chứa một khối tool_use dở dang thì phải gửi lại request với max_tokens cao hơn để nhận đủ tool call. Sai: \"chạy phần input dở dang\" — input bị cắt giữa chừng, không hợp lệ, chạy nó là ghi báo cáo hỏng. \"Đặt tool_choice none\" — bỏ luôn yêu cầu gọi tool, không sửa nguyên nhân là thiếu token. \"Coi như end_turn\" — max_tokens là bị cắt, không phải hoàn tất; trả nửa câu trả lời cho người dùng là sai."
+     "explain": "Đúng: theo trang Stop reasons, max_tokens nghĩa là response chạm giới hạn max_tokens; docs nói rõ nếu response bị cắt chứa một khối tool_use dở dang thì phải gửi lại request với max_tokens cao hơn để nhận đủ tool call. Sai: \"chạy phần input dở dang\" — input bị cắt giữa chừng, không hợp lệ, chạy nó là ghi báo cáo hỏng. \"Đặt tool_choice none\" — bỏ luôn yêu cầu gọi tool, không sửa nguyên nhân là thiếu token. \"Coi như end_turn\" — max_tokens là bị cắt, không phải hoàn tất; trả nửa câu trả lời cho người dùng là sai.",
+     "ts": [
+      "1.1"
+     ]
     },
     {
      "q": "A research assistant uses Anthropic's server-side web search tool. For broad questions, some responses arrive with stop_reason \"pause_turn\" and a server_tool_use block that has no result yet, and the app shows these to users as final answers. What is the correct handling?",
@@ -437,7 +503,10 @@ window.CERT_DATA = {
       "Raise max_tokens, because pause_turn means the output budget ran out before the search could finish."
      ],
      "answer": 1,
-     "explain": "Đúng: docs Stop reasons ghi pause_turn xảy ra khi vòng lặp server-side chạy server tool (như web search) chạm giới hạn số vòng (docs hiện ghi mặc định 10 vòng mỗi request, tháng 11/2026); cách xử lý là gửi lại response như cũ để Claude làm tiếp. Sai: \"tự chạy search rồi gửi tool_result\" — đó là cách cho client tool (stop_reason tool_use); docs nói một response chờ client tool không bao giờ có pause_turn. \"Coi là refusal\" — refusal là stop_reason riêng. \"Tăng max_tokens\" — hết token là max_tokens, không phải pause_turn."
+     "explain": "Đúng: docs Stop reasons ghi pause_turn xảy ra khi vòng lặp server-side chạy server tool (như web search) chạm giới hạn số vòng (docs hiện ghi mặc định 10 vòng mỗi request, tháng 11/2026); cách xử lý là gửi lại response như cũ để Claude làm tiếp. Sai: \"tự chạy search rồi gửi tool_result\" — đó là cách cho client tool (stop_reason tool_use); docs nói một response chờ client tool không bao giờ có pause_turn. \"Coi là refusal\" — refusal là stop_reason riêng. \"Tăng max_tokens\" — hết token là max_tokens, không phải pause_turn.",
+     "ts": [
+      "1.1"
+     ]
     },
     {
      "q": "A support agent often calls get_order and get_shipment in the same response. The developer's loop appends each tool_result as its own separate user message. Over time Claude stops making parallel calls and latency grows. What is the BEST fix?",
@@ -448,7 +517,11 @@ window.CERT_DATA = {
       "Repeat the instruction to call tools in parallel inside every user message instead of only in the system prompt."
      ],
      "answer": 2,
-     "explain": "Đúng: docs Parallel tool use nói lỗi phổ biến nhất là định dạng kết quả sai, cụ thể là \"một user message riêng cho mỗi tool result\", điều này \"dạy\" Claude tránh gọi song song; phải trả mọi tool_result trong một user message, ghép bằng tool_use_id, đặt trước mọi text. Sai: \"disable_parallel_tool_use\" — tắt hẳn gọi song song, ngược mục tiêu. \"Chèn assistant message ở giữa\" — docs yêu cầu tool_result phải đi ngay sau tool_use, không được chen message. \"Nhắc lại trong mỗi user message\" — không sửa lỗi định dạng gốc."
+     "explain": "Đúng: docs Parallel tool use nói lỗi phổ biến nhất là định dạng kết quả sai, cụ thể là \"một user message riêng cho mỗi tool result\", điều này \"dạy\" Claude tránh gọi song song; phải trả mọi tool_result trong một user message, ghép bằng tool_use_id, đặt trước mọi text. Sai: \"disable_parallel_tool_use\" — tắt hẳn gọi song song, ngược mục tiêu. \"Chèn assistant message ở giữa\" — docs yêu cầu tool_result phải đi ngay sau tool_use, không được chen message. \"Nhắc lại trong mỗi user message\" — không sửa lỗi định dạng gốc.",
+     "sc": "s1",
+     "ts": [
+      "1.1"
+     ]
     },
     {
      "q": "In a custom agent loop, after each tool runs, the code sends a user message containing the tool_result block followed by a text block saying \"Here is the result.\" The agent increasingly returns empty responses with stop_reason \"end_turn\" right after tool results. What is the MOST likely cause?",
@@ -459,7 +532,10 @@ window.CERT_DATA = {
       "The text added after each tool_result teaches Claude to end its turn; send only the tool_result blocks."
      ],
      "answer": 3,
-     "explain": "Đúng: trang Stop reasons (mục Empty responses with end_turn) nêu nguyên nhân phổ biến là thêm text block ngay sau tool_result, lịch sử khi đó luôn có text của user sau tool result nên Claude kết thúc lượt theo mẫu đó; cách tránh là không thêm text sau tool_result. Sai: \"context gần đầy\" — không phải nguyên nhân docs nêu, và đầy context thì không sinh response rỗng kiểu này. \"is_error: false\" — is_error là tùy chọn, bỏ trống không làm tool bị từ chối. \"stop sequence\" — nếu stop sequence kích hoạt thì stop_reason là stop_sequence, không phải end_turn."
+     "explain": "Đúng: trang Stop reasons (mục Empty responses with end_turn) nêu nguyên nhân phổ biến là thêm text block ngay sau tool_result, lịch sử khi đó luôn có text của user sau tool result nên Claude kết thúc lượt theo mẫu đó; cách tránh là không thêm text sau tool_result. Sai: \"context gần đầy\" — không phải nguyên nhân docs nêu, và đầy context thì không sinh response rỗng kiểu này. \"is_error: false\" — is_error là tùy chọn, bỏ trống không làm tool bị từ chối. \"stop sequence\" — nếu stop sequence kích hoạt thì stop_reason là stop_sequence, không phải end_turn.",
+     "ts": [
+      "1.1"
+     ]
     },
     {
      "q": "Which TWO statements about stop_reason in the Messages API are correct? (Choose TWO.)",
@@ -474,7 +550,10 @@ window.CERT_DATA = {
       0,
       3
      ],
-     "explain": "Đúng: docs ghi refusal là response HTTP 200 bình thường (không phải lỗi) nên phải tự kiểm tra stop_reason; tool_use nghĩa là Claude đang gọi tool, bạn chạy tool và gửi tool_result. Sai: max_tokens là stop_reason trong response thành công, docs phân biệt rõ stop_reason với lỗi 4xx/5xx. end_turn vẫn có thể đi kèm response rỗng (docs có mục riêng về empty responses). pause_turn chỉ dành cho vòng lặp server tool; khi chờ client tool thì stop_reason luôn là tool_use."
+     "explain": "Đúng: docs ghi refusal là response HTTP 200 bình thường (không phải lỗi) nên phải tự kiểm tra stop_reason; tool_use nghĩa là Claude đang gọi tool, bạn chạy tool và gửi tool_result. Sai: max_tokens là stop_reason trong response thành công, docs phân biệt rõ stop_reason với lỗi 4xx/5xx. end_turn vẫn có thể đi kèm response rỗng (docs có mục riêng về empty responses). pause_turn chỉ dành cho vòng lặp server tool; khi chờ client tool thì stop_reason luôn là tool_use.",
+     "ts": [
+      "1.1"
+     ]
     },
     {
      "q": "Using the Claude Agent SDK, a developer sets max_turns=3 for a task that needs exactly three tool-calling turns (run tests, read files, edit and re-run). Every run ends with a ResultMessage of subtype error_max_turns and no final summary. Why?",
@@ -485,7 +564,11 @@ window.CERT_DATA = {
       "max_turns is only enforced together with max_budget_usd, so the budget limit was reached and reported as turns."
      ],
      "answer": 0,
-     "explain": "Đúng: trang Agent loop định nghĩa turn là một vòng qua loop và hướng dẫn đếm mỗi turn có tool call cộng thêm một cho câu trả lời cuối chỉ có text; thiếu turn đó thì run kết thúc bằng error_max_turns và không có câu trả lời cuối. Sai: \"đếm từng tool call\" — một turn có thể có nhiều tool call. \"Dành một turn cho khởi tạo\" — init là SystemMessage, không phải turn. \"Chỉ áp dụng cùng max_budget_usd\" — hai giới hạn độc lập, mỗi cái có subtype riêng (error_max_turns, error_max_budget_usd)."
+     "explain": "Đúng: trang Agent loop định nghĩa turn là một vòng qua loop và hướng dẫn đếm mỗi turn có tool call cộng thêm một cho câu trả lời cuối chỉ có text; thiếu turn đó thì run kết thúc bằng error_max_turns và không có câu trả lời cuối. Sai: \"đếm từng tool call\" — một turn có thể có nhiều tool call. \"Dành một turn cho khởi tạo\" — init là SystemMessage, không phải turn. \"Chỉ áp dụng cùng max_budget_usd\" — hai giới hạn độc lập, mỗi cái có subtype riêng (error_max_turns, error_max_budget_usd).",
+     "sc": "s4",
+     "ts": [
+      "1.1"
+     ]
     },
     {
      "q": "An overnight Agent SDK job that analyzes a large repository stops with a result of subtype error_max_budget_usd after completing most of the analysis. The team wants to finish without redoing the work already done. What should they do?",
@@ -496,7 +579,11 @@ window.CERT_DATA = {
       "Raise the budget in the settings file; the stopped run picks up the new value and resumes on its own."
      ],
      "answer": 1,
-     "explain": "Đúng: trang Sessions liệt kê \"Recover from a limit\" là lý do điển hình để resume: run kết thúc với error_max_turns hoặc error_max_budget_usd thì resume với giới hạn cao hơn, agent giữ nguyên context cũ. Sai: \"query mới cùng prompt\" — mỗi query() mặc định là session mới, không tự bỏ qua việc đã làm. \"Bỏ max_turns\" — error_max_budget_usd là do chi phí ước tính chạm mức trần, không liên quan turn. \"Sửa settings rồi run tự chạy tiếp\" — run đã kết thúc; không có cơ chế tự resume."
+     "explain": "Đúng: trang Sessions liệt kê \"Recover from a limit\" là lý do điển hình để resume: run kết thúc với error_max_turns hoặc error_max_budget_usd thì resume với giới hạn cao hơn, agent giữ nguyên context cũ. Sai: \"query mới cùng prompt\" — mỗi query() mặc định là session mới, không tự bỏ qua việc đã làm. \"Bỏ max_turns\" — error_max_budget_usd là do chi phí ước tính chạm mức trần, không liên quan turn. \"Sửa settings rồi run tự chạy tiếp\" — run đã kết thúc; không có cơ chế tự resume.",
+     "sc": "s4",
+     "ts": [
+      "1.7"
+     ]
     },
     {
      "q": "In a multi-agent system, a code-generation subagent produces several large source files. They are passed through the coordinator's conversation to a packaging subagent, and the final files contain small but damaging changes, while the coordinator's context fills quickly. What is the BEST design change?",
@@ -507,7 +594,10 @@ window.CERT_DATA = {
       "Move the coordinator to a model with a larger context window so the full files fit alongside its history."
      ],
      "answer": 2,
-     "explain": "Đúng: bài \"How we built our multi-agent research system\" khuyên cho subagent ghi output ra hệ thống lưu trữ bên ngoài rồi chuyển tham chiếu nhẹ về coordinator, để tránh \"trò chơi truyền tin\" làm mất/biến đổi thông tin và giảm token phải chép qua lịch sử hội thoại. Sai: \"chép nguyên văn trong XML\" — vẫn đi qua coordinator, vẫn tốn context và vẫn có rủi ro biến đổi. \"Gộp vào coordinator\" — mất tính chuyên biệt, context coordinator còn phình hơn. \"Context lớn hơn\" — chỉ hoãn vấn đề, không sửa việc nội dung bị sao chép qua nhiều bước."
+     "explain": "Đúng: bài \"How we built our multi-agent research system\" khuyên cho subagent ghi output ra hệ thống lưu trữ bên ngoài rồi chuyển tham chiếu nhẹ về coordinator, để tránh \"trò chơi truyền tin\" làm mất/biến đổi thông tin và giảm token phải chép qua lịch sử hội thoại. Sai: \"chép nguyên văn trong XML\" — vẫn đi qua coordinator, vẫn tốn context và vẫn có rủi ro biến đổi. \"Gộp vào coordinator\" — mất tính chuyên biệt, context coordinator còn phình hơn. \"Context lớn hơn\" — chỉ hoãn vấn đề, không sửa việc nội dung bị sao chép qua nhiều bước.",
+     "ts": [
+      "1.3"
+     ]
     },
     {
      "q": "A research coordinator spawns ten or more subagents even for simple fact-finding questions such as \"When was this company founded?\", which drives up cost and latency. What is the MOST effective fix?",
@@ -518,7 +608,11 @@ window.CERT_DATA = {
       "Add effort-scaling rules to the coordinator's prompt, e.g. one agent and a few tool calls for simple facts."
      ],
      "answer": 3,
-     "explain": "Đúng: bài multi-agent research của Anthropic kể agent ban đầu khó tự ước lượng công sức, nên họ nhúng quy tắc scale vào prompt: câu hỏi fact đơn giản chỉ 1 agent với 3–10 tool call, so sánh trực tiếp 2–4 subagent, nghiên cứu phức tạp có thể hơn 10 subagent. Sai: \"cố định 3 subagent\" — lãng phí với câu đơn giản và thiếu với câu phức tạp. \"Bỏ coordinator\" — mất lợi ích song song cho truy vấn rộng. \"Subagent tự quyết\" — subagent đã được tạo (đã tốn chi phí) và không biết việc của nhau; quyết định phải nằm ở coordinator."
+     "explain": "Đúng: bài multi-agent research của Anthropic kể agent ban đầu khó tự ước lượng công sức, nên họ nhúng quy tắc scale vào prompt: câu hỏi fact đơn giản chỉ 1 agent với 3–10 tool call, so sánh trực tiếp 2–4 subagent, nghiên cứu phức tạp có thể hơn 10 subagent. Sai: \"cố định 3 subagent\" — lãng phí với câu đơn giản và thiếu với câu phức tạp. \"Bỏ coordinator\" — mất lợi ích song song cho truy vấn rộng. \"Subagent tự quyết\" — subagent đã được tạo (đã tốn chi phí) và không biết việc của nhau; quyết định phải nằm ở coordinator.",
+     "sc": "s3",
+     "ts": [
+      "1.2"
+     ]
     },
     {
      "q": "A coordinator delegates \"research remote-work trends\" to three subagents with that same one-line instruction. Two of them return nearly identical summaries of the same 2024 surveys, and none covers productivity studies. What should change in how the coordinator delegates?",
@@ -529,7 +623,11 @@ window.CERT_DATA = {
       "Add a deduplication step after synthesis that removes repeated findings from the final report."
      ],
      "answer": 0,
-     "explain": "Đúng: bài multi-agent research nêu mỗi subagent cần mục tiêu, định dạng output, hướng dẫn về tool/nguồn và ranh giới nhiệm vụ rõ ràng; giao việc ngắn gọn mơ hồ khiến các agent làm trùng và bỏ sót. Sai: \"model lớn hơn\" — vấn đề là cách giao việc, không phải năng lực. \"Thêm subagent\" — cùng một câu giao việc thì càng trùng nhiều hơn, không đảm bảo phủ phần thiếu. \"Khử trùng lặp sau tổng hợp\" — chữa triệu chứng; phần nghiên cứu bị thiếu vẫn thiếu."
+     "explain": "Đúng: bài multi-agent research nêu mỗi subagent cần mục tiêu, định dạng output, hướng dẫn về tool/nguồn và ranh giới nhiệm vụ rõ ràng; giao việc ngắn gọn mơ hồ khiến các agent làm trùng và bỏ sót. Sai: \"model lớn hơn\" — vấn đề là cách giao việc, không phải năng lực. \"Thêm subagent\" — cùng một câu giao việc thì càng trùng nhiều hơn, không đảm bảo phủ phần thiếu. \"Khử trùng lặp sau tổng hợp\" — chữa triệu chứng; phần nghiên cứu bị thiếu vẫn thiếu.",
+     "sc": "s3",
+     "ts": [
+      "1.2"
+     ]
     },
     {
      "q": "A lead agent exposes a delegate_research tool, and your harness runs one subagent per call. For four independent subtopics, the agent calls the tool once per response and waits for each result before the next call, so runtime is the sum of all four. Which change BEST reduces runtime?",
@@ -540,7 +638,11 @@ window.CERT_DATA = {
       "Lower the overall spend limit so the lead agent is pushed to finish each subtopic more quickly."
      ],
      "answer": 1,
-     "explain": "Đúng: docs Parallel tool use cho phép một response chứa nhiều tool_use và để bạn tự chọn chạy đồng thời; bài multi-agent research ghi việc cho lead agent tạo 3–5 subagent song song (thay vì tuần tự) cắt thời gian nghiên cứu tới 90% với truy vấn phức tạp. Sai: \"tăng giới hạn turn\" — không làm các subagent chạy cùng lúc. \"Một subagent làm cả bốn\" — quay lại tuần tự và dồn context. \"Giảm ngân sách\" — chỉ làm run dừng sớm, không song song hóa."
+     "explain": "Đúng: docs Parallel tool use cho phép một response chứa nhiều tool_use và để bạn tự chọn chạy đồng thời; bài multi-agent research ghi việc cho lead agent tạo 3–5 subagent song song (thay vì tuần tự) cắt thời gian nghiên cứu tới 90% với truy vấn phức tạp. Sai: \"tăng giới hạn turn\" — không làm các subagent chạy cùng lúc. \"Một subagent làm cả bốn\" — quay lại tuần tự và dồn context. \"Giảm ngân sách\" — chỉ làm run dừng sớm, không song song hóa.",
+     "sc": "s3",
+     "ts": [
+      "1.3"
+     ]
     },
     {
      "q": "A coordinator's system prompt defines a strict citation format. Subagents defined with AgentDefinition return findings without that format; the developer assumed they inherit the coordinator's instructions. What is the BEST fix?",
@@ -551,7 +653,11 @@ window.CERT_DATA = {
       "Increase the subagents' maxTurns so they have enough time to infer the format from earlier coordinator results."
      ],
      "answer": 2,
-     "explain": "Đúng: trang Subagents in the SDK có bảng \"subagent không nhận\": lịch sử hội thoại và tool result của parent, và system prompt của parent; subagent (không phải fork) chỉ có prompt riêng của nó (AgentDefinition.prompt) và chuỗi prompt của Agent tool. Vì vậy quy tắc phải nằm ở một trong hai chỗ đó. Sai: \"đưa vào user message đầu\" — subagent cũng không thấy lịch sử hội thoại. \"model: inherit\" — chỉ kế thừa model, không kế thừa prompt. \"Tăng maxTurns\" — subagent không có cách nào thấy kết quả cũ của coordinator."
+     "explain": "Đúng: trang Subagents in the SDK có bảng \"subagent không nhận\": lịch sử hội thoại và tool result của parent, và system prompt của parent; subagent (không phải fork) chỉ có prompt riêng của nó (AgentDefinition.prompt) và chuỗi prompt của Agent tool. Vì vậy quy tắc phải nằm ở một trong hai chỗ đó. Sai: \"đưa vào user message đầu\" — subagent cũng không thấy lịch sử hội thoại. \"model: inherit\" — chỉ kế thừa model, không kế thừa prompt. \"Tăng maxTurns\" — subagent không có cách nào thấy kết quả cũ của coordinator.",
+     "sc": "s3",
+     "ts": [
+      "1.3"
+     ]
     },
     {
      "q": "An agent queries three MCP servers that return dates in different formats (Unix epochs, ISO 8601, \"MM/DD/YY\") along with numeric status codes, and Claude sometimes misorders events. The team wants every result normalized before Claude sees it, without changing the servers. What is the BEST approach in Claude Code?",
@@ -562,7 +668,10 @@ window.CERT_DATA = {
       "A PostToolUse hook on those MCP tools that rewrites each result with updatedToolOutput into one format."
      ],
      "answer": 3,
-     "explain": "Đúng: theo Hooks reference, PostToolUse có trường updatedToolOutput thay output của tool trước khi gửi cho Claude (với MCP tool, output được chuyển tiếp không qua kiểm schema), và matcher dạng mcp__server__.* bắt được tool của MCP server. Đây là cách chuẩn hóa tất định. Sai: \"PreToolUse đổi input\" — vấn đề nằm ở output. \"CLAUDE.md\" — chỉ là lời dặn, mô hình có thể bỏ sót. \"Stop hook\" — phát hiện muộn ở cuối lượt, không chuẩn hóa dữ liệu Claude đã dùng để suy luận."
+     "explain": "Đúng: theo Hooks reference, PostToolUse có trường updatedToolOutput thay output của tool trước khi gửi cho Claude (với MCP tool, output được chuyển tiếp không qua kiểm schema), và matcher dạng mcp__server__.* bắt được tool của MCP server. Đây là cách chuẩn hóa tất định. Sai: \"PreToolUse đổi input\" — vấn đề nằm ở output. \"CLAUDE.md\" — chỉ là lời dặn, mô hình có thể bỏ sót. \"Stop hook\" — phát hiện muộn ở cuối lượt, không chuẩn hóa dữ liệu Claude đã dùng để suy luận.",
+     "ts": [
+      "1.5"
+     ]
     },
     {
      "q": "A team adds a PreToolUse hook with the matcher \"mcp__billing\" to audit every call to their billing MCP server's tools (for example mcp__billing__refund and mcp__billing__get_invoice). The hook never fires. Why?",
@@ -573,7 +682,10 @@ window.CERT_DATA = {
       "The matcher has to use the server's URL rather than its name, because MCP tools are resolved per endpoint."
      ],
      "answer": 0,
-     "explain": "Đúng: Hooks reference ghi matcher chỉ gồm chữ, số, _, -, khoảng trắng, dấu phẩy, | được so khớp chính xác; tên MCP tool có dạng mcp__<server>__<tool>, và docs nói rõ \"mcp__memory\" không khớp tool nào, phải viết \"mcp__memory__.*\" (đuôi .* là bắt buộc). Sai: MCP tool xuất hiện như tool thường trong PreToolUse, PostToolUse, PermissionRequest…. Hook khai báo trong settings (hoặc plugin, skill, subagent frontmatter), không trong .mcp.json. Matcher của tool event lọc theo tool_name, không theo URL."
+     "explain": "Đúng: Hooks reference ghi matcher chỉ gồm chữ, số, _, -, khoảng trắng, dấu phẩy, | được so khớp chính xác; tên MCP tool có dạng mcp__<server>__<tool>, và docs nói rõ \"mcp__memory\" không khớp tool nào, phải viết \"mcp__memory__.*\" (đuôi .* là bắt buộc). Sai: MCP tool xuất hiện như tool thường trong PreToolUse, PostToolUse, PermissionRequest…. Hook khai báo trong settings (hoặc plugin, skill, subagent frontmatter), không trong .mcp.json. Matcher của tool event lọc theo tool_name, không theo URL.",
+     "ts": [
+      "1.5"
+     ]
     },
     {
      "q": "A PreToolUse hook with matcher \"Write|Edit\" denies any change to files under config/secrets/. Later the team finds that Claude updated one of those files using a shell command (sed -i). Why did the hook not stop it?",
@@ -584,7 +696,10 @@ window.CERT_DATA = {
       "\"Write|Edit\" is read as a regular expression that matches no tool, so it must be written as a JSON array."
      ],
      "answer": 1,
-     "explain": "Đúng: docs Agent SDK hooks cảnh báo đúng tình huống này: matcher Write|Edit chỉ giới hạn ở tool Write và Edit; nếu Claude ghi file bằng lệnh Bash thì hook không chạy. Cần thêm xử lý cho Bash (hoặc dùng sandbox/deny rule). Sai: \"hook không chạy trong subagent\" — Hooks reference ghi hook trong settings cũng chạy cho tool call của subagent. \"Đổi sang exit 1\" — không thay đổi gì: exit 0 kèm JSON deny hợp lệ đã là cách đúng (với JSON hợp lệ, docs ghi mã thoát khác 0/2 bị bỏ qua và các trường JSON quyết định); hook không chặn được chỉ vì lệnh đi qua Bash. \"Write|Edit là regex không khớp\" — chuỗi chỉ gồm chữ và | được hiểu là danh sách tên khớp chính xác, khớp đúng hai tool."
+     "explain": "Đúng: docs Agent SDK hooks cảnh báo đúng tình huống này: matcher Write|Edit chỉ giới hạn ở tool Write và Edit; nếu Claude ghi file bằng lệnh Bash thì hook không chạy. Cần thêm xử lý cho Bash (hoặc dùng sandbox/deny rule). Sai: \"hook không chạy trong subagent\" — Hooks reference ghi hook trong settings cũng chạy cho tool call của subagent. \"Đổi sang exit 1\" — không thay đổi gì: exit 0 kèm JSON deny hợp lệ đã là cách đúng (với JSON hợp lệ, docs ghi mã thoát khác 0/2 bị bỏ qua và các trường JSON quyết định); hook không chặn được chỉ vì lệnh đi qua Bash. \"Write|Edit là regex không khớp\" — chuỗi chỉ gồm chữ và | được hiểu là danh sách tên khớp chính xác, khớp đúng hai tool.",
+     "ts": [
+      "1.5"
+     ]
     },
     {
      "q": "A Stop hook runs the test suite and exits with code 2 to keep Claude working until all tests pass. On one branch a test fails for an environmental reason Claude cannot fix, and Claude keeps trying to stop and being sent back. What should the hook do?",
@@ -595,7 +710,10 @@ window.CERT_DATA = {
       "Return decision \"block\" with an empty reason, which Claude Code treats as a block that applies only once."
      ],
      "answer": 2,
-     "explain": "Đúng: Hooks reference ghi Stop hook nhận trường stop_hook_active = true khi Claude đang tiếp tục do stop hook; nên kiểm tra nó để tránh chặn mãi vì một điều kiện không bao giờ được giải quyết. Docs hiện ghi (tháng 11/2026) Claude Code giới hạn 8 lần tiếp tục liên tiếp do stop hook rồi bỏ qua lần chặn kế tiếp, nhưng bộ đếm reset mỗi khi Claude gọi tool (và chỉnh được bằng CLAUDE_CODE_STOP_HOOK_BLOCK_CAP), nên không nên dựa vào giới hạn đó. Sai: \"exit 1\" — là lỗi không chặn, Claude chỉ dừng luôn chứ không tự chạy lại test. \"Chuyển sang PostToolUse\" — PostToolUse không chặn được việc kết thúc lượt. \"decision block với reason rỗng\" — không có hành vi \"chặn một lần\" như vậy."
+     "explain": "Đúng: Hooks reference ghi Stop hook nhận trường stop_hook_active = true khi Claude đang tiếp tục do stop hook; nên kiểm tra nó để tránh chặn mãi vì một điều kiện không bao giờ được giải quyết. Docs hiện ghi (tháng 11/2026) Claude Code giới hạn 8 lần tiếp tục liên tiếp do stop hook rồi bỏ qua lần chặn kế tiếp, nhưng bộ đếm reset mỗi khi Claude gọi tool (và chỉnh được bằng CLAUDE_CODE_STOP_HOOK_BLOCK_CAP), nên không nên dựa vào giới hạn đó. Sai: \"exit 1\" — là lỗi không chặn, Claude chỉ dừng luôn chứ không tự chạy lại test. \"Chuyển sang PostToolUse\" — PostToolUse không chặn được việc kết thúc lượt. \"decision block với reason rỗng\" — không có hành vi \"chặn một lần\" như vậy.",
+     "ts": [
+      "1.5"
+     ]
     },
     {
      "q": "A banking support agent must call verify_identity successfully before it may call update_contact_details. Prompt instructions achieve this in most conversations, but audits found several updates made without verification. What is the MOST reliable fix?",
@@ -606,7 +724,11 @@ window.CERT_DATA = {
       "Gate update_contact_details in code, blocking it until verify_identity has succeeded in the session."
      ],
      "answer": 3,
-     "explain": "Đúng: khi một thứ tự bắt buộc phải luôn đúng (tuân thủ, tài chính), hãy cưỡng chế bằng code: một hook/kiểm tra tiên quyết chặn update_contact_details cho đến khi verify_identity thành công. Docs Claude Code (Best practices, Memory) nhấn mạnh hướng dẫn trong prompt/CLAUDE.md là context chứ không phải cấu hình bị cưỡng chế. Sai: few-shot và đổi tên tool vẫn là gợi ý xác suất, vẫn có lúc bị bỏ qua. \"Hỏi mô hình đã xác minh chưa\" — tự khai báo của mô hình không phải bằng chứng; mô hình có thể trả lời sai."
+     "explain": "Đúng: khi một thứ tự bắt buộc phải luôn đúng (tuân thủ, tài chính), hãy cưỡng chế bằng code: một hook/kiểm tra tiên quyết chặn update_contact_details cho đến khi verify_identity thành công. Docs Claude Code (Best practices, Memory) nhấn mạnh hướng dẫn trong prompt/CLAUDE.md là context chứ không phải cấu hình bị cưỡng chế. Sai: few-shot và đổi tên tool vẫn là gợi ý xác suất, vẫn có lúc bị bỏ qua. \"Hỏi mô hình đã xác minh chưa\" — tự khai báo của mô hình không phải bằng chứng; mô hình có thể trả lời sai.",
+     "sc": "s1",
+     "ts": [
+      "1.4"
+     ]
     },
     {
      "q": "When the support agent escalates a case, the human receives only the ticket ID and has to scroll a long transcript in a tool that renders it poorly, often asking the customer to repeat details. What should the escalation handoff contain?",
@@ -617,7 +739,11 @@ window.CERT_DATA = {
       "A sentiment score and a model confidence score so the human team can prioritize its queue."
      ],
      "answer": 0,
-     "explain": "Đúng (lời khuyên thiết kế): người nhận bàn giao không có (hoặc khó đọc) transcript, nên bản bàn giao phải tự đủ: định danh khách/đơn, vấn đề, những gì đã kiểm tra và đã thử, lý do escalate. Như vậy khách không phải kể lại. Sai: \"toàn bộ transcript thô\" — đúng thứ người nhận không đọc được, lại nhiều nhiễu. \"Chỉ tin nhắn cuối\" — mất hết ngữ cảnh, buộc khách lặp lại. \"Điểm sentiment/confidence\" — không chứa thông tin để xử lý vụ việc."
+     "explain": "Đúng (lời khuyên thiết kế): người nhận bàn giao không có (hoặc khó đọc) transcript, nên bản bàn giao phải tự đủ: định danh khách/đơn, vấn đề, những gì đã kiểm tra và đã thử, lý do escalate. Như vậy khách không phải kể lại. Sai: \"toàn bộ transcript thô\" — đúng thứ người nhận không đọc được, lại nhiều nhiễu. \"Chỉ tin nhắn cuối\" — mất hết ngữ cảnh, buộc khách lặp lại. \"Điểm sentiment/confidence\" — không chứa thông tin để xử lý vụ việc.",
+     "sc": "s1",
+     "ts": [
+      "1.4"
+     ]
     },
     {
      "q": "A platform team wants Claude Code to pause for explicit developer confirmation whenever it runs kubectl against the production context, without blocking those commands outright and without affecting other commands. Which hook design fits BEST?",
@@ -628,7 +754,10 @@ window.CERT_DATA = {
       "A PermissionRequest hook that always returns behavior \"allow\" for kubectl so the prompts never appear."
      ],
      "answer": 1,
-     "explain": "Đúng: Hooks reference ghi permissionDecision của PreToolUse có allow/deny/ask/defer; \"ask\" hiện prompt xác nhận cho người dùng kèm permissionDecisionReason. Hook chỉ trả ask khi lệnh nhắm production, lệnh khác đi theo luồng bình thường. Sai: \"exit 2 mọi lệnh kubectl\" — chặn hẳn và chặn cả lệnh không phải production. \"PostToolUse block\" — lệnh đã chạy rồi; decision block chỉ thêm lý do cạnh tool result. \"Luôn allow\" — ngược yêu cầu, bỏ luôn bước xác nhận."
+     "explain": "Đúng: Hooks reference ghi permissionDecision của PreToolUse có allow/deny/ask/defer; \"ask\" hiện prompt xác nhận cho người dùng kèm permissionDecisionReason. Hook chỉ trả ask khi lệnh nhắm production, lệnh khác đi theo luồng bình thường. Sai: \"exit 2 mọi lệnh kubectl\" — chặn hẳn và chặn cả lệnh không phải production. \"PostToolUse block\" — lệnh đã chạy rồi; decision block chỉ thêm lý do cạnh tool result. \"Luôn allow\" — ngược yêu cầu, bỏ luôn bước xác nhận.",
+     "ts": [
+      "1.5"
+     ]
     },
     {
      "q": "A PreToolUse hook appends --dry-run to Bash commands that call a deployment script. It returns permissionDecision \"allow\" with updatedInput {\"command\": \"./deploy.sh --dry-run\"}. The team notices that the timeout and description the call originally had are gone. Why?",
@@ -639,7 +768,10 @@ window.CERT_DATA = {
       "Hooks cannot change tool inputs, so Claude regenerated the command without those fields after reading the hook."
      ],
      "answer": 2,
-     "explain": "Đúng: Hooks reference mô tả updatedInput \"thay toàn bộ object input, nên phải kèm các trường không đổi cùng trường đã sửa\"; input của Bash gồm command, description, timeout, run_in_background. Sai: \"allow xóa trường tùy chọn\" — không có hành vi đó; ask chỉ hiện input đã sửa cho người dùng. \"Chỉ merge với MCP; built-in dùng updatedToolOutput\" — updatedToolOutput là của PostToolUse để thay output, không phải input. \"Hook không đổi được input\" — PreToolUse đổi được input qua updatedInput."
+     "explain": "Đúng: Hooks reference mô tả updatedInput \"thay toàn bộ object input, nên phải kèm các trường không đổi cùng trường đã sửa\"; input của Bash gồm command, description, timeout, run_in_background. Sai: \"allow xóa trường tùy chọn\" — không có hành vi đó; ask chỉ hiện input đã sửa cho người dùng. \"Chỉ merge với MCP; built-in dùng updatedToolOutput\" — updatedToolOutput là của PostToolUse để thay output, không phải input. \"Hook không đổi được input\" — PreToolUse đổi được input qua updatedInput.",
+     "ts": [
+      "1.5"
+     ]
     },
     {
      "q": "A finance team must process supplier invoices through the same fixed steps every time: extract fields, validate totals against the purchase order, then post to the ERP. Auditors require predictable, inspectable behavior. Which architecture is MOST appropriate?",
@@ -650,7 +782,11 @@ window.CERT_DATA = {
       "A prompt-chaining workflow with programmatic checks between the steps."
      ],
      "answer": 3,
-     "explain": "Đúng: bài \"Building effective agents\" phân biệt workflow (đường đi định sẵn bằng code) với agent (mô hình tự điều hướng); prompt chaining hợp khi việc tách gọn thành các bước cố định, có thể thêm \"gate\" kiểm tra bằng code giữa các bước, và workflow cho tính dự đoán được với việc đã xác định rõ. Sai: \"agent tự quyết thứ tự\" — bỏ mất tính dự đoán mà kiểm toán cần. \"Coordinator sinh subagent\" — phức tạp, tốn token, dành cho việc mở. \"Evaluator-optimizer\" — để tinh chỉnh dần một output theo tiêu chí, không phải để chạy quy trình cố định; \"viết lại hóa đơn\" còn sai bản chất."
+     "explain": "Đúng: bài \"Building effective agents\" phân biệt workflow (đường đi định sẵn bằng code) với agent (mô hình tự điều hướng); prompt chaining hợp khi việc tách gọn thành các bước cố định, có thể thêm \"gate\" kiểm tra bằng code giữa các bước, và workflow cho tính dự đoán được với việc đã xác định rõ. Sai: \"agent tự quyết thứ tự\" — bỏ mất tính dự đoán mà kiểm toán cần. \"Coordinator sinh subagent\" — phức tạp, tốn token, dành cho việc mở. \"Evaluator-optimizer\" — để tinh chỉnh dần một output theo tiêu chí, không phải để chạy quy trình cố định; \"viết lại hóa đơn\" còn sai bản chất.",
+     "sc": "s6",
+     "ts": [
+      "1.6"
+     ]
     },
     {
      "q": "A coding assistant receives requests such as \"rename this API field everywhere and update its callers.\" How many files change, and what each change looks like, cannot be known until the codebase is inspected. Which pattern fits BEST?",
@@ -661,7 +797,10 @@ window.CERT_DATA = {
       "A single prompt-chaining sequence whose steps are all written in advance by the developers."
      ],
      "answer": 0,
-     "explain": "Đúng: \"Building effective agents\" mô tả orchestrator-workers hợp với việc phức tạp mà không đoán trước được subtask, lấy ví dụ coding: số file cần đổi và kiểu thay đổi phụ thuộc từng yêu cầu; khác biệt then chốt với parallelization là subtask không định sẵn. Sai: parallelization với phần định sẵn và prompt chaining viết trước đều giả định biết trước các bước. Routing chỉ phân loại đầu vào sang luồng chuyên biệt, không chia việc theo nội dung codebase."
+     "explain": "Đúng: \"Building effective agents\" mô tả orchestrator-workers hợp với việc phức tạp mà không đoán trước được subtask, lấy ví dụ coding: số file cần đổi và kiểu thay đổi phụ thuộc từng yêu cầu; khác biệt then chốt với parallelization là subtask không định sẵn. Sai: parallelization với phần định sẵn và prompt chaining viết trước đều giả định biết trước các bước. Routing chỉ phân loại đầu vào sang luồng chuyên biệt, không chia việc theo nội dung codebase.",
+     "ts": [
+      "1.6"
+     ]
     },
     {
      "q": "Which TWO pairings of task and workflow pattern match Anthropic's guidance in \"Building effective agents\"? (Choose TWO.)",
@@ -676,7 +815,10 @@ window.CERT_DATA = {
       1,
       4
      ],
-     "explain": "Đúng: bài viết lấy chính ví dụ routing các loại câu hỏi chăm sóc khách hàng sang quy trình/prompt/tool khác nhau, và evaluator-optimizer cho dịch văn học khi có tiêu chí đánh giá rõ và vòng góp ý cải thiện được kết quả. Sai: việc mở không đoán được số bước là chỗ của agent, không phải prompt chaining (vốn cho các bước cố định). Một bản dịch cố định không cần orchestrator chia việc động. Voting là chạy cùng một việc nhiều lần để lấy nhiều kết quả, không dùng để sắp thứ tự các bước tuần tự."
+     "explain": "Đúng: bài viết lấy chính ví dụ routing các loại câu hỏi chăm sóc khách hàng sang quy trình/prompt/tool khác nhau, và evaluator-optimizer cho dịch văn học khi có tiêu chí đánh giá rõ và vòng góp ý cải thiện được kết quả. Sai: việc mở không đoán được số bước là chỗ của agent, không phải prompt chaining (vốn cho các bước cố định). Một bản dịch cố định không cần orchestrator chia việc động. Voting là chạy cùng một việc nhiều lần để lấy nhiều kết quả, không dùng để sắp thứ tự các bước tuần tự.",
+     "ts": [
+      "1.6"
+     ]
     },
     {
      "q": "A developer asks Claude Code to \"add comprehensive tests to the legacy billing module,\" which has no tests and an unclear structure. Which way of decomposing this open-ended task is BEST?",
@@ -687,7 +829,11 @@ window.CERT_DATA = {
       "Generate tests for every function in alphabetical order so that coverage stays systematic and complete."
      ],
      "answer": 1,
-     "explain": "Đúng (lời khuyên thiết kế, khớp \"Building effective agents\": agent hợp với việc mở không đoán trước số bước, cần lấy \"ground truth\" từ môi trường mỗi bước): khảo sát trước, ưu tiên phần rủi ro cao, rồi điều chỉnh kế hoạch theo những phụ thuộc phát hiện ra. Sai: \"danh sách cố định từ tên file\" — kế hoạch tĩnh cho việc mà cấu trúc chưa rõ, không thích ứng. \"Một lượt viết hết\" — dễ hời hợt, không có bước xác minh. \"Theo thứ tự chữ cái\" — bỏ qua mức độ rủi ro/quan trọng."
+     "explain": "Đúng (lời khuyên thiết kế, khớp \"Building effective agents\": agent hợp với việc mở không đoán trước số bước, cần lấy \"ground truth\" từ môi trường mỗi bước): khảo sát trước, ưu tiên phần rủi ro cao, rồi điều chỉnh kế hoạch theo những phụ thuộc phát hiện ra. Sai: \"danh sách cố định từ tên file\" — kế hoạch tĩnh cho việc mà cấu trúc chưa rõ, không thích ứng. \"Một lượt viết hết\" — dễ hời hợt, không có bước xác minh. \"Theo thứ tự chữ cái\" — bỏ qua mức độ rủi ro/quan trọng.",
+     "sc": "s2",
+     "ts": [
+      "1.6"
+     ]
     },
     {
      "q": "A multi-user web app runs one Agent SDK conversation per customer on the same server and working directory. When customer B returns, the app passes continue to pick up their conversation, but sometimes loads customer A's history instead. What is the correct fix?",
@@ -698,7 +844,10 @@ window.CERT_DATA = {
       "Call continue twice in a row, because the second call skips the session that was opened most recently."
      ],
      "answer": 2,
-     "explain": "Đúng: trang Sessions phân biệt: continue tìm session gần nhất trong thư mục hiện tại (hợp khi app chạy một hội thoại mỗi lúc), còn resume nhận session ID cụ thể và là bắt buộc khi có nhiều session, ví dụ mỗi người dùng một session. Sai: \"fork session gần nhất\" — vẫn chọn nhầm session gốc, chỉ là bản sao của sai session. \"persistSession: false\" — session chỉ tồn tại trong bộ nhớ, không thể quay lại được nữa. \"continue hai lần\" — không có hành vi đó."
+     "explain": "Đúng: trang Sessions phân biệt: continue tìm session gần nhất trong thư mục hiện tại (hợp khi app chạy một hội thoại mỗi lúc), còn resume nhận session ID cụ thể và là bắt buộc khi có nhiều session, ví dụ mỗi người dùng một session. Sai: \"fork session gần nhất\" — vẫn chọn nhầm session gốc, chỉ là bản sao của sai session. \"persistSession: false\" — session chỉ tồn tại trong bộ nhớ, không thể quay lại được nữa. \"continue hai lần\" — không có hành vi đó.",
+     "ts": [
+      "1.7"
+     ]
     },
     {
      "q": "A CI pipeline runs claude -p on ephemeral runners. Step 1 analyzes a pull request; step 2 runs on a different runner with --resume and step 1's session ID, and cannot find the session. Which TWO approaches let step 2 build on step 1's work? (Choose TWO.)",
@@ -713,7 +862,12 @@ window.CERT_DATA = {
       0,
       2
      ],
-     "explain": "Đúng: trang Sessions (Resume across hosts) ghi file session nằm cục bộ trên máy tạo ra nó; để resume ở host khác thì chuyển file .jsonl sang máy mới (CLI reference ghi --resume nhận cả đường dẫn tuyệt đối tới file .jsonl; ứng dụng Agent SDK còn có thể dùng session store), hoặc không dựa vào resume mà đưa kết quả cần thiết (phân tích, quyết định) vào prompt của session mới, docs gọi cách này thường bền hơn. Sai: continue chỉ tìm session gần nhất trên máy hiện tại. --fork-session chỉ tạo session ID mới khi resume, không sao chép giữa máy. Không có cơ chế session hết hạn sau vài phút; lỗi là do file không có trên runner mới."
+     "explain": "Đúng: trang Sessions (Resume across hosts) ghi file session nằm cục bộ trên máy tạo ra nó; để resume ở host khác thì chuyển file .jsonl sang máy mới (CLI reference ghi --resume nhận cả đường dẫn tuyệt đối tới file .jsonl; ứng dụng Agent SDK còn có thể dùng session store), hoặc không dựa vào resume mà đưa kết quả cần thiết (phân tích, quyết định) vào prompt của session mới, docs gọi cách này thường bền hơn. Sai: continue chỉ tìm session gần nhất trên máy hiện tại. --fork-session chỉ tạo session ID mới khi resume, không sao chép giữa máy. Không có cơ chế session hết hạn sau vài phút; lỗi là do file không có trên runner mới.",
+     "sc": "s5",
+     "ts": [
+      "1.7",
+      "3.6"
+     ]
     },
     {
      "q": "A developer forks an Agent SDK session to try a risky refactor while keeping the original conversation intact. The forked agent edits several files. When she later resumes the original session, its agent finds those files already changed. Why?",
@@ -724,7 +878,10 @@ window.CERT_DATA = {
       "Forking branches the conversation history, not the filesystem; file changes need checkpointing or git to isolate."
      ],
      "answer": 3,
-     "explain": "Đúng: trang Sessions nói rõ session lưu hội thoại chứ không lưu filesystem; fork rẽ nhánh lịch sử hội thoại, nếu agent ở nhánh fork sửa file thì thay đổi là thật và mọi session trong cùng thư mục đều thấy; muốn rẽ nhánh và hoàn tác file thì dùng file checkpointing. Sai: fork không \"thất bại\" ở đây, đó là hành vi đúng. Fork có session ID riêng, lịch sử gốc giữ nguyên. Không có cơ chế gộp lịch sử fork vào session gốc."
+     "explain": "Đúng: trang Sessions nói rõ session lưu hội thoại chứ không lưu filesystem; fork rẽ nhánh lịch sử hội thoại, nếu agent ở nhánh fork sửa file thì thay đổi là thật và mọi session trong cùng thư mục đều thấy; muốn rẽ nhánh và hoàn tác file thì dùng file checkpointing. Sai: fork không \"thất bại\" ở đây, đó là hành vi đúng. Fork có session ID riêng, lịch sử gốc giữ nguyên. Không có cơ chế gộp lịch sử fork vào session gốc.",
+     "ts": [
+      "1.7"
+     ]
     },
     {
      "q": "A customer writes in one message that their last order arrived damaged, that they were charged twice for it, and that they want to change the delivery address on a separate open order. The agent resolves the first issue and ignores the other two. What is the BEST improvement?",
@@ -735,7 +892,11 @@ window.CERT_DATA = {
       "Increase max_tokens so the agent has more room to address the rest of the customer's message."
      ],
      "answer": 0,
-     "explain": "Đúng (lời khuyên thiết kế): yêu cầu nhiều vấn đề nên được tách thành các mục riêng, điều tra từng mục (song song nếu độc lập, ví dụ tra đơn và tra giao dịch), rồi tổng hợp thành một phản hồi. Sai: \"bắt khách mở nhiều hội thoại\" — đẩy việc sang khách, trải nghiệm tệ. \"Escalate mọi yêu cầu kép\" — đây là các việc agent làm được; escalate không cần thiết làm quá tải người. \"Tăng max_tokens\" — agent không bị cắt chữ; nó bỏ sót vì không tách vấn đề."
+     "explain": "Đúng (lời khuyên thiết kế): yêu cầu nhiều vấn đề nên được tách thành các mục riêng, điều tra từng mục (song song nếu độc lập, ví dụ tra đơn và tra giao dịch), rồi tổng hợp thành một phản hồi. Sai: \"bắt khách mở nhiều hội thoại\" — đẩy việc sang khách, trải nghiệm tệ. \"Escalate mọi yêu cầu kép\" — đây là các việc agent làm được; escalate không cần thiết làm quá tải người. \"Tăng max_tokens\" — agent không bị cắt chữ; nó bỏ sót vì không tách vấn đề.",
+     "sc": "s1",
+     "ts": [
+      "1.4"
+     ]
     },
     {
      "q": "A research coordinator synthesizes subagent findings in a single pass and publishes immediately. Reviewers often find that one requested aspect was barely covered. What change to the coordinator's loop BEST addresses this?",
@@ -746,7 +907,11 @@ window.CERT_DATA = {
       "Raise each subagent's search result limit from 10 to 50 results per query."
      ],
      "answer": 1,
-     "explain": "Đúng: bài multi-agent research mô tả LeadResearcher tổng hợp kết quả rồi quyết định có cần nghiên cứu thêm không; nếu cần thì tạo thêm subagent hoặc chỉnh chiến lược trước khi kết thúc. Sai: \"mọi subagent làm mọi khía cạnh\" — trùng lặp, tốn token, bỏ lợi ích chia việc. \"Viết dài hơn\" — che lỗ hổng chứ không lấp. \"Tăng số kết quả mỗi truy vấn\" — không giúp nếu khía cạnh đó chưa từng được giao."
+     "explain": "Đúng: bài multi-agent research mô tả LeadResearcher tổng hợp kết quả rồi quyết định có cần nghiên cứu thêm không; nếu cần thì tạo thêm subagent hoặc chỉnh chiến lược trước khi kết thúc. Sai: \"mọi subagent làm mọi khía cạnh\" — trùng lặp, tốn token, bỏ lợi ích chia việc. \"Viết dài hơn\" — che lỗ hổng chứ không lấp. \"Tăng số kết quả mỗi truy vấn\" — không giúp nếu khía cạnh đó chưa từng được giao.",
+     "sc": "s3",
+     "ts": [
+      "1.2"
+     ]
     },
     {
      "q": "A security engineer configured a PreToolUse hook in the project's .claude/settings.json that blocks curl calls to unknown hosts. A colleague worries Claude could bypass it by delegating the request to a subagent. What is accurate?",
@@ -757,7 +922,10 @@ window.CERT_DATA = {
       "Subagents can never run Bash, so delegated work cannot reach curl and the concern does not apply."
      ],
      "answer": 2,
-     "explain": "Đúng: Hooks reference ghi hook từ settings, managed policy và plugin cũng chạy trong subagent; khi subagent gọi tool, PreToolUse/PostToolUse bắn cùng các hook đã cấu hình, và input có agent_id, agent_type để nhận diện subagent. Sai: không cần chép hook vào frontmatter (frontmatter chỉ thêm hook riêng cho subagent đó). Không có điều kiện về permissionMode. Subagent general-purpose có mọi tool dành cho subagent, gồm Bash."
+     "explain": "Đúng: Hooks reference ghi hook từ settings, managed policy và plugin cũng chạy trong subagent; khi subagent gọi tool, PreToolUse/PostToolUse bắn cùng các hook đã cấu hình, và input có agent_id, agent_type để nhận diện subagent. Sai: không cần chép hook vào frontmatter (frontmatter chỉ thêm hook riêng cho subagent đó). Không có điều kiện về permissionMode. Subagent general-purpose có mọi tool dành cho subagent, gồm Bash.",
+     "ts": [
+      "1.5"
+     ]
     },
     {
      "q": "To stop Claude Code from dropping database tables, a team writes a PostToolUse hook on Bash that exits with code 2 when the command contains DROP TABLE. In testing, the table is still dropped, although Claude does see the hook's message. Why?",
@@ -768,7 +936,10 @@ window.CERT_DATA = {
       "PostToolUse runs after the tool executes; preventing it needs PreToolUse or a deny rule."
      ],
      "answer": 3,
-     "explain": "Đúng: bảng \"Exit code 2 behavior per event\" ghi PostToolUse không chặn được: exit 2 chỉ hiện stderr cho Claude vì tool đã chạy; muốn ngăn thì dùng PreToolUse (exit 2 chặn tool call) hoặc permission deny. Sai: exit 2 là mã chặn ở các event chặn được như PreToolUse; exit 1 là lỗi không chặn. Matcher Bash khớp mọi lệnh qua Bash tool, kể cả lệnh pipe. updatedToolOutput chỉ đổi thứ Claude thấy, docs cảnh báo nó không hoàn tác việc tool đã làm."
+     "explain": "Đúng: bảng \"Exit code 2 behavior per event\" ghi PostToolUse không chặn được: exit 2 chỉ hiện stderr cho Claude vì tool đã chạy; muốn ngăn thì dùng PreToolUse (exit 2 chặn tool call) hoặc permission deny. Sai: exit 2 là mã chặn ở các event chặn được như PreToolUse; exit 1 là lỗi không chặn. Matcher Bash khớp mọi lệnh qua Bash tool, kể cả lệnh pipe. updatedToolOutput chỉ đổi thứ Claude thấy, docs cảnh báo nó không hoàn tác việc tool đã làm.",
+     "ts": [
+      "1.5"
+     ]
     },
     {
      "q": "A team wants the rule \"never read .env files\" to be enforced by Claude Code itself rather than left to the model's judgment. Which TWO mechanisms meet that requirement? (Choose TWO.)",
@@ -783,8 +954,259 @@ window.CERT_DATA = {
       2,
       4
      ],
-     "explain": "Đúng: Best practices của Claude Code chia hướng dẫn thành hai loại: không tất định (prompt, CLAUDE.md, skill — Claude quyết định) và tất định (hook, deny rule, managed settings — harness bắt buộc thực thi). Deny rule Read(...) chặn tool đọc file; PreToolUse exit 2 chặn tool call. Sai: CLAUDE.md và system prompt là context, docs Memory nói rõ không phải cấu hình bị cưỡng chế, viết hoa cũng vậy. Skill chỉ là nội dung prompt nạp khi gọi; disable-model-invocation chỉ quyết định ai được gọi skill."
+     "explain": "Đúng: Best practices của Claude Code chia hướng dẫn thành hai loại: không tất định (prompt, CLAUDE.md, skill — Claude quyết định) và tất định (hook, deny rule, managed settings — harness bắt buộc thực thi). Deny rule Read(...) chặn tool đọc file; PreToolUse exit 2 chặn tool call. Sai: CLAUDE.md và system prompt là context, docs Memory nói rõ không phải cấu hình bị cưỡng chế, viết hoa cũng vậy. Skill chỉ là nội dung prompt nạp khi gọi; disable-model-invocation chỉ quyết định ai được gọi skill.",
+     "ts": [
+      "1.4"
+     ]
+    },
+    {
+     "q": "A customer support agent built on the Messages API (tools: get_customer, lookup_order, process_refund, escalate_to_human) always ends its loop after exactly five iterations, whatever the model returned. Simple lookups work, but multi-step refund cases are often cut off mid-process and the customer never gets a final answer. What is the BEST change to the loop?",
+     "options": [
+      "Raise the fixed limit to 25 iterations so that even the longest refund cases have enough room to finish before the loop exits.",
+      "Ask Claude to end every final answer with the token DONE, and stop the loop as soon as that token appears in a text block.",
+      "Remove the limit and stop the loop whenever the response contains any text block, since Claude writes text once it has finished.",
+      "Keep looping while stop_reason is \"tool_use\" and stop on \"end_turn\"; keep a high cap only as a safety net that hands off to a human."
+     ],
+     "answer": 3,
+     "explain": "D đúng: stop_reason là tín hiệu có cấu trúc cho biết Claude muốn gọi tool (\"tool_use\") hay đã xong (\"end_turn\"). Vòng lặp dựa vào đó sẽ chạy đúng số bước mà ca cần; giới hạn số vòng chỉ nên là lưới an toàn, và khi chạm thì chuyển người thay vì im lặng dừng. A sai: vẫn dùng số vòng làm tín hiệu dừng chính, ca dài hơn vẫn bị cắt và vòng lặp không biết lúc nào Claude đã xong. B sai: dựa vào chữ trong câu trả lời là kiểu phân tích ngôn ngữ tự nhiên dễ vỡ (Claude có thể quên token, hoặc token xuất hiện trong ngữ cảnh khác). C sai: Claude thường viết text trước khi gọi tool trong cùng một response, nên \"có text\" không có nghĩa là đã xong.",
+     "sc": "s1",
+     "ts": [
+      "1.1"
+     ]
+    },
+    {
+     "q": "A developer is writing the tool loop for the support agent. When Claude returns a lookup_order tool_use block, the code runs the tool and sends a new request whose messages array ends with a user message containing only the matching tool_result. The API rejects the request with a 400 error. What is the MOST likely cause?",
+     "options": [
+      "Tool results must be placed in the system prompt rather than in a user message so that Claude treats them as trusted data.",
+      "tool_result blocks are accepted only when tool_choice is set to \"any\" or \"tool\" for that request.",
+      "The assistant response containing the tool_use block was not appended to the history before the tool_result message.",
+      "The tool_result content must be a JSON object, so returning plain text from lookup_order is rejected by the API."
+     ],
+     "answer": 2,
+     "explain": "C đúng: docs tool use yêu cầu khối tool_result phải đi ngay sau message assistant chứa khối tool_use tương ứng. Nếu code không thêm response của assistant (gồm khối tool_use) vào lịch sử, tool_result trỏ tới một tool_use_id không tồn tại và request bị từ chối. A sai: docs khuyên giữ nội dung từ nguồn ngoài trong tool_result, không đưa vào system prompt (rủi ro prompt injection), và đó cũng không phải cách API nhận kết quả tool. B sai: tool_result dùng được với mọi giá trị tool_choice, kể cả auto mặc định. D sai: content của tool_result có thể là chuỗi thuần (docs có ví dụ \"15 degrees\") hoặc danh sách khối.",
+     "sc": "s1",
+     "ts": [
+      "1.1"
+     ]
+    },
+    {
+     "q": "The support team is listing requirements for its customer support agent. Which TWO should be enforced in code, for example inside the tools or in a PreToolUse hook, rather than only stated in the system prompt? (Choose TWO.)",
+     "options": [
+      "Use a warm, apologetic tone whenever a customer reports that a delivery is late.",
+      "Never call process_refund for an order that lookup_order has not confirmed belongs to the verified customer.",
+      "Keep replies short enough to read comfortably on a phone screen.",
+      "Refunds above the $300 policy limit must go to escalate_to_human instead of process_refund.",
+      "End the conversation by offering the customer a short summary of what was done."
+     ],
+     "answer": [
+      1,
+      3
+     ],
+     "explain": "B và D đúng: đây là quy tắc về tiền và quyền truy cập, sai một lần là thiệt hại thật. Lời dặn trong prompt chỉ làm tăng xác suất tuân thủ, còn kiểm tra trong tool hoặc hook PreToolUse cho bảo đảm tất định: lời gọi sai bị chặn bất kể model nghĩ gì. A, C, E sai: giọng văn, độ dài và lời tóm tắt cuối là hành vi mềm, thỉnh thoảng lệch cũng không gây hại nghiêm trọng, nên system prompt là chỗ phù hợp; viết code cưỡng chế cho chúng vừa khó vừa không đáng.",
+     "sc": "s1",
+     "ts": [
+      "1.4"
+     ]
+    },
+    {
+     "q": "In the support agent, a PreToolUse hook denies process_refund calls above $500 and tells Claude to use escalate_to_human instead. Supervisors now approve some of these refunds inside the escalation system and want the agent to complete them afterwards. A first attempt let the call through whenever the agent's own message said \"supervisor approved\". What is the BEST way to allow approved refunds?",
+     "options": [
+      "Have the hook look up an approval record that the escalation system created for that order and amount, and allow the call only when one exists.",
+      "Keep the hook but raise its threshold, so that most of the refunds supervisors approve no longer reach the hook at all.",
+      "Add few-shot examples in which the agent asks the supervisor to confirm the approval in chat before calling process_refund.",
+      "Disable the hook for any session in which escalate_to_human has already been called at least once."
+     ],
+     "answer": 0,
+     "explain": "A đúng: cổng kiểm tra phải dựa vào dữ kiện do hệ thống tạo ra (bản ghi phê duyệt gắn với đúng đơn và số tiền), không dựa vào lời model tự khẳng định. Như vậy chỉ những khoản thật sự được duyệt mới đi qua. B sai: nâng ngưỡng là nới chính sách cho mọi khoản, kể cả khoản chưa ai duyệt. C sai: lời xác nhận trong chat vẫn chỉ là text trong hội thoại, model hoặc người dùng đều có thể viết ra, nên không phải bằng chứng phê duyệt. D sai: một lần escalate bất kỳ (có thể cho việc khác) sẽ mở khóa mọi khoản hoàn tiền về sau, với bất kỳ số tiền nào.",
+     "sc": "s1",
+     "ts": [
+      "1.4",
+      "1.5"
+     ]
+    },
+    {
+     "q": "A PreToolUse hook in the support agent blocks any single process_refund call above $300 by returning a deny decision with no reason. Audits show that after a denial the agent sometimes issued two or three smaller refunds on the same order that together exceeded $300. What is the BEST fix?",
+     "options": [
+      "Add a sentence to the system prompt saying that splitting one refund into several smaller refunds is not allowed under the policy.",
+      "Move the check into a PostToolUse hook so that every refund is compared with the limit right after it has been processed.",
+      "Check the order's already-refunded total plus the new amount against the limit, and deny with a reason telling Claude to call escalate_to_human.",
+      "Lower the per-call limit to $100 so that splitting a large refund would take too many calls to be worth trying."
+     ],
+     "answer": 2,
+     "explain": "C đúng: quy tắc thật là tổng tiền hoàn trên một đơn, nên phép kiểm tra phải tính cả số đã hoàn trước đó. Docs Agent SDK ghi permissionDecisionReason được gửi cho model, nên lý do từ chối kèm hướng dẫn \"gọi escalate_to_human\" giúp agent đổi hướng thay vì thử đường vòng. A sai: lại đưa quy tắc tiền bạc về lời dặn trong prompt, đúng loại cưỡng chế đã thất bại. B sai: PostToolUse chạy sau khi tool đã thực thi, tiền đã hoàn rồi mới kiểm tra. D sai: hạ ngưỡng từng lần không chặn được việc cộng dồn, lại làm agent không xử lý được các khoản nhỏ hợp lệ.",
+     "sc": "s1",
+     "ts": [
+      "1.5"
+     ]
+    },
+    {
+     "q": "The support agent, built with the Claude Agent SDK, connects to a vendor's CRM MCP server that the team cannot modify. Its get_customer tool returns full card numbers and dates of birth, which then sit in Claude's context and sometimes appear in its replies. What is the MOST reliable fix?",
+     "options": [
+      "A PostToolUse hook on that tool that masks those fields and returns the result through updatedToolOutput before Claude sees it.",
+      "A system prompt rule telling Claude never to repeat card numbers or dates of birth back to the customer under any circumstances.",
+      "A PreToolUse hook on get_customer that strips the sensitive fields from the tool's input before the call is sent to the server.",
+      "A Stop hook that scans Claude's final reply for card numbers and blocks the turn whenever one is found in the text."
+     ],
+     "answer": 0,
+     "explain": "A đúng: docs Agent SDK ghi PostToolUse có thể đặt updatedToolOutput để thay output của tool (cả built-in lẫn MCP) trước khi Claude thấy. Che dữ liệu nhạy cảm ở đây nghĩa là nó không bao giờ vào context, nên không thể bị lặp lại. B sai: lời dặn chỉ giảm xác suất, dữ liệu vẫn nằm trong context. C sai: PreToolUse chỉ sửa input của lời gọi; dữ liệu nhạy cảm nằm trong output trả về, không phải input. D sai: chỉ bắt được ở câu trả lời cuối, dữ liệu vẫn ở trong context suốt phiên và có thể lộ qua các đường khác.",
+     "sc": "s1",
+     "ts": [
+      "1.5"
+     ]
+    },
+    {
+     "q": "A customer returns to the support chat three days after a conversation about a delayed order. The app could resume the old Agent SDK session by its ID. In the meantime the order has shipped and a human agent issued a partial refund. What is the BEST way to continue?",
+     "options": [
+      "Resume the old session unchanged, since its history already contains the order details the agent looked up three days ago.",
+      "Fork the old session, because a forked session reloads the latest order data from the connected tools when it starts.",
+      "Use continue instead of the session ID, so that the most recent state of the order is loaded into the session automatically when it resumes.",
+      "Start a fresh session seeded with a structured summary of the earlier case, and have the agent re-fetch the current order status first."
+     ],
+     "answer": 3,
+     "explain": "D đúng: kết quả tool trong phiên cũ (trạng thái đơn, số tiền đã hoàn) đã lỗi thời. Phiên mới kèm bản tóm tắt có cấu trúc giữ lại các dữ kiện còn đúng (mã đơn, vấn đề, cam kết), còn dữ liệu hay thay đổi thì tra lại. A sai: agent sẽ trả lời dựa trên trạng thái \"đang chậm\" và chưa hoàn tiền, trái với thực tế. B sai: docs Agent SDK mô tả fork chỉ sao chép lịch sử hội thoại sang session mới; nó không tải lại dữ liệu nào từ tool. C sai: continue chỉ chọn session gần nhất trong thư mục, nội dung vẫn là lịch sử cũ, và với app nhiều khách thì còn có thể chọn nhầm session của người khác.",
+     "sc": "s1",
+     "ts": [
+      "1.7"
+     ]
+    },
+    {
+     "q": "To save time, a team lets the search subagents in its multi-agent research system send findings directly to the report-writing subagent instead of returning them to the coordinator. Since then, failed searches go unnoticed, duplicate findings appear in reports, and nobody can trace which subagent produced a claim. What is the BEST fix?",
+     "options": [
+      "Have every subagent also copy its messages to a shared log file, so that the team can review and trace each finding and failure after every run.",
+      "Route all subagent results back through the coordinator, which checks them, handles failures, and decides what goes to the writer.",
+      "Add a deduplication step inside the report-writing subagent that removes repeated findings before it starts writing.",
+      "Give each search subagent the report-writing tools, so that it can add its own section to the report directly."
+     ],
+     "answer": 1,
+     "explain": "B đúng: mô hình hub-and-spoke để coordinator là điểm duy nhất nhận kết quả, nên nó phát hiện được lỗi, gộp trùng, giữ nguồn gốc từng claim và quyết định bước tiếp. Cả ba triệu chứng đều do bỏ qua điểm kiểm soát này. A sai: log giúp điều tra sau, nhưng không ai xử lý lỗi hay trùng lặp trong lúc chạy. C sai: chỉ chữa triệu chứng trùng lặp; lỗi tìm kiếm vẫn bị bỏ sót và nguồn gốc vẫn mất. D sai: càng phân tán hơn, mỗi subagent tự viết vào báo cáo mà không ai kiểm soát chất lượng hay tính nhất quán.",
+     "sc": "s3",
+     "ts": [
+      "1.2"
+     ]
+    },
+    {
+     "q": "A research coordinator built with the Claude Agent SDK delegates to search subagents. Costs have spiked because some search subagents spawn subagents of their own. The team wants search subagents to do their delegated work themselves. Which TWO changes enforce this? (Choose TWO.)",
+     "options": [
+      "Add the instruction \"Do not delegate to other agents\" to the search subagents' prompts.",
+      "Set the CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH environment variable to 1 for the query.",
+      "Set maxTurns on the search subagents to a lower value.",
+      "Run the search subagents on a smaller model alias such as haiku.",
+      "Omit the Agent tool from the search subagents' tools list, or add it to their disallowedTools."
+     ],
+     "answer": [
+      1,
+      4
+     ],
+     "explain": "B và E đúng. Docs hiện ghi (tháng 11/2026) subagent mặc định được sinh subagent con tới 3 tầng dưới agent chính; đặt CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH = 1 tắt việc lồng nhau, và bỏ Agent khỏi tools (hoặc đưa vào disallowedTools) khiến riêng subagent đó không sinh được subagent con. Cả hai do harness cưỡng chế. A sai: docs nói rõ lời dặn kiểu này chỉ định hướng Claude, vẫn phải đặt giới hạn để harness cưỡng chế. C sai: maxTurns giới hạn số lượt, không ngăn subagent gọi tool Agent trong các lượt đó. D sai: đổi model không lấy đi tool Agent; model nhỏ vẫn có thể ủy quyền.",
+     "sc": "s3",
+     "ts": [
+      "1.3"
+     ]
+    },
+    {
+     "q": "In a multi-agent research system, the coordinator passes subagent results to the synthesis subagent as a few paragraphs of prose that it writes itself. Final reports keep losing source URLs and publication dates, and no one can tell which subagent a claim came from. How should the coordinator pass findings to the synthesis subagent instead?",
+     "options": [
+      "As a longer prose summary that names each source, so that the synthesis subagent can look up the URLs later if it needs them.",
+      "By forking the coordinator's conversation for the synthesis step, so the subagent can read every original tool result and page itself.",
+      "By telling the synthesis subagent to search again for a source for each claim while it is writing the report.",
+      "As structured records in the Agent tool prompt, each with claim, source URL, excerpt, publication date, and originating subagent."
+     ],
+     "answer": 3,
+     "explain": "D đúng: docs Agent SDK ghi thứ duy nhất truyền từ cha sang subagent (không phải fork) là chuỗi prompt của tool Agent, nên dữ liệu cần giữ phải nằm trong đó, và dạng bản ghi có cấu trúc (claim, nguồn, đoạn trích, ngày, subagent) giữ được nguồn gốc qua bước tổng hợp. A sai: văn xuôi dài hơn vẫn đánh rơi URL và ngày, và đi tìm lại sau dễ gán nhầm nguồn. B sai: docs Agent SDK ghi các lời gọi tool và kết quả trung gian nằm lại trong subagent, chỉ báo cáo cuối quay về cha; nên fork hội thoại của coordinator không cho bước tổng hợp đọc được kết quả tool hay trang gốc của các subagent như phương án nói, mà chỉ chép thêm cả context điều phối, vẫn không có ánh xạ claim–nguồn rõ ràng. C sai: gắn nguồn sau khi viết là cách dễ gán sai nhất; nguồn phải đi cùng claim từ lúc thu thập.",
+     "sc": "s3",
+     "ts": [
+      "1.3",
+      "5.6"
+     ]
+    },
+    {
+     "q": "A research coordinator runs the same fixed chain for every question: four searches on predefined angles, then analysis, then synthesis. For broad questions, early findings often reveal important sub-areas, such as a new regulation that changes the whole picture, which the fixed plan never investigates. What is the BEST change?",
+     "options": [
+      "Let the coordinator plan subtasks from the question, review interim findings, and add or redirect subtasks as new sub-areas emerge.",
+      "Add more predefined angles to the fixed chain, so that every run covers a much wider range of possible sub-areas right from the very start.",
+      "Run the fixed chain twice for each question and merge the two reports, so that the second run catches what the first one missed.",
+      "Replace the coordinator with a single agent that answers each question in one long pass, without any delegation to subagents."
+     ],
+     "answer": 0,
+     "explain": "A đúng: câu hỏi nghiên cứu mở là đúng loại việc mà các việc con không đoán trước được, nên cần phân rã động: coordinator lập kế hoạch, xem kết quả giữa chừng rồi giao thêm hoặc đổi hướng. Chuỗi cố định chỉ hợp với việc lặp lại, đoán trước được. B sai: thêm góc định sẵn vẫn là đoán trước; hướng mới phát sinh từ kết quả vẫn không được theo, lại tốn thêm cho câu hỏi hẹp. C sai: chạy lại cùng một kế hoạch cố định sẽ bỏ sót cùng những mảng đó. D sai: bỏ hẳn điều phối không giải quyết việc thích ứng, và mất lợi ích tách context và chạy song song.",
+     "sc": "s3",
+     "ts": [
+      "1.6"
+     ]
+    },
+    {
+     "q": "An invoice-extraction agent has three tools: extract_invoice, validate_invoice, and post_to_erp. post_to_erp already refuses to run unless validate_invoice returned a pass earlier in the session. Audits still find posted invoices with errors: after a pass, the agent sometimes corrected a field, such as the supplier name, and posted the corrected data without validating it again. What is the MOST reliable fix?",
+     "options": [
+      "Add a system prompt rule that any change made after validation requires calling validate_invoice again before post_to_erp.",
+      "Make post_to_erp accept only a payload whose hash matches one that validate_invoice recorded as passing.",
+      "Add a PostToolUse hook on post_to_erp that alerts the finance team whenever the posted data differ from the last validated data.",
+      "Remove the agent's ability to correct fields, so that any invoice with an error is rejected and must be scanned and extracted again."
+     ],
+     "answer": 1,
+     "explain": "B đúng: cổng hiện tại kiểm tra sai thứ: \"đã có một lần validate đạt trong phiên\" chứ không phải \"chính dữ liệu sắp ghi đã được validate\". Gắn kết quả validate với đúng dữ liệu (ví dụ so khớp hash do validator ghi lại) khiến mọi chỉnh sửa sau đó buộc phải validate lại, do code cưỡng chế chứ không dựa vào trí nhớ của model (lời khuyên thiết kế). A sai: lại là lời dặn trong prompt cho đúng chỗ mà cổng code chưa bao được; model vẫn có thể quên. C sai: PostToolUse chạy sau khi tool đã thực thi, nên dữ liệu sai đã vào ERP rồi mới có cảnh báo. D sai: bỏ khả năng sửa là quá tay, biến lỗi nhỏ sửa được thành việc làm lại toàn bộ, trong khi vấn đề chỉ là cổng kiểm tra gắn sai đối tượng.",
+     "sc": "s6",
+     "ts": [
+      "1.4"
+     ]
+    },
+    {
+     "q": "A team adds a progress panel to their Agent SDK coding assistant. It should show when the main agent delegates work to a subagent, and which streamed messages come from inside that subagent. How should the app detect these events?",
+     "options": [
+      "Parse the assistant's text for phrases such as \"I'll delegate this\", since subagent calls do not appear in the message stream.",
+      "Watch for new files under .claude/agents/, because every delegation writes a fresh agent definition file into that folder.",
+      "Watch for tool_use blocks named \"Agent\" (older versions used \"Task\"), and group messages by their parent_tool_use_id field.",
+      "Compare token usage between turns, since a sudden jump in input tokens is the only sign that a subagent has started work."
+     ],
+     "answer": 2,
+     "explain": "Docs SDK subagents: Claude gọi subagent qua tool Agent; để phát hiện, kiểm tra block tool_use có name là \"Agent\" (bản cũ là \"Task\", docs khuyên khớp cả hai), và message phát sinh trong subagent mang trường parent_tool_use_id. Lời gọi subagent hiện rõ trong stream, nên dò câu chữ là mong manh và không cần. Gọi subagent không tạo file định nghĩa mới; .claude/agents/ là nơi bạn tự định nghĩa agent. Dựa vào token tăng đột biến là đoán mò khi đã có tín hiệu tường minh.",
+     "sc": "s4",
+     "ts": [
+      "1.3"
+     ]
+    },
+    {
+     "q": "An Agent SDK app puts a security check in its canUseTool callback: Bash commands that contact hosts outside the company network are refused. To cut down on prompts, a developer later added \"Bash\" to allowedTools, and now the check never runs. What is the BEST fix?",
+     "options": [
+      "Mention canUseTool at the top of the system prompt, so that the model runs the check before each command.",
+      "Move the check into a PreToolUse hook, which runs even for calls that an allow rule has already approved.",
+      "Add \"Bash\" to allowedTools a second time with a higher priority, so canUseTool is consulted before the rule.",
+      "Switch to bypassPermissions mode, in which canUseTool is invoked for every tool call that Claude makes."
+     ],
+     "answer": 1,
+     "explain": "Docs SDK permissions cảnh báo: tool đã được tự duyệt (bởi allow rule, acceptEdits hoặc bypassPermissions) không bao giờ tới canUseTool, nên kiểm tra đặt ở đó bị bỏ qua âm thầm; muốn kiểm tra cả các lời gọi đã được duyệt thì dùng hook PreToolUse, hook này chạy cho chúng và lệnh deny của hook có hiệu lực cả trong bypass. canUseTool là callback của app, model không \"chạy\" được nó qua system prompt. Không có khái niệm ưu tiên khi liệt kê trùng trong allowedTools. Ở bypassPermissions, lời gọi được duyệt trước khi tới canUseTool, ngược với điều phương án đó nói.",
+     "sc": "s4",
+     "ts": [
+      "1.5",
+      "2.3"
+     ]
+    },
+    {
+     "q": "A documentation generator built on the Agent SDK must produce a page for each of 40 modules plus an architecture overview of how the modules interact. A single prompt asking for everything at once yields detailed pages for the first modules, thin pages for the rest, and an overview that misses cross-module dependencies. Which decomposition is BEST?",
+     "options": [
+      "The same single prompt with a much higher max_turns value, so that the agent has enough turns left to reach the later modules and the overview properly.",
+      "A focused pass per module recording its interfaces and dependencies, then a separate synthesis pass that builds the overview from those records.",
+      "Only the overview, generated in one pass, with readers sent to the source code whenever they need details about a specific module.",
+      "All 40 pages requested in one prompt again, with \"be equally thorough for every module\" added to the end of the instructions."
+     ],
+     "answer": 1,
+     "explain": "Bài toán biết trước cấu trúc (40 module + một tổng quan) hợp với chuỗi bước cố định: một lượt tập trung cho từng module ghi lại interface và phụ thuộc ở dạng có cấu trúc, rồi một lượt tổng hợp xuyên module dựa trên các bản ghi đó (exam guide 1.6: per-file + cross-file). Mỗi lượt có sự chú ý đầy đủ, còn lượt tổng hợp thấy được phụ thuộc giữa các module. Tăng max_turns không sửa việc chú ý loãng dần trong một prompt quá rộng. Bỏ trang module là bỏ yêu cầu. Thêm câu \"thorough như nhau\" vẫn giữ nguyên thiết kế đã thất bại.",
+     "sc": "s4",
+     "ts": [
+      "1.6"
+     ]
     }
+   ],
+   "summary": [
+    "Điều khiển vòng lặp agent bằng stop_reason: tool_use thì chạy tool, gửi tool_result rồi lặp; end_turn thì dừng. Thấy text trong response không có nghĩa là xong, và giới hạn số vòng chỉ là lưới an toàn.",
+    "tool_result đứng đầu message user và khớp tool_use_id; nhiều tool_use trong một lượt thì trả hết kết quả trong một message.",
+    "Các bước con biết trước thì dùng prompt chaining hoặc routing, đặt gate bằng code giữa các bước; không biết trước thì để coordinator phân rã động (orchestrator-workers).",
+    "Coordinator là trung tâm: chia việc, giao việc, tổng hợp. Báo cáo thiếu cả một mảng thì xem lại bước chia việc của coordinator, không đổ cho subagent.",
+    "Subagent (trừ fork) không thấy lịch sử của agent cha: mục tiêu, dữ liệu, định dạng output, nguồn/tool nên dùng và ranh giới phải nằm trong prompt giao việc.",
+    "Nhiều lời gọi Agent (tên cũ Task) trong cùng một response thì chạy song song. AgentDefinition bắt buộc có description và prompt; tools giới hạn tool của subagent, bỏ Agent khỏi tools để chặn sinh subagent con.",
+    "Quy tắc về tiền, bảo mật hay thứ tự bước phải cưỡng chế bằng code (kiểm tra trong tool, hook PreToolUse, permission rule); prompt và CLAUDE.md chỉ là hướng dẫn xác suất.",
+    "PreToolUse chặn hoặc sửa trước khi tool chạy (deny/ask/allow, updatedInput); PostToolUse không ngăn được hành động, chỉ thêm context hoặc thay output Claude thấy (updatedToolOutput để chuẩn hóa dữ liệu). Hook Claude Code chặn bằng exit 2, exit 1 không chặn.",
+    "Resume để làm tiếp trên cùng phân tích, fork để thử hướng khác mà giữ bản gốc; session lưu hội thoại chứ không lưu file. File đã đổi thì báo agent file nào đổi, hoặc mở session mới kèm bản tóm tắt.",
+    "Escalate khi khách yêu cầu gặp người, chính sách không bao quát, không tiến triển được hoặc vượt ngưỡng rủi ro; cảm xúc hay điểm tự tin model tự báo không phải tiêu chí đáng tin; bàn giao bằng tóm tắt có cấu trúc."
    ]
   },
   {
@@ -830,6 +1252,11 @@ window.CERT_DATA = {
        "t": "Connect Claude Code to tools via MCP (tool search)",
        "u": "https://code.claude.com/docs/en/mcp"
       }
+     ],
+     "ts": [
+      "2.1",
+      "2.2",
+      "2.4"
      ]
     },
     {
@@ -853,6 +1280,9 @@ window.CERT_DATA = {
        "t": "Writing tools for agents",
        "u": "https://www.anthropic.com/engineering/writing-tools-for-agents"
       }
+     ],
+     "ts": [
+      "2.1"
      ]
     },
     {
@@ -884,6 +1314,10 @@ window.CERT_DATA = {
        "t": "Connect Claude Code to tools via MCP (tool search)",
        "u": "https://code.claude.com/docs/en/mcp"
       }
+     ],
+     "ts": [
+      "2.3",
+      "2.5"
      ]
     },
     {
@@ -911,6 +1345,9 @@ window.CERT_DATA = {
        "t": "MCP specification 2025-11-25: changelog (input validation errors)",
        "u": "https://modelcontextprotocol.io/specification/2025-11-25/changelog"
       }
+     ],
+     "ts": [
+      "2.2"
      ]
     },
     {
@@ -934,6 +1371,9 @@ window.CERT_DATA = {
        "t": "Connect Claude Code to tools via MCP",
        "u": "https://code.claude.com/docs/en/mcp"
       }
+     ],
+     "ts": [
+      "2.4"
      ]
     },
     {
@@ -965,6 +1405,10 @@ window.CERT_DATA = {
        "t": "Connect Claude Code to tools via MCP",
        "u": "https://code.claude.com/docs/en/mcp"
       }
+     ],
+     "ts": [
+      "2.4",
+      "2.2"
      ]
     }
    ],
@@ -1040,7 +1484,11 @@ window.CERT_DATA = {
       "Set tool_choice to force lookup_order whenever the user's message contains a number."
      ],
      "answer": 2,
-     "explain": "Mô tả tool là yếu tố quan trọng nhất trong việc chọn tool. Ở đây hai mô tả quá ngắn và chồng lấn, nên sửa mô tả là bước đầu tiên, rẻ nhất và đúng gốc rễ. A thêm hạ tầng mà chưa chữa nguyên nhân. B gộp hai đối tượng khác nhau vào một tool mơ hồ hơn. D là luật cứng dễ sai (số điện thoại, số lượng hàng cũng là số)."
+     "explain": "Mô tả tool là yếu tố quan trọng nhất trong việc chọn tool. Ở đây hai mô tả quá ngắn và chồng lấn, nên sửa mô tả là bước đầu tiên, rẻ nhất và đúng gốc rễ. A thêm hạ tầng mà chưa chữa nguyên nhân. B gộp hai đối tượng khác nhau vào một tool mơ hồ hơn. D là luật cứng dễ sai (số điện thoại, số lượng hàng cũng là số).",
+     "sc": "s1",
+     "ts": [
+      "2.1"
+     ]
     },
     {
      "q": "An invoice-extraction pipeline must produce a call to the extract_invoice tool for every document, never a free-text reply. The model in use supports forced tool use. Which configuration BEST meets this requirement?",
@@ -1051,7 +1499,12 @@ window.CERT_DATA = {
       "Lower the temperature to zero so the model reliably chooses the tool."
      ],
      "answer": 0,
-     "explain": "Ép đúng tool bằng tool_choice dạng tool bảo đảm mỗi response là một lời gọi extract_invoice. strict: true bảo đảm input khớp schema. B vẫn chỉ là xác suất. C bỏ mất cơ chế bảo đảm cấu trúc. D không bảo đảm gì về việc có gọi tool hay không."
+     "explain": "Ép đúng tool bằng tool_choice dạng tool bảo đảm mỗi response là một lời gọi extract_invoice. strict: true bảo đảm input khớp schema. B vẫn chỉ là xác suất. C bỏ mất cơ chế bảo đảm cấu trúc. D không bảo đảm gì về việc có gọi tool hay không.",
+     "sc": "s6",
+     "ts": [
+      "2.3",
+      "4.3"
+     ]
     },
     {
      "q": "An MCP server's check_inventory tool returns a successful, empty item list whenever its upstream database query times out. The agent then tells customers that products are out of stock. What is the BEST fix?",
@@ -1062,7 +1515,12 @@ window.CERT_DATA = {
       "Return the timeout as a tool execution error (isError: true) marked retryable, distinct from a genuine empty result."
      ],
      "answer": 3,
-     "explain": "Gốc rễ là tool trộn lẫn 'thất bại' với 'không có kết quả'. Trả lỗi thực thi có cấu trúc (isError, có thể retry) giúp agent biết retry hoặc báo đúng tình trạng. A bắt cả trường hợp hết hàng thật cũng phải gọi lại, và vẫn không phân biệt được hai trường hợp. B làm mất kết nối, không mang thông tin. C chỉ làm lỗi hiếm hơn, khi xảy ra vẫn sai như cũ."
+     "explain": "Gốc rễ là tool trộn lẫn 'thất bại' với 'không có kết quả'. Trả lỗi thực thi có cấu trúc (isError, có thể retry) giúp agent biết retry hoặc báo đúng tình trạng. A bắt cả trường hợp hết hàng thật cũng phải gọi lại, và vẫn không phân biệt được hai trường hợp. B làm mất kết nối, không mang thông tin. C chỉ làm lỗi hiếm hơn, khi xảy ra vẫn sai như cũ.",
+     "sc": "s1",
+     "ts": [
+      "2.2",
+      "5.3"
+     ]
     },
     {
      "q": "A platform team wants every developer's Claude Code to connect to the company GitHub MCP server when working in the monorepo. Each developer has a personal access token. Which setup is BEST?",
@@ -1073,7 +1531,10 @@ window.CERT_DATA = {
       "Add the server to ~/.claude.json on the CI runner so it propagates to developers."
      ],
      "answer": 1,
-     "explain": ".mcp.json ở project scope được commit nên cả team có cùng cấu hình. Biến môi trường ${GITHUB_TOKEN} giữ secret ngoài repo. A làm được nhưng mỗi người tự cấu hình, dễ lệch nhau và không gắn với repo. C lộ secret trong version control. D sai: ~/.claude.json là cấu hình riêng của từng máy, không lan sang ai."
+     "explain": ".mcp.json ở project scope được commit nên cả team có cùng cấu hình. Biến môi trường ${GITHUB_TOKEN} giữ secret ngoài repo. A làm được nhưng mỗi người tự cấu hình, dễ lệch nhau và không gắn với repo. C lộ secret trong version control. D sai: ~/.claude.json là cấu hình riêng của từng máy, không lan sang ai.",
+     "ts": [
+      "2.4"
+     ]
     },
     {
      "q": "Which TWO statements about MCP server primitives are correct? (Choose TWO.)",
@@ -1088,7 +1549,10 @@ window.CERT_DATA = {
       1,
       4
      ],
-     "explain": "Resource là dữ liệu chỉ đọc có URI, do ứng dụng điều khiển. Prompt là mẫu do người dùng gọi, và Claude Code hiển thị chúng như lệnh /mcp__server__prompt. A mô tả tool chứ không phải resource. C sai vì prompt cần người dùng gọi rõ ràng. D sai: client khám phá tool qua tools/list, còn .mcp.json chỉ khai báo server."
+     "explain": "Resource là dữ liệu chỉ đọc có URI, do ứng dụng điều khiển. Prompt là mẫu do người dùng gọi, và Claude Code hiển thị chúng như lệnh /mcp__server__prompt. A mô tả tool chứ không phải resource. C sai vì prompt cần người dùng gọi rõ ràng. D sai: client khám phá tool qua tools/list, còn .mcp.json chỉ khai báo server.",
+     "ts": [
+      "2.4"
+     ]
     },
     {
      "q": "In a multi-agent research system, the synthesis agent has 18 tools, including web search, page fetch, database query, and file operations. It often launches new web searches instead of synthesizing the findings it was given, and sometimes calls the wrong tool. What is the BEST change?",
@@ -1099,7 +1563,11 @@ window.CERT_DATA = {
       "Move the synthesis agent to a larger model that can manage more tools."
      ],
      "answer": 2,
-     "explain": "Agent cầm quá nhiều tool ngoài vai trò sẽ dễ lạc đề và chọn nhầm. Thu hẹp bộ tool theo vai trò, thêm một tool kiểm chứng phạm vi hẹp, và đẩy nghiên cứu mới về coordinator. A không giải quyết việc agent có quyền làm việc ngoài vai trò. B còn ép nó gọi tool nhiều hơn. D tốn hơn mà không sửa thiết kế."
+     "explain": "Agent cầm quá nhiều tool ngoài vai trò sẽ dễ lạc đề và chọn nhầm. Thu hẹp bộ tool theo vai trò, thêm một tool kiểm chứng phạm vi hẹp, và đẩy nghiên cứu mới về coordinator. A không giải quyết việc agent có quyền làm việc ngoài vai trò. B còn ép nó gọi tool nhiều hơn. D tốn hơn mà không sửa thiết kế.",
+     "sc": "s3",
+     "ts": [
+      "2.3"
+     ]
     },
     {
      "q": "Claude Code's Edit tool fails on a file because the old_string Claude chose appears in three places. Which response is CORRECT?",
@@ -1110,7 +1578,11 @@ window.CERT_DATA = {
       "Disable the uniqueness check in settings.json."
      ],
      "answer": 0,
-     "explain": "Edit thay chuỗi chính xác và yêu cầu old_string xuất hiện đúng một lần. Cách xử lý là thêm ngữ cảnh cho duy nhất, hoặc dùng replace_all khi muốn thay hết. B sai: Edit không dùng regex. C sai: Grep chỉ tìm, không sửa. D: không có thiết lập như vậy."
+     "explain": "Edit thay chuỗi chính xác và yêu cầu old_string xuất hiện đúng một lần. Cách xử lý là thêm ngữ cảnh cho duy nhất, hoặc dùng replace_all khi muốn thay hết. B sai: Edit không dùng regex. C sai: Grep chỉ tìm, không sửa. D: không có thiết lập như vậy.",
+     "sc": "s4",
+     "ts": [
+      "2.5"
+     ]
     },
     {
      "q": "A developer wants Claude Code to use the users table schema that the connected MCP server named \"postgres\" exposes as a resource. How should the developer include it in the prompt?",
@@ -1121,7 +1593,10 @@ window.CERT_DATA = {
       "Ask Claude to run claude mcp get postgres to read the schema."
      ],
      "answer": 1,
-     "explain": "Resource của MCP được tham chiếu bằng @server:protocol://resource/path và được tự động lấy về đính kèm. A là cú pháp chạy prompt của MCP, không phải resource. C là thao tác thủ công, dễ lỗi thời. D chỉ hiển thị cấu hình server, không đọc resource."
+     "explain": "Resource của MCP được tham chiếu bằng @server:protocol://resource/path và được tự động lấy về đính kèm. A là cú pháp chạy prompt của MCP, không phải resource. C là thao tác thủ công, dễ lỗi thời. D chỉ hiển thị cấu hình server, không đọc resource.",
+     "ts": [
+      "2.4"
+     ]
     }
    ],
    "bank": [
@@ -1134,7 +1609,10 @@ window.CERT_DATA = {
       "Return the raw calendar API payloads unchanged so the agent always has every field it might need for booking."
      ],
      "answer": 0,
-     "explain": "Đúng: bài \"Writing effective tools for agents\" khuyên đừng chỉ bọc lại từng endpoint API; tool có thể gộp chức năng, xử lý nhiều bước hay đi cùng nhau trong một lần gọi, và lấy đúng ví dụ thay list_users/list_events/create_event bằng schedule_event tự tìm lịch trống và đặt lịch. Sai: thêm tool \"hướng dẫn\" vẫn giữ chuỗi gọi dài và dễ sai. Tách list_events thành nhiều tool làm tăng số tool và chọn nhầm, không giải quyết việc đặt trùng. Trả payload thô làm phình context, ngược với khuyến nghị chỉ trả thông tin tín hiệu cao."
+     "explain": "Đúng: bài \"Writing effective tools for agents\" khuyên đừng chỉ bọc lại từng endpoint API; tool có thể gộp chức năng, xử lý nhiều bước hay đi cùng nhau trong một lần gọi, và lấy đúng ví dụ thay list_users/list_events/create_event bằng schedule_event tự tìm lịch trống và đặt lịch. Sai: thêm tool \"hướng dẫn\" vẫn giữ chuỗi gọi dài và dễ sai. Tách list_events thành nhiều tool làm tăng số tool và chọn nhầm, không giải quyết việc đặt trùng. Trả payload thô làm phình context, ngược với khuyến nghị chỉ trả thông tin tín hiệu cao.",
+     "ts": [
+      "2.1"
+     ]
     },
     {
      "q": "An agent connects to Jira, Asana, and Confluence servers, and each exposes a tool simply named search. The agent often searches the wrong system. Which naming change BEST helps tool selection?",
@@ -1145,7 +1623,10 @@ window.CERT_DATA = {
       "Put the three tools in alphabetical order in the tools array so the most relevant one is easier to locate."
      ],
      "answer": 1,
-     "explain": "Đúng: docs Define tools (best practices) và bài \"Writing effective tools for agents\" đều khuyên đặt namespace theo dịch vụ/tài nguyên (ví dụ github_list_prs, asana_search, jira_search) để việc chọn tool rõ ràng khi thư viện tool lớn dần. Sai: mô tả giống hệt nhau làm ba tool càng khó phân biệt. Gộp thành một search chung trả về trộn lẫn kết quả nhiễu, agent mất khả năng nhắm đúng hệ thống. Thứ tự trong mảng tools không phải cơ chế chọn tool."
+     "explain": "Đúng: docs Define tools (best practices) và bài \"Writing effective tools for agents\" đều khuyên đặt namespace theo dịch vụ/tài nguyên (ví dụ github_list_prs, asana_search, jira_search) để việc chọn tool rõ ràng khi thư viện tool lớn dần. Sai: mô tả giống hệt nhau làm ba tool càng khó phân biệt. Gộp thành một search chung trả về trộn lẫn kết quả nhiễu, agent mất khả năng nhắm đúng hệ thống. Thứ tự trong mảng tools không phải cơ chế chọn tool.",
+     "ts": [
+      "2.1"
+     ]
     },
     {
      "q": "A contacts tool returns records such as {\"uuid\": \"9f1c2e7a-4b8d-…\", \"mime_type\": \"text/vcard\", \"avatar_256px_url\": \"…\", \"name\": \"Jane Li\"}. In follow-up calls the agent sometimes passes a mistyped or invented uuid. What change does Anthropic's tool-writing guidance recommend?",
@@ -1156,7 +1637,10 @@ window.CERT_DATA = {
       "Encode each record as base64 so that the agent treats the identifier as one opaque token and cannot alter it."
      ],
      "answer": 2,
-     "explain": "Đúng: bài \"Writing effective tools for agents\" khuyên chỉ trả thông tin tín hiệu cao, bỏ định danh kỹ thuật cấp thấp (uuid, 256px_image_url, mime_type), vì agent xử lý tên/định danh có nghĩa tốt hơn nhiều; đổi UUID sang tên có nghĩa hoặc ID đơn giản giảm hallucination. Khi cần ID kỹ thuật cho bước sau, có thể thêm tham số response_format \"concise\"/\"detailed\". Sai: thêm trường cấp thấp làm nhiễu hơn. Dặn trong prompt không sửa gốc vấn đề. Base64 còn khó đọc hơn, không ngăn sai lệch."
+     "explain": "Đúng: bài \"Writing effective tools for agents\" khuyên chỉ trả thông tin tín hiệu cao, bỏ định danh kỹ thuật cấp thấp (uuid, 256px_image_url, mime_type), vì agent xử lý tên/định danh có nghĩa tốt hơn nhiều; đổi UUID sang tên có nghĩa hoặc ID đơn giản giảm hallucination. Khi cần ID kỹ thuật cho bước sau, có thể thêm tham số response_format \"concise\"/\"detailed\". Sai: thêm trường cấp thấp làm nhiễu hơn. Dặn trong prompt không sửa gốc vấn đề. Base64 còn khó đọc hơn, không ngăn sai lệch.",
+     "ts": [
+      "2.1"
+     ]
     },
     {
      "q": "A search_tickets tool returns every matching ticket with full history, sometimes tens of thousands of tokens, crowding the agent's context. Which TWO changes are MOST appropriate? (Choose TWO.)",
@@ -1171,7 +1655,11 @@ window.CERT_DATA = {
       1,
       3
      ],
-     "explain": "Đúng: \"Writing effective tools for agents\" khuyên kết hợp pagination, range, filter và/hoặc truncation với giá trị mặc định hợp lý cho tool có thể trả nhiều token, kèm hướng dẫn hữu ích khi cắt; và dùng tham số response_format (concise/detailed) để agent chọn mức chi tiết. Sai: tăng giới hạn output chỉ cho phép nhồi thêm vào context. Trả JSON thô ngược lại khuyến nghị trả thông tin tín hiệu cao. Tách thành hàng loạt tool nhỏ làm tăng số tool, tăng nhầm lẫn và số lần gọi."
+     "explain": "Đúng: \"Writing effective tools for agents\" khuyên kết hợp pagination, range, filter và/hoặc truncation với giá trị mặc định hợp lý cho tool có thể trả nhiều token, kèm hướng dẫn hữu ích khi cắt; và dùng tham số response_format (concise/detailed) để agent chọn mức chi tiết. Sai: tăng giới hạn output chỉ cho phép nhồi thêm vào context. Trả JSON thô ngược lại khuyến nghị trả thông tin tín hiệu cao. Tách thành hàng loạt tool nhỏ làm tăng số tool, tăng nhầm lẫn và số lần gọi.",
+     "ts": [
+      "2.1",
+      "5.1"
+     ]
     },
     {
      "q": "When an inventory tool hits a rate limit, it returns a tool_result with is_error: true and the content \"failed\". Claude either gives up immediately or retries in a tight loop. What is the BEST change to the tool?",
@@ -1182,7 +1670,10 @@ window.CERT_DATA = {
       "Make the error say what went wrong and what to do next, e.g. \"Rate limit exceeded. Retry after 60 seconds.\""
      ],
      "answer": 3,
-     "explain": "Đúng: trang Handle tool calls có mẹo \"Write instructive error messages\": thay vì \"failed\", ghi rõ chuyện gì xảy ra và Claude nên thử gì tiếp, lấy đúng ví dụ \"Rate limit exceeded. Retry after 60 seconds.\" để Claude phục hồi mà không phải đoán. Sai: trả rỗng như thành công che lỗi, Claude sẽ hiểu sai là không có hàng. Ném exception dừng cả loop là bỏ cơ hội phục hồi. Chỉ trả mã HTTP vẫn mơ hồ và bỏ cờ is_error mà docs dùng để báo lỗi thực thi."
+     "explain": "Đúng: trang Handle tool calls có mẹo \"Write instructive error messages\": thay vì \"failed\", ghi rõ chuyện gì xảy ra và Claude nên thử gì tiếp, lấy đúng ví dụ \"Rate limit exceeded. Retry after 60 seconds.\" để Claude phục hồi mà không phải đoán. Sai: trả rỗng như thành công che lỗi, Claude sẽ hiểu sai là không có hàng. Ném exception dừng cả loop là bỏ cơ hội phục hồi. Chỉ trả mã HTTP vẫn mơ hồ và bỏ cờ is_error mà docs dùng để báo lỗi thực thi.",
+     "ts": [
+      "2.2"
+     ]
     },
     {
      "q": "A team builds an MCP server whose create_booking tool requires a date in YYYY-MM-DD format. When the model sends \"next Friday\", the server currently answers with a JSON-RPC protocol error, and the model rarely recovers. What does the current MCP specification (2026-07-28) recommend instead?",
@@ -1193,7 +1684,10 @@ window.CERT_DATA = {
       "Close the connection so the client reconnects and re-sends the request with the correct format."
      ],
      "answer": 0,
-     "explain": "Đúng: spec MCP (Tools, Error Handling) chia hai loại: protocol error (JSON-RPC) cho tool không tồn tại, request sai cấu trúc, lỗi server; còn tool execution error với isError: true cho lỗi API, lỗi kiểm tra input (ví dụ ngày sai định dạng) và lỗi nghiệp vụ, vì chúng chứa phản hồi mô hình dùng được để tự sửa và thử lại. Client NÊN chuyển tool execution error cho mô hình. (Bản spec cũ 2025-06-18 còn xếp \"invalid arguments\" vào protocol error; thay đổi này có từ bản 2025-11-25.) Sai: spec xếp lỗi validate input vào tool execution error. Tự đổi sang ngày hôm nay là đặt sai lịch. Đóng kết nối không cho mô hình biết phải sửa gì."
+     "explain": "Đúng: spec MCP (Tools, Error Handling) chia hai loại: protocol error (JSON-RPC) cho tool không tồn tại, request sai cấu trúc, lỗi server; còn tool execution error với isError: true cho lỗi API, lỗi kiểm tra input (ví dụ ngày sai định dạng) và lỗi nghiệp vụ, vì chúng chứa phản hồi mô hình dùng được để tự sửa và thử lại. Client NÊN chuyển tool execution error cho mô hình. (Bản spec cũ 2025-06-18 còn xếp \"invalid arguments\" vào protocol error; thay đổi này có từ bản 2025-11-25.) Sai: spec xếp lỗi validate input vào tool execution error. Tự đổi sang ngày hôm nay là đặt sai lịch. Đóng kết nối không cho mô hình biết phải sửa gì.",
+     "ts": [
+      "2.2"
+     ]
     },
     {
      "q": "A client application auto-approves any tool whose MCP annotations include readOnlyHint: true. It connects to a third-party MCP server the team has not reviewed. What is the problem with this design?",
@@ -1204,7 +1698,10 @@ window.CERT_DATA = {
       "readOnlyHint applies to resources rather than tools, so it has no effect on whether a tool modifies data."
      ],
      "answer": 1,
-     "explain": "Đúng: spec MCP ghi client PHẢI coi annotations của tool là không đáng tin trừ khi đến từ server tin cậy; schema ToolAnnotations nói mọi thuộc tính chỉ là gợi ý, không đảm bảo mô tả trung thực hành vi, và client không nên quyết định dùng tool dựa trên annotations từ server không tin cậy. Sai: destructiveHint chỉ có nghĩa khi readOnlyHint = false (ngược với phương án). Không có cơ chế xác minh mật mã nào cho annotations. readOnlyHint là thuộc tính của ToolAnnotations, tức là của tool."
+     "explain": "Đúng: spec MCP ghi client PHẢI coi annotations của tool là không đáng tin trừ khi đến từ server tin cậy; schema ToolAnnotations nói mọi thuộc tính chỉ là gợi ý, không đảm bảo mô tả trung thực hành vi, và client không nên quyết định dùng tool dựa trên annotations từ server không tin cậy. Sai: destructiveHint chỉ có nghĩa khi readOnlyHint = false (ngược với phương án). Không có cơ chế xác minh mật mã nào cho annotations. readOnlyHint là thuộc tính của ToolAnnotations, tức là của tool.",
+     "ts": [
+      "2.4"
+     ]
     },
     {
      "q": "A pipeline receives mixed documents and has three extraction tools: extract_invoice, extract_receipt, and extract_contract. Every request must end in exactly one of these calls, but the model should pick which one. The model in use supports forced tool use. Which tool_choice setting fits?",
@@ -1215,7 +1712,12 @@ window.CERT_DATA = {
       "{\"type\": \"none\"}, then parse whichever extraction the model describes in its text reply."
      ],
      "answer": 2,
-     "explain": "Đúng: docs Define tools: \"any\" bắt Claude phải dùng một trong các tool được cung cấp nhưng không ép tool cụ thể; \"tool\" ép đúng một tool; \"auto\" (mặc định khi có tools) để Claude tự quyết có gọi tool hay không; \"none\" cấm dùng tool. Lưu ý: docs hiện ghi một số model mới (ví dụ Claude Opus 5.5, Sonnet 5.5) trả lỗi 400 với \"any\"/\"tool\" và khuyên dùng auto kèm strict tool use hoặc structured outputs (tháng 11/2026), vì vậy đề bài nói rõ model hỗ trợ forced tool use. Sai: ép extract_invoice rồi thử lại là đoán mò, tốn gấp ba. auto có thể trả lời bằng text. none cấm gọi tool."
+     "explain": "Đúng: docs Define tools: \"any\" bắt Claude phải dùng một trong các tool được cung cấp nhưng không ép tool cụ thể; \"tool\" ép đúng một tool; \"auto\" (mặc định khi có tools) để Claude tự quyết có gọi tool hay không; \"none\" cấm dùng tool. Lưu ý: docs hiện ghi một số model mới (ví dụ Claude Opus 5.5, Sonnet 5.5) trả lỗi 400 với \"any\"/\"tool\" và khuyên dùng auto kèm strict tool use hoặc structured outputs (tháng 11/2026), vì vậy đề bài nói rõ model hỗ trợ forced tool use. Sai: ép extract_invoice rồi thử lại là đoán mò, tốn gấp ba. auto có thể trả lời bằng text. none cấm gọi tool.",
+     "sc": "s6",
+     "ts": [
+      "2.3",
+      "4.3"
+     ]
     },
     {
      "q": "A team forces a specific tool with tool_choice {\"type\": \"tool\", \"name\": \"classify_ticket\"}. They also want Claude to write a short natural-language explanation before the call, but no explanation ever appears even when the prompt asks for one. What should they do?",
@@ -1226,7 +1728,10 @@ window.CERT_DATA = {
       "Use tool_choice auto and instruct Claude in the user message to explain briefly and then call classify_ticket."
      ],
      "answer": 3,
-     "explain": "Đúng: docs Define tools ghi khi tool_choice là any hoặc tool, API prefill assistant message để ép gọi tool, nên mô hình không sinh lời giải thích trước tool_use dù được yêu cầu; muốn có giải thích thì dùng auto (mặc định) và thêm chỉ dẫn rõ trong user message. Sai: max_tokens không phải nguyên nhân. Chỉ ép được một tool tên cụ thể; thứ tự trong mảng tools không ép thứ tự gọi. Temperature không thay đổi cơ chế prefill."
+     "explain": "Đúng: docs Define tools ghi khi tool_choice là any hoặc tool, API prefill assistant message để ép gọi tool, nên mô hình không sinh lời giải thích trước tool_use dù được yêu cầu; muốn có giải thích thì dùng auto (mặc định) và thêm chỉ dẫn rõ trong user message. Sai: max_tokens không phải nguyên nhân. Chỉ ép được một tool tên cụ thể; thứ tự trong mảng tools không ép thứ tự gọi. Temperature không thay đổi cơ chế prefill.",
+     "ts": [
+      "2.3"
+     ]
     },
     {
      "q": "Which TWO statements about the tool_choice parameter are correct? (Choose TWO.)",
@@ -1241,7 +1746,10 @@ window.CERT_DATA = {
       0,
       4
      ],
-     "explain": "Đúng: docs Define tools liệt kê bốn giá trị: auto (mặc định khi có tools), any, tool, none (ngăn dùng tool; mặc định khi không có tools). Sai: any bắt dùng một tool bất kỳ, không ép tool cụ thể và không theo thứ tự mảng. Docs ghi với manual extended thinking (thinking type \"enabled\"), any và tool không được hỗ trợ và gây lỗi. Docs cũng ghi thay đổi tool_choice làm mất cache các khối message (tool definitions và system prompt vẫn được cache)."
+     "explain": "Đúng: docs Define tools liệt kê bốn giá trị: auto (mặc định khi có tools), any, tool, none (ngăn dùng tool; mặc định khi không có tools). Sai: any bắt dùng một tool bất kỳ, không ép tool cụ thể và không theo thứ tự mảng. Docs ghi với manual extended thinking (thinking type \"enabled\"), any và tool không được hỗ trợ và gây lỗi. Docs cũng ghi thay đổi tool_choice làm mất cache các khối message (tool definitions và system prompt vẫn được cache).",
+     "ts": [
+      "2.3"
+     ]
     },
     {
      "q": "An agent has a transfer_funds tool with side effects. When Claude calls it twice in one response, the two transfers race against each other. The team wants Claude to make at most one tool call per response while still being able to reply in plain text. What should they set?",
@@ -1252,7 +1760,10 @@ window.CERT_DATA = {
       "strict: true on transfer_funds, since strict mode only ever allows one call of the tool per response."
      ],
      "answer": 0,
-     "explain": "Đúng: docs Parallel tool use ghi disable_parallel_tool_use: true đặt BÊN TRONG object tool_choice, không phải tham số top-level; với type auto, Claude gọi tối đa một tool mỗi response và vẫn có thể trả lời bằng text. Sai: không có tham số top-level như vậy trong Messages API. Với any (hoặc tool) cộng disable_parallel_tool_use, Claude phải gọi đúng một tool, tức là bắt buộc gọi tool ở mọi response, trái yêu cầu được trả lời bằng text. strict: true chỉ đảm bảo input khớp schema, không giới hạn số lần gọi."
+     "explain": "Đúng: docs Parallel tool use ghi disable_parallel_tool_use: true đặt BÊN TRONG object tool_choice, không phải tham số top-level; với type auto, Claude gọi tối đa một tool mỗi response và vẫn có thể trả lời bằng text. Sai: không có tham số top-level như vậy trong Messages API. Với any (hoặc tool) cộng disable_parallel_tool_use, Claude phải gọi đúng một tool, tức là bắt buộc gọi tool ở mọi response, trái yêu cầu được trả lời bằng text. strict: true chỉ đảm bảo input khớp schema, không giới hạn số lần gọi.",
+     "ts": [
+      "2.3"
+     ]
     },
     {
      "q": "A create_shipment tool's input schema marks weight_kg and destination_country as required. In production, Claude occasionally calls it with weight_kg missing or given as a string like \"5kg\", which breaks the backend. Which change gives a guarantee rather than an improvement in odds?",
@@ -1263,7 +1774,11 @@ window.CERT_DATA = {
       "Move both required parameters to the start of the input schema so that Claude fills them in first."
      ],
      "answer": 1,
-     "explain": "Đúng: trang Handle tool calls có mẹo: muốn loại bỏ hoàn toàn tool call không hợp lệ thì dùng strict tool use với strict: true, đảm bảo input luôn khớp schema, không thiếu tham số, không sai kiểu (strict tool use dùng constrained decoding như structured outputs). Sai: sửa description giúp nhưng chỉ tăng xác suất. Trả lỗi để Claude thử lại là cơ chế phục hồi, không phải đảm bảo (docs ghi Claude thử 2–3 lần rồi xin lỗi). Thứ tự thuộc tính không bắt buộc giá trị phải đúng."
+     "explain": "Đúng: trang Handle tool calls có mẹo: muốn loại bỏ hoàn toàn tool call không hợp lệ thì dùng strict tool use với strict: true, đảm bảo input luôn khớp schema, không thiếu tham số, không sai kiểu (strict tool use dùng constrained decoding như structured outputs). Sai: sửa description giúp nhưng chỉ tăng xác suất. Trả lỗi để Claude thử lại là cơ chế phục hồi, không phải đảm bảo (docs ghi Claude thử 2–3 lần rồi xin lỗi). Thứ tự thuộc tính không bắt buộc giá trị phải đúng.",
+     "ts": [
+      "2.1",
+      "4.3"
+     ]
     },
     {
      "q": "A search_logs tool has a nested filter object with format-sensitive fields (ISO timestamps, severity enums, and a query mini-language). Claude often builds filters that are valid JSON but semantically wrong. Besides a detailed description, which tool-definition feature is designed for this?",
@@ -1274,7 +1789,10 @@ window.CERT_DATA = {
       "A longer tool name, such as search_logs_with_iso_timestamps_and_severity_enum, that encodes the format."
      ],
      "answer": 2,
-     "explain": "Đúng: docs Define tools: ưu tiên mô tả, nhưng với tool có input phức tạp, object lồng nhau hoặc tham số nhạy định dạng, có thể dùng trường input_examples (mảng ví dụ input, mỗi cái phải hợp lệ theo input_schema). Sai: cache_control là prompt caching để giảm chi phí, không dạy định dạng. defer_loading thuộc tool search, để hoãn nạp định nghĩa tool, không cải thiện cách điền input. Nhồi định dạng vào tên tool không thay được ví dụ và còn vướng giới hạn tên (regex ^[a-zA-Z0-9_-]{1,128}$)."
+     "explain": "Đúng: docs Define tools: ưu tiên mô tả, nhưng với tool có input phức tạp, object lồng nhau hoặc tham số nhạy định dạng, có thể dùng trường input_examples (mảng ví dụ input, mỗi cái phải hợp lệ theo input_schema). Sai: cache_control là prompt caching để giảm chi phí, không dạy định dạng. defer_loading thuộc tool search, để hoãn nạp định nghĩa tool, không cải thiện cách điền input. Nhồi định dạng vào tên tool không thay được ví dụ và còn vướng giới hạn tên (regex ^[a-zA-Z0-9_-]{1,128}$).",
+     "ts": [
+      "2.1"
+     ]
     },
     {
      "q": "A developer added a \"postgres\" MCP server at local scope pointing at her personal database. The repository's committed .mcp.json also defines a server named \"postgres\" pointing at the shared staging database. Which definition does Claude Code use in her sessions in that repository?",
@@ -1285,7 +1803,10 @@ window.CERT_DATA = {
       "Her local-scope entry, used in full, because local scope takes precedence over project scope."
      ],
      "answer": 3,
-     "explain": "Đúng: docs MCP (Scope hierarchy and precedence): cùng tên ở nhiều nơi thì Claude Code kết nối một lần theo nguồn ưu tiên cao nhất, thứ tự Local → Project → User → plugin → claude.ai connectors; dùng nguyên entry của nguồn đó, không gộp trường. Sai: project không thắng local. Không có gộp từng trường (docs nói rõ fields are not merged). Không có hành vi từ chối khởi động khi trùng tên."
+     "explain": "Đúng: docs MCP (Scope hierarchy and precedence): cùng tên ở nhiều nơi thì Claude Code kết nối một lần theo nguồn ưu tiên cao nhất, thứ tự Local → Project → User → plugin → claude.ai connectors; dùng nguyên entry của nguồn đó, không gộp trường. Sai: project không thắng local. Không có gộp từng trường (docs nói rõ fields are not merged). Không có hành vi từ chối khởi động khi trùng tên.",
+     "ts": [
+      "2.4"
+     ]
     },
     {
      "q": "A team shares an HTTP MCP server in .mcp.json. Most developers use the production endpoint, but some must point at a staging URL, and nobody should commit credentials. Which configuration supports this?",
@@ -1296,7 +1817,10 @@ window.CERT_DATA = {
       "Store the URL and token in CLAUDE.md so that Claude reads them and passes them to the server at runtime."
      ],
      "answer": 0,
-     "explain": "Đúng: docs MCP (Environment variable expansion in .mcp.json) hỗ trợ ${VAR} và ${VAR:-default} trong command, args, env, url, headers; ví dụ chính thức dùng url với giá trị mặc định và header Authorization lấy từ biến môi trường, nên mỗi người đặt biến riêng mà không commit bí mật. Sai: commit token vào bất kỳ file nào là lộ thông tin xác thực; Claude Code cũng không tự đọc file .mcp.staging.json. Sửa file cục bộ không commit thì dễ lỡ tay commit token. CLAUDE.md là chỉ dẫn cho mô hình, không phải cấu hình kết nối MCP, và đưa token vào context là rủi ro."
+     "explain": "Đúng: docs MCP (Environment variable expansion in .mcp.json) hỗ trợ ${VAR} và ${VAR:-default} trong command, args, env, url, headers; ví dụ chính thức dùng url với giá trị mặc định và header Authorization lấy từ biến môi trường, nên mỗi người đặt biến riêng mà không commit bí mật. Sai: commit token vào bất kỳ file nào là lộ thông tin xác thực; Claude Code cũng không tự đọc file .mcp.staging.json. Sửa file cục bộ không commit thì dễ lỡ tay commit token. CLAUDE.md là chỉ dẫn cho mô hình, không phải cấu hình kết nối MCP, và đưa token vào context là rủi ro.",
+     "ts": [
+      "2.4"
+     ]
     },
     {
      "q": "A refund tool can fail in several ways: the payments API times out, the customer lacks permission, the amount exceeds policy, or the order ID is malformed. Which TWO properties make these errors MOST useful to the agent? (Choose TWO.)",
@@ -1311,7 +1835,11 @@ window.CERT_DATA = {
       2,
       3
      ],
-     "explain": "Đúng (khớp spec MCP và docs Handle tool calls): lỗi thực thi nên mang phản hồi hành động được, để mô hình biết nên thử lại (lỗi tạm thời), sửa input (lỗi validate), giải thích cho khách (vi phạm chính sách, không nên thử lại) hay escalate (thiếu quyền). Phân loại kèm cờ có-thể-thử-lại cộng giải thích rõ ràng cho phép đúng hành vi đó. Sai: stack trace là chi tiết kỹ thuật vô dụng với agent; bài \"Writing effective tools for agents\" khuyên tránh mã lỗi mờ và traceback. Thông báo chung chung khiến agent không biết làm gì. Trả rỗng như thành công che lỗi và làm agent trả lời sai."
+     "explain": "Đúng (khớp spec MCP và docs Handle tool calls): lỗi thực thi nên mang phản hồi hành động được, để mô hình biết nên thử lại (lỗi tạm thời), sửa input (lỗi validate), giải thích cho khách (vi phạm chính sách, không nên thử lại) hay escalate (thiếu quyền). Phân loại kèm cờ có-thể-thử-lại cộng giải thích rõ ràng cho phép đúng hành vi đó. Sai: stack trace là chi tiết kỹ thuật vô dụng với agent; bài \"Writing effective tools for agents\" khuyên tránh mã lỗi mờ và traceback. Thông báo chung chung khiến agent không biết làm gì. Trả rỗng như thành công che lỗi và làm agent trả lời sai.",
+     "sc": "s1",
+     "ts": [
+      "2.2"
+     ]
     },
     {
      "q": "Claude Code needs to change one constant in a 1,800-line configuration module that another developer is also editing. Which built-in tool behavior makes Edit the better choice than Write here?",
@@ -1322,7 +1850,11 @@ window.CERT_DATA = {
       "Write is limited to new files only and fails whenever the target file already exists on disk."
      ],
      "answer": 1,
-     "explain": "Đúng: Tools reference: Edit thay chuỗi chính xác (old_string → new_string, không regex, old_string phải duy nhất trừ khi replace_all); Write tạo file mới hoặc ghi đè toàn bộ nội dung, không append hay merge; docs ghi với thay đổi một phần file thì Claude dùng Edit. Ghi đè cả file có thể xóa thay đổi khác. Sai: Edit không khóa file. Edit không dùng regex. Write ghi đè được file có sẵn (với điều kiện đọc trước tùy model), không chỉ tạo file mới."
+     "explain": "Đúng: Tools reference: Edit thay chuỗi chính xác (old_string → new_string, không regex, old_string phải duy nhất trừ khi replace_all); Write tạo file mới hoặc ghi đè toàn bộ nội dung, không append hay merge; docs ghi với thay đổi một phần file thì Claude dùng Edit. Ghi đè cả file có thể xóa thay đổi khác. Sai: Edit không khóa file. Edit không dùng regex. Write ghi đè được file có sẵn (với điều kiện đọc trước tùy model), không chỉ tạo file mới.",
+     "sc": "s4",
+     "ts": [
+      "2.5"
+     ]
     },
     {
      "q": "In an Agent SDK app where both the Glob and Grep tools are enabled, the agent must find every place in the repository that calls the function legacyFormatDate. Which tool fits this step BEST?",
@@ -1333,7 +1865,11 @@ window.CERT_DATA = {
       "Write, which creates a temporary index file of all function calls that later searches can then reuse."
      ],
      "answer": 2,
-     "explain": "Đúng: Tools reference: Glob tìm file theo mẫu tên, Grep tìm dòng bên trong file (dựa trên ripgrep, hỗ trợ lọc theo glob/type). Tìm nơi gọi hàm là tìm nội dung, nên dùng Grep. (Lưu ý: docs hiện ghi trên macOS/Linux/WSL, Claude Code mặc định bỏ Glob/Grep khỏi bộ tool và tìm bằng find/grep qua Bash, trừ khi bạn bật lại, tháng 11/2026; vì vậy đề bài nói rõ cả hai tool đã được bật.) Sai: Glob chỉ khớp tên file, bỏ sót mọi file gọi hàm mà tên không chứa tên hàm. Đọc từng file tốn context khủng khiếp. Write không phải công cụ tìm kiếm."
+     "explain": "Đúng: Tools reference: Glob tìm file theo mẫu tên, Grep tìm dòng bên trong file (dựa trên ripgrep, hỗ trợ lọc theo glob/type). Tìm nơi gọi hàm là tìm nội dung, nên dùng Grep. (Lưu ý: docs hiện ghi trên macOS/Linux/WSL, Claude Code mặc định bỏ Glob/Grep khỏi bộ tool và tìm bằng find/grep qua Bash, trừ khi bạn bật lại, tháng 11/2026; vì vậy đề bài nói rõ cả hai tool đã được bật.) Sai: Glob chỉ khớp tên file, bỏ sót mọi file gọi hàm mà tên không chứa tên hàm. Đọc từng file tốn context khủng khiếp. Write không phải công cụ tìm kiếm.",
+     "sc": "s4",
+     "ts": [
+      "2.5"
+     ]
     },
     {
      "q": "A code-review subagent must never modify files. Its definition currently says \"You are read-only; never edit files\" in its prompt and inherits all tools, and it has occasionally applied \"quick fixes.\" What is the BEST fix?",
@@ -1344,7 +1880,10 @@ window.CERT_DATA = {
       "Restrict the subagent's tools to read-only ones, e.g. Read, Grep, Glob, so editing tools are not available."
      ],
      "answer": 3,
-     "explain": "Đúng: docs Subagents (SDK và Claude Code) cho giới hạn tool bằng trường tools; tool bị bỏ ra không có trong session của subagent, Claude làm việc không có nó. Best practices nêu đúng ví dụ reviewer chỉ có Read, Grep, Glob: giới hạn do Claude Code cưỡng chế chứ không phải lời dặn. Sai: nhắc lại trong prompt vẫn là gợi ý. Đổi model không đảm bảo gì. Hoàn tác sau khi sửa là chữa cháy và phụ thuộc subagent tự khai báo."
+     "explain": "Đúng: docs Subagents (SDK và Claude Code) cho giới hạn tool bằng trường tools; tool bị bỏ ra không có trong session của subagent, Claude làm việc không có nó. Best practices nêu đúng ví dụ reviewer chỉ có Read, Grep, Glob: giới hạn do Claude Code cưỡng chế chứ không phải lời dặn. Sai: nhắc lại trong prompt vẫn là gợi ý. Đổi model không đảm bảo gì. Hoàn tác sau khi sửa là chữa cháy và phụ thuộc subagent tự khai báo.",
+     "ts": [
+      "2.3"
+     ]
     },
     {
      "q": "A documentation agent spends many turns calling list_pages and get_page just to discover which documents exist before answering. The MCP server owner wants the agent to see the documentation catalog up front without extra tool calls. Which MCP primitive fits this BEST?",
@@ -1355,7 +1894,10 @@ window.CERT_DATA = {
       "Put the catalog inside the server's tool descriptions so it is sent along with every single tool definition."
      ],
      "answer": 0,
-     "explain": "Đúng: trang \"Understanding MCP servers\" mô tả resource là nguồn dữ liệu thụ động, chỉ đọc, cung cấp context như nội dung file, schema, tài liệu; ứng dụng (application-controlled) quyết định đưa vào context, và Claude Code cho tham chiếu resource bằng @. Sai: prompt là mẫu do người dùng gọi (user-controlled), không phải do mô hình tự gọi. Thêm tool vẫn là tool call do mô hình quyết định, đúng thứ đang muốn giảm. Nhồi catalog vào mô tả tool làm phình mọi định nghĩa tool và bị cắt theo giới hạn độ dài mô tả."
+     "explain": "Đúng: trang \"Understanding MCP servers\" mô tả resource là nguồn dữ liệu thụ động, chỉ đọc, cung cấp context như nội dung file, schema, tài liệu; ứng dụng (application-controlled) quyết định đưa vào context, và Claude Code cho tham chiếu resource bằng @. Sai: prompt là mẫu do người dùng gọi (user-controlled), không phải do mô hình tự gọi. Thêm tool vẫn là tool call do mô hình quyết định, đúng thứ đang muốn giảm. Nhồi catalog vào mô tả tool làm phình mọi định nghĩa tool và bị cắt theo giới hạn độ dài mô tả.",
+     "ts": [
+      "2.4"
+     ]
     },
     {
      "q": "A developer connects Claude Code to eight MCP servers exposing over 150 tools and worries that the tool definitions alone will consume a large part of the context window in every session. What does Claude Code do to address this?",
@@ -1366,7 +1908,10 @@ window.CERT_DATA = {
       "MCP tools are only available inside subagents, so that their definitions never enter the main context."
      ],
      "answer": 1,
-     "explain": "Đúng: docs MCP (Scale with MCP tool search): tool search giữ mức dùng context thấp bằng cách hoãn định nghĩa tool đến khi Claude cần; lúc bắt đầu session chỉ nạp tên tool và server instructions, và Claude Code không đặt giới hạn cố định số tool mỗi server (docs hiện ghi, tháng 11/2026; một số nền tảng như Foundry trên Azure không hỗ trợ). Sai: không có giới hạn 20 tool mỗi server. Không có cơ chế tự nén mô tả (chỉ có giới hạn độ dài, phần vượt bị cắt). MCP tool dùng được trong hội thoại chính, không chỉ trong subagent."
+     "explain": "Đúng: docs MCP (Scale with MCP tool search): tool search giữ mức dùng context thấp bằng cách hoãn định nghĩa tool đến khi Claude cần; lúc bắt đầu session chỉ nạp tên tool và server instructions, và Claude Code không đặt giới hạn cố định số tool mỗi server (docs hiện ghi, tháng 11/2026; một số nền tảng như Foundry trên Azure không hỗ trợ). Sai: không có giới hạn 20 tool mỗi server. Không có cơ chế tự nén mô tả (chỉ có giới hạn độ dài, phần vượt bị cắt). MCP tool dùng được trong hội thoại chính, không chỉ trong subagent.",
+     "ts": [
+      "2.4"
+     ]
     },
     {
      "q": "An email-triage agent fetches customer emails with a get_email tool. To \"make the content more prominent,\" a developer changes the code to paste each fetched email body into the system prompt instead of returning it in the tool_result. Why is this a bad change?",
@@ -1377,8 +1922,414 @@ window.CERT_DATA = {
       "Moving content into the system prompt disables prompt caching for every request that includes tool definitions."
      ],
      "answer": 2,
-     "explain": "Đúng: trang Handle tool calls cảnh báo tool result thường mang nội dung ngoài tầm kiểm soát (web, email đến, file người dùng, API bên thứ ba); kẻ tấn công có thể nhúng chỉ dẫn để điều hướng Claude (indirect prompt injection); docs khuyên giữ nội dung không đáng tin trong tool_result thay vì system prompt hay text block thường. Đưa email vào system prompt là trao cho nó vị trí có thẩm quyền cao nhất. Sai: không có giới hạn 1.000 token cho system prompt. Claude không bỏ qua system prompt khi có tools. Đặt nội dung vào system prompt không tắt prompt caching (chỉ là nội dung thay đổi theo request thì cache prefix kém hiệu quả), và đó không phải lý do chính."
+     "explain": "Đúng: trang Handle tool calls cảnh báo tool result thường mang nội dung ngoài tầm kiểm soát (web, email đến, file người dùng, API bên thứ ba); kẻ tấn công có thể nhúng chỉ dẫn để điều hướng Claude (indirect prompt injection); docs khuyên giữ nội dung không đáng tin trong tool_result thay vì system prompt hay text block thường. Đưa email vào system prompt là trao cho nó vị trí có thẩm quyền cao nhất. Sai: không có giới hạn 1.000 token cho system prompt. Claude không bỏ qua system prompt khi có tools. Đặt nội dung vào system prompt không tắt prompt caching (chỉ là nội dung thay đổi theo request thì cache prefix kém hiệu quả), và đó không phải lý do chính.",
+     "ts": [
+      "1.1"
+     ]
+    },
+    {
+     "q": "After the team rewrote the descriptions of get_customer and lookup_order to say which identifiers each accepts, the support agent still calls get_customer first even when the customer has already given an order number. The system prompt begins: \"Always start by reviewing the customer's account to personalize the conversation.\" What should the team do next?",
+     "options": [
+      "Add more sample order numbers and formats to the lookup_order description so that Claude recognizes order numbers more easily in customer messages.",
+      "Reword the system prompt so it no longer requires an account review first, e.g. use lookup_order directly when an order number is given.",
+      "Rename get_customer to get_customer_account_details_only so that the longer name discourages unnecessary calls to it.",
+      "Remove get_customer from the agent's tools, since order records already contain the customer details most requests need."
+     ],
+     "answer": 1,
+     "explain": "B đúng: câu mở đầu system prompt ra lệnh xem tài khoản trước, nên nó lấn át mô tả tool vừa sửa. Khi tool đã được mô tả rõ mà hành vi chưa đổi, cần tìm chỉ dẫn trong system prompt đang kéo lựa chọn tool lệch đi và sửa nó. A sai: mô tả đã rõ; thêm ví dụ không gỡ được mệnh lệnh \"luôn bắt đầu bằng tài khoản\". C sai: đổi tên vẫn thua một chỉ dẫn trực tiếp trong system prompt. D sai: get_customer vẫn cần cho các ca khác (khách chưa có mã đơn, xác minh danh tính); bỏ tool để né một xung đột là sửa sai chỗ.",
+     "sc": "s1",
+     "ts": [
+      "2.1"
+     ]
+    },
+    {
+     "q": "The payment gateway behind the support agent's process_refund tool sometimes times out after the refund has actually gone through. The tool returns a generic error, the agent calls it again, and some customers are refunded twice. Which change BEST addresses this?",
+     "options": [
+      "Tell the agent in the system prompt never to call process_refund more than once per conversation, whatever result it returns.",
+      "Use an idempotency key per refund request, and on a timeout return an error saying the outcome is unknown and must be checked before any retry.",
+      "Return a successful result on every timeout so the agent does not retry, and reconcile any failed refunds at the end of the day.",
+      "Raise the gateway timeout so that timeouts become rare enough that the occasional duplicate refund no longer matters much."
+     ],
+     "answer": 1,
+     "explain": "B đúng: khóa idempotency bảo đảm một yêu cầu hoàn tiền dù gửi lại vẫn chỉ được thực hiện một lần, và thông báo lỗi nói rõ \"không biết kết quả, cần kiểm tra trước khi thử lại\" cho agent biết cách xử lý đúng thay vì một lỗi chung chung. Đây là lời khuyên thiết kế cho tool có tác dụng phụ. A sai: lời dặn không cưỡng chế, và còn chặn cả lần thử lại hợp lệ khi lần đầu thật sự thất bại. C sai: báo thành công giả khiến agent nói với khách là đã hoàn tiền khi có thể chưa. D sai: chỉ giảm tần suất, vấn đề hoàn tiền hai lần vẫn còn.",
+     "sc": "s1",
+     "ts": [
+      "2.2"
+     ]
+    },
+    {
+     "q": "The support agent's MCP tools return structured errors with an error category and an isRetryable flag. For which TWO of these failures should isRetryable be false, so that the agent explains or escalates instead of trying again? (Choose TWO.)",
+     "options": [
+      "lookup_order: the order database did not respond within 10 seconds.",
+      "get_customer: the CRM returned HTTP 503 Service Unavailable.",
+      "process_refund: the order is outside the 30-day refund window set by policy.",
+      "lookup_order: the API rate limit was exceeded; retry after 30 seconds.",
+      "process_refund: the agent's service account lacks permission to refund gift-card purchases."
+     ],
+     "answer": [
+      2,
+      4
+     ],
+     "explain": "C và E đúng: vi phạm quy tắc nghiệp vụ (quá hạn hoàn tiền) và thiếu quyền là lỗi không tự hết khi thử lại; agent nên giải thích cho khách hoặc escalate. A, B, D sai: timeout, 503 và vượt rate limit là lỗi tạm thời, thử lại (có backoff, hoặc sau thời gian server gợi ý) thường thành công, nên đánh dấu retryable là đúng. Phân loại này giúp agent chọn hành động thay vì thử lại mù quáng hay bỏ cuộc ngay.",
+     "sc": "s1",
+     "ts": [
+      "2.2"
+     ]
+    },
+    {
+     "q": "The support agent has an update_order tool that can change any order field, including price, items, and status. It was added so the agent could fix shipping addresses, but the agent has occasionally changed other fields when customers asked it to. What is the BEST redesign?",
+     "options": [
+      "Keep update_order, but add a paragraph to its description that lists which fields the agent may change and which fields it must never touch.",
+      "Remove update_order and escalate every address change to a human, so that order data is never modified automatically by the agent.",
+      "Keep update_order and add a confidence parameter, applying a change only when the agent reports a confidence above 0.9.",
+      "Replace it with a narrow change_shipping_address tool that takes an order ID and new address and rejects orders that have shipped."
+     ],
+     "answer": 3,
+     "explain": "D đúng: một tool phạm vi hẹp chỉ làm được đúng việc agent cần, và quy tắc (chưa giao hàng mới được đổi) nằm trong code của tool. Agent không thể sửa giá hay trạng thái vì không có tool nào cho phép. A sai: mô tả chỉ hướng dẫn; tool vẫn cho phép sửa mọi trường, nên khách nài nỉ vẫn có thể dẫn tới sửa sai. B sai: quá tay, biến một việc thường ngày, an toàn khi được giới hạn, thành việc tốn người. C sai: confidence do model tự báo không được hiệu chuẩn và không giới hạn được trường nào bị sửa.",
+     "sc": "s1",
+     "ts": [
+      "2.3"
+     ]
+    },
+    {
+     "q": "The support team wants the first model response in every conversation to be a get_customer call that verifies the caller, using the email address captured by the chat widget. After that, Claude should choose freely among its tools or reply in text. The model in use supports forced tool use, and extended thinking is off. Which tool_choice setup fits BEST?",
+     "options": [
+      "{\"type\": \"tool\", \"name\": \"get_customer\"} on the first request, then {\"type\": \"auto\"} on later requests.",
+      "{\"type\": \"any\"} on every request, so that each response is guaranteed to contain some tool call.",
+      "{\"type\": \"tool\", \"name\": \"get_customer\"} on every request, so that identity is re-verified throughout the conversation.",
+      "{\"type\": \"none\"} on the first request, so that Claude greets the customer before it calls any of its tools."
+     ],
+     "answer": 0,
+     "explain": "A đúng: ép đúng tool get_customer ở request đầu bảo đảm bước xác minh chạy trước, rồi trả về auto để Claude tự quyết dùng tool nào hay trả lời bằng text. (Đề nêu rõ model hỗ trợ ép tool và thinking tắt; docs ghi với thinking thủ công hoặc trên một số model mới nhất, any/tool bị từ chối.) B sai: any bắt buộc gọi tool ở mọi lượt nên Claude không bao giờ trả lời khách bằng text, và lượt đầu vẫn có thể gọi tool khác. C sai: ép get_customer mọi lượt khiến agent không bao giờ dùng được tool khác. D sai: none cấm gọi tool ở lượt đầu, ngược với yêu cầu.",
+     "sc": "s1",
+     "ts": [
+      "2.3"
+     ]
+    },
+    {
+     "q": "The support agent runs on a server with the Claude Agent SDK and connects to an MCP server named \"crm\". In production, Claude can see the CRM tools but is not permitted to call them, since nobody is present to answer permission prompts. The team wants only the read-only lookups, get_customer and lookup_order, to run without approval. What is the BEST configuration?",
+     "options": [
+      "Set permissionMode to \"bypassPermissions\" so that every tool call from the CRM server is approved automatically.",
+      "Set permissionMode to \"acceptEdits\", which auto-approves MCP tool calls together with file edits.",
+      "Add \"mcp__crm__get_customer\" and \"mcp__crm__lookup_order\" to allowedTools.",
+      "Rename the tools on the MCP server to drop the mcp__ prefix, which is what triggers the permission checks."
+     ],
+     "answer": 2,
+     "explain": "C đúng: docs Agent SDK ghi MCP tool cần quyền rõ ràng (không có thì Claude thấy tool nhưng không gọi được) và khuyên dùng allowedTools với tên đầy đủ mcp__<server>__<tool> để duyệt đúng những tool cần. A sai: docs ghi bypassPermissions duyệt cả MCP tool nhưng tắt gần hết các lời hỏi an toàn khác, rộng hơn mức cần, và sẽ duyệt luôn process_refund. B sai: docs ghi acceptEdits không tự duyệt MCP tool (chỉ sửa file và lệnh Bash thao tác file). D sai: tiền tố mcp__ do phía client đặt khi đặt tên tool, server không điều khiển được, và tên tool không phải thứ quyết định có cần duyệt hay không.",
+     "sc": "s1",
+     "ts": [
+      "2.4"
+     ]
+    },
+    {
+     "q": "An analysis subagent in a multi-agent research system works over a local corpus of about 900 downloaded reports in Markdown, using the Read, Grep, and Glob tools. To find every passage that mentions \"capacity factor\", it currently reads each file in turn, and its context fills up before it finishes. What is the BEST approach?",
+     "options": [
+      "Use Glob with the pattern **/*capacity*factor*.md, then Read every file it returns from beginning to end.",
+      "Use Grep to find the files and lines that mention the phrase, then Read only the relevant sections of those files.",
+      "Read the files in larger batches per turn, so that fewer turns are needed to get through the entire corpus.",
+      "Ask the coordinator to paste the full corpus into the subagent's prompt, so that no tool calls are needed at all during the analysis."
+     ],
+     "answer": 1,
+     "explain": "B đúng: Grep tìm theo nội dung bên trong file, trả về file và dòng khớp; sau đó chỉ Read những đoạn liên quan. Đây là cách khám phá tăng dần (khoanh vùng trước, đọc có chọn lọc sau) giúp context không bị đầy. A sai: Glob khớp theo tên file, không theo nội dung; báo cáo nhắc tới \"capacity factor\" hiếm khi có cụm đó trong tên file. C sai: đọc theo lô lớn hơn vẫn đưa toàn bộ 900 file vào context, chỉ đầy nhanh hơn. D sai: dán cả kho vào prompt còn vượt context sớm hơn.",
+     "sc": "s3",
+     "ts": [
+      "2.5"
+     ]
+    },
+    {
+     "q": "A data subagent in a research system, whose tools list includes Read, Grep, and Glob, must list every survey dataset in a shared workspace. The files follow the naming pattern <region>_survey_<year>.csv across many nested folders. It currently runs Grep for the word \"survey\" across all files and gets back thousands of matching lines from file contents. Which tool use fits this step BEST?",
+     "options": [
+      "Grep with a stricter regular expression, so that fewer lines inside the files match the search word.",
+      "Read on the workspace's top-level folder, so that it returns the names of every file the folder contains.",
+      "Write a temporary index file of all CSV paths first, then run Grep on that index to find the survey files.",
+      "Glob with a pattern such as **/*_survey_*.csv, which matches file paths by name."
+     ],
+     "answer": 3,
+     "explain": "D đúng: việc cần làm là tìm file theo mẫu tên, đúng chức năng của Glob; mẫu ** đi qua các thư mục lồng nhau. A sai: Grep tìm trong nội dung, nên dù regex chặt hơn vẫn trả về dòng trong file chứ không phải danh sách file theo tên. B sai: docs Tools reference ghi Read chỉ đọc file, không đọc thư mục; liệt kê thư mục là việc của lệnh shell như ls, còn tìm đệ quy theo mẫu tên là việc của Glob. C sai: Write chỉ ghi nội dung mà Claude đưa vào; để viết được danh sách đường dẫn thì trước đó vẫn phải tìm ra chúng, nên đây là một bước vòng vô ích.",
+     "sc": "s3",
+     "ts": [
+      "2.5"
+     ]
+    },
+    {
+     "q": "A search subagent in a multi-agent research system has two tools, web_search and kb_search. kb_search is described as \"Searches the company's internal analyst-report archive by keyword.\" The archive is not on the public web and holds only reports published from 2021 onward. Asked for the company's 2018 market forecast, the subagent runs kb_search, gets zero results, and reports that the company never published a 2018 forecast. What should the team change FIRST?",
+     "options": [
+      "Make kb_search return isError: true whenever a search finds no documents, so that the subagent never treats zero results as a finding.",
+      "Have the coordinator rerun every zero-result kb_search query three more times with reworded keywords before accepting the result.",
+      "State in the kb_search description that the archive covers only 2021 onward, so older material cannot be found there.",
+      "Set tool_choice to force web_search on every request that mentions a year before 2021, so that older questions go to a broader source."
+     ],
+     "answer": 2,
+     "explain": "C đúng: docs Define tools ghi mô tả chi tiết là yếu tố quan trọng nhất cho hiệu quả tool, và mô tả nên nêu cả những lưu ý, giới hạn quan trọng (ví dụ thông tin mà tool không trả về). Mô tả hiện tại không cho Claude biết kho chỉ có báo cáo từ 2021, nên Claude hiểu \"0 kết quả\" là \"không tồn tại\". Biết phạm vi rồi, subagent có thể báo đúng là câu hỏi nằm ngoài phạm vi kho thay vì kết luận sai. A sai: với truy vấn trong phạm vi, 0 kết quả là một kết quả hợp lệ; biến nó thành lỗi làm mất sự phân biệt giữa \"không tìm thấy\" và \"không truy cập được\". B sai: đổi từ khóa không giúp được khi tài liệu nằm ngoài phạm vi kho, chỉ tốn thêm lượt gọi. D sai: báo cáo nội bộ không có trên web công khai, và một luật cứng theo năm không sửa được việc Claude hiểu sai ý nghĩa của kết quả rỗng.",
+     "sc": "s3",
+     "ts": [
+      "2.1"
+     ]
+    },
+    {
+     "q": "In a multi-agent research system, the coordinator was given the same web_search and fetch_page tools as its subagents \"just in case.\" It now often runs long searches itself instead of delegating, its context fills with raw pages, and it loses track of the overall research plan. What is the BEST change?",
+     "options": [
+      "Keep the tools, but add a sentence to the coordinator's prompt asking it to prefer delegating searches to its subagents.",
+      "Give the coordinator a model with a larger context window, so that the raw pages fit alongside its research plan.",
+      "Set tool_choice to any for the coordinator, so that it always calls a tool instead of spending turns on planning.",
+      "Remove search and fetch from the coordinator so that it plans, delegates through the Agent tool, and synthesizes."
+     ],
+     "answer": 3,
+     "explain": "D đúng: mỗi agent chỉ nên cầm tool cần cho vai trò của nó. Coordinator lo lập kế hoạch, giao việc và tổng hợp; khi không có tool tìm kiếm, nó buộc phải giao việc cho subagent, và trang thô nằm trong context của subagent thay vì của coordinator. A sai: lời dặn chỉ là định hướng; tool vẫn ở đó và thói quen tự tìm vẫn tiếp diễn. B sai: context lớn hơn chỉ trì hoãn vấn đề, coordinator vẫn bị lấp bởi nội dung thô và vẫn lạc kế hoạch. C sai: any ép gọi tool ở mọi lượt, càng đẩy coordinator vào việc gọi tool tìm kiếm.",
+     "sc": "s3",
+     "ts": [
+      "2.3"
+     ]
+    },
+    {
+     "q": "In an extraction pipeline, a coordinator sends each scanned invoice to an extraction subagent, which calls an MCP tool, get_document_text, to run OCR. The OCR backend sometimes returns brief HTTP 503 errors that succeed when retried a few seconds later. Today every 503 goes straight back to the coordinator as a failed document; the coordinator re-dispatches the whole invoice to a new subagent that starts over, and its context fills with failure reports. What is the BEST change?",
+     "options": [
+      "Have get_document_text return an empty string on a 503, so that the subagent can carry on and the coordinator never sees the failure.",
+      "Have the coordinator dispatch every failed invoice to several new subagents at once, so that at least one of the attempts gets through.",
+      "Retry 503s locally with backoff and a small limit; report only persistent failures upward, with the attempts made.",
+      "Mark every OCR error as non-retryable and send the invoice straight to the human review queue, so that no compute is spent on retries."
+     ],
+     "answer": 2,
+     "explain": "C đúng (lời khuyên thiết kế): lỗi tạm thời như 503 nên được xử lý gần nơi xảy ra nhất (trong tool hoặc subagent) bằng thử lại có backoff và giới hạn số lần. Chỉ lỗi không tự khắc phục được mới lan lên coordinator, kèm loại lỗi và những gì đã thử, để coordinator quyết định đổi hướng hay chuyển người. Coordinator không phải làm lại cả việc, và context của nó không bị lấp bởi những lỗi đã tự hết. A sai: giả lỗi thành kết quả rỗng khiến hóa đơn bị trích xuất như một tài liệu trống, đúng loại lỗi im lặng cần tránh. B sai: gửi song song cho nhiều subagent nhân chi phí và dồn thêm tải vào backend đang quá tải, trong khi thử lại cục bộ rẻ hơn nhiều. D sai: 503 thường tự hết sau vài giây; đẩy mọi lỗi tạm thời sang người là lãng phí công sức duyệt.",
+     "sc": "s6",
+     "ts": [
+      "2.2",
+      "5.3"
+     ]
+    },
+    {
+     "q": "An onboarding assistant built on the Claude Agent SDK explicitly enables the Read, Glob, and Grep tools. For a new hire it must (1) list every Dockerfile in the repository, including variants such as Dockerfile.dev, and (2) find which source files reference the environment variable PAYMENTS_API_URL. Which tool choice fits these two steps BEST?",
+     "options": [
+      "Grep for both steps, searching file contents for the word Dockerfile first and then for PAYMENTS_API_URL.",
+      "Glob with a pattern such as **/Dockerfile* for step 1, and Grep for PAYMENTS_API_URL for step 2.",
+      "Read every file in the repository once, then answer both questions from the file contents held in context.",
+      "Glob for both steps, using a pattern such as **/*PAYMENTS_API_URL* to find the files needed for step 2."
+     ],
+     "answer": 1,
+     "explain": "Theo tools reference: Glob tìm file theo mẫu tên/đường dẫn, Grep tìm nội dung bên trong file. Bước 1 hỏi về tên file nên dùng Glob; bước 2 hỏi về nội dung nên dùng Grep. Grep chữ \"Dockerfile\" trong nội dung sẽ trả về mọi file nhắc tới từ đó (README, script CI) và bỏ sót Dockerfile không tự nhắc tên mình. Đọc cả repo vào context tốn kém và không cần thiết. Glob theo tên biến môi trường chỉ tìm file có tên chứa chuỗi đó, không tìm được file tham chiếu biến trong nội dung. (Câu hỏi nêu rõ app bật Glob và Grep; trong Claude Code trên macOS/Linux/WSL hai tool này không có trong bộ mặc định.)",
+     "sc": "s4",
+     "ts": [
+      "2.5"
+     ]
+    },
+    {
+     "q": "A developer-productivity agent answers questions such as \"Where do we retry failed webhook deliveries?\" in a 4,000-file repository. Logs show it reads files one directory at a time until it happens upon the answer, which is slow and fills its context. Which exploration strategy should its instructions describe?",
+     "options": [
+      "Read the whole repository at the start of each session, so every later question can be answered from what is already in context.",
+      "Ask the user to name the exact file before doing any exploration, and refuse to search through the repository on its own.",
+      "List all directories with Bash, pick the directory whose name sounds most relevant, and then read every single file inside it.",
+      "Search file contents first for likely terms (retry, webhook, backoff), then read only the matching files and follow imports."
+     ],
+     "answer": 3,
+     "explain": "Cách khám phá tăng dần là tìm nội dung trước (Grep hoặc grep qua Bash) để khoanh vùng, rồi chỉ Read các file khớp và lần theo import/lời gọi từ đó; vừa nhanh vừa giữ context gọn. Đọc cả repo mỗi phiên là đúng kiểu nạp thừa làm context đầy và chất lượng giảm. Bắt người dùng chỉ đúng file làm mất ý nghĩa của công cụ khám phá codebase. Đoán thư mục theo tên rồi đọc hết bên trong vẫn là đọc mù, dễ sai chỗ và tốn context.",
+     "sc": "s4",
+     "ts": [
+      "2.5",
+      "5.4"
+     ]
+    },
+    {
+     "q": "In a Claude Code session, an Edit call fails with an error saying old_string was not found, although the line Claude wanted to change is plainly in the file. The file is indented with tabs, and Claude's old_string used four spaces. What is the correct way to proceed?",
+     "options": [
+      "Retry the same Edit with a regular expression that treats tabs and spaces as equivalent whitespace.",
+      "Re-read the relevant lines and copy their exact text, including the tab characters, into old_string.",
+      "Switch to Write and regenerate the entire file, because Edit cannot work on files indented with tabs.",
+      "Set replace_all to true, which relaxes matching so that near-identical strings are accepted as well."
+     ],
+     "answer": 1,
+     "explain": "Tools reference ghi: Edit thay chuỗi chính xác, không dùng regex hay so khớp mờ; lệch một ký tự khoảng trắng hoặc thụt lề là đủ để không khớp. Cách đúng là đọc lại đoạn cần sửa và chép nguyên văn, kể cả tab. Edit không nhận regex. Edit làm việc bình thường với file thụt bằng tab; viết lại cả file bằng Write chỉ thêm rủi ro làm hỏng phần khác. replace_all chỉ quyết định thay một hay mọi lần xuất hiện của chuỗi khớp chính xác, không nới lỏng việc so khớp.",
+     "sc": "s4",
+     "ts": [
+      "2.5"
+     ]
+    },
+    {
+     "q": "A build-diagnostics helper running in Claude Code is asked why last night's build failed. It calls Read on a 2 MB build log and receives an error instead of the file contents. What should it do next?",
+     "options": [
+      "Ask the user to paste the full log into the chat, because Claude Code has no way to read any file larger than 256 KB.",
+      "Use Edit to delete the older half of the log, so that the remaining part of the file fits into one Read call.",
+      "Give up on the log and infer the cause of the failure from the list of files changed in the most recent commits.",
+      "Search the log for the relevant lines (such as error or FAILED), then Read only that region with offset and limit."
+     ],
+     "answer": 3,
+     "explain": "Docs tools reference ghi: mặc định Read từ chối đọc nguyên một file trên 256 KB và trả lỗi hướng dẫn đọc từng phần bằng offset/limit hoặc tìm nội dung cụ thể bằng Grep. Vì vậy tìm dòng lỗi trước rồi đọc đúng vùng đó là đúng. Nói Claude Code \"không thể\" đọc file lớn là sai: file lớn vẫn đọc được theo trang (và từ v2.1.296 Read còn có allow_large: true để đọc cả file khi thật sự cần, nhưng ở đây chỉ cần vùng lỗi). Sửa xóa nội dung log để vừa một lần đọc là phá dữ liệu chẩn đoán. Bỏ qua log và đoán từ commit là bỏ đi bằng chứng trực tiếp nhất.",
+     "sc": "s4",
+     "ts": [
+      "2.5"
+     ]
+    },
+    {
+     "q": "A platform team audits code searches in Claude Code with a PreToolUse hook whose matcher is \"Grep|Glob\". On developers' macOS and Linux machines the hook never fires, even though transcripts show Claude searching the code constantly. Why?",
+     "options": [
+      "On macOS, Linux, and WSL, Glob and Grep are off by default; Claude searches with find and grep in Bash, so hooks see Bash calls.",
+      "PreToolUse hooks never run for read-only tools, so searches can be observed only by a PostToolUse hook configured for the same tool names.",
+      "Hook matchers are case-sensitive and expect lowercase tool names, so the matcher has to be written as \"grep|glob\" before it can match.",
+      "A matcher accepts only one tool name, so the team needs one hook entry for Grep and a second, separate hook entry for Glob."
+     ],
+     "answer": 0,
+     "explain": "Docs tools reference (mục Glob tool behavior) ghi: trên macOS, Linux và WSL, Claude Code bỏ Glob và Grep khỏi bộ tool mặc định; Claude tìm bằng find và grep qua tool Bash, và các lần tìm đó tới hook và permission rule dưới dạng lời gọi Bash. Muốn bắt thì thêm Bash vào matcher, hoặc bật lại Glob/Grep bằng --tools/--allowedTools. PreToolUse chạy cho mọi tool, không loại trừ tool chỉ đọc. Tên tool là \"Grep\", \"Glob\" (chữ hoa đầu), viết thường sẽ không khớp. Matcher nhận được nhiều tên nối bằng | (như \"Write|Edit\").",
+     "sc": "s4",
+     "ts": [
+      "2.5",
+      "1.5"
+     ]
+    },
+    {
+     "q": "A release-notes agent built with the Agent SDK connects to a GitHub MCP server named github and runs in the default permission mode. Calls to the server's tools are denied, so the agent falls back to guessing. The team wants those tools to run without approval while leaving every other tool's permissions unchanged. Which TWO configurations achieve this? (Choose TWO.)",
+     "options": [
+      "allowedTools: [\"mcp__github__*\"]",
+      "permissionMode: \"acceptEdits\"",
+      "allowedTools: [\"mcp__*\"]",
+      "allowedTools listing each needed tool by full name, such as \"mcp__github__list_issues\"",
+      "permissionMode: \"bypassPermissions\""
+     ],
+     "answer": [
+      0,
+      3
+     ],
+     "explain": "Docs Agent SDK (MCP và permissions): tên tool MCP có dạng mcp__server__tool; trong allow rule, wildcard chỉ hợp lệ sau tiền tố mcp__<server>__, nên mcp__github__* hoặc liệt kê từng tool đầy đủ tên đều tự duyệt đúng server đó và không đụng tới tool khác. acceptEdits không tự duyệt tool MCP (chỉ sửa file và lệnh filesystem). mcp__* không neo vào server cụ thể nên bị bỏ qua, không duyệt gì. bypassPermissions có duyệt tool MCP nhưng duyệt luôn gần như mọi thứ khác, trái yêu cầu giữ nguyên quyền của tool khác; docs khuyên dùng allowedTools thay vì permission mode cho MCP.",
+     "sc": "s4",
+     "ts": [
+      "2.4"
+     ]
+    },
+    {
+     "q": "A team building a developer-productivity agent wants Claude to read and update their Jira tickets. A well-maintained, widely used MCP server for Jira already exists. A teammate proposes writing an in-house MCP server that wraps the Jira REST API instead. What is the BEST recommendation?",
+     "options": [
+      "Write the in-house server, because a custom server is the only way to give Claude accurate and complete descriptions of the Jira tools.",
+      "Skip MCP and let Claude call the Jira REST API with curl through Bash, passing the API token inside the prompt text.",
+      "Use the existing server for the standard integration, and build custom tools only for team-specific workflows it does not cover.",
+      "Export the tickets to Markdown every night and @-import the export from CLAUDE.md so that Claude always has them loaded."
+     ],
+     "answer": 2,
+     "explain": "Lời khuyên thiết kế (khớp exam guide 2.4 và bài học của site): với tích hợp chuẩn, ưu tiên MCP server có sẵn, đáng tin, được bảo trì; chỉ tự viết tool cho logic riêng của nhóm. Server có sẵn cũng có mô tả tool, tự viết không phải \"cách duy nhất\" để có mô tả tốt, và tốn công bảo trì. Gọi REST bằng curl với token trong prompt làm lộ secret và mất cấu trúc tool. Xuất ticket ra Markdown rồi import vào CLAUDE.md chỉ cho dữ liệu cũ, chỉ đọc, tốn context mọi phiên và không cập nhật được ticket.",
+     "sc": "s4",
+     "ts": [
+      "2.4"
+     ]
+    },
+    {
+     "q": "An internal MCP server offers a code_search tool backed by a semantic index of all company repositories. Its description reads only \"Searches code.\" Developers notice that Claude almost always runs grep through Bash instead, missing matches in other repositories. What should the server owner change FIRST?",
+     "options": [
+      "Remove the Bash tool from every developer's sessions, so that code_search becomes the only way left for Claude to search any code.",
+      "Rename the tool to grep, so that Claude treats it as the familiar command and calls it without any hesitation at all.",
+      "Add a sentence to every repository's CLAUDE.md telling Claude to prefer MCP tools over built-in tools in every situation it meets.",
+      "Rewrite the description: what it covers that grep cannot (all repositories, semantic matches), when to prefer it, what it returns."
+     ],
+     "answer": 3,
+     "explain": "Claude chọn tool dựa chủ yếu vào mô tả; exam guide 2.4 nêu đúng điểm này: mô tả phong phú để tool MCP được chọn thay cho built-in. Mô tả \"Searches code.\" không cho Claude lý do để bỏ grep quen thuộc, nên việc đầu tiên là nói rõ phạm vi (mọi repo, khớp ngữ nghĩa), khi nào nên dùng và trả về gì. Gỡ Bash khỏi mọi phiên là biện pháp thô, làm hỏng nhiều việc khác. Đặt tên trùng \"grep\" gây nhầm với lệnh thật và không nói gì về khả năng riêng. Câu chung chung trong CLAUDE.md ở mọi repo là vá ở nơi khác, quá rộng (\"mọi tình huống\") và vẫn không cho Claude biết tool này làm gì.",
+     "sc": "s4",
+     "ts": [
+      "2.4",
+      "2.1"
+     ]
+    },
+    {
+     "q": "A developer built a personal MCP server that searches her own notes using her private token. She wants it available in every repository she opens with Claude Code, but never visible to teammates or committed anywhere. Which setup fits?",
+     "options": [
+      "Add it to each repository's .mcp.json and supply her private token through ${NOTES_TOKEN} expansion.",
+      "Add it with claude mcp add --scope user, which stores it in ~/.claude.json for all of her projects.",
+      "Add it once with the default local scope, which makes it load in every project on the machine.",
+      "Declare it in each project's committed .claude/settings.json so it loads when she starts a session."
+     ],
+     "answer": 1,
+     "explain": "Docs MCP của Claude Code: scope user lưu trong ~/.claude.json, nạp ở mọi project của bạn và không chia sẻ với nhóm, đúng nhu cầu. .mcp.json là scope project, được commit và chia sẻ; dù token qua biến môi trường thì server vẫn hiện ra với cả nhóm. Scope local (mặc định) cũng nằm trong ~/.claude.json nhưng chỉ nạp ở project nơi bạn thêm nó, không phải mọi project. Đặt cấu hình vào .claude/settings.json được commit thì lại chia sẻ với cả nhóm, trái yêu cầu riêng tư.",
+     "sc": "s4",
+     "ts": [
+      "2.4"
+     ]
+    },
+    {
+     "q": "Developers' Claude Code sessions connect to a dozen MCP servers with tool search on, which is the default. Claude rarely reaches for the tools of the team's deploy-tools server, even on deployment questions. What does the Claude Code documentation suggest the server's author do?",
+     "options": [
+      "Split the server into many small servers, so that each server's full tool definitions load into context at session start.",
+      "Make every tool description as long as possible, since Claude reads the full description of every connected tool before each turn.",
+      "Write server instructions saying which tasks its tools handle and when to search for them; put key terms early in descriptions.",
+      "Ask developers to raise MAX_MCP_OUTPUT_TOKENS, so that more tool definitions fit into the context window at startup."
+     ],
+     "answer": 2,
+     "explain": "Docs MCP (mục tool search): khi bật tool search, lúc khởi động chỉ nạp tên tool và server instructions; định nghĩa tool được nạp khi cần. Vì vậy docs khuyên tác giả server viết server instructions rõ: nhóm việc tool xử lý, khi nào nên tìm tới tool, năng lực chính; và đặt từ khóa quan trọng ở đầu mô tả, vì khi khớp truy vấn tool search chỉ đọc phần mô tả nằm trong giới hạn ngắn hơn. Chia nhỏ server không làm định nghĩa nạp sẵn (tool search vẫn hoãn chúng). Mô tả bị cắt theo giới hạn ký tự và Claude không đọc hết mọi mô tả mỗi lượt, nên kéo dài vô tội vạ không giúp. MAX_MCP_OUTPUT_TOKENS giới hạn kích thước output của lời gọi tool, không liên quan định nghĩa tool.",
+     "sc": "s4",
+     "ts": [
+      "2.4",
+      "2.1"
+     ]
+    },
+    {
+     "q": "A code-explainer tool built on the Agent SDK must never change files. The developer set allowedTools to [\"Read\", \"Grep\", \"Glob\"] and permissionMode to \"acceptEdits\", yet the agent sometimes edits files when a user asks for a quick fix. What is the BEST fix?",
+     "options": [
+      "Restrict the available tools, e.g. tools: [\"Read\", \"Grep\", \"Glob\"]; allowedTools only pre-approves, and acceptEdits approves edits.",
+      "Add \"never edit files\" to the system prompt, since allowedTools already prevents every tool that is not on the list from being called at all.",
+      "Switch permissionMode to \"bypassPermissions\", so that only the tools named in allowedTools are permitted to run in the session.",
+      "Add Edit to allowedTools with an empty pattern, which tells the SDK that every Edit call must be denied without prompting."
+     ],
+     "answer": 0,
+     "explain": "Docs Agent SDK permissions: allowedTools chỉ tự duyệt các tool được liệt kê, không giới hạn Claude vào các tool đó; tool khác vẫn tồn tại và rơi xuống permission mode. Ở acceptEdits, sửa file trong thư mục làm việc được tự duyệt, nên Edit chạy. Cách đúng là giới hạn chính bộ tool (tùy chọn tools liệt kê tool đọc, hoặc disallowedTools tên trần để gỡ tool ghi). Câu trong system prompt chỉ là hướng dẫn mềm, và tiền đề \"allowedTools chặn tool khác\" là sai. bypassPermissions duyệt cả tool không liệt kê, tức là tệ hơn. Không có cú pháp \"pattern rỗng\" để biến allow thành deny; chặn thì dùng deny rule.",
+     "sc": "s4",
+     "ts": [
+      "2.3"
+     ]
+    },
+    {
+     "q": "A documentation assistant built with the Agent SDK has a coordinator and three subagents: an explorer that maps modules, a writer that drafts documentation pages, and a checker that runs the docs build to catch broken links. Every subagent currently inherits all tools, and the explorer has occasionally rewritten source files. Which tool assignment follows best practice?",
+     "options": [
+      "Explorer: Read, Grep, Glob. Writer: Read, Write, Edit. Checker: Bash, Read. Each role gets only the tools it needs.",
+      "All three subagents keep every tool, and each subagent's prompt describes the limits of its role so it stays in its lane.",
+      "Only the coordinator holds tools, and the subagents send it a request whenever they need to read or write a file.",
+      "Explorer: Read, Write, Bash. Writer: Grep, Glob. Checker: Edit. No single subagent can both read and change files."
+     ],
+     "answer": 0,
+     "explain": "Thực hành tốt (exam guide 2.3, docs SDK subagents): mỗi agent chỉ cầm tool cần cho vai trò, đặt qua trường tools của AgentDefinition; giới hạn này do harness cưỡng chế. Docs SDK còn có bảng gợi ý: phân tích chỉ đọc dùng Read/Grep/Glob, chạy test dùng Bash/Read/Grep, sửa code dùng Read/Edit/Write (kèm Grep/Glob). Để mọi subagent giữ mọi tool rồi dặn trong prompt chính là thiết kế đã để explorer sửa file. Dồn tool về coordinator biến nó thành nút cổ chai và làm mất lợi ích tách context. Phương án chia ngược (explorer có Write, writer không có quyền ghi) không khớp vai trò nào.",
+     "sc": "s4",
+     "ts": [
+      "2.3",
+      "1.3"
+     ]
+    },
+    {
+     "q": "In an Agent SDK release assistant, a coordinator delegates to a changelog-writer subagent whose tools are Read, Grep, and Glob. On almost every task the writer must check which pull requests were merged, so it hands the question back to the coordinator, which holds the GitHub MCP tools. This adds several round trips per run. Which change BEST follows tool-distribution guidance?",
+     "options": [
+      "Give the writer every tool from the GitHub server plus Bash, so it never has to go back to the coordinator for anything.",
+      "Merge the coordinator and all of its subagents into one agent that holds every tool, removing delegation altogether.",
+      "Tell the writer in its prompt to infer merge status from commit messages, so that it never needs any GitHub tools.",
+      "Add only the one read-only tool it needs, such as mcp__github__list_pull_requests, to the writer's tools list."
+     ],
+     "answer": 3,
+     "explain": "Lời khuyên thiết kế (exam guide 2.3): mỗi agent cầm bộ tool hẹp theo vai trò, cộng thêm vài tool xuyên vai trò có giới hạn cho nhu cầu lặp lại thường xuyên. Thêm đúng một tool chỉ đọc mà writer cần vào trường tools của AgentDefinition (trường này nhận tên tool, kể cả tool MCP) cắt các vòng hỏi qua coordinator mà vẫn giữ writer hẹp. Cấp cả server GitHub kèm Bash là quá rộng, writer có thêm cả tool ghi lẫn lệnh shell nó không cần. Gộp tất cả vào một agent mất lợi ích tách vai trò và tách context, và quay lại kiểu một agent cầm quá nhiều tool. Đoán trạng thái merge từ commit message là bỏ nguồn dữ liệu đúng để đoán mò.",
+     "sc": "s4",
+     "ts": [
+      "2.3",
+      "1.3"
+     ]
+    },
+    {
+     "q": "A CI review job runs claude -p with --allowedTools \"Read\" \"Bash(git diff *)\", and the team assumes the reviewer cannot edit files. During one run, Claude still attempted an Edit call. Which flag actually restricts which built-in tools are available in the run?",
+     "options": [
+      "--strict-mcp-config, which limits the run to exactly the tools that are named in --allowedTools",
+      "--tools, for example --tools \"Read,Bash\", because --allowedTools only pre-approves the tools it lists",
+      "--permission-mode acceptEdits, which limits Claude to the tools that are approved for editing",
+      "--append-system-prompt \"read-only\", which removes all of the write tools from the run"
+     ],
+     "answer": 1,
+     "explain": "Docs CLI reference: --allowedTools là các tool chạy không cần hỏi; muốn giới hạn tool nào có mặt thì dùng --tools (ví dụ \"Bash,Edit,Read\"); --disallowedTools với tên trần cũng gỡ tool. Trong -p ở mode mặc định, lời gọi Edit chưa được duyệt sẽ bị từ chối, nhưng tool vẫn có mặt và Claude vẫn thử gọi. --strict-mcp-config chỉ giới hạn server MCP vào những server trong --mcp-config. acceptEdits làm ngược lại: tự duyệt sửa file. Thêm chữ vào system prompt không gỡ tool nào.",
+     "sc": "s5",
+     "ts": [
+      "2.3",
+      "3.6"
+     ]
     }
+   ],
+   "summary": [
+    "Claude chỉ thấy name, description và input_schema của tool; mô tả là yếu tố quan trọng nhất, docs khuyên tối thiểu 3–4 câu: làm gì, khi nào dùng/không dùng, tham số, giới hạn.",
+    "Agent chọn nhầm tool thì sửa mô tả trước (nói rõ input dạng nào, phân biệt với tool tương tự), trước khi nghĩ tới routing hay fine-tune; thêm tiền tố theo dịch vụ để giảm mơ hồ.",
+    "Schema dùng type/enum/required và mô tả từng thuộc tính, thêm input_examples cho input phức tạp; response của tool chỉ trả trường cần thiết với định danh ổn định.",
+    "Mỗi agent chỉ cầm tool cần cho vai trò của nó; vai trò khác cần chút năng lực thì cấp một tool phạm vi hẹp thay vì cả bộ tool.",
+    "tool_choice: auto (mặc định), any (bắt buộc gọi một tool), tool (ép một tool cụ thể), none. any/tool khiến Claude không viết text trước tool_use; kết hợp strict: true để input đúng schema.",
+    "Lỗi thực thi trả về bằng is_error: true (MCP: isError trong result) kèm thông điệp nói rõ nên làm gì; protocol error JSON-RPC dành cho tool không tồn tại, request sai schema, lỗi server.",
+    "Phân loại lỗi transient / validation / business_rule / permission kèm cờ retryable; kết quả rỗng hợp lệ khác với thất bại, không bao giờ trả rỗng khi bị timeout; lỗi tạm thời thì retry cục bộ trước.",
+    "MCP có ba primitive: Tools (model điều khiển), Resources (ứng dụng điều khiển, chỉ đọc, có URI, tham chiếu bằng @server:protocol://path) và Prompts (người dùng gọi, chạy bằng /mcp__server__prompt).",
+    "Scope MCP trong Claude Code: local (mặc định, riêng tư), project (.mcp.json, commit, chia sẻ), user (mọi project, riêng tư). Secret trong .mcp.json dùng ${VAR} hoặc ${VAR:-default}, không commit.",
+    "Built-in tool: Glob tìm file theo tên, Grep tìm nội dung, Edit thay chuỗi chính xác và duy nhất (trùng thì thêm ngữ cảnh hoặc dùng replace_all), Write ghi đè cả file. Tích hợp chuẩn thì ưu tiên MCP server có sẵn đáng tin, logic riêng mới tự viết tool."
    ]
   },
   {
@@ -1420,6 +2371,11 @@ window.CERT_DATA = {
        "t": "Explore the context window",
        "u": "https://code.claude.com/docs/en/context-window"
       }
+     ],
+     "ts": [
+      "3.1",
+      "3.2",
+      "3.3"
      ]
     },
     {
@@ -1439,6 +2395,10 @@ window.CERT_DATA = {
        "t": "How Claude remembers your project",
        "u": "https://code.claude.com/docs/en/memory"
       }
+     ],
+     "ts": [
+      "3.1",
+      "3.3"
      ]
     },
     {
@@ -1462,6 +2422,9 @@ window.CERT_DATA = {
        "t": "Create custom subagents",
        "u": "https://code.claude.com/docs/en/sub-agents"
       }
+     ],
+     "ts": [
+      "3.2"
      ]
     },
     {
@@ -1493,6 +2456,9 @@ window.CERT_DATA = {
        "t": "Permission modes",
        "u": "https://code.claude.com/docs/en/permission-modes"
       }
+     ],
+     "ts": [
+      "3.4"
      ]
     },
     {
@@ -1516,6 +2482,9 @@ window.CERT_DATA = {
        "t": "CLI reference",
        "u": "https://code.claude.com/docs/en/cli-reference"
       }
+     ],
+     "ts": [
+      "3.6"
      ]
     },
     {
@@ -1543,6 +2512,9 @@ window.CERT_DATA = {
        "t": "Prompting best practices (Use examples effectively)",
        "u": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices"
       }
+     ],
+     "ts": [
+      "3.5"
      ]
     },
     {
@@ -1578,6 +2550,10 @@ window.CERT_DATA = {
        "t": "Best practices for Claude Code",
        "u": "https://code.claude.com/docs/en/best-practices"
       }
+     ],
+     "ts": [
+      "1.7",
+      "5.4"
      ]
     }
    ],
@@ -1657,7 +2633,11 @@ window.CERT_DATA = {
       "Move the conventions into the project's CLAUDE.md (or a file in .claude/rules/) and commit it to the repository."
      ],
      "answer": 3,
-     "explain": "~/.claude/CLAUDE.md là file cấp user, chỉ máy người viết có. Quy ước cả team cần phải nằm ở CLAUDE.md của project hoặc .claude/rules/ và được commit. A chạy được tạm thời nhưng không bền: người mới sau lại thiếu, sửa một nơi không đồng bộ nơi khác. B: CLAUDE.local.md là file cá nhân, nên bị gitignore. C: .mcp.json dùng để cấu hình MCP server, không chứa chỉ dẫn."
+     "explain": "~/.claude/CLAUDE.md là file cấp user, chỉ máy người viết có. Quy ước cả team cần phải nằm ở CLAUDE.md của project hoặc .claude/rules/ và được commit. A chạy được tạm thời nhưng không bền: người mới sau lại thiếu, sửa một nơi không đồng bộ nơi khác. B: CLAUDE.local.md là file cá nhân, nên bị gitignore. C: .mcp.json dùng để cấu hình MCP server, không chứa chỉ dẫn.",
+     "sc": "s2",
+     "ts": [
+      "3.1"
+     ]
     },
     {
      "q": "A repository has test files spread across dozens of directories (**/*.test.ts). The team wants specific testing conventions applied whenever Claude works on a test file, without adding those instructions to every session's context. What is the BEST approach?",
@@ -1668,7 +2648,11 @@ window.CERT_DATA = {
       "Create a skill with disable-model-invocation: true and ask developers to run it before editing tests."
      ],
      "answer": 1,
-     "explain": "Rule có paths chỉ nạp khi Claude làm việc với file khớp mẫu, nên hợp với quy ước rải khắp repo. A phải nhân bản file ở hàng chục chỗ, khó bảo trì. C luôn nạp vào mọi phiên, trái với yêu cầu. D bắt người dùng nhớ gọi tay, dễ quên."
+     "explain": "Rule có paths chỉ nạp khi Claude làm việc với file khớp mẫu, nên hợp với quy ước rải khắp repo. A phải nhân bản file ở hàng chục chỗ, khó bảo trì. C luôn nạp vào mọi phiên, trái với yêu cầu. D bắt người dùng nhớ gọi tay, dễ quên.",
+     "sc": "s2",
+     "ts": [
+      "3.3"
+     ]
     },
     {
      "q": "A team wants a shared /release-notes command that takes a version number as an argument. It should run only when a developer explicitly types the command, never because Claude decides it is relevant. Where and how should it be defined?",
@@ -1679,7 +2663,11 @@ window.CERT_DATA = {
       "Define it as a subagent in .claude/agents/release-notes.md whose description tells Claude to use it proactively whenever release notes come up."
      ],
      "answer": 2,
-     "explain": "Skill cấp project (.claude/skills/, commit) thì cả team có. disable-model-invocation: true ngăn Claude tự gọi. $ARGUMENTS nhận số phiên bản. A là skill cá nhân, không chia sẻ. B không tạo lệnh và luôn tốn context. D ngược yêu cầu: 'use proactively' khuyến khích Claude tự giao việc."
+     "explain": "Skill cấp project (.claude/skills/, commit) thì cả team có. disable-model-invocation: true ngăn Claude tự gọi. $ARGUMENTS nhận số phiên bản. A là skill cá nhân, không chia sẻ. B không tạo lệnh và luôn tốn context. D ngược yêu cầu: 'use proactively' khuyến khích Claude tự giao việc.",
+     "sc": "s2",
+     "ts": [
+      "3.2"
+     ]
     },
     {
      "q": "A developer asks Claude Code to migrate the project's logging library across roughly 45 files. There are several reasonable strategies (a wrapper module, direct replacement, or a phased rollout), and the team wants to agree on one before any file changes. How should the developer proceed?",
@@ -1690,7 +2678,11 @@ window.CERT_DATA = {
       "Run the migration with claude -p in CI so it does not consume the developer's session."
      ],
      "answer": 0,
-     "explain": "Thay đổi lớn, nhiều file, nhiều hướng hợp lý: đúng trường hợp dùng plan mode để khám phá và chốt hướng trước khi sửa. B và C sửa trước rồi mới bàn hướng, dễ phải làm lại cả loạt file. D không giải quyết nhu cầu thống nhất hướng trước khi sửa."
+     "explain": "Thay đổi lớn, nhiều file, nhiều hướng hợp lý: đúng trường hợp dùng plan mode để khám phá và chốt hướng trước khi sửa. B và C sửa trước rồi mới bàn hướng, dễ phải làm lại cả loạt file. D không giải quyết nhu cầu thống nhất hướng trước khi sửa.",
+     "sc": "s2",
+     "ts": [
+      "3.4"
+     ]
     },
     {
      "q": "A CI pipeline should run Claude Code on each pull request, then post its findings as inline review comments. The job must never hang waiting for input, and the posting script needs machine-parseable results. Which TWO choices meet these requirements? (Choose TWO.)",
@@ -1705,7 +2697,11 @@ window.CERT_DATA = {
       2,
       3
      ],
-     "explain": "-p chạy không tương tác rồi thoát. --output-format json kèm --json-schema cho kết quả theo schema trong structured_output. A vẫn là phiên tương tác, có thể treo. B làm context phình to và lẫn giữa các PR, không liên quan tới yêu cầu. E là cách parse dễ gãy."
+     "explain": "-p chạy không tương tác rồi thoát. --output-format json kèm --json-schema cho kết quả theo schema trong structured_output. A vẫn là phiên tương tác, có thể treo. B làm context phình to và lẫn giữa các PR, không liên quan tới yêu cầu. E là cách parse dễ gãy.",
+     "sc": "s5",
+     "ts": [
+      "3.6"
+     ]
     },
     {
      "q": "A project's committed .claude/settings.json contains the permission rule deny: [\"Read(./.env)\"]. A developer adds allow: [\"Read(./.env)\"] to their own .claude/settings.local.json. What happens when Claude tries to read .env?",
@@ -1716,7 +2712,11 @@ window.CERT_DATA = {
       "The read is still blocked: deny rules are checked first, and allow cannot override a matching deny."
      ],
      "answer": 3,
-     "explain": "Permission rule được đánh giá theo thứ tự deny, rồi ask, rồi allow, và allow không khoét được ngoại lệ trong deny. Các danh sách rule được gộp qua các file. A nhầm giữa ưu tiên của key đơn lẻ và cách rule permission kết hợp. B sai thứ tự đánh giá. C: không có cơ chế 'xung đột thì hỏi'."
+     "explain": "Permission rule được đánh giá theo thứ tự deny, rồi ask, rồi allow, và allow không khoét được ngoại lệ trong deny. Các danh sách rule được gộp qua các file. A nhầm giữa ưu tiên của key đơn lẻ và cách rule permission kết hợp. B sai thứ tự đánh giá. C: không có cơ chế 'xung đột thì hỏi'.",
+     "sc": "s2",
+     "ts": [
+      "3.1"
+     ]
     },
     {
      "q": "While investigating how token refresh works in a large monorepo, a developer's main Claude Code session fills up with dozens of file reads, and later answers become less precise. What is the BEST way to do this kind of investigation?",
@@ -1727,7 +2727,12 @@ window.CERT_DATA = {
       "Increase MAX_MCP_OUTPUT_TOKENS so more file content fits in context."
      ],
      "answer": 2,
-     "explain": "Subagent đọc file trong context riêng và chỉ trả bản tóm tắt, nên context chính sạch. Docs best practices vẫn nêu việc giữ output dài (như một lượt tìm kiếm rộng) ngoài hội thoại chính là lý do dùng subagent, và Claude Code tự giao tìm kiếm codebase rộng cho Explore (dù docs cũng ghi “hết context” nay hiếm khi là vấn đề chính). A mất luôn những gì vừa tìm được. B nhồi chi tiết tạm thời vào file luôn được nạp, tốn context mọi phiên. D không liên quan (đó là giới hạn output của tool MCP) và còn làm context đầy hơn."
+     "explain": "Subagent đọc file trong context riêng và chỉ trả bản tóm tắt, nên context chính sạch. Docs best practices vẫn nêu việc giữ output dài (như một lượt tìm kiếm rộng) ngoài hội thoại chính là lý do dùng subagent, và Claude Code tự giao tìm kiếm codebase rộng cho Explore (dù docs cũng ghi “hết context” nay hiếm khi là vấn đề chính). A mất luôn những gì vừa tìm được. B nhồi chi tiết tạm thời vào file luôn được nạp, tốn context mọi phiên. D không liên quan (đó là giới hạn output của tool MCP) và còn làm context đầy hơn.",
+     "sc": "s4",
+     "ts": [
+      "3.4",
+      "5.4"
+     ]
     },
     {
      "q": "A team's nightly claude -p job produces different results on different runners. Investigation shows some runners load extra hooks and MCP servers from configuration lying around on the machine. The team wants every run to behave the same. What should they do?",
@@ -1738,7 +2743,11 @@ window.CERT_DATA = {
       "Add --fork-session so each run starts from a clean branch of the conversation."
      ],
      "answer": 1,
-     "explain": "--bare bỏ qua việc tự phát hiện hook, skill, plugin, MCP, CLAUDE.md, nên mọi máy chạy giống nhau. Thứ cần dùng thì truyền tường minh qua cờ. A chỉ ghi log, không sửa. C và D liên quan tới lịch sử hội thoại, không liên quan tới cấu hình được nạp từ máy."
+     "explain": "--bare bỏ qua việc tự phát hiện hook, skill, plugin, MCP, CLAUDE.md, nên mọi máy chạy giống nhau. Thứ cần dùng thì truyền tường minh qua cờ. A chỉ ghi log, không sửa. C và D liên quan tới lịch sử hội thoại, không liên quan tới cấu hình được nạp từ máy.",
+     "sc": "s5",
+     "ts": [
+      "3.6"
+     ]
     }
    ],
    "bank": [
@@ -1751,7 +2760,11 @@ window.CERT_DATA = {
       "CLAUDE.md files in subdirectories load on demand, once Claude reads or edits a file in that directory."
      ],
      "answer": 3,
-     "explain": "Đúng: docs Memory ghi CLAUDE.md ở các thư mục phía trên thư mục làm việc được nạp lúc khởi động; CLAUDE.md trong thư mục con được phát hiện nhưng chỉ nạp khi Claude đọc, ghi hoặc sửa một file trong thư mục con đó. Sai: các file được nối vào context chứ không loại trừ nhau. Không cần import để file lồng nhau được nạp. Phương án \"không bao giờ nạp từ bên dưới\" sai vì chúng vẫn được nạp theo nhu cầu."
+     "explain": "Đúng: docs Memory ghi CLAUDE.md ở các thư mục phía trên thư mục làm việc được nạp lúc khởi động; CLAUDE.md trong thư mục con được phát hiện nhưng chỉ nạp khi Claude đọc, ghi hoặc sửa một file trong thư mục con đó. Sai: các file được nối vào context chứ không loại trừ nhau. Không cần import để file lồng nhau được nạp. Phương án \"không bao giờ nạp từ bên dưới\" sai vì chúng vẫn được nạp theo nhu cầu.",
+     "sc": "s2",
+     "ts": [
+      "3.1"
+     ]
     },
     {
      "q": "A team's CLAUDE.md has grown to about 900 lines covering frontend, backend, infrastructure, and release procedures, and adherence to individual rules has dropped. A teammate proposes splitting it into several files pulled in with @imports. What is the BEST response?",
@@ -1762,7 +2775,12 @@ window.CERT_DATA = {
       "Move the whole file into ~/.claude/CLAUDE.md, since user-level instructions are followed more strictly."
      ],
      "answer": 0,
-     "explain": "Đúng: docs Memory khuyên mỗi CLAUDE.md dưới khoảng 200 dòng vì file dài tốn context và giảm mức tuân thủ; chuyển chỉ dẫn chỉ áp dụng cho một phần codebase vào path-scoped rules (chỉ nạp khi làm việc với file khớp), và quy trình nhiều bước vào skill. Docs nói rõ import giúp tổ chức nhưng không giảm chi phí context vì file được import nạp cùng CLAUDE.md. Sai: import không nạp lười. Viết hoa: Best practices ghi cách này nay chủ yếu khiến Claude áp quy tắc quá đà; nếu dòng bị chìm trong file dài thì file cần ngắn lại. Chuyển sang file user không làm quy tắc được tuân thủ hơn và còn bỏ mất việc chia sẻ với team."
+     "explain": "Đúng: docs Memory khuyên mỗi CLAUDE.md dưới khoảng 200 dòng vì file dài tốn context và giảm mức tuân thủ; chuyển chỉ dẫn chỉ áp dụng cho một phần codebase vào path-scoped rules (chỉ nạp khi làm việc với file khớp), và quy trình nhiều bước vào skill. Docs nói rõ import giúp tổ chức nhưng không giảm chi phí context vì file được import nạp cùng CLAUDE.md. Sai: import không nạp lười. Viết hoa: Best practices ghi cách này nay chủ yếu khiến Claude áp quy tắc quá đà; nếu dòng bị chìm trong file dài thì file cần ngắn lại. Chuyển sang file user không làm quy tắc được tuân thủ hơn và còn bỏ mất việc chia sẻ với team.",
+     "sc": "s2",
+     "ts": [
+      "3.1",
+      "3.3"
+     ]
     },
     {
      "q": "The root CLAUDE.md contains the line @docs/guide.md, and docs/guide.md in turn contains the line @api-conventions.md. Which file does Claude Code try to load for the second import?",
@@ -1773,7 +2791,11 @@ window.CERT_DATA = {
       "~/.claude/api-conventions.md, because a relative import path without a directory resolves against the user's config folder."
      ],
      "answer": 1,
-     "explain": "Đúng: docs Memory ghi đường dẫn tương đối được resolve tương đối với file chứa dòng import, không phải thư mục làm việc; file được import có thể import tiếp (docs hiện ghi tối đa bốn bước lồng nhau, tháng 11/2026). Sai: không resolve theo thư mục làm việc. Import lồng nhau được hỗ trợ (có giới hạn độ sâu). Không có quy tắc tìm trong ~/.claude cho import tương đối."
+     "explain": "Đúng: docs Memory ghi đường dẫn tương đối được resolve tương đối với file chứa dòng import, không phải thư mục làm việc; file được import có thể import tiếp (docs hiện ghi tối đa bốn bước lồng nhau, tháng 11/2026). Sai: không resolve theo thư mục làm việc. Import lồng nhau được hỗ trợ (có giới hạn độ sâu). Không có quy tắc tìm trong ~/.claude cho import tương đối.",
+     "sc": "s2",
+     "ts": [
+      "3.1"
+     ]
     },
     {
      "q": "Early in a long Claude Code session, a developer told Claude \"always use the project's logger, never console.log.\" After an automatic compaction, Claude starts adding console.log calls again. What is the BEST way to make the instruction persist?",
@@ -1784,7 +2806,11 @@ window.CERT_DATA = {
       "Put the rule in a nested CLAUDE.md under src/, which is pinned to the context once it has been loaded."
      ],
      "answer": 2,
-     "explain": "Đúng: docs Memory (Instructions seem lost after /compact): CLAUDE.md ở gốc project tồn tại qua compaction — sau /compact Claude đọc lại từ đĩa và đưa lại vào session; nếu một chỉ dẫn biến mất sau compaction thì có thể nó chỉ được nói trong hội thoại; thêm vào CLAUDE.md để nó bền vững. Sai: tin nhắn hội thoại chính là thứ bị tóm tắt, nhắc lại sau mỗi lần là thủ công và không đáng tin. Tắt compaction chỉ hoãn vấn đề và có thể làm cạn context. CLAUDE.md lồng nhau nạp lại theo nhu cầu sau compaction, không \"ghim\" cố định."
+     "explain": "Đúng: docs Memory (Instructions seem lost after /compact): CLAUDE.md ở gốc project tồn tại qua compaction — sau /compact Claude đọc lại từ đĩa và đưa lại vào session; nếu một chỉ dẫn biến mất sau compaction thì có thể nó chỉ được nói trong hội thoại; thêm vào CLAUDE.md để nó bền vững. Sai: tin nhắn hội thoại chính là thứ bị tóm tắt, nhắc lại sau mỗi lần là thủ công và không đáng tin. Tắt compaction chỉ hoãn vấn đề và có thể làm cạn context. CLAUDE.md lồng nhau nạp lại theo nhu cầu sau compaction, không \"ghim\" cố định.",
+     "sc": "s2",
+     "ts": [
+      "3.1"
+     ]
     },
     {
      "q": "A repository already has an AGENTS.md used by several coding tools, and Claude Code was reading it as project instructions. A developer then commits a small CLAUDE.md with a few Claude-specific notes, and Claude stops following the AGENTS.md conventions. What is the simplest fix?",
@@ -1795,7 +2821,11 @@ window.CERT_DATA = {
       "Add an @AGENTS.md import at the top of CLAUDE.md, followed by the Claude-specific notes."
      ],
      "answer": 3,
-     "explain": "Đúng: docs Memory (AGENTS.md) ghi mặc định Claude chỉ đọc AGENTS.md khi không có CLAUDE.md/CLAUDE.local.md ở thư mục làm việc trở lên; khi có CLAUDE.md, cách giữ một file chung cho mọi công cụ là đặt @AGENTS.md trong CLAUDE.md rồi viết phần riêng cho Claude bên dưới. (Docs hiện ghi việc đọc trực tiếp AGENTS.md cần Claude Code v2.1.277 trở lên, tháng 11/2026.) Sai: CLAUDE.local.md là file cá nhân nên gitignore, đổi tên làm các công cụ khác mất file. Câu dặn bằng lời chỉ khiến Claude thấy AGENTS.md nếu nó quyết định mở file. \"Không bao giờ nạp cả hai\" sai: import, hoặc đổi thiết lập Project instructions thành claude-md-and-agents-md, đều nạp cả hai."
+     "explain": "Đúng: docs Memory (AGENTS.md) ghi mặc định Claude chỉ đọc AGENTS.md khi không có CLAUDE.md/CLAUDE.local.md ở thư mục làm việc trở lên; khi có CLAUDE.md, cách giữ một file chung cho mọi công cụ là đặt @AGENTS.md trong CLAUDE.md rồi viết phần riêng cho Claude bên dưới. (Docs hiện ghi việc đọc trực tiếp AGENTS.md cần Claude Code v2.1.277 trở lên, tháng 11/2026.) Sai: CLAUDE.local.md là file cá nhân nên gitignore, đổi tên làm các công cụ khác mất file. Câu dặn bằng lời chỉ khiến Claude thấy AGENTS.md nếu nó quyết định mở file. \"Không bao giờ nạp cả hai\" sai: import, hoặc đổi thiết lập Project instructions thành claude-md-and-agents-md, đều nạp cả hai.",
+     "sc": "s2",
+     "ts": [
+      "3.1"
+     ]
     },
     {
      "q": "A security team must make sure that every developer's Claude Code session, on every machine in the organization, receives the company's secure-coding guidance, and that \"never read files under /secrets\" is actually enforced. Which setup fits BEST?",
@@ -1806,7 +2836,11 @@ window.CERT_DATA = {
       "Put both in a shared skill with user-invocable: false so that Claude loads it automatically when relevant."
      ],
      "answer": 0,
-     "explain": "Đúng: docs Memory mô tả CLAUDE.md ở vị trí managed policy (ví dụ /Library/Application Support/ClaudeCode/CLAUDE.md trên macOS) áp dụng cho mọi người dùng trên máy và không bị loại bằng claudeMdExcludes; docs khuyên dùng file đó cho hướng dẫn, còn cưỡng chế quy tắc thì dùng managed settings như permissions.deny, thứ người dùng và project không ghi đè được. Sai: CLAUDE.md của repo chỉ phủ repo đó và chỉ là context. File user phụ thuộc từng người và không có cưỡng chế. Skill chỉ nạp khi Claude thấy liên quan và vẫn là lời dặn, không chặn được việc đọc file."
+     "explain": "Đúng: docs Memory mô tả CLAUDE.md ở vị trí managed policy (ví dụ /Library/Application Support/ClaudeCode/CLAUDE.md trên macOS) áp dụng cho mọi người dùng trên máy và không bị loại bằng claudeMdExcludes; docs khuyên dùng file đó cho hướng dẫn, còn cưỡng chế quy tắc thì dùng managed settings như permissions.deny, thứ người dùng và project không ghi đè được. Sai: CLAUDE.md của repo chỉ phủ repo đó và chỉ là context. File user phụ thuộc từng người và không có cưỡng chế. Skill chỉ nạp khi Claude thấy liên quan và vẫn là lời dặn, không chặn được việc đọc file.",
+     "sc": "s2",
+     "ts": [
+      "3.1"
+     ]
     },
     {
      "q": "A developer has a deploy skill in ~/.claude/skills/deploy/ and the repository has its own deploy skill in .claude/skills/deploy/. Separately, she has a reviewer subagent in ~/.claude/agents/ and the repository defines a reviewer subagent in .claude/agents/. Which TWO statements are correct? (Choose TWO.)",
@@ -1821,7 +2855,11 @@ window.CERT_DATA = {
       1,
       2
      ],
-     "explain": "Đúng: docs Skills (Resolve skills that share a name): enterprise thắng personal, personal thắng project; ví dụ chính thức là deploy ở cả ~/.claude/skills/ và .claude/skills/ thì /deploy chạy bản personal. Docs Subagents (Choose the subagent scope): khi trùng tên dùng nơi ưu tiên cao hơn, thứ tự managed > --agents CLI > .claude/agents/ (project) > ~/.claude/agents/ (user) > plugin. Hai cơ chế có thứ tự ngược nhau, đây là bẫy hay gặp. Sai: project không phải lúc nào cũng thắng. Subagent không gộp định nghĩa. Trùng tên không làm Claude Code dừng."
+     "explain": "Đúng: docs Skills (Resolve skills that share a name): enterprise thắng personal, personal thắng project; ví dụ chính thức là deploy ở cả ~/.claude/skills/ và .claude/skills/ thì /deploy chạy bản personal. Docs Subagents (Choose the subagent scope): khi trùng tên dùng nơi ưu tiên cao hơn, thứ tự managed > --agents CLI > .claude/agents/ (project) > ~/.claude/agents/ (user) > plugin. Hai cơ chế có thứ tự ngược nhau, đây là bẫy hay gặp. Sai: project không phải lúc nào cũng thắng. Subagent không gộp định nghĩa. Trùng tên không làm Claude Code dừng.",
+     "sc": "s2",
+     "ts": [
+      "3.2"
+     ]
     },
     {
      "q": "A /analyze-dependencies skill scans the codebase and prints hundreds of lines of intermediate output into the main conversation, crowding out the actual task. The skill's instructions are self-contained and need nothing from the current conversation. Which frontmatter change BEST helps?",
@@ -1832,7 +2870,11 @@ window.CERT_DATA = {
       "allowed-tools: Read Grep, so that the skill is limited to tools that produce shorter output."
      ],
      "answer": 1,
-     "explain": "Đúng: docs Skills (Run skills in a subagent): context: fork chạy skill trong subagent riêng với nội dung skill làm prompt; subagent không thấy lịch sử hội thoại nên skill phải tự đủ — đúng trường hợp này — và kết quả trả về hội thoại chính khi xong. Sai: disable-model-invocation chỉ ngăn Claude tự gọi skill, không ẩn output. user-invocable: false chỉ ẩn khỏi menu /, không đổi nơi chạy. allowed-tools chỉ cấp quyền dùng tool không cần hỏi trong lượt gọi skill, không giới hạn tool hay độ dài output."
+     "explain": "Đúng: docs Skills (Run skills in a subagent): context: fork chạy skill trong subagent riêng với nội dung skill làm prompt; subagent không thấy lịch sử hội thoại nên skill phải tự đủ — đúng trường hợp này — và kết quả trả về hội thoại chính khi xong. Sai: disable-model-invocation chỉ ngăn Claude tự gọi skill, không ẩn output. user-invocable: false chỉ ẩn khỏi menu /, không đổi nơi chạy. allowed-tools chỉ cấp quyền dùng tool không cần hỏi trong lượt gọi skill, không giới hạn tool hay độ dài output.",
+     "sc": "s2",
+     "ts": [
+      "3.2"
+     ]
     },
     {
      "q": "A team writes a /db-report skill with allowed-tools: Bash(psql *), intending to stop Claude from using any other tool while the skill runs. During a run Claude still calls Edit. Why, and what would restrict the tools?",
@@ -1843,7 +2885,11 @@ window.CERT_DATA = {
       "Edit is a core tool that no frontmatter field can ever remove, so a PreToolUse hook is the only option."
      ],
      "answer": 2,
-     "explain": "Đúng: docs Skills (Pre-approve tools for a skill): allowed-tools cấp quyền cho các tool liệt kê trong lượt gọi skill để Claude không phải hỏi; nó không hạn chế tool nào khả dụng. Muốn bỏ tool khỏi bộ tool khi skill đang hoạt động thì liệt kê trong disallowed-tools (hạn chế hết khi bạn gửi tin nhắn tiếp theo). Sai: allowed-tools áp dụng khi skill được gọi, dù do bạn hay Claude. Skill dùng allowed-tools, còn tools là trường của subagent. disallowed-tools bỏ được Edit (docs chỉ nêu ngoại lệ là EndConversation)."
+     "explain": "Đúng: docs Skills (Pre-approve tools for a skill): allowed-tools cấp quyền cho các tool liệt kê trong lượt gọi skill để Claude không phải hỏi; nó không hạn chế tool nào khả dụng. Muốn bỏ tool khỏi bộ tool khi skill đang hoạt động thì liệt kê trong disallowed-tools (hạn chế hết khi bạn gửi tin nhắn tiếp theo). Sai: allowed-tools áp dụng khi skill được gọi, dù do bạn hay Claude. Skill dùng allowed-tools, còn tools là trường của subagent. disallowed-tools bỏ được Edit (docs chỉ nêu ngoại lệ là EndConversation).",
+     "sc": "s2",
+     "ts": [
+      "3.2"
+     ]
     },
     {
      "q": "A team has a 40-step release checklist (version bumps, changelog, tagging, artifact verification) that is needed only a few times a month. It currently sits in CLAUDE.md. What is the BEST place for it?",
@@ -1854,7 +2900,11 @@ window.CERT_DATA = {
       "A project skill, so only its short description is in context until someone invokes it."
      ],
      "answer": 3,
-     "explain": "Đúng: docs Memory khuyên CLAUDE.md chỉ chứa thứ cần trong mọi session; mục là quy trình nhiều bước hoặc chỉ liên quan một phần codebase nên chuyển sang skill hoặc path-scoped rule. Docs Skills: mặc định chỉ mô tả skill nằm trong context, nội dung đầy đủ chỉ nạp khi được gọi. Sai: để cuối file vẫn tốn context mọi session. Rule với paths khớp mọi file thì gần như luôn được nạp. Managed CLAUDE.md nạp cho mọi session của mọi người, càng lãng phí."
+     "explain": "Đúng: docs Memory khuyên CLAUDE.md chỉ chứa thứ cần trong mọi session; mục là quy trình nhiều bước hoặc chỉ liên quan một phần codebase nên chuyển sang skill hoặc path-scoped rule. Docs Skills: mặc định chỉ mô tả skill nằm trong context, nội dung đầy đủ chỉ nạp khi được gọi. Sai: để cuối file vẫn tốn context mọi session. Rule với paths khớp mọi file thì gần như luôn được nạp. Managed CLAUDE.md nạp cho mọi session của mọi người, càng lãng phí.",
+     "sc": "s2",
+     "ts": [
+      "3.2"
+     ]
     },
     {
      "q": "A team's CLAUDE.md says \"never read or modify anything under vendor/.\" When Claude delegates a broad search to the built-in Explore subagent, the results include vendor/ files. Why?",
@@ -1865,7 +2915,11 @@ window.CERT_DATA = {
       "The rule must be phrased as an @import of a vendor policy file before any subagent will read it."
      ],
      "answer": 0,
-     "explain": "Đúng: docs Subagents (Built-in subagents, What loads at startup): Explore và Plan khởi động không có CLAUDE.md và git status để nghiên cứu nhanh, rẻ; docs khuyên nếu một quy tắc bắt buộc phải tới subagent, như \"bỏ qua thư mục vendor/\", thì nhắc lại trong prompt khi giao việc. (Muốn cưỡng chế thật thì dùng deny rule.) Sai: không phụ thuộc chế độ plan. Subagent khác (built-in khác và custom) có nạp đủ phân cấp CLAUDE.md, gồm cả project. Import không thay đổi việc Explore bỏ qua CLAUDE.md."
+     "explain": "Đúng: docs Subagents (Built-in subagents, What loads at startup): Explore và Plan khởi động không có CLAUDE.md và git status để nghiên cứu nhanh, rẻ; docs khuyên nếu một quy tắc bắt buộc phải tới subagent, như \"bỏ qua thư mục vendor/\", thì nhắc lại trong prompt khi giao việc. (Muốn cưỡng chế thật thì dùng deny rule.) Sai: không phụ thuộc chế độ plan. Subagent khác (built-in khác và custom) có nạp đủ phân cấp CLAUDE.md, gồm cả project. Import không thay đổi việc Explore bỏ qua CLAUDE.md.",
+     "sc": "s2",
+     "ts": [
+      "3.4"
+     ]
     },
     {
      "q": "A developer pastes a stack trace showing a null check missing in one function and asks Claude Code to fix it. The fix is a single obvious line, and there is an existing unit test for the function. How should the developer proceed?",
@@ -1876,7 +2930,11 @@ window.CERT_DATA = {
       "Delegate the fix to a subagent so that the change happens in an isolated context window."
      ],
      "answer": 1,
-     "explain": "Đúng (lời khuyên thiết kế): plan mode (docs Permission modes) là để Claude nghiên cứu và đề xuất trước khi sửa, hữu ích khi có nhiều cách làm hợp lý hoặc thay đổi lớn; với lỗi rõ ràng, phạm vi một dòng và đã có test, làm thẳng rồi chạy test là đủ (Best practices: cho Claude một bài kiểm tra pass/fail để tự xác nhận). Sai: lập kế hoạch cho mọi thay đổi chỉ thêm chi phí. Phỏng vấn viết SPEC dành cho khi chưa rõ mình muốn gì. Subagent khởi đầu với context mới, phải tự thu thập lại ngữ cảnh; Best practices ghi giao cho subagent không làm câu trả lời tốt hơn."
+     "explain": "Đúng (lời khuyên thiết kế): plan mode (docs Permission modes) là để Claude nghiên cứu và đề xuất trước khi sửa, hữu ích khi có nhiều cách làm hợp lý hoặc thay đổi lớn; với lỗi rõ ràng, phạm vi một dòng và đã có test, làm thẳng rồi chạy test là đủ (Best practices: cho Claude một bài kiểm tra pass/fail để tự xác nhận). Sai: lập kế hoạch cho mọi thay đổi chỉ thêm chi phí. Phỏng vấn viết SPEC dành cho khi chưa rõ mình muốn gì. Subagent khởi đầu với context mới, phải tự thu thập lại ngữ cảnh; Best practices ghi giao cho subagent không làm câu trả lời tốt hơn.",
+     "sc": "s2",
+     "ts": [
+      "3.4"
+     ]
     },
     {
      "q": "A product manager wants Claude Code to add rate limiting to the public API but has not decided on per-user versus per-key limits, behavior over the limit, or scope. Which workflow does the Claude Code best-practices guide recommend?",
@@ -1887,7 +2945,11 @@ window.CERT_DATA = {
       "Write every possible requirement into CLAUDE.md so that Claude can choose the right one by itself."
      ],
      "answer": 2,
-     "explain": "Đúng: trang Best practices (Brainstorm with Claude first) gợi ý khi chưa rõ mình muốn gì, bảo Claude phỏng vấn cho đến khi viết được spec vào SPEC.md, rồi mở session mới để xây từ spec đó với context sạch và định nghĩa \"xong\" rõ ràng; SPEC.md cũng là thứ để reviewer đối chiếu sau. Sai: tự chọn cách phổ biến là đoán thay cho quyết định chỉ PM biết. Chạy -p không giải quyết việc thiếu yêu cầu. Nhồi mọi khả năng vào CLAUDE.md làm phình context và vẫn không chứa quyết định."
+     "explain": "Đúng: trang Best practices (Brainstorm with Claude first) gợi ý khi chưa rõ mình muốn gì, bảo Claude phỏng vấn cho đến khi viết được spec vào SPEC.md, rồi mở session mới để xây từ spec đó với context sạch và định nghĩa \"xong\" rõ ràng; SPEC.md cũng là thứ để reviewer đối chiếu sau. Sai: tự chọn cách phổ biến là đoán thay cho quyết định chỉ PM biết. Chạy -p không giải quyết việc thiếu yêu cầu. Nhồi mọi khả năng vào CLAUDE.md làm phình context và vẫn không chứa quyết định.",
+     "sc": "s2",
+     "ts": [
+      "3.5"
+     ]
     },
     {
      "q": "Claude Code keeps declaring a date-parsing bug \"fixed,\" but the developer finds it still broken each time. The repository has a test runner, but no test reproduces this bug. What is the MOST effective next step?",
@@ -1898,7 +2960,11 @@ window.CERT_DATA = {
       "Ask Claude to write a failing test that reproduces the bug, then fix the code until that test passes."
      ],
      "answer": 3,
-     "explain": "Đúng: Best practices (Give Claude a check to run): Claude dừng khi việc trông như đã xong; nếu có thứ trả về pass/fail, Claude tự đóng vòng lặp — sửa, chạy kiểm tra, đọc output và sửa tiếp; bảng ví dụ prompt tốt cũng có \"viết một test thất bại tái hiện lỗi rồi sửa\". Sai: dặn \"cẩn thận hơn\" không cho Claude cách xác minh. Effort cao hơn vẫn không có bằng chứng khách quan. acceptEdits chỉ bỏ bước duyệt sửa file, không xác minh gì."
+     "explain": "Đúng: Best practices (Give Claude a check to run): Claude dừng khi việc trông như đã xong; nếu có thứ trả về pass/fail, Claude tự đóng vòng lặp — sửa, chạy kiểm tra, đọc output và sửa tiếp; bảng ví dụ prompt tốt cũng có \"viết một test thất bại tái hiện lỗi rồi sửa\". Sai: dặn \"cẩn thận hơn\" không cho Claude cách xác minh. Effort cao hơn vẫn không có bằng chứng khách quan. acceptEdits chỉ bỏ bước duyệt sửa file, không xác minh gì.",
+     "sc": "s2",
+     "ts": [
+      "3.5"
+     ]
     },
     {
      "q": "A developer has corrected Claude twice in the same session about how to structure a migration, and the third attempt is still wrong. According to the Claude Code best-practices guide, what should she do next?",
@@ -1909,7 +2975,11 @@ window.CERT_DATA = {
       "Fork the session twice and keep whichever branch eventually produces the right structure."
      ],
      "answer": 0,
-     "explain": "Đúng: Best practices (Steer the session): sau hai lần sửa không thành, chạy /clear và viết prompt tốt hơn thay vì sửa lần thứ ba; lần sửa thứ ba chủ yếu thêm vào hội thoại vốn đã chứa hai lần thất bại mà Claude cứ đọc lại; /clear cộng một prompt mới gói những gì đã học hầu như luôn tốt hơn. Sai: viết hoa/nhấn mạnh không phải cách khắc phục (docs ghi nó dễ khiến áp quá đà). /compact vẫn giữ bản tóm tắt các lần thất bại. Fork vẫn mang theo lịch sử sai."
+     "explain": "Đúng: Best practices (Steer the session): sau hai lần sửa không thành, chạy /clear và viết prompt tốt hơn thay vì sửa lần thứ ba; lần sửa thứ ba chủ yếu thêm vào hội thoại vốn đã chứa hai lần thất bại mà Claude cứ đọc lại; /clear cộng một prompt mới gói những gì đã học hầu như luôn tốt hơn. Sai: viết hoa/nhấn mạnh không phải cách khắc phục (docs ghi nó dễ khiến áp quá đà). /compact vẫn giữ bản tóm tắt các lần thất bại. Fork vẫn mang theo lịch sử sai.",
+     "sc": "s2",
+     "ts": [
+      "3.5"
+     ]
     },
     {
      "q": "A nightly claude -p job on a shared build server refactors a module and opens a pull request. The server holds deployment credentials. Which TWO options keep the run bounded and limited to the actions the team pre-approved? (Choose TWO.)",
@@ -1924,7 +2994,11 @@ window.CERT_DATA = {
       0,
       3
      ],
-     "explain": "Đúng: docs Headless/Best practices: --allowedTools tự duyệt các tool liệt kê, còn --permission-mode dontAsk từ chối mọi thứ khác lẽ ra phải hỏi, hợp với CI bị khóa chặt; --max-turns và --max-budget-usd (chỉ ở print mode) là thứ \"dừng nó lại\" trong danh sách kiểm tra trước khi để run tự chạy. Sai: bỏ qua mọi quyền trên máy có credentials triển khai là rủi ro lớn; docs chỉ khuyên bypass trong môi trường cô lập. --continue nối hội thoại cũ, không giới hạn hay khoanh quyền. --verbose chỉ ghi log, không ngăn hành động nào."
+     "explain": "Đúng: docs Headless/Best practices: --allowedTools tự duyệt các tool liệt kê, còn --permission-mode dontAsk từ chối mọi thứ khác lẽ ra phải hỏi, hợp với CI bị khóa chặt; --max-turns và --max-budget-usd (chỉ ở print mode) là thứ \"dừng nó lại\" trong danh sách kiểm tra trước khi để run tự chạy. Sai: bỏ qua mọi quyền trên máy có credentials triển khai là rủi ro lớn; docs chỉ khuyên bypass trong môi trường cô lập. --continue nối hội thoại cũ, không giới hạn hay khoanh quyền. --verbose chỉ ghi log, không ngăn hành động nào.",
+     "sc": "s5",
+     "ts": [
+      "3.6"
+     ]
     },
     {
      "q": "A CI job runs a Claude review on every push to a pull request. After each new commit it posts the same findings again, so developers see duplicate comments on unchanged code. What is the BEST fix?",
@@ -1935,7 +3009,11 @@ window.CERT_DATA = {
       "Raise the severity threshold so that fewer findings are posted on each run of the review."
      ],
      "answer": 1,
-     "explain": "Đúng (lời khuyên thiết kế cho CI): mỗi run claude -p là một lần độc lập; đưa kết quả review trước vào context và yêu cầu chỉ báo vấn đề mới hoặc chưa được sửa là cách tránh lặp bình luận mà vẫn review code mới. Sai: chỉ review lần đầu sẽ bỏ sót lỗi ở commit sau. --continue mở hội thoại gần nhất trên máy đó; runner CI thường là máy tạm và file session nằm cục bộ, nên không đáng tin (docs Sessions). Nâng ngưỡng giảm số bình luận nhưng vẫn lặp lại những phát hiện cũ, còn có thể giấu lỗi thật."
+     "explain": "Đúng (lời khuyên thiết kế cho CI): mỗi run claude -p là một lần độc lập; đưa kết quả review trước vào context và yêu cầu chỉ báo vấn đề mới hoặc chưa được sửa là cách tránh lặp bình luận mà vẫn review code mới. Sai: chỉ review lần đầu sẽ bỏ sót lỗi ở commit sau. --continue mở hội thoại gần nhất trên máy đó; runner CI thường là máy tạm và file session nằm cục bộ, nên không đáng tin (docs Sessions). Nâng ngưỡng giảm số bình luận nhưng vẫn lặp lại những phát hiện cũ, còn có thể giấu lỗi thật.",
+     "sc": "s5",
+     "ts": [
+      "3.6"
+     ]
     },
     {
      "q": "A team's committed .claude/settings.json sets \"spinnerTipsEnabled\": true. A developer set it to false in ~/.claude/settings.json, but tips still appear in this project. How can she turn them off for herself in this project only, without affecting teammates?",
@@ -1946,7 +3024,11 @@ window.CERT_DATA = {
       "Pass the value in CLAUDE.md, since instructions in CLAUDE.md override values set in settings files."
      ],
      "answer": 2,
-     "explain": "Đúng: docs Settings (Settings precedence) xếp từ cao xuống: managed, command line (--settings), project local (.claude/settings.local.json), shared project (.claude/settings.json), user; docs dùng đúng ví dụ spinnerTipsEnabled: team đặt true thì project thắng user, và đặt false trong settings.local.json sẽ lấy lại giá trị của bạn mà không đổi gì cho đồng đội. Sai: vị trí trong file không đổi thứ tự ưu tiên. Sửa file chung ảnh hưởng cả team, và user settings của đồng đội lại thấp hơn project. CLAUDE.md là chỉ dẫn cho mô hình, không phải cấu hình."
+     "explain": "Đúng: docs Settings (Settings precedence) xếp từ cao xuống: managed, command line (--settings), project local (.claude/settings.local.json), shared project (.claude/settings.json), user; docs dùng đúng ví dụ spinnerTipsEnabled: team đặt true thì project thắng user, và đặt false trong settings.local.json sẽ lấy lại giá trị của bạn mà không đổi gì cho đồng đội. Sai: vị trí trong file không đổi thứ tự ưu tiên. Sửa file chung ảnh hưởng cả team, và user settings của đồng đội lại thấp hơn project. CLAUDE.md là chỉ dẫn cho mô hình, không phải cấu hình.",
+     "sc": "s2",
+     "ts": [
+      "3.1"
+     ]
     },
     {
      "q": "A CI script runs claude -p with --system-prompt \"You are a strict security reviewer...\" Reviews have become worse at using tools and ignore the repository's git context. What change keeps the reviewer persona while restoring Claude Code's normal behavior?",
@@ -1957,7 +3039,11 @@ window.CERT_DATA = {
       "Use --append-system-prompt instead, which adds the text to the end of the default system prompt."
      ],
      "answer": 3,
-     "explain": "Đúng: CLI reference: --system-prompt thay toàn bộ system prompt mặc định; --append-system-prompt nối thêm vào cuối prompt mặc định, giữ hành vi mặc định của Claude Code. Docs Headless còn ghi nếu thay prompt thì run cũng khởi động không có git status snapshot. Sai: giữ --system-prompt thì prompt mặc định vẫn bị thay. --verbose chỉ tăng log, không khôi phục gì. Model lớn hơn không bù được phần system prompt đã mất."
+     "explain": "Đúng: CLI reference: --system-prompt thay toàn bộ system prompt mặc định; --append-system-prompt nối thêm vào cuối prompt mặc định, giữ hành vi mặc định của Claude Code. Docs Headless còn ghi nếu thay prompt thì run cũng khởi động không có git status snapshot. Sai: giữ --system-prompt thì prompt mặc định vẫn bị thay. --verbose chỉ tăng log, không khôi phục gì. Model lớn hơn không bù được phần system prompt đã mất.",
+     "sc": "s5",
+     "ts": [
+      "3.6"
+     ]
     },
     {
      "q": "A CI step runs claude -p --output-format json --json-schema '...' and then reads the structured_output field. Most runs work, but occasionally the script crashes because structured_output is missing. What should the script do?",
@@ -1968,7 +3054,11 @@ window.CERT_DATA = {
       "Retry the run with --continue, which always returns the structured_output of the previous run."
      ],
      "answer": 0,
-     "explain": "Đúng: docs Headless (Get structured output): kết quả theo schema nằm ở trường structured_output; nếu run kết thúc mà không có structured output hợp lệ, ví dụ Claude từ chối yêu cầu, response không có trường structured_output, nên kiểm tra trường đó tồn tại trước khi dùng. Sai: required chỉ ràng buộc nội dung khi có output, không ngăn trường hợp run không tạo được output. Parse text bằng regex kém tin cậy hơn. --continue không có hành vi trả lại output cũ."
+     "explain": "Đúng: docs Headless (Get structured output): kết quả theo schema nằm ở trường structured_output; nếu run kết thúc mà không có structured output hợp lệ, ví dụ Claude từ chối yêu cầu, response không có trường structured_output, nên kiểm tra trường đó tồn tại trước khi dùng. Sai: required chỉ ràng buộc nội dung khi có output, không ngăn trường hợp run không tạo được output. Parse text bằng regex kém tin cậy hơn. --continue không có hành vi trả lại output cũ.",
+     "sc": "s5",
+     "ts": [
+      "3.6"
+     ]
     },
     {
      "q": "A team wants claude -p to run git diff commands without prompting and adds --allowedTools \"Bash(git diff*)\". Later they notice Claude also ran git diff-index without being asked to approve it. Why, and how should the rule be written?",
@@ -1979,7 +3069,11 @@ window.CERT_DATA = {
       "The rule needs quotes around the command, as in \"Bash('git diff')\", to stop prefix matching."
      ],
      "answer": 1,
-     "explain": "Đúng: docs Headless (Create a commit): --allowedTools dùng cú pháp permission rule; dấu \" *\" ở cuối bật khớp tiền tố, nên Bash(git diff *) cho mọi lệnh bắt đầu bằng \"git diff\"; khoảng trắng trước * là quan trọng, thiếu nó thì Bash(git diff*) khớp cả git diff-index. Sai: Bash rule dùng mẫu wildcard, không phải regex. --allowedTools không bỏ qua đối số; rule có specifier chỉ khớp lệnh tương ứng. Không có cú pháp dấu nháy như vậy."
+     "explain": "Đúng: docs Headless (Create a commit): --allowedTools dùng cú pháp permission rule; dấu \" *\" ở cuối bật khớp tiền tố, nên Bash(git diff *) cho mọi lệnh bắt đầu bằng \"git diff\"; khoảng trắng trước * là quan trọng, thiếu nó thì Bash(git diff*) khớp cả git diff-index. Sai: Bash rule dùng mẫu wildcard, không phải regex. --allowedTools không bỏ qua đối số; rule có specifier chỉ khớp lệnh tương ứng. Không có cú pháp dấu nháy như vậy.",
+     "sc": "s5",
+     "ts": [
+      "3.6"
+     ]
     },
     {
      "q": "A team connects an MCP server named \"github\" in Claude Code. Which TWO statements about referring to its tools are correct? (Choose TWO.)",
@@ -1994,7 +3088,10 @@ window.CERT_DATA = {
       1,
       4
      ],
-     "explain": "Đúng: docs Permissions (MCP): \"mcp__puppeteer\" khớp mọi tool của server puppeteer, \"mcp__puppeteer__*\" cũng vậy. Hooks reference: matcher chỉ gồm ký tự khớp-chính-xác được so sánh nguyên chuỗi, nên \"mcp__memory\" không khớp tool nào; cần \"mcp__memory__.*\". Cùng một chuỗi nhưng hai cơ chế hiểu khác nhau, đây là bẫy hay gặp. Sai: dạng server:path là cú pháp @ tham chiếu resource, không phải permission rule. Không phải regex ở cả hai nơi (matcher chỉ thành regex khi có ký tự khác). Permission rule hỗ trợ MCP tool."
+     "explain": "Đúng: docs Permissions (MCP): \"mcp__puppeteer\" khớp mọi tool của server puppeteer, \"mcp__puppeteer__*\" cũng vậy. Hooks reference: matcher chỉ gồm ký tự khớp-chính-xác được so sánh nguyên chuỗi, nên \"mcp__memory\" không khớp tool nào; cần \"mcp__memory__.*\". Cùng một chuỗi nhưng hai cơ chế hiểu khác nhau, đây là bẫy hay gặp. Sai: dạng server:path là cú pháp @ tham chiếu resource, không phải permission rule. Không phải regex ở cả hai nơi (matcher chỉ thành regex khi có ký tự khác). Permission rule hỗ trợ MCP tool.",
+     "ts": [
+      "2.4"
+     ]
     },
     {
      "q": "A security reviewer notes that a nightly claude -p job runs inside arbitrary contributor branches. Because -p sessions show no approval prompt, any MCP server a branch adds to .mcp.json would connect automatically. The job itself needs exactly one approved server. Which option addresses this?",
@@ -2005,7 +3102,12 @@ window.CERT_DATA = {
       "Set MCP_TIMEOUT to 0 so that project-scoped servers never have time to connect during the run."
      ],
      "answer": 2,
-     "explain": "Đúng: docs MCP (Project scope) ghi trong claude -p, Agent SDK và một số phiên cloud, Claude Code không hiện prompt duyệt nên nạp server project-scoped mà không hỏi; cách chặn gồm disabledMcpjsonServers, loại project settings bằng --setting-sources, hoặc --strict-mcp-config để chỉ dùng server truyền qua --mcp-config. (--bare cũng bỏ qua .mcp.json.) Sai: reset-project-choices chỉ đặt lại lựa chọn duyệt cho phiên tương tác, -p vẫn không hiện prompt. Docs Headless ghi -p không hiện hộp thoại workspace trust. MCP_TIMEOUT là thời gian chờ khởi động, đặt 0 không phải cơ chế bảo mật được docs hỗ trợ."
+     "explain": "Đúng: docs MCP (Project scope) ghi trong claude -p, Agent SDK và một số phiên cloud, Claude Code không hiện prompt duyệt nên nạp server project-scoped mà không hỏi; cách chặn gồm disabledMcpjsonServers, loại project settings bằng --setting-sources, hoặc --strict-mcp-config để chỉ dùng server truyền qua --mcp-config. (--bare cũng bỏ qua .mcp.json.) Sai: reset-project-choices chỉ đặt lại lựa chọn duyệt cho phiên tương tác, -p vẫn không hiện prompt. Docs Headless ghi -p không hiện hộp thoại workspace trust. MCP_TIMEOUT là thời gian chờ khởi động, đặt 0 không phải cơ chế bảo mật được docs hỗ trợ.",
+     "sc": "s5",
+     "ts": [
+      "3.6",
+      "2.4"
+     ]
     },
     {
      "q": "Before complex refactors, a developer prefixes every prompt with \"think very hard, step by step\" expecting Claude Code to reason more deeply. According to the Claude Code best-practices guide, what is accurate?",
@@ -2016,8 +3118,326 @@ window.CERT_DATA = {
       "Such phrases are ordinary prompt text; the effort level is the main control for how hard Claude thinks."
      ],
      "answer": 3,
-     "explain": "Đúng: Best practices (Write a specific prompt, What you can stop doing): các cụm như \"think step by step\", \"be thorough\" là chữ bình thường trong prompt, không phải từ khóa; điều khiển chính là effort level; những cụm đó chỉ đẩy nhẹ trong phạm vi effort hiện tại. Docs ghi riêng \"ultrathink\" vẫn yêu cầu suy luận sâu hơn cho đúng lượt đó mà không đổi thiết lập effort. Sai: không có từ khóa nào nâng effort vĩnh viễn. Claude Code không xóa các cụm này. Đặt trong CLAUDE.md không biến nó thành điều khiển effort."
+     "explain": "Đúng: Best practices (Write a specific prompt, What you can stop doing): các cụm như \"think step by step\", \"be thorough\" là chữ bình thường trong prompt, không phải từ khóa; điều khiển chính là effort level; những cụm đó chỉ đẩy nhẹ trong phạm vi effort hiện tại. Docs ghi riêng \"ultrathink\" vẫn yêu cầu suy luận sâu hơn cho đúng lượt đó mà không đổi thiết lập effort. Sai: không có từ khóa nào nâng effort vĩnh viễn. Claude Code không xóa các cụm này. Đặt trong CLAUDE.md không biến nó thành điều khiển effort.",
+     "sc": "s2",
+     "ts": [
+      "3.5"
+     ]
+    },
+    {
+     "q": "A team that uses Claude Code for daily feature work copied rule files from another editor into .claude/rules/. Their testing.md starts with the frontmatter line globs: \"**/*.test.ts\". The testing conventions now show up in every session, even sessions that never touch a test file. What is the cause, and what is the fix?",
+     "options": [
+      "Every file in .claude/rules/ loads at launch whatever its frontmatter says; move the conventions into a CLAUDE.md file placed inside each test directory.",
+      "The pattern is wrapped in quotes, which makes it match every file in the project; remove the quotes so that only test files match the pattern.",
+      "Claude Code reads only paths in rule frontmatter and ignores other fields, so the rule is unscoped and loads at launch; rename globs to paths.",
+      "Rule patterns must be absolute paths from the filesystem root; rewrite the pattern as /**/*.test.ts so that it is anchored correctly."
+     ],
+     "answer": 2,
+     "explain": "Docs memory ghi: paths là trường duy nhất Claude Code đọc trong frontmatter của rule, trường khác bị bỏ qua không báo lỗi; rule không có paths được nạp lúc khởi động như .claude/CLAUDE.md. Vì vậy globs: khiến rule thành rule không phạm vi; đổi thành paths: là đúng. \"Mọi rule đều nạp lúc khởi động\" sai: rule có paths chỉ nạp khi Claude đọc/ghi/sửa file khớp; rải CLAUDE.md vào từng thư mục test cũng là cách vụng cho quy ước rải khắp repo. Dấu nháy không sao: chính ví dụ trong docs viết pattern trong dấu nháy. Pattern tính tương đối từ thư mục chứa .claude; dấu / ở đầu nghĩa là \"ngay trong thư mục gốc đó\", không phải gốc hệ thống file.",
+     "sc": "s2",
+     "ts": [
+      "3.3"
+     ]
+    },
+    {
+     "q": "In a React repository where the team generates components with Claude Code, .claude/rules/components.md has the frontmatter paths: [\"src/components/*.tsx\"]. The conventions load when Claude edits src/components/Button.tsx, but not when it edits src/components/forms/DatePicker.tsx. What should the team change?",
+     "options": [
+      "Change the pattern to src/components/**/*.tsx, because a single * does not match across directory levels.",
+      "Move the rule into src/components/CLAUDE.md, because path-scoped rules can never match files in nested folders.",
+      "Rename the rule file to components-forms.md so that the loader associates the rule with the forms folder too.",
+      "Run /memory after every edit, which forces path-scoped rules to reload for files deeper in the directory tree."
+     ],
+     "answer": 0,
+     "explain": "Theo bảng pattern trong docs memory, src/components/*.tsx chỉ khớp file .tsx nằm trực tiếp trong src/components/, không khớp thư mục con; muốn khớp mọi cấp thì dùng ** (ví dụ src/components/**/*.tsx). Rule theo đường dẫn hoàn toàn khớp được thư mục lồng nhau (**/*.ts là ví dụ trong docs), nên chuyển sang CLAUDE.md con là không cần. Tên file rule chỉ để người đọc dễ hiểu, không ảnh hưởng việc khớp. /memory dùng để xem và sửa file memory đã nạp, không làm pattern khớp thêm file.",
+     "sc": "s2",
+     "ts": [
+      "3.3"
+     ]
+    },
+    {
+     "q": "A developer's long Claude Code session works on the payments package. Its conventions come from the project-root CLAUDE.md, from packages/payments/CLAUDE.md, and from a rule in .claude/rules/ with paths: [\"packages/payments/**\"]. The session then compacts. Which TWO statements describe what happens to these instructions? (Choose TWO.)",
+     "options": [
+      "The project-root CLAUDE.md is re-read from disk and re-injected into the compacted session.",
+      "The path-scoped rule is re-injected right away, because Claude Code tracks every rule that had loaded before compaction.",
+      "The path-scoped rule and packages/payments/CLAUDE.md load again on demand, when Claude next reads, writes, or edits a file there.",
+      "packages/payments/CLAUDE.md is merged into the root CLAUDE.md on disk so that its content can never be lost again.",
+      "All instructions stay lost until the developer restarts Claude Code, because compaction clears every memory file."
+     ],
+     "answer": [
+      0,
+      2
+     ],
+     "explain": "Docs (memory và context-window) ghi: sau compaction, CLAUDE.md ở gốc project và rule không có paths được đọc lại từ đĩa và đưa lại vào; còn CLAUDE.md lồng trong thư mục con và rule có paths chỉ nạp lại theo nhu cầu, khi Claude đọc/ghi/sửa file khớp (chúng nằm trong lịch sử nên bị tóm tắt cùng phần còn lại). Vì vậy \"rule theo đường dẫn được đưa lại ngay\" sai. Claude Code không gộp file CLAUDE.md trên đĩa. Compaction cũng không xóa sạch chỉ dẫn, không cần khởi động lại. Docs gợi ý: rule nào phải sống qua compaction thì bỏ paths hoặc chuyển vào CLAUDE.md gốc.",
+     "sc": "s2",
+     "ts": [
+      "3.3",
+      "3.1"
+     ]
+    },
+    {
+     "q": "A developer asks Claude Code to change a shared TypeScript type in packages/core and update every call site across six packages. The session will be long and is expected to compact several times, and the team worries that later edits will drift from decisions made at the start. Which approach BEST keeps the change consistent?",
+     "options": [
+      "Split the work into six separate sessions, one per package, and tell each session only to fix the call sites inside its own package directory.",
+      "Turn off automatic compaction and keep working in the same session until the context window is completely full.",
+      "Paste the full list of decisions into the prompt again after every few edits, written in capital letters and marked IMPORTANT.",
+      "Plan first in plan mode, so Claude writes the plan to a file, and approve it; Claude Code re-injects that plan file after each compaction."
+     ],
+     "answer": 3,
+     "explain": "Trang large-codebases của Claude Code khuyên với thay đổi xuyên nhiều package: giao trọn thay đổi trong một phiên và lập kế hoạch trước bằng plan mode; Claude ghi plan ra file và Claude Code đưa lại file plan sau mỗi lần compaction (bảng \"What survives compaction\" cũng ghi plan được re-inject từ đĩa), nên quyết định ban đầu không mất. Chia sáu phiên làm mỗi phiên tự suy lại quyết định, docs nói rõ giao một phiên giữ quyết định nhất quán hơn. Tắt compaction rồi chạy tới đầy context thì phiên không đi tiếp được. Dán lại bằng chữ hoa là mẹo cũ; best practices nói thêm IMPORTANT/ALL CAPS không còn là cách đúng.",
+     "sc": "s2",
+     "ts": [
+      "3.4",
+      "5.4"
+     ]
+    },
+    {
+     "q": "A developer asks Claude Code to write a function that normalizes customer names from a legacy import, so that \"MCDONALD, ronald j.\" becomes \"Ronald J. McDonald\". After two rounds of prose explanations, the output is still wrong for name prefixes, suffixes such as Jr., and initials. What is the MOST effective next step?",
+     "options": [
+      "Describe the rules again in more detail, putting extra emphasis on the parts of the rules that Claude got wrong in the earlier attempts.",
+      "Give several input/output pairs covering the prefix, suffix, and initial cases, and have Claude turn them into tests it must pass.",
+      "Ask Claude to think harder about naming conventions in general before it writes the next version of the function.",
+      "Switch to plan mode so that Claude presents a plan for the function before it writes any more of the code."
+     ],
+     "answer": 1,
+     "explain": "Với phép biến đổi khó tả bằng lời, cách hiệu quả là đưa vài cặp ví dụ input/output cụ thể, gồm cả ca biên, và biến chúng thành test để Claude có phép kiểm đạt/không đạt mà tự lặp đến khi đúng (best practices: \"Give Claude a check to run\"). Đây là lời khuyên thực hành, khớp với phần tinh chỉnh dần trong exam guide. Viết lại mô tả dài hơn, nhấn mạnh hơn vẫn là cùng một kênh đã thất bại hai lần; docs còn khuyên sau hai lần sửa không được thì viết prompt tốt hơn thay vì sửa lần ba. \"Think harder\" chỉ là chữ thường trong prompt, không phải từ khóa nâng mức suy nghĩ. Plan mode hợp cho thay đổi lớn nhiều hướng; ở đây vấn đề là thiếu đặc tả, không phải thiếu kế hoạch.",
+     "sc": "s2",
+     "ts": [
+      "3.5"
+     ]
+    },
+    {
+     "q": "A team has a /scaffold-endpoint command defined in .claude/commands/scaffold-endpoint.md. They now want the workflow to use a template file and a helper script that live next to the instructions and are versioned with them. What is the BEST way to set this up?",
+     "options": [
+      "Convert it into a skill at .claude/skills/scaffold-endpoint/SKILL.md and keep the template and script in that directory.",
+      "Keep the command file as it is and paste the full template and script into the project CLAUDE.md, so that they are always loaded.",
+      "Move the command file into ~/.claude/commands/ so that the command can read supporting files from the developer's home directory.",
+      "Replace the command with a PreToolUse hook that runs the helper script whenever Claude is about to create a new file."
+     ],
+     "answer": 0,
+     "explain": "Docs skills ghi: file trong .claude/commands/ là định dạng cũ, vẫn chạy, nhưng nên dùng skill cho việc mới vì skill hỗ trợ supporting files; thư mục .claude/skills/<tên>/ chứa SKILL.md cùng template, script và vẫn tạo lệnh /scaffold-endpoint, commit được để cả nhóm dùng. Dán template và script vào CLAUDE.md làm chúng chiếm context ở mọi phiên dù không liên quan. Chuyển sang ~/.claude/commands/ biến lệnh thành của riêng một người, không còn chia sẻ qua repo, và không giải quyết chuyện file đi kèm. Hook PreToolUse dùng để chặn hoặc kiểm tra lời gọi tool, không phải nơi đặt một quy trình người dùng chủ động gọi.",
+     "sc": "s2",
+     "ts": [
+      "3.2"
+     ]
+    },
+    {
+     "q": "A developer starts Claude Code at the root of a large monorepo. As Claude touches files across the tree, CLAUDE.md files from packages owned by other teams, which she never works on, load and add conflicting conventions. She wants those files skipped in her own sessions without changing anything for her teammates. What should she do?",
+     "options": [
+      "Delete the other teams' CLAUDE.md files in her checkout and never commit the deletion.",
+      "Add a line to ~/.claude/CLAUDE.md telling Claude to ignore other teams' instructions.",
+      "Add those packages' paths to claudeMdExcludes in .claude/settings.local.json.",
+      "Start every session with --bare, so that no CLAUDE.md file loads, not even the root one."
+     ],
+     "answer": 2,
+     "explain": "Docs memory và large-codebases mô tả đúng tình huống này: trong monorepo, dùng claudeMdExcludes để bỏ qua CLAUDE.md của nhóm khác, và đặt nó trong .claude/settings.local.json để thay đổi chỉ áp dụng trên máy mình. Xóa file trong bản checkout là thao tác dễ lỡ commit và phải làm lại mỗi lần pull. Một dòng trong CLAUDE.md cá nhân chỉ là chỉ dẫn mềm, các file kia vẫn được nạp vào context và vẫn mâu thuẫn. --bare bỏ luôn CLAUDE.md gốc và cả hook, skill, MCP, nên mất cả những quy ước cô cần.",
+     "sc": "s2",
+     "ts": [
+      "3.1"
+     ]
+    },
+    {
+     "q": "A developer reviews a pagination module that Claude Code just generated and finds four problems. The cursor is encoded in a format the API client cannot decode, and the client's retry logic depends on that same cursor format. Separately, a log message has a typo and an unrelated helper lacks a docstring. How should she give this feedback?",
+     "options": [
+      "Describe the two cursor problems together in one message, since a fix to one changes the other; the typo and docstring can follow separately.",
+      "Report the four problems strictly one at a time, waiting for each fix before mentioning the next, so Claude only ever has one thing to think about.",
+      "Ask Claude to regenerate the whole module without naming any specific problems, because pointing out details biases the next attempt.",
+      "Fix the cursor format by hand and leave only the typo and docstring to Claude, because Claude cannot handle changes that depend on each other."
+     ],
+     "answer": 0,
+     "explain": "Lời khuyên thực hành (exam guide 3.5): vấn đề tương tác với nhau thì gom vào một tin nhắn, vấn đề độc lập thì xử lý tuần tự cũng được. Định dạng cursor và logic retry phụ thuộc nhau; nêu riêng từng cái thì bản sửa đầu có thể làm hỏng cái sau và phải sửa đi sửa lại. Lỗi chính tả và docstring độc lập nên tách ra không gây xung đột. Báo từng vấn đề một kể cả vấn đề tương tác là đúng kiểu dễ sinh vòng sửa qua lại. Tạo lại cả module mà không nêu lỗi cụ thể bỏ mất thông tin quý nhất. Claude làm được thay đổi phụ thuộc nhau khi được mô tả cùng lúc; tự sửa tay không cần thiết.",
+     "sc": "s2",
+     "ts": [
+      "3.5"
+     ]
+    },
+    {
+     "q": "A developer wants her personal Python preferences (type hints on every public function, pathlib instead of os.path) applied whenever Claude works on .py files, in every repository on her machine, without committing anything to those repositories. What should she create?",
+     "options": [
+      ".claude/rules/python.md with paths: [\"**/*.py\"] in each repository",
+      "A paths line in ~/.claude/CLAUDE.md that limits it to Python files",
+      "A \"rules\" key in ~/.claude/settings.json listing the preferences",
+      "~/.claude/rules/python.md with paths: [\"**/*.py\"]"
+     ],
+     "answer": 3,
+     "explain": "Docs memory: rule cá nhân trong ~/.claude/rules/ áp dụng cho mọi project trên máy; với rule cấp user, pattern trong paths tính từ thư mục làm việc chính của phiên, nên **/*.py khớp file Python ở bất kỳ repo nào. Đặt rule trong .claude/rules/ của từng repo là đổi repo của người khác và phải commit. CLAUDE.md không có cơ chế paths; trường này chỉ có ở rule (và skill). Settings không có khóa \"rules\" chứa chỉ dẫn; chỉ dẫn cho model nằm trong CLAUDE.md và rule, còn settings là cấu hình harness.",
+     "sc": "s4",
+     "ts": [
+      "3.3"
+     ]
+    },
+    {
+     "q": "An internal code-review assistant built with the TypeScript Agent SDK sets settingSources: [\"user\"] so that each engineer's personal settings apply. Its reviews ignore the conventions in the repository's CLAUDE.md, even though the agent runs with cwd set to the repository. What explains this?",
+     "options": [
+      "The SDK never reads CLAUDE.md files at all, so their content always has to be passed in through the systemPrompt option instead.",
+      "CLAUDE.md loads only together with the claude_code system prompt preset, which this assistant does not set.",
+      "Project CLAUDE.md and rules load only with the \"project\" source, and an explicit settingSources list must include it.",
+      "The user source overrides the project source, so each engineer's personal CLAUDE.md hides the project's file."
+     ],
+     "answer": 2,
+     "explain": "Docs SDK (Use Claude Code features, modifying system prompts): bỏ trống settingSources tương đương [\"user\", \"project\", \"local\"]; khi đặt danh sách tường minh thì chỉ nạp các nguồn có trong đó, và CLAUDE.md/rule của project thuộc nguồn \"project\". Danh sách chỉ có \"user\" nên CLAUDE.md của repo không nạp. SDK có đọc CLAUDE.md khi nguồn tương ứng bật. Docs nói rõ việc nạp CLAUDE.md do setting sources điều khiển, không phải preset claude_code. Các file CLAUDE.md được nối lại chứ không ghi đè nhau.",
+     "sc": "s4",
+     "ts": [
+      "3.1"
+     ]
+    },
+    {
+     "q": "After a long design discussion in Claude Code, a developer runs /write-adr, a project skill whose SKILL.md says \"Write an ADR recording the decisions made in this conversation\" and whose frontmatter sets context: fork. The ADR comes back generic and names none of the decisions. What explains this, and what is the fix?",
+     "options": [
+      "context: fork removes every tool from the skill, so it cannot open the session transcript; add Read to the skill's allowed-tools.",
+      "Add agent: Plan to the frontmatter, because Plan is the one agent type that receives the parent conversation when a skill forks.",
+      "A context: fork skill runs in a subagent that doesn't see the conversation; drop context: fork, or fork the conversation instead.",
+      "Project skills cannot see conversation history in any mode, so the decisions must first be copied into the project's CLAUDE.md."
+     ],
+     "answer": 2,
+     "explain": "Docs skills (Run skills in a subagent): với context: fork, Claude Code khởi động subagent mới thuộc loại ghi trong agent và đưa nội dung SKILL.md làm prompt; subagent không thấy lịch sử hội thoại, nên skill phải tự đủ. Docs nói rõ dù tên là fork, skill context: fork không phải fork của hội thoại hiện tại; khi task phụ thuộc lịch sử, hãy fork hội thoại thay vì dùng context: fork. Bỏ context: fork thì nội dung skill được nạp vào chính hội thoại đang có các quyết định. Fork không gỡ tool của subagent, và allowed-tools chỉ tự duyệt tool chứ không cấp quyền đọc hội thoại. Không loại agent nào nhận lịch sử khi skill fork; Plan còn khởi động không có CLAUDE.md. Skill chạy trong phiên chính (không fork) thấy hội thoại, nên \"không bao giờ\" là sai.",
+     "sc": "s4",
+     "ts": [
+      "3.2"
+     ]
+    },
+    {
+     "q": "A migration assistant built on the Agent SDK starts each session with permissionMode \"plan\" so users approve a plan before anything changes. Its implementer subagent's AgentDefinition sets permissionMode \"acceptEdits\". A tester worries the subagent could edit source files while the session is still planning. What happens?",
+     "options": [
+      "The subagent's acceptEdits setting wins, so it edits files during planning, and the plan only constrains what the main agent may do.",
+      "It still runs in plan mode, so its Edit and Write calls on source files go to the canUseTool callback instead of being auto-approved.",
+      "Subagents cannot be started at all while the main session is in plan mode, so the implementer is simply never invoked by the agent.",
+      "Plan mode applies only to Bash commands, so file edits by any agent are approved automatically for as long as that mode is active."
+     ],
+     "answer": 1,
+     "explain": "Docs SDK permissions (Subagent inheritance): nếu phiên chính ở plan mode, subagent có AgentDefinition đặt acceptEdits vẫn chạy ở plan mode; lời gọi Edit/Write lên file nguồn của nó vẫn đi tới canUseTool. Plan mode giữ cho cả subagent để việc giao việc không lách được bước duyệt plan. Vì vậy \"acceptEdits thắng\" sai. Subagent vẫn được gọi trong plan mode (ví dụ Plan subagent dùng để nghiên cứu). Plan mode chặn sửa source cho đến khi plan được duyệt, không phải chỉ áp dụng cho Bash.",
+     "sc": "s4",
+     "ts": [
+      "3.4",
+      "1.3"
+     ]
+    },
+    {
+     "q": "A CI step runs claude -p \"Review this diff\" --json-schema '<schema>' and pipes stdout into a script that reads the structured_output field. The script fails because stdout is plain text, not a JSON object with a structured_output field. What is missing from the command?",
+     "options": [
+      "--verbose, which must be present before Claude Code will validate the final output against the supplied JSON Schema",
+      "--bare, because Claude Code produces structured output only in runs that skip hooks, skills, and CLAUDE.md",
+      "--max-turns 1, because structured output is available only for single-turn runs that make no tool calls at all",
+      "--output-format json, which --json-schema needs so the result is a JSON object containing structured_output"
+     ],
+     "answer": 3,
+     "explain": "Docs headless: muốn output theo schema thì dùng --output-format json cùng --json-schema; response JSON chứa metadata và kết quả trong trường structured_output. Thiếu --output-format json thì định dạng output là mặc định (text), nên script không có object JSON để đọc. --verbose chỉ bật log chi tiết từng lượt (hay đi kèm stream-json), không phải điều kiện validate. --bare chỉ bỏ auto-discovery để tái lập, không liên quan structured output. --json-schema trả JSON hợp lệ sau khi agent làm xong workflow, tức là vẫn dùng tool được, không giới hạn một lượt.",
+     "sc": "s5",
+     "ts": [
+      "3.6"
+     ]
+    },
+    {
+     "q": "A CI job runs claude -p \"Run the unit tests and fix any failures\" with no permission-related flags. The log shows that Claude's attempts to run npm test were denied, and the job ends with a note that it could not run the tests. Which TWO changes would let Claude run the tests and apply fixes in this non-interactive job? (Choose TWO.)",
+     "options": [
+      "Add \"You have permission to run npm test\" to the prompt text of the job",
+      "Add --allowedTools \"Bash(npm test *)\" \"Edit\" so those calls are pre-approved",
+      "Add --permission-mode plan so that Claude can work through the fix while it plans",
+      "Add --permission-mode auto so a classifier reviews each action instead of a person",
+      "Add --output-format stream-json so that approval prompts appear in the job log"
+     ],
+     "answer": [
+      1,
+      3
+     ],
+     "explain": "Docs permission-modes: từ v2.1.302, claude -p không đặt mode sẽ chạy ở Manual mode (giá trị cấu hình default); lời gọi cần duyệt bị từ chối trừ khi có allow rule, hook, --permission-prompt-tool. Docs đưa hai cách: thêm allow rule qua --allowedTools, hoặc chạy --permission-mode auto để classifier xét từng hành động (auto mode cần model được hỗ trợ và tổ chức không tắt nó). Câu trong prompt không phải permission. Plan mode chặn sửa source cho đến khi plan được duyệt, nên không áp dụng được bản sửa. Định dạng output không tạo ra lời nhắc duyệt nào; ở -p không có người để duyệt.",
+     "sc": "s5",
+     "ts": [
+      "3.6"
+     ]
+    },
+    {
+     "q": "A team's claude -p CI job relies on a PostToolUse hook in the repository's .claude/settings.json that runs the formatter after every edit. To stop runner-specific configuration from changing results, they add --bare. Now the formatter never runs. What should they do?",
+     "options": [
+      "Keep --bare and pass the hook in a --settings file, which bare mode loads in place of the project's own settings file.",
+      "Keep --bare and load the hook from a plugin with --plugin-dir, because bare mode still runs hooks from plugins given by flag.",
+      "Drop --bare for this job, since bare mode runs no hooks at all, and narrow what loads in another way, e.g. --setting-sources.",
+      "Keep --bare and add --append-system-prompt \"run the formatter after each edit\", which bare mode treats as a hook."
+     ],
+     "answer": 2,
+     "explain": "Docs headless (Start faster with bare mode): --bare bỏ auto-discovery hook, skill, plugin, MCP, CLAUDE.md…; và hook vẫn không chạy trong bare mode kể cả khi truyền qua --settings hay qua hooks/hooks.json của plugin nạp bằng cờ; docs ghi rõ đừng dùng bare mode cho run cần hook. Vì vậy phải bỏ --bare cho job này. Muốn giảm khác biệt giữa các runner thì dùng cách khác, ví dụ --setting-sources project để không đọc settings cấp user/local trên máy runner (lời khuyên; hook của project vẫn chạy). Hai phương án --settings và --plugin-dir trái với docs. Câu trong system prompt chỉ là lời dặn cho model, không phải hook do harness chạy.",
+     "sc": "s5",
+     "ts": [
+      "3.6"
+     ]
+    },
+    {
+     "q": "A CI job asks claude -p to generate unit tests for each module a pull request changes. Reviewers find that many generated tests repeat scenarios already covered by the existing test files, while edge cases remain untested. What is the BEST improvement?",
+     "options": [
+      "Ask for twice as many tests per module, so that the number of new cases outweighs the duplicated ones in the end.",
+      "Include each module's existing tests in the job's context and ask only for behaviors and edge cases those tests do not cover yet.",
+      "Delete the existing test files before the job starts, so that Claude cannot possibly repeat any scenario that they already cover.",
+      "Raise --max-turns for the job, so that Claude spends more turns on each module while it generates the tests."
+     ],
+     "answer": 1,
+     "explain": "Exam guide 3.6 nêu đúng kỹ thuật này: đưa test hiện có vào context để test sinh ra không trùng, và chỉ định rõ phần cần bổ sung (hành vi, ca biên chưa được phủ). Tăng số lượng chỉ thêm nhiều test trùng hơn. Xóa test hiện có làm mất bảo vệ hồi quy và thật ra không loại được việc viết lại cùng kịch bản. Thêm lượt cho Claude không cho nó biết test nào đã có.",
+     "sc": "s5",
+     "ts": [
+      "3.6"
+     ]
+    },
+    {
+     "q": "A team's CI runs claude -p on the head branch of every pull request, including PRs from forks. A security review points out that a contributor could add a hook to the branch's .claude/settings.json, and a -p run shows no workspace trust dialog. The job itself needs nothing from the repository's settings files. Which TWO options keep such hooks from running? (Choose TWO.)",
+     "options": [
+      "Set disableAllHooks to true in the runner's ~/.claude/settings.json, which overrides whatever a branch adds",
+      "Rely on the workspace trust dialog, which a -p run shows before it runs hooks from an unfamiliar folder",
+      "Run with --bare, which reads no hooks, skills, subagents, plugins, or .mcp.json servers from the project",
+      "Run with --setting-sources user, so Claude Code reads neither the project's settings files nor its .mcp.json",
+      "Add --output-format json, which disables hooks because hooks cannot write to stdout in JSON mode"
+     ],
+     "answer": [
+      2,
+      3
+     ],
+     "explain": "Docs permissions (mục What runs before you trust a folder): claude -p và SDK không bao giờ hiện trust dialog, và hook trong settings file của repo vẫn được dùng. Trước khi chạy -p trên repo mình không viết, docs liệt kê các cách: --setting-sources user (không đọc settings file lẫn .mcp.json của project), --bare (không đọc hook, skill, subagent, plugin, server .mcp.json của project), hoặc truyền --settings '{\"disableAllHooks\": true}' cho lần chạy đó. Docs nói rõ đặt disableAllHooks chỉ trong user settings là không đủ, vì project settings ưu tiên hơn và có thể đặt lại thành false. Phương án dựa vào trust dialog trái docs. Định dạng output không tắt hook.",
+     "sc": "s5",
+     "ts": [
+      "3.6"
+     ]
+    },
+    {
+     "q": "A team uses the Claude Code GitHub Action to run a review skill that should post findings as inline pull-request comments. The skill's allowed-tools frontmatter names mcp__github_inline_comment__create_inline_comment, but no inline comments appear. According to the Action's documentation, what is needed?",
+     "options": [
+      "List that tool in --allowedTools inside claude_args; the Action starts the inline-comment MCP server only when it is named there.",
+      "Mention the tool in the repository's CLAUDE.md, which the Action reads to decide which MCP servers it should start for a run.",
+      "Set --output-format json in claude_args, because inline comments can be posted only from runs that return structured results.",
+      "Rename the skill to code-review, which is the only skill name that the Action allows to post inline comments on a pull request."
+     ],
+     "answer": 0,
+     "explain": "Docs GitHub Actions (mục Run a skill) ghi rõ: giữ dòng claude_args có --allowedTools \"mcp__github_inline_comment__create_inline_comment\" dù frontmatter allowed-tools của skill đã nêu cùng tool, vì Action chỉ khởi động MCP server đăng bình luận inline khi --allowedTools trong claude_args nêu tên nó. CLAUDE.md là chỉ dẫn cho model, không điều khiển Action khởi động server nào. Định dạng output không quyết định việc đăng bình luận. Không có giới hạn tên skill như vậy.",
+     "sc": "s5",
+     "ts": [
+      "3.6",
+      "2.4"
+     ]
+    },
+    {
+     "q": "A CI job generates tests for new code, but about a third of the generated tests fail to compile or fail on their first run, so developers fix them by hand. The job's prompt only says \"write thorough tests.\" Which change BEST improves the result?",
+     "options": [
+      "Pre-approve the test command with --allowedTools and have Claude run it, iterating until the new tests compile and pass.",
+      "Add \"make sure the tests compile\" to the prompt, while still not allowing Claude to run any commands during the job.",
+      "Request fewer tests per module, since a smaller number of generated tests is less likely to contain mistakes.",
+      "Generate the tests in plan mode, so that Claude writes a detailed test plan that a developer later turns into working test code by hand."
+     ],
+     "answer": 0,
+     "explain": "Best practices: Claude dừng khi việc trông có vẻ xong; cho nó một phép kiểm trả về đạt/không đạt (test, build) thì nó tự chạy, đọc lỗi, sửa và chạy lại, và nên đòi bằng chứng là output lệnh đã chạy. Trong -p, lệnh test phải được duyệt trước (ví dụ --allowedTools). Dặn \"đảm bảo compile\" mà không cho chạy lệnh thì Claude không có cách kiểm. Giảm số test không sửa nguyên nhân. Plan mode chỉ tạo kế hoạch, không tạo test chạy được, và đẩy việc lại cho developer.",
+     "sc": "s5",
+     "ts": [
+      "3.5",
+      "3.6"
+     ]
     }
+   ],
+   "summary": [
+    "Quy ước cả team đặt trong ./CLAUDE.md hoặc ./.claude/CLAUDE.md (hoặc .claude/rules/) và commit; ~/.claude/CLAUDE.md chỉ có trên máy bạn, CLAUDE.local.md là ghi chú cá nhân cho project hiện tại.",
+    "CLAUDE.md ở thư mục hiện tại và thư mục cha nạp lúc khởi động; CLAUDE.md ở thư mục con chỉ nạp khi Claude chạm file trong thư mục đó. @path import tính từ file chứa nó, tối đa bốn tầng, không giảm chi phí context.",
+    "Quy ước rải khắp repo (vd. **/*.test.ts) dùng file .claude/rules/ có frontmatter paths: chỉ nạp khi làm việc với file khớp. Mỗi CLAUDE.md nên dưới 200 dòng; chỉ dẫn mâu thuẫn làm Claude chọn tùy ý.",
+    "Custom command đã gộp vào skill: .claude/commands/x.md và .claude/skills/x/SKILL.md đều tạo /x. Skill project ở .claude/skills/ (commit), skill cá nhân ở ~/.claude/skills/.",
+    "Frontmatter skill: disable-model-invocation: true để chỉ người dùng gọi được, context: fork để chạy trong subagent, $ARGUMENTS nhận đối số. Skill chỉ nạp mô tả lúc đầu còn CLAUDE.md luôn nạp, nên quy trình ít dùng nên làm thành skill.",
+    "Plan mode (đọc và đề xuất, không sửa cho đến khi duyệt) dành cho thay đổi lớn, nhiều cách làm, codebase lạ; việc nhỏ, rõ ràng thì làm thẳng; khám phá tốn context thì giao subagent Explore.",
+    "Permission rule đánh giá deny, rồi ask, rồi allow; allow không khoét được ngoại lệ trong deny. Settings ưu tiên từ cao xuống: managed, --settings, .claude/settings.local.json, .claude/settings.json, ~/.claude/settings.json.",
+    "Trong CI: claude -p chạy không tương tác rồi thoát; --output-format json cùng --json-schema đưa kết quả vào structured_output (kiểm tra trường này tồn tại trước khi dùng); --bare để tái lập, truyền context tường minh bằng cờ.",
+    "Review trong CI bằng phiên độc lập với phiên viết code; truyền các phát hiện cũ vào để tránh bình luận trùng.",
+    "Tinh chỉnh dần: prompt cụ thể, vài cặp ví dụ input/output gồm ca biên, phép kiểm đạt/không đạt (test, Stop hook exit 2); yêu cầu mơ hồ thì để Claude phỏng vấn, ghi SPEC.md rồi xây trong phiên mới; sửa hai lần vẫn sai thì /clear."
    ]
   },
   {
@@ -2055,6 +3475,12 @@ window.CERT_DATA = {
        "t": "Best practices for Claude Code (prompt wording vs effort)",
        "u": "https://code.claude.com/docs/en/best-practices"
       }
+     ],
+     "ts": [
+      "4.1",
+      "4.2",
+      "4.3",
+      "4.4"
      ]
     },
     {
@@ -2074,6 +3500,10 @@ window.CERT_DATA = {
        "t": "Prompting best practices",
        "u": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices"
       }
+     ],
+     "ts": [
+      "4.1",
+      "4.2"
      ]
     },
     {
@@ -2097,6 +3527,10 @@ window.CERT_DATA = {
        "t": "Handle tool calls (untrusted content)",
        "u": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls"
       }
+     ],
+     "ts": [
+      "4.1",
+      "5.1"
      ]
     },
     {
@@ -2124,6 +3558,10 @@ window.CERT_DATA = {
        "t": "How the agent loop works (result subtypes)",
        "u": "https://code.claude.com/docs/en/agent-sdk/agent-loop"
       }
+     ],
+     "ts": [
+      "4.3",
+      "4.4"
      ]
     },
     {
@@ -2151,6 +3589,10 @@ window.CERT_DATA = {
        "t": "How we built our multi-agent research system",
        "u": "https://www.anthropic.com/engineering/multi-agent-research-system"
       }
+     ],
+     "ts": [
+      "4.5",
+      "4.6"
      ]
     },
     {
@@ -2182,6 +3624,10 @@ window.CERT_DATA = {
        "t": "Building effective agents (routing)",
        "u": "https://www.anthropic.com/engineering/building-effective-agents"
       }
+     ],
+     "ts": [
+      "4.3",
+      "4.4"
      ]
     },
     {
@@ -2217,6 +3663,11 @@ window.CERT_DATA = {
        "t": "Building effective agents (parallelization, evaluator-optimizer)",
        "u": "https://www.anthropic.com/engineering/building-effective-agents"
       }
+     ],
+     "ts": [
+      "4.1",
+      "4.6",
+      "4.4"
      ]
     }
    ],
@@ -2296,7 +3747,11 @@ window.CERT_DATA = {
       "Run the review twice and post only issues that appear in both runs."
      ],
      "answer": 0,
-     "explain": "Gốc rễ là 'quan trọng' chưa được định nghĩa. Tiêu chí tường minh (báo gì, bỏ gì, kèm ví dụ) giải quyết trực tiếp. B vẫn mơ hồ, và ngưỡng tự tin do model tự báo không được hiệu chuẩn. C không định nghĩa lại tiêu chí. D có thể giảm nhiễu ngẫu nhiên nhưng hai lần chạy vẫn cùng đồng ý báo lỗi style, vì vấn đề nằm ở tiêu chí."
+     "explain": "Gốc rễ là 'quan trọng' chưa được định nghĩa. Tiêu chí tường minh (báo gì, bỏ gì, kèm ví dụ) giải quyết trực tiếp. B vẫn mơ hồ, và ngưỡng tự tin do model tự báo không được hiệu chuẩn. C không định nghĩa lại tiêu chí. D có thể giảm nhiễu ngẫu nhiên nhưng hai lần chạy vẫn cùng đồng ý báo lỗi style, vì vấn đề nằm ở tiêu chí.",
+     "sc": "s5",
+     "ts": [
+      "4.1"
+     ]
     },
     {
      "q": "An invoice-extraction prompt returns \"N/A\", \"none\", or an empty string for missing purchase-order numbers, and occasionally invents a plausible-looking PO number when none exists. What is the BEST fix?",
@@ -2307,7 +3762,12 @@ window.CERT_DATA = {
       "Post-process the output to delete the strings \"N/A\" and \"none\"."
      ],
      "answer": 2,
-     "explain": "Cho phép null cùng ví dụ minh họa vừa chuẩn hóa cách biểu diễn 'không có', vừa bỏ áp lực phải điền giá trị (nguyên nhân bịa). A là lời dặn chung chung, ít tác dụng. B làm tệ hơn: bắt buộc chuỗi thì model phải điền một thứ gì đó. D chỉ vá biểu hiện, không xử lý được giá trị bịa đặt."
+     "explain": "Cho phép null cùng ví dụ minh họa vừa chuẩn hóa cách biểu diễn 'không có', vừa bỏ áp lực phải điền giá trị (nguyên nhân bịa). A là lời dặn chung chung, ít tác dụng. B làm tệ hơn: bắt buộc chuỗi thì model phải điền một thứ gì đó. D chỉ vá biểu hiện, không xử lý được giá trị bịa đặt.",
+     "sc": "s6",
+     "ts": [
+      "4.3",
+      "4.2"
+     ]
     },
     {
      "q": "A pipeline asks Claude to \"respond only with JSON matching this schema.\" About 3% of outputs fail JSON.parse because of extra prose or missing brackets. What is the MOST reliable fix?",
@@ -2318,7 +3778,11 @@ window.CERT_DATA = {
       "Set temperature to zero to make the output deterministic."
      ],
      "answer": 1,
-     "explain": "Structured outputs dùng constrained decoding, bảo đảm output parse được và đúng schema (trừ các ngoại lệ như refusal hay max_tokens). A giúp tăng tỉ lệ đúng nhưng không bảo đảm. C tốn chi phí và vẫn có thể thất bại. D không bảo đảm định dạng."
+     "explain": "Structured outputs dùng constrained decoding, bảo đảm output parse được và đúng schema (trừ các ngoại lệ như refusal hay max_tokens). A giúp tăng tỉ lệ đúng nhưng không bảo đảm. C tốn chi phí và vẫn có thể thất bại. D không bảo đảm định dạng.",
+     "sc": "s6",
+     "ts": [
+      "4.3"
+     ]
     },
     {
      "q": "After moving invoice extraction to structured outputs, every response parses and matches the schema. However, in some results the line-item amounts do not add up to the stated total printed on the invoice. What should the team do?",
@@ -2329,7 +3793,11 @@ window.CERT_DATA = {
       "Schema compliance doesn't guarantee correct values; check the sums in code and retry with the specific discrepancy."
      ],
      "answer": 3,
-     "explain": "Schema bảo đảm cú pháp, không bảo đảm ngữ nghĩa. Kiểm tra tổng tiền là việc của code, và retry kèm lỗi cụ thể giúp model sửa đúng chỗ. A đổ lỗi sai chỗ. B: structured outputs không hỗ trợ minimum/maximum (sẽ lỗi 400), và dù có cũng không kiểm tra được tổng. C không liên quan, vì response không bị cắt."
+     "explain": "Schema bảo đảm cú pháp, không bảo đảm ngữ nghĩa. Kiểm tra tổng tiền là việc của code, và retry kèm lỗi cụ thể giúp model sửa đúng chỗ. A đổ lỗi sai chỗ. B: structured outputs không hỗ trợ minimum/maximum (sẽ lỗi 400), và dù có cũng không kiểm tra được tổng. C không liên quan, vì response không bị cắt.",
+     "sc": "s6",
+     "ts": [
+      "4.4"
+     ]
     },
     {
      "q": "A team is evaluating the Message Batches API for two workloads: (1) a pre-merge check that developers wait on before merging, and (2) a nightly audit of 40,000 support transcripts. Which TWO statements are correct? (Choose TWO.)",
@@ -2344,7 +3812,10 @@ window.CERT_DATA = {
       0,
       2
      ],
-     "explain": "Audit hằng đêm không ai chờ nên tận dụng được giảm 50%. Kết quả batch có thể không theo thứ tự, nên phải khớp bằng custom_id. B sai: batch có thể mất tới 24 giờ, không hợp luồng chặn. D sai: mỗi request là một lời gọi Messages, tool phía bạn phải chạy giữa các request. E sai: phần lớn xong dưới 1 giờ nhưng không có cam kết, và giới hạn thật là 24 giờ."
+     "explain": "Audit hằng đêm không ai chờ nên tận dụng được giảm 50%. Kết quả batch có thể không theo thứ tự, nên phải khớp bằng custom_id. B sai: batch có thể mất tới 24 giờ, không hợp luồng chặn. D sai: mỗi request là một lời gọi Messages, tool phía bạn phải chạy giữa các request. E sai: phần lớn xong dưới 1 giờ nhưng không có cam kết, và giới hạn thật là 24 giờ.",
+     "ts": [
+      "4.5"
+     ]
     },
     {
      "q": "A legal-analysis prompt contains, in order: detailed instructions, a 150-page contract, and the question. Answers often miss relevant clauses deep in the contract. Which change is MOST likely to help first?",
@@ -2355,7 +3826,10 @@ window.CERT_DATA = {
       "First ask Claude to summarize the contract, then answer the question from the summary."
      ],
      "answer": 0,
-     "explain": "Docs khuyên đặt tài liệu dài lên đầu, câu hỏi ở cuối, bọc bằng thẻ XML, và yêu cầu trích dẫn trước để tập trung vào phần liên quan. B làm mất liên kết chéo giữa các điều khoản. C không giải quyết cách tổ chức. D đánh mất chi tiết, vì bản tóm tắt dễ bỏ chính các điều khoản nhỏ mà câu hỏi cần."
+     "explain": "Docs khuyên đặt tài liệu dài lên đầu, câu hỏi ở cuối, bọc bằng thẻ XML, và yêu cầu trích dẫn trước để tập trung vào phần liên quan. B làm mất liên kết chéo giữa các điều khoản. C không giải quyết cách tổ chức. D đánh mất chi tiết, vì bản tóm tắt dễ bỏ chính các điều khoản nhỏ mà câu hỏi cần.",
+     "ts": [
+      "5.1"
+     ]
     },
     {
      "q": "A single-pass review of a 30-file pull request produces detailed comments on the first few files, shallow comments on the rest, and misses an interface mismatch between two services. What is the BEST redesign?",
@@ -2366,7 +3840,11 @@ window.CERT_DATA = {
       "Run a focused pass per file plus a separate cross-file integration pass, using a reviewer independent of the author session."
      ],
      "answer": 3,
-     "explain": "Chia lượt theo trọng tâm chống 'loãng' sự chú ý. Lượt tích hợp riêng bắt lỗi xuyên file, và reviewer độc lập không mang lập luận của phiên viết code. A không sửa vấn đề phân bổ chú ý. B: phiên tác giả dễ bỏ qua lỗi của chính nó. C bỏ sót có chủ đích."
+     "explain": "Chia lượt theo trọng tâm chống 'loãng' sự chú ý. Lượt tích hợp riêng bắt lỗi xuyên file, và reviewer độc lập không mang lập luận của phiên viết code. A không sửa vấn đề phân bổ chú ý. B: phiên tác giả dễ bỏ qua lỗi của chính nó. C bỏ sót có chủ đích.",
+     "sc": "s5",
+     "ts": [
+      "4.6"
+     ]
     },
     {
      "q": "A ticket classifier assigns one of six categories. It is consistent on clear cases but flips between \"billing\" and \"account\" on borderline tickets, such as double charges after an email change. What is the MOST effective improvement?",
@@ -2377,7 +3855,10 @@ window.CERT_DATA = {
       "Add \"think very carefully before choosing a category\" to the prompt."
      ],
      "answer": 2,
-     "explain": "Ví dụ có giá trị nhất ở ranh giới mơ hồ. Kèm lý do giúp model khái quát quy tắc thay vì bắt chước bề mặt. A né vấn đề bằng điểm tự tin không được hiệu chuẩn. B tạo thêm nhiều ranh giới mơ hồ mới. D là lời dặn chung chung, không cung cấp quy tắc phân định."
+     "explain": "Ví dụ có giá trị nhất ở ranh giới mơ hồ. Kèm lý do giúp model khái quát quy tắc thay vì bắt chước bề mặt. A né vấn đề bằng điểm tự tin không được hiệu chuẩn. B tạo thêm nhiều ranh giới mơ hồ mới. D là lời dặn chung chung, không cung cấp quy tắc phân định.",
+     "ts": [
+      "4.2"
+     ]
     }
    ],
    "bank": [
@@ -2390,7 +3871,11 @@ window.CERT_DATA = {
       "Run the review three times and post only findings that appear in at least two of the three runs."
      ],
      "answer": 0,
-     "explain": "Đúng (lời khuyên thiết kế): false positive ở vài nhóm làm mất niềm tin vào cả những nhóm chính xác; tạm tắt các nhóm nhiễu để khôi phục niềm tin, đồng thời viết lại tiêu chí rõ ràng kèm ví dụ cho các nhóm đó trước khi bật lại. Sai: \"chỉ báo khi rất tự tin\" là chỉ dẫn mơ hồ, docs Prompting best practices khuyên nói cụ thể thứ mình muốn. Điểm tự tin tự khai báo không được hiệu chuẩn và đẩy việc lọc sang dev. Chạy ba lần tăng chi phí gấp ba và không sửa tiêu chí sai gốc."
+     "explain": "Đúng (lời khuyên thiết kế): false positive ở vài nhóm làm mất niềm tin vào cả những nhóm chính xác; tạm tắt các nhóm nhiễu để khôi phục niềm tin, đồng thời viết lại tiêu chí rõ ràng kèm ví dụ cho các nhóm đó trước khi bật lại. Sai: \"chỉ báo khi rất tự tin\" là chỉ dẫn mơ hồ, docs Prompting best practices khuyên nói cụ thể thứ mình muốn. Điểm tự tin tự khai báo không được hiệu chuẩn và đẩy việc lọc sang dev. Chạy ba lần tăng chi phí gấp ba và không sửa tiêu chí sai gốc.",
+     "sc": "s5",
+     "ts": [
+      "4.1"
+     ]
     },
     {
      "q": "A code-review prompt asks Claude to rate each issue as critical, high, medium, or low. The same missing-authorization bug is rated critical in one pull request and low in another. What is the MOST effective fix?",
@@ -2401,7 +3886,11 @@ window.CERT_DATA = {
       "Average the severities from several independent runs and post the rounded value as the final rating."
      ],
      "answer": 1,
-     "explain": "Đúng: docs Prompting best practices khuyên cụ thể về output và ràng buộc mong muốn, và ví dụ là một trong những cách đáng tin nhất để điều hướng output; định nghĩa từng mức bằng tiêu chí rõ và ví dụ code cụ thể giúp cùng một loại lỗi luôn vào cùng mức. Sai: bớt mức không loại bỏ sự mơ hồ, chỉ dời ranh giới. \"Nhất quán với lần trước trong cùng review\" không giúp giữa các PR khác nhau. Lấy trung bình nhiều lần tốn kém và vẫn dựa trên tiêu chí không xác định."
+     "explain": "Đúng: docs Prompting best practices khuyên cụ thể về output và ràng buộc mong muốn, và ví dụ là một trong những cách đáng tin nhất để điều hướng output; định nghĩa từng mức bằng tiêu chí rõ và ví dụ code cụ thể giúp cùng một loại lỗi luôn vào cùng mức. Sai: bớt mức không loại bỏ sự mơ hồ, chỉ dời ranh giới. \"Nhất quán với lần trước trong cùng review\" không giúp giữa các PR khác nhau. Lấy trung bình nhiều lần tốn kém và vẫn dựa trên tiêu chí không xác định.",
+     "sc": "s5",
+     "ts": [
+      "4.1"
+     ]
     },
     {
      "q": "A pipeline extracts citations from research papers. It works on papers with a bibliography section but returns empty or malformed results for papers that use inline footnote citations or numbered endnotes. What is the BEST prompt improvement?",
@@ -2412,7 +3901,11 @@ window.CERT_DATA = {
       "Increase max_tokens so that the model has more room to process papers with many citations."
      ],
      "answer": 2,
-     "explain": "Đúng: docs Prompting best practices: ví dụ (few-shot) là cách đáng tin để điều hướng định dạng và cấu trúc output; ví dụ nên sát use case thật và đa dạng, phủ edge case — ở đây là các kiểu trích dẫn khác nhau. Sai: một câu chỉ dẫn chung chung không chỉ cho mô hình cách xử lý từng định dạng; viết hoa không thay được ví dụ. Lọc bỏ tài liệu là né vấn đề và mất dữ liệu. max_tokens không phải nguyên nhân khi output rỗng hoặc sai định dạng."
+     "explain": "Đúng: docs Prompting best practices: ví dụ (few-shot) là cách đáng tin để điều hướng định dạng và cấu trúc output; ví dụ nên sát use case thật và đa dạng, phủ edge case — ở đây là các kiểu trích dẫn khác nhau. Sai: một câu chỉ dẫn chung chung không chỉ cho mô hình cách xử lý từng định dạng; viết hoa không thay được ví dụ. Lọc bỏ tài liệu là né vấn đề và mất dữ liệu. max_tokens không phải nguyên nhân khi output rỗng hoặc sai định dạng.",
+     "sc": "s6",
+     "ts": [
+      "4.2"
+     ]
     },
     {
      "q": "A support-reply generator uses four few-shot examples, all with the same three-paragraph layout and the same opening phrase. Outputs now copy that phrase and layout even when a one-line answer would fit. Which TWO changes BEST follow Anthropic's guidance on examples? (Choose TWO.)",
@@ -2427,7 +3920,10 @@ window.CERT_DATA = {
       0,
       2
      ],
-     "explain": "Đúng: docs Prompting best practices (Use examples effectively): ví dụ nên Relevant, Diverse (đủ khác nhau và phủ edge case để Claude không bắt chước mẫu ngoài ý muốn) và Structured (bọc trong <example>, nhiều ví dụ trong <examples>, để phân biệt với chỉ dẫn); docs gợi ý 3–5 ví dụ. Sai: bỏ hết ví dụ là bỏ một trong những công cụ đáng tin nhất để điều khiển định dạng. Thêm nhiều ví dụ giống hệt càng củng cố đúng thứ đang muốn tránh. Dời ví dụ ra sau tin nhắn khách không giải quyết việc thiếu đa dạng, và docs không khuyến nghị điều đó."
+     "explain": "Đúng: docs Prompting best practices (Use examples effectively): ví dụ nên Relevant, Diverse (đủ khác nhau và phủ edge case để Claude không bắt chước mẫu ngoài ý muốn) và Structured (bọc trong <example>, nhiều ví dụ trong <examples>, để phân biệt với chỉ dẫn); docs gợi ý 3–5 ví dụ. Sai: bỏ hết ví dụ là bỏ một trong những công cụ đáng tin nhất để điều khiển định dạng. Thêm nhiều ví dụ giống hệt càng củng cố đúng thứ đang muốn tránh. Dời ví dụ ra sau tin nhắn khách không giải quyết việc thiếu đa dạng, và docs không khuyến nghị điều đó.",
+     "ts": [
+      "4.2"
+     ]
     },
     {
      "q": "A product-description generator's system prompt says \"Do not use markdown. Do not use bullet points.\" Outputs still contain headers and lists. Which change does Anthropic's prompting guidance suggest?",
@@ -2438,7 +3934,10 @@ window.CERT_DATA = {
       "Say what to do instead, e.g. \"Write the description as smoothly flowing prose paragraphs.\""
      ],
      "answer": 3,
-     "explain": "Đúng: docs Prompting best practices (Control the format of responses): bảo Claude làm gì thay vì không làm gì, ví dụ thay \"Do not use markdown\" bằng yêu cầu viết văn xuôi trôi chảy; docs cũng nói phong cách prompt ảnh hưởng phong cách output. Sai: lặp lại và viết hoa không phải cách docs khuyên, và Claude Code Best practices ghi nhấn mạnh quá đà dễ phản tác dụng. Lọc bằng regex là chữa cháy, có thể làm hỏng nội dung. Viết prompt dày markdown còn đẩy output về phía markdown, ngược mục tiêu."
+     "explain": "Đúng: docs Prompting best practices (Control the format of responses): bảo Claude làm gì thay vì không làm gì, ví dụ thay \"Do not use markdown\" bằng yêu cầu viết văn xuôi trôi chảy; docs cũng nói phong cách prompt ảnh hưởng phong cách output. Sai: lặp lại và viết hoa không phải cách docs khuyên, và Claude Code Best practices ghi nhấn mạnh quá đà dễ phản tác dụng. Lọc bằng regex là chữa cháy, có thể làm hỏng nội dung. Viết prompt dày markdown còn đẩy output về phía markdown, ngược mục tiêu.",
+     "ts": [
+      "4.1"
+     ]
     },
     {
      "q": "A voice assistant's prompt says \"NEVER use ellipses.\" Claude follows it in most cases but still uses them in some unusual situations. Which revision BEST applies Anthropic's guidance on adding context?",
@@ -2449,7 +3948,10 @@ window.CERT_DATA = {
       "Lower the temperature so that rarely used punctuation such as ellipses is sampled less often."
      ],
      "answer": 0,
-     "explain": "Đúng: docs Prompting best practices (Add context to improve performance) dùng gần đúng ví dụ này: thay \"NEVER use ellipses\" bằng giải thích phản hồi sẽ được đọc bằng text-to-speech không phát âm được dấu ba chấm; Claude khái quát hóa từ lời giải thích, nên xử lý được cả trường hợp lạ. Sai: danh sách dấu được phép dài dòng và vẫn thiếu lý do. Nhấn mạnh hai lần không giúp mô hình hiểu mục đích. Giảm temperature không phải cơ chế tuân thủ quy tắc."
+     "explain": "Đúng: docs Prompting best practices (Add context to improve performance) dùng gần đúng ví dụ này: thay \"NEVER use ellipses\" bằng giải thích phản hồi sẽ được đọc bằng text-to-speech không phát âm được dấu ba chấm; Claude khái quát hóa từ lời giải thích, nên xử lý được cả trường hợp lạ. Sai: danh sách dấu được phép dài dòng và vẫn thiếu lý do. Nhấn mạnh hai lần không giúp mô hình hiểu mục đích. Giảm temperature không phải cơ chế tuân thủ quy tắc.",
+     "ts": [
+      "4.1"
+     ]
     },
     {
      "q": "A team migrates a JSON-extraction prompt to a newer Claude model. Their old technique, prefilling the assistant turn with \"{\" to force JSON, now returns a 400 error. What is the recommended replacement?",
@@ -2460,7 +3962,11 @@ window.CERT_DATA = {
       "Switch to streaming and discard every token before the first \"{\" that appears in the response."
      ],
      "answer": 1,
-     "explain": "Đúng: docs Prompting best practices (Migrating away from prefilled responses): từ các model Claude 4.6 (và Mythos Preview), prefill ở lượt assistant cuối không còn được hỗ trợ và trả lỗi 400; để ép định dạng như JSON, docs chỉ sang structured outputs, tính năng được thiết kế để ràng buộc response theo schema. Docs Structured outputs cũng ghi prefill không tương thích với JSON outputs. Sai: prefill dài hơn vẫn là prefill. Bảo mô hình \"tiếp tục\" từ system prompt không đảm bảo JSON hợp lệ. Bỏ token trước dấu { là chữa cháy, không đảm bảo phần sau hợp lệ."
+     "explain": "Đúng: docs Prompting best practices (Migrating away from prefilled responses): từ các model Claude 4.6 (và Mythos Preview), prefill ở lượt assistant cuối không còn được hỗ trợ và trả lỗi 400; để ép định dạng như JSON, docs chỉ sang structured outputs, tính năng được thiết kế để ràng buộc response theo schema. Docs Structured outputs cũng ghi prefill không tương thích với JSON outputs. Sai: prefill dài hơn vẫn là prefill. Bảo mô hình \"tiếp tục\" từ system prompt không đảm bảo JSON hợp lệ. Bỏ token trước dấu { là chữa cháy, không đảm bảo phần sau hợp lệ.",
+     "sc": "s6",
+     "ts": [
+      "4.3"
+     ]
     },
     {
      "q": "With structured outputs, a schema lists properties in the order id, notes, amount, currency, where only id and amount are required. A downstream parser that reads values by position breaks because the output order differs from the schema. Why, and what is the fix?",
@@ -2471,7 +3977,11 @@ window.CERT_DATA = {
       "The parser is fine; the model ignored the schema, so the request should be retried until the order matches."
      ],
      "answer": 2,
-     "explain": "Đúng: docs Structured outputs (Property ordering): thuộc tính giữ thứ tự trong schema, với ngoại lệ quan trọng là thuộc tính required xuất hiện trước, rồi đến optional; nếu thứ tự quan trọng thì đánh dấu mọi thuộc tính là required, hoặc xử lý việc sắp lại trong logic parse. Sai: không sắp theo bảng chữ cái. Thứ tự không ngẫu nhiên (strict: true là thuộc tính của tool definition, không phải cách sửa việc này). Mô hình không bỏ qua schema; đây là hành vi đã được mô tả trong docs."
+     "explain": "Đúng: docs Structured outputs (Property ordering): thuộc tính giữ thứ tự trong schema, với ngoại lệ quan trọng là thuộc tính required xuất hiện trước, rồi đến optional; nếu thứ tự quan trọng thì đánh dấu mọi thuộc tính là required, hoặc xử lý việc sắp lại trong logic parse. Sai: không sắp theo bảng chữ cái. Thứ tự không ngẫu nhiên (strict: true là thuộc tính của tool definition, không phải cách sửa việc này). Mô hình không bỏ qua schema; đây là hành vi đã được mô tả trong docs.",
+     "sc": "s6",
+     "ts": [
+      "4.3"
+     ]
     },
     {
      "q": "A ticket classifier uses structured outputs with an enum of labels such as \"account access\" and \"billing dispute.\" Occasionally the output contains \"Billing Dispute,\" and an exact string comparison downstream fails, even though the response completed normally. What is the correct handling?",
@@ -2482,7 +3992,10 @@ window.CERT_DATA = {
       "Compare enum values case-insensitively; capitalization of enum values is not guaranteed."
      ],
      "answer": 3,
-     "explain": "Đúng: docs Structured outputs (Invalid outputs, Enum value casing): structured outputs không đảm bảo chữ hoa/thường của giá trị enum và const; output có thể khác schema chỉ ở chữ hoa (thường chữ cái đầu của từ sau khoảng trắng), response vẫn hoàn tất bình thường, không lỗi, không stop_reason đặc biệt; docs khuyên so sánh không phân biệt hoa thường và tránh enum chỉ khác nhau ở chữ hoa. Sai: đây là giới hạn đã được docs ghi, không phải bug. minLength không được hỗ trợ trong structured outputs. Không có stop_reason refusal đi kèm."
+     "explain": "Đúng: docs Structured outputs (Invalid outputs, Enum value casing): structured outputs không đảm bảo chữ hoa/thường của giá trị enum và const; output có thể khác schema chỉ ở chữ hoa (thường chữ cái đầu của từ sau khoảng trắng), response vẫn hoàn tất bình thường, không lỗi, không stop_reason đặc biệt; docs khuyên so sánh không phân biệt hoa thường và tránh enum chỉ khác nhau ở chữ hoa. Sai: đây là giới hạn đã được docs ghi, không phải bug. minLength không được hỗ trợ trong structured outputs. Không có stop_reason refusal đi kèm.",
+     "ts": [
+      "4.3"
+     ]
     },
     {
      "q": "An extraction request with output_config.format fails with a 400 error. The schema includes \"minLength\": 3 on a name field and \"maximum\": 100 on a quantity field. What is the BEST way forward?",
@@ -2493,7 +4006,11 @@ window.CERT_DATA = {
       "Keep the constraints and add a retry loop, since the 400 error is caused by temporary grammar compilation load."
      ],
      "answer": 0,
-     "explain": "Đúng: docs Structured outputs (JSON Schema limitations): ràng buộc số (minimum, maximum, multipleOf) và chuỗi (minLength, maxLength) không được hỗ trợ; dùng tính năng không hỗ trợ sẽ nhận lỗi 400. SDK helper có thể biến đổi schema: bỏ ràng buộc không hỗ trợ, thêm chúng vào description, và kiểm tra lại response theo schema gốc trong code. Sai: anyOf không làm minLength/maximum được hỗ trợ. Strict tool use dùng chung giới hạn schema với JSON outputs (docs: \"Both JSON outputs and strict tool use share these limitations\"). Lỗi 400 do schema không hợp lệ, retry không giải quyết."
+     "explain": "Đúng: docs Structured outputs (JSON Schema limitations): ràng buộc số (minimum, maximum, multipleOf) và chuỗi (minLength, maxLength) không được hỗ trợ; dùng tính năng không hỗ trợ sẽ nhận lỗi 400. SDK helper có thể biến đổi schema: bỏ ràng buộc không hỗ trợ, thêm chúng vào description, và kiểm tra lại response theo schema gốc trong code. Sai: anyOf không làm minLength/maximum được hỗ trợ. Strict tool use dùng chung giới hạn schema với JSON outputs (docs: \"Both JSON outputs and strict tool use share these limitations\"). Lỗi 400 do schema không hợp lệ, retry không giải quyết.",
+     "sc": "s6",
+     "ts": [
+      "4.3"
+     ]
     },
     {
      "q": "A team uses structured outputs and is told that responses are \"guaranteed\" to match the schema. In which TWO situations can a response still fail to match the schema? (Choose TWO.)",
@@ -2508,7 +4025,10 @@ window.CERT_DATA = {
       2,
       4
      ],
-     "explain": "Đúng: docs Structured outputs (Invalid outputs) nêu hai trường hợp: refusal (HTTP 200, vẫn tính phí token, refusal được ưu tiên hơn ràng buộc schema) và max_tokens (output có thể không hoàn chỉnh; thử lại với max_tokens cao hơn). Sai: không có giới hạn \"năm thuộc tính required\" (giới hạn docs nêu là về số tool strict, tham số optional, tham số union). Docs ghi structured outputs hoạt động với Batch processing. Temperature không phải trường hợp được docs nêu là phá vỡ schema."
+     "explain": "Đúng: docs Structured outputs (Invalid outputs) nêu hai trường hợp: refusal (HTTP 200, vẫn tính phí token, refusal được ưu tiên hơn ràng buộc schema) và max_tokens (output có thể không hoàn chỉnh; thử lại với max_tokens cao hơn). Sai: không có giới hạn \"năm thuộc tính required\" (giới hạn docs nêu là về số tool strict, tham số optional, tham số union). Docs ghi structured outputs hoạt động với Batch processing. Temperature không phải trường hợp được docs nêu là phá vỡ schema.",
+     "ts": [
+      "4.3"
+     ]
     },
     {
      "q": "An agent must call internal tools with guaranteed-valid parameters and then return its final answer as JSON matching a fixed schema for downstream code. How should the request be configured?",
@@ -2519,7 +4039,10 @@ window.CERT_DATA = {
       "Choose one of the two, since JSON outputs and strict tool use cannot be enabled in the same request."
      ],
      "answer": 1,
-     "explain": "Đúng: docs Structured outputs (Using both features together): JSON outputs điều khiển định dạng câu trả lời của Claude, strict tool use kiểm tham số tool; kết hợp cả hai cho tool call đúng schema VÀ câu trả lời JSON có cấu trúc, hữu ích cho workflow agent. Sai: output_config.format không ràng buộc tool input (docs: grammar chỉ áp cho output trực tiếp của Claude, không cho tool use call). Chỉ dặn bằng prompt thì JSON cuối không được đảm bảo. Docs nói rõ hai tính năng dùng chung một request được."
+     "explain": "Đúng: docs Structured outputs (Using both features together): JSON outputs điều khiển định dạng câu trả lời của Claude, strict tool use kiểm tham số tool; kết hợp cả hai cho tool call đúng schema VÀ câu trả lời JSON có cấu trúc, hữu ích cho workflow agent. Sai: output_config.format không ràng buộc tool input (docs: grammar chỉ áp cho output trực tiếp của Claude, không cho tool use call). Chỉ dặn bằng prompt thì JSON cuối không được đảm bảo. Docs nói rõ hai tính năng dùng chung một request được.",
+     "ts": [
+      "4.3"
+     ]
     },
     {
      "q": "A document classifier's schema has category: enum [\"invoice\", \"receipt\", \"contract\"]. New document types (purchase orders, credit notes) keep getting forced into one of the three, corrupting downstream reports. What schema change is BEST?",
@@ -2530,7 +4053,11 @@ window.CERT_DATA = {
       "Make category optional so that the model can omit it for unfamiliar document types."
      ],
      "answer": 2,
-     "explain": "Đúng (lời khuyên thiết kế schema): enum đóng ép mô hình chọn sai khi gặp loại mới; thêm \"other\" kèm trường chi tiết dạng chuỗi giữ được tính có cấu trúc cho loại đã biết mà vẫn ghi nhận loại lạ để xem xét và mở rộng enum sau. Sai: bỏ enum hoàn toàn làm nhãn trôi nổi (cùng loại viết nhiều kiểu), downstream khó gộp. \"Chọn cái gần nhất\" chính là nguồn gốc dữ liệu sai. Để optional thì mất phân loại, và docs Structured outputs còn ghi thuộc tính optional bị đưa xuống cuối và tính vào giới hạn độ phức tạp."
+     "explain": "Đúng (lời khuyên thiết kế schema): enum đóng ép mô hình chọn sai khi gặp loại mới; thêm \"other\" kèm trường chi tiết dạng chuỗi giữ được tính có cấu trúc cho loại đã biết mà vẫn ghi nhận loại lạ để xem xét và mở rộng enum sau. Sai: bỏ enum hoàn toàn làm nhãn trôi nổi (cùng loại viết nhiều kiểu), downstream khó gộp. \"Chọn cái gần nhất\" chính là nguồn gốc dữ liệu sai. Để optional thì mất phân loại, và docs Structured outputs còn ghi thuộc tính optional bị đưa xuống cuối và tính vào giới hạn độ phức tạp.",
+     "sc": "s6",
+     "ts": [
+      "4.3"
+     ]
     },
     {
      "q": "An extraction pipeline validates each result and retries with the error message when a field fails validation. For some contracts the governing-law field is never filled even after three retries; investigation shows those contracts reference a separate master agreement that the pipeline does not include. What should the pipeline do?",
@@ -2541,7 +4068,11 @@ window.CERT_DATA = {
       "Stop retrying for that field, record it as null or missing-source, and route the document for review if needed."
      ],
      "answer": 3,
-     "explain": "Đúng (lời khuyên thiết kế): retry kèm thông báo lỗi giúp khi lỗi là định dạng hay cấu trúc; nhưng khi thông tin không có trong tài liệu đầu vào, thử lại không thể tạo ra nó. Ghi nhận rõ là thiếu (null hoặc missing-source) và chuyển người xem là cách trung thực. Sai: tăng số lần thử chỉ tốn tiền hoặc dẫn đến bịa. Bắt buộc trường là đẩy mô hình bịa giá trị. Ví dụ điều khoản điển hình khuyến khích suy đoán thay vì trích xuất."
+     "explain": "Đúng (lời khuyên thiết kế): retry kèm thông báo lỗi giúp khi lỗi là định dạng hay cấu trúc; nhưng khi thông tin không có trong tài liệu đầu vào, thử lại không thể tạo ra nó. Ghi nhận rõ là thiếu (null hoặc missing-source) và chuyển người xem là cách trung thực. Sai: tăng số lần thử chỉ tốn tiền hoặc dẫn đến bịa. Bắt buộc trường là đẩy mô hình bịa giá trị. Ví dụ điều khoản điển hình khuyến khích suy đoán thay vì trích xuất.",
+     "sc": "s6",
+     "ts": [
+      "4.4"
+     ]
     },
     {
      "q": "Invoice extraction occasionally returns line items that do not sum to the invoice total, and downstream systems cannot tell whether the invoice itself is inconsistent or the extraction is wrong. Which schema design BEST supports automatic detection?",
@@ -2552,7 +4083,11 @@ window.CERT_DATA = {
       "Add a confidence field from 0 to 1 for the total and auto-approve anything above 0.9."
      ],
      "answer": 0,
-     "explain": "Đúng (lời khuyên thiết kế): lấy cả số in trên hóa đơn và tổng tính từ dòng hàng, kèm cờ mâu thuẫn, cho phép code phát hiện chênh lệch (exam guide CCAR-F mô tả đúng mẫu calculated_total, stated_total và cờ conflict_detected; code vẫn nên tự cộng lại để kiểm tra, xem l-4-5) và phân biệt hóa đơn tự mâu thuẫn với lỗi trích xuất; structured outputs đảm bảo đúng schema chứ không đảm bảo giá trị đúng. Sai: chỉ giữ một con số là giấu đi đúng tín hiệu cần để phát hiện lỗi. Điểm tự tin tự khai báo không được hiệu chuẩn, không thay được phép kiểm tra số học tất định."
+     "explain": "Đúng (lời khuyên thiết kế): lấy cả số in trên hóa đơn và tổng tính từ dòng hàng, kèm cờ mâu thuẫn, cho phép code phát hiện chênh lệch (exam guide CCAR-F mô tả đúng mẫu calculated_total, stated_total và cờ conflict_detected; code vẫn nên tự cộng lại để kiểm tra, xem l-4-5) và phân biệt hóa đơn tự mâu thuẫn với lỗi trích xuất; structured outputs đảm bảo đúng schema chứ không đảm bảo giá trị đúng. Sai: chỉ giữ một con số là giấu đi đúng tín hiệu cần để phát hiện lỗi. Điểm tự tin tự khai báo không được hiệu chuẩn, không thay được phép kiểm tra số học tất định.",
+     "sc": "s6",
+     "ts": [
+      "4.4"
+     ]
     },
     {
      "q": "A contract-analysis service must return results within 30 hours of a document arriving. The team wants the 50% cost saving of the Message Batches API and accumulates incoming documents before each submission. What is the longest gap they can safely leave between batch submissions?",
@@ -2563,7 +4098,11 @@ window.CERT_DATA = {
       "It doesn't matter, because batch requests are processed in the order submitted and finish within minutes."
      ],
      "answer": 1,
-     "explain": "Đúng: docs Batch processing ghi phần lớn batch xong trong dưới 1 giờ nhưng kết quả có thể chỉ có khi mọi request xong hoặc sau 24 giờ, và batch hết hạn nếu chưa xong trong 24 giờ. Tài liệu đến ngay sau một lần nộp phải chờ tới lần nộp kế (khoảng cách N giờ) cộng tối đa 24 giờ xử lý: N + 24 ≤ 30 nên N ≤ 6. Sai: \"phần lớn dưới 1 giờ\" không phải đảm bảo, phải tính trường hợp xấu nhất. 29 ngày là thời gian giữ kết quả, không phải thời gian xử lý. Docs không đảm bảo thứ tự hay thời gian vài phút."
+     "explain": "Đúng: docs Batch processing ghi phần lớn batch xong trong dưới 1 giờ nhưng kết quả có thể chỉ có khi mọi request xong hoặc sau 24 giờ, và batch hết hạn nếu chưa xong trong 24 giờ. Tài liệu đến ngay sau một lần nộp phải chờ tới lần nộp kế (khoảng cách N giờ) cộng tối đa 24 giờ xử lý: N + 24 ≤ 30 nên N ≤ 6. Sai: \"phần lớn dưới 1 giờ\" không phải đảm bảo, phải tính trường hợp xấu nhất. 29 ngày là thời gian giữ kết quả, không phải thời gian xử lý. Docs không đảm bảo thứ tự hay thời gian vài phút.",
+     "sc": "s6",
+     "ts": [
+      "4.5"
+     ]
     },
     {
      "q": "A nightly batch of 20,000 extraction requests ends with most results succeeded, but some errored (invalid requests) and some expired. What is the correct way to recover?",
@@ -2574,7 +4113,11 @@ window.CERT_DATA = {
       "Match the failed results to inputs by their position in the results file, which mirrors the submission order."
      ],
      "answer": 2,
-     "explain": "Đúng: docs Batch processing: mỗi request có custom_id duy nhất; kết quả có bốn loại succeeded, errored, canceled, expired; errored và expired không bị tính phí; lỗi của một request không ảnh hưởng request khác; kết quả có thể không theo thứ tự nộp nên luôn dùng custom_id để ghép. Sai: không cần nộp lại cả batch (và sẽ trả tiền lại cho phần đã thành công). Docs FAQ ghi batch đã nộp không sửa được; muốn đổi thì hủy và nộp batch mới. Ghép theo vị trí sai vì thứ tự không được đảm bảo."
+     "explain": "Đúng: docs Batch processing: mỗi request có custom_id duy nhất; kết quả có bốn loại succeeded, errored, canceled, expired; errored và expired không bị tính phí; lỗi của một request không ảnh hưởng request khác; kết quả có thể không theo thứ tự nộp nên luôn dùng custom_id để ghép. Sai: không cần nộp lại cả batch (và sẽ trả tiền lại cho phần đã thành công). Docs FAQ ghi batch đã nộp không sửa được; muốn đổi thì hủy và nộp batch mới. Ghép theo vị trí sai vì thứ tự không được đảm bảo.",
+     "sc": "s6",
+     "ts": [
+      "4.5"
+     ]
     },
     {
      "q": "Which TWO statements about Message Batches API results are correct? (Choose TWO.)",
@@ -2589,7 +4132,10 @@ window.CERT_DATA = {
       1,
       3
      ],
-     "explain": "Đúng: docs Batch processing có tip \"Batch results may not match input order\" và khuyên luôn dùng custom_id; bảng result types ghi errored, canceled và expired đều không bị tính phí. Sai: docs ghi lỗi của một request không ảnh hưởng xử lý các request khác (validation params còn diễn ra bất đồng bộ, lỗi trả về khi cả batch kết thúc). Kết quả chỉ có trong 29 ngày kể từ lúc tạo. Batch đã nộp không sửa được."
+     "explain": "Đúng: docs Batch processing có tip \"Batch results may not match input order\" và khuyên luôn dùng custom_id; bảng result types ghi errored, canceled và expired đều không bị tính phí. Sai: docs ghi lỗi của một request không ảnh hưởng xử lý các request khác (validation params còn diễn ra bất đồng bộ, lỗi trả về khi cả batch kết thúc). Kết quả chỉ có trong 29 ngày kể từ lúc tạo. Batch đã nộp không sửa được.",
+     "ts": [
+      "4.5"
+     ]
     },
     {
      "q": "A team builds a 50,000-request batch with a new request shape. Several hours later, when processing ends, a large share of results are errored because of an invalid parameter. How could they have caught this earlier?",
@@ -2600,7 +4146,10 @@ window.CERT_DATA = {
       "Send one request with the same shape to the Messages API first, because batch validation happens asynchronously."
      ],
      "answer": 3,
-     "explain": "Đúng: docs Batch processing: việc kiểm tra object params của từng request diễn ra bất đồng bộ, lỗi được trả về khi cả batch xử lý xong; docs khuyên kiểm tra hình dạng request bằng Messages API trước (\"dry run a single request shape\"). Sai: không có tham số validate_only. stream: true không được hỗ trợ trong batch và gây lỗi validation (kết quả batch trả về dưới dạng một file). Params của mỗi request batch chính là tham số chuẩn của Messages API."
+     "explain": "Đúng: docs Batch processing: việc kiểm tra object params của từng request diễn ra bất đồng bộ, lỗi được trả về khi cả batch xử lý xong; docs khuyên kiểm tra hình dạng request bằng Messages API trước (\"dry run a single request shape\"). Sai: không có tham số validate_only. stream: true không được hỗ trợ trong batch và gây lỗi validation (kết quả batch trả về dưới dạng một file). Params của mỗi request batch chính là tham số chuẩn của Messages API.",
+     "ts": [
+      "4.5"
+     ]
     },
     {
      "q": "A marketing team generates product descriptions and wants each draft checked against a brand-voice rubric and then improved, with the ability to log and inspect each stage. Which approach fits BEST?",
@@ -2611,7 +4160,11 @@ window.CERT_DATA = {
       "Fine-tune the prompt by adding \"follow the brand voice perfectly\" until the first draft passes review."
      ],
      "answer": 0,
-     "explain": "Đúng: docs Prompting best practices (Chain complex prompts): chaining vẫn hữu ích khi cần kiểm tra output trung gian hoặc ép cấu trúc pipeline; mẫu phổ biến nhất là self-correction: tạo bản nháp → Claude review theo tiêu chí → Claude chỉnh theo review, mỗi bước là một API call riêng để log, đánh giá hoặc rẽ nhánh. Sai: gộp một prompt mất khả năng kiểm tra từng bước. Chọn bản dài nhất không liên quan đến rubric. Thêm câu \"hoàn hảo\" là chỉ dẫn mơ hồ, không phải quy trình kiểm tra."
+     "explain": "Đúng: docs Prompting best practices (Chain complex prompts): chaining vẫn hữu ích khi cần kiểm tra output trung gian hoặc ép cấu trúc pipeline; mẫu phổ biến nhất là self-correction: tạo bản nháp → Claude review theo tiêu chí → Claude chỉnh theo review, mỗi bước là một API call riêng để log, đánh giá hoặc rẽ nhánh. Sai: gộp một prompt mất khả năng kiểm tra từng bước. Chọn bản dài nhất không liên quan đến rubric. Thêm câu \"hoàn hảo\" là chỉ dẫn mơ hồ, không phải quy trình kiểm tra.",
+     "ts": [
+      "1.6",
+      "4.6"
+     ]
     },
     {
      "q": "A classifier is asked to answer with one label from a fixed list, but it returns variants such as \"Billing\", \"billing issue\", and \"Billing - refund\", which break downstream routing. Which approach BEST guarantees a valid label?",
@@ -2622,7 +4175,10 @@ window.CERT_DATA = {
       "Lower the temperature to 0 so that Claude always produces exactly the same spelling of each label."
      ],
      "answer": 1,
-     "explain": "Đúng: docs Prompting best practices (migrating away from prefill) nêu với tác vụ phân loại, dùng tool có trường enum chứa nhãn hợp lệ hoặc dùng structured outputs; với structured outputs hoặc strict tool use, constrained decoding giữ output trong tập giá trị (chỉ lưu ý chữ hoa/thường của enum không được đảm bảo, nên so sánh không phân biệt hoa thường). Sai: liệt kê nhãn trong prompt giúp nhưng không đảm bảo. Fuzzy matching có thể ánh xạ sai và che lỗi. Temperature 0 không giới hạn tập giá trị."
+     "explain": "Đúng: docs Prompting best practices (migrating away from prefill) nêu với tác vụ phân loại, dùng tool có trường enum chứa nhãn hợp lệ hoặc dùng structured outputs; với structured outputs hoặc strict tool use, constrained decoding giữ output trong tập giá trị (chỉ lưu ý chữ hoa/thường của enum không được đảm bảo, nên so sánh không phân biệt hoa thường). Sai: liệt kê nhãn trong prompt giúp nhưng không đảm bảo. Fuzzy matching có thể ánh xạ sai và che lỗi. Temperature 0 không giới hạn tập giá trị.",
+     "ts": [
+      "4.3"
+     ]
     },
     {
      "q": "A nightly batch sends 10,000 requests that each begin with the same 60,000-token policy manual followed by a different short case. Cache hits are rare. What does the documentation recommend to improve them?",
@@ -2633,7 +4189,10 @@ window.CERT_DATA = {
       "Enable streaming on each request, since cache hits are only recorded for streamed batch responses."
      ],
      "answer": 2,
-     "explain": "Đúng: docs Batch processing (Using prompt caching with Message Batches): batch hỗ trợ prompt caching và giảm giá cộng dồn; cache hit là best-effort vì request chạy bất đồng bộ và đồng thời; để tăng khả năng hit, đặt khối cache_control giống hệt nhau trong mọi request và chia sẻ càng nhiều nội dung càng tốt; docs cũng gợi ý dùng cache 1 giờ vì batch có thể chạy lâu hơn 5 phút. Sai: tách ra hàng nghìn batch không giúp cache và rất khó quản lý. Cache là theo prefix (tools → system → messages), nội dung thay đổi phải đặt sau phần tĩnh. stream: true không được hỗ trợ trong batch."
+     "explain": "Đúng: docs Batch processing (Using prompt caching with Message Batches): batch hỗ trợ prompt caching và giảm giá cộng dồn; cache hit là best-effort vì request chạy bất đồng bộ và đồng thời; để tăng khả năng hit, đặt khối cache_control giống hệt nhau trong mọi request và chia sẻ càng nhiều nội dung càng tốt; docs cũng gợi ý dùng cache 1 giờ vì batch có thể chạy lâu hơn 5 phút. Sai: tách ra hàng nghìn batch không giúp cache và rất khó quản lý. Cache là theo prefix (tools → system → messages), nội dung thay đổi phải đặt sau phần tĩnh. stream: true không được hỗ trợ trong batch.",
+     "ts": [
+      "4.5"
+     ]
     },
     {
      "q": "A pipeline submits extraction requests to the Message Batches API with stream: true copied over from its synchronous code path. What happens?",
@@ -2644,7 +4203,11 @@ window.CERT_DATA = {
       "The requests fail validation, because streaming is not supported inside batch requests."
      ],
      "answer": 3,
-     "explain": "Đúng: docs Batch processing (What can be batched) có bảng tham số không được hỗ trợ trong batch: stream: true (kết quả batch trả về dạng một file, không phải stream), speed, fallbacks, max_tokens: 0; đưa vào sẽ nhận lỗi validation. Sai: batch không giữ kết nối để stream. Docs nói rõ là lỗi chứ không bỏ qua lặng lẽ. Không có quy tắc đổi sang giá thường."
+     "explain": "Đúng: docs Batch processing (What can be batched) có bảng tham số không được hỗ trợ trong batch: stream: true (kết quả batch trả về dạng một file, không phải stream), speed, fallbacks, max_tokens: 0; đưa vào sẽ nhận lỗi validation. Sai: batch không giữ kết nối để stream. Docs nói rõ là lỗi chứ không bỏ qua lặng lẽ. Không có quy tắc đổi sang giá thường.",
+     "sc": "s6",
+     "ts": [
+      "4.5"
+     ]
     },
     {
      "q": "Developers dismiss many findings from an automated review bot, and the team wants to learn which kinds of findings get dismissed so it can improve the prompt systematically. Which change to the bot's output schema BEST supports this analysis?",
@@ -2655,8 +4218,351 @@ window.CERT_DATA = {
       "Add a self-reported confidence field and drop every finding under 0.5 before posting."
      ],
      "answer": 0,
-     "explain": "Đúng (lời khuyên thiết kế): ghi lại mẫu mã nào kích hoạt mỗi phát hiện (ví dụ \"nested ternary\", \"unchecked array index\") cho phép thống kê mẫu nào hay bị dismiss, từ đó sửa tiêu chí hoặc ví dụ trong prompt một cách có hệ thống. Sai: ghi chú tự do khó gộp và phân tích. Bỏ category làm mất thông tin phân tích. Lọc theo điểm tự tin tự khai báo che giấu dữ liệu, không giải thích vì sao bị dismiss."
+     "explain": "Đúng (lời khuyên thiết kế): ghi lại mẫu mã nào kích hoạt mỗi phát hiện (ví dụ \"nested ternary\", \"unchecked array index\") cho phép thống kê mẫu nào hay bị dismiss, từ đó sửa tiêu chí hoặc ví dụ trong prompt một cách có hệ thống. Sai: ghi chú tự do khó gộp và phân tích. Bỏ category làm mất thông tin phân tích. Lọc theo điểm tự tin tự khai báo che giấu dữ liệu, không giải thích vì sao bị dismiss.",
+     "sc": "s5",
+     "ts": [
+      "4.4"
+     ]
+    },
+    {
+     "q": "In a research system, the synthesis agent writes a draft report and is then asked, in the same conversation, to \"double-check every claim against its sources.\" It almost always confirms its own claims, yet reviewers keep finding statements that the cited excerpts do not support. What is the BEST change?",
+     "options": [
+      "Use a separate verifier instance that gets each claim with its cited excerpt, but not the drafting conversation, and marks it supported or not.",
+      "Ask the synthesis agent to double-check twice, with stronger wording telling it to be highly critical of its own draft.",
+      "Have the synthesis agent attach a confidence score to each claim, and drop every claim scored below 0.7 before publishing.",
+      "Lower the synthesis agent's temperature so that its first draft contains fewer unsupported statements to begin with."
+     ],
+     "answer": 0,
+     "explain": "A đúng: tự review trong cùng phiên yếu vì phiên đó vẫn mang lập luận đã dẫn tới claim. Một instance độc lập, chỉ thấy claim và đoạn trích được dẫn, đánh giá đúng câu hỏi \"đoạn này có ủng hộ claim không\" mà không bị neo vào bản nháp. B sai: lời lẽ mạnh hơn không gỡ được thiên lệch của chính phiên đã viết. C sai: confidence do model tự báo chưa được hiệu chuẩn, nên ngưỡng 0.7 không tương ứng với việc claim có được nguồn ủng hộ hay không. D sai: temperature không giải quyết chuyện claim vượt quá nội dung nguồn, và không thay được một bước kiểm tra.",
+     "sc": "s3",
+     "ts": [
+      "4.6"
+     ]
+    },
+    {
+     "q": "A research report has twelve sections, each written from a different subagent's findings. Reviewers find every section accurate on its own, but the executive summary says the market grew 12% while section 7 says 8%, and two sections define \"small business\" differently. Which review design BEST catches problems like these?",
+     "options": [
+      "Re-run the per-section reviews with a stricter rubric, since each section's accuracy check evidently missed these errors.",
+      "Have one reviewer read the entire report in a single pass and comment on anything that looks wrong to it.",
+      "Keep the per-section checks and add a separate cross-section pass that compares figures, definitions, and conclusions.",
+      "Assign all twelve sections to a single subagent next time, so that only one author writes the whole report."
+     ],
+     "answer": 2,
+     "explain": "C đúng: lỗi ở đây nằm giữa các phần (con số và định nghĩa không khớp nhau), nên cần một lượt tích hợp chuyên so sánh xuyên phần, bên cạnh lượt kiểm tra từng phần. Đây là mẫu review nhiều lượt: lượt cục bộ cộng lượt tích hợp. A sai: từng phần vốn đã đúng khi xét riêng; rubric chặt hơn cho từng phần vẫn không nhìn thấy mâu thuẫn giữa các phần. B sai: một lượt đọc toàn bộ dễ bị loãng sự chú ý trên báo cáo dài, và không có trọng tâm rõ vào tính nhất quán. D sai: bỏ lợi ích chia việc song song, và một tác giả viết báo cáo dài vẫn có thể tự mâu thuẫn.",
+     "sc": "s3",
+     "ts": [
+      "4.6"
+     ]
+    },
+    {
+     "q": "An invoice pipeline uses structured outputs, with invoice_date defined as {\"type\": \"string\", \"format\": \"date\"}. Every response matches the schema, yet audits find that some invoices from European suppliers printed as \"03/04/2026\" (3 April) are stored as 2026-03-04. What is the BEST fix?",
+     "options": [
+      "Add a regex pattern to invoice_date that requires the YYYY-MM-DD form, so that the model can no longer put the day and month in the wrong order.",
+      "Retry every extraction whose date fails schema validation, and include the validation error in the retry request.",
+      "Add prompt rules and examples for reading day-first vs month-first dates, and return null with a flag when still ambiguous.",
+      "Replace structured outputs with a strict tool that has the same schema, since strict tool use also checks that dates are plausible."
+     ],
+     "answer": 2,
+     "explain": "C đúng: schema chỉ bảo đảm cú pháp. Docs structured outputs liệt kê date trong các format chuỗi được hỗ trợ, và 2026-03-04 là một ngày hợp lệ về cú pháp. Chọn đúng thứ tự ngày/tháng là chuyện ngữ nghĩa, nên phải nằm trong quy tắc chuẩn hóa của prompt (dựa vào dấu hiệu như quốc gia nhà cung cấp, kèm ví dụ); khi vẫn mơ hồ thì để null kèm cờ cho người hoặc code xử lý thay vì đoán (lời khuyên thiết kế). A sai: output vốn đã đúng dạng YYYY-MM-DD; pattern không biết đâu là ngày, đâu là tháng. B sai: các ngày sai này vẫn hợp lệ với schema, nên không có lỗi validation nào để kích hoạt retry. D sai: docs ghi strict tool use dùng chung pipeline grammar và chung giới hạn JSON Schema với structured outputs; nó cũng chỉ ràng buộc cú pháp, không kiểm tra ngày có hợp lý hay không.",
+     "sc": "s6",
+     "ts": [
+      "4.3"
+     ]
+    },
+    {
+     "q": "An independent verifier instance reviews each extracted contract against its source document, but it returns one free-text critique per document, so the team cannot decide automatically which fields need a human. What change BEST supports routing?",
+     "options": [
+      "Ask the verifier for a single overall score per document and send every document scoring below 0.5 to human review.",
+      "Have the extraction instance read the verifier's critique and decide by itself which fields need to be changed.",
+      "Make the critique longer and more detailed, so that human reviewers can scan it for problems more easily.",
+      "Return a per-field verdict (confirmed, incorrect, not found in source) with the supporting excerpt, and route non-confirmed fields."
+     ],
+     "answer": 3,
+     "explain": "D đúng: kết quả review ở dạng có cấu trúc theo từng trường cho phép code định tuyến tất định: trường được xác nhận thì đi tiếp, trường sai hoặc không tìm thấy nguồn thì vào hàng đợi người, kèm đoạn trích để người duyệt kiểm tra nhanh. A sai: một điểm cho cả tài liệu che mất trường nào có vấn đề, và ngưỡng chưa được hiệu chuẩn. B sai: để chính phiên trích xuất tự phán xử lại đưa thiên lệch quay về, và vẫn không có quyết định nào máy đọc được. C sai: văn bản dài hơn vẫn là văn bản tự do, không định tuyến tự động được.",
+     "sc": "s6",
+     "ts": [
+      "4.6",
+      "5.5"
+     ]
+    },
+    {
+     "q": "An extraction service uses output_config.format with a JSON schema. Auditors now require every extracted value to point to the exact passage in the source contract. A developer enables citations on the document blocks in the same request, and the API returns a 400 error. Which approach do the docs suggest?",
+     "options": [
+      "Keep output_config.format and add a source_quote string to each field, which the API then checks against the document text before returning.",
+      "Keep citations, ask for one \"field: value\" line per field, and parse the lines and their citations into structured data in code.",
+      "Retry the request, because the 400 error comes from temporary load when citations and schemas are compiled together.",
+      "Enable citations on only one copy of the contract and send a second copy without citations alongside it in the request."
+     ],
+     "answer": 1,
+     "explain": "B đúng: docs structured outputs ghi citations không tương thích với output_config.format (API trả 400), và docs citations hướng dẫn xin mỗi trường một dòng dạng \"field: value\" rồi để code ghép các dòng cùng citations thành dữ liệu có cấu trúc. A sai: trường source_quote chỉ là text do model sinh ra; API không đối chiếu nó với tài liệu, nên không có bảo đảm như citations. C sai: đây là lỗi do kết hợp tính năng không được hỗ trợ, thử lại vẫn lỗi. D sai: docs ghi citations phải bật trên tất cả hoặc không tài liệu nào trong một request, và output_config.format vẫn xung đột.",
+     "sc": "s6",
+     "ts": [
+      "4.3",
+      "5.6"
+     ]
+    },
+    {
+     "q": "An extraction pipeline used tool_choice {\"type\": \"tool\", \"name\": \"record_invoice\"} to force a strict extraction tool. After switching to Claude Opus 5.5, every request returns a 400 error. Which change keeps schema-guaranteed output?",
+     "options": [
+      "Switch to tool_choice {\"type\": \"any\"}, which still forces a tool call without naming one particular tool.",
+      "Prefill the assistant turn with the start of a record_invoice call, so that the model simply continues the call.",
+      "Remove strict: true from the tool definition, since strict mode is what the newer model rejects together with forcing.",
+      "Use output_config.format with the invoice schema, or tool_choice auto with the strict tool."
+     ],
+     "answer": 3,
+     "explain": "D đúng: docs define-tools hiện ghi (tháng 11/2026) Claude Opus 5.5 trả lỗi 400 với tool_choice any và tool, và đề nghị dùng auto kèm strict tool use (input tool đúng schema) hoặc structured outputs khi cần response theo một khuôn JSON cố định. A sai: any cũng là ép tool, bị từ chối giống tool. B sai: docs prompting ghi bắt đầu từ các model Claude 4.6, prefill ở lượt assistant cuối không còn được hỗ trợ và trả lỗi 400. C sai: lỗi do ép tool chứ không do strict; bỏ strict chỉ làm mất bảo đảm schema. (Lưu ý: với auto, Claude có thể không gọi tool; nếu mọi response đều phải là JSON theo schema thì output_config.format là lựa chọn chắc hơn.)",
+     "sc": "s6",
+     "ts": [
+      "4.3"
+     ]
+    },
+    {
+     "q": "An extraction request includes five strict tools, one per document type, each with many optional and nullable fields. It fails with a 400 error about schema complexity. Which TWO changes follow the documented ways to reduce schema complexity? (Choose TWO.)",
+     "options": [
+      "Retry the same request with exponential backoff, since grammar compilation errors are usually transient.",
+      "Increase max_tokens so that the compiled grammar has more room to fit all five schemas.",
+      "Classify the document first, then send only the matching schema in a separate request.",
+      "Make parameters required where a sensible default exists, and have Claude fill in that default explicitly.",
+      "Move the five tools' descriptions into the system prompt so that each tool definition becomes shorter."
+     ],
+     "answer": [
+      2,
+      3
+     ],
+     "explain": "C và D đúng: docs structured outputs liệt kê các cách giảm độ phức tạp, trong đó có tách thành nhiều request (mỗi request chỉ mang schema cần dùng) và giảm tham số tùy chọn bằng cách để required khi có giá trị mặc định hợp lý. Giới hạn tính trên tổng mọi strict schema trong một request (docs hiện ghi 24 tham số tùy chọn, 16 tham số union). A sai: đây là giới hạn của schema, không phải lỗi tạm thời. B sai: max_tokens là giới hạn output, không liên quan tới kích thước grammar. E sai: các giới hạn độ phức tạp trong docs tính theo cấu trúc schema (số tool strict, tham số tùy chọn, tham số union, cấu trúc lồng nhau), không theo độ dài mô tả; dời mô tả đi không giảm các con số đó.",
+     "sc": "s6",
+     "ts": [
+      "4.3"
+     ]
+    },
+    {
+     "q": "When an extracted invoice fails validation (for example, a due_date earlier than its issue_date), the pipeline re-sends the original request with \"Your previous answer was invalid. Try again.\" appended. Most retries fail the same way. What should the retry request contain instead?",
+     "options": [
+      "The same request sent again at a higher temperature, so that the model is more likely to produce a different answer the second time.",
+      "Only the failed extraction and an instruction to fix it, leaving out the source document to save input tokens.",
+      "The source document, the failed extraction, and the specific validation errors, such as which fields conflict and why.",
+      "A stronger warning that invalid answers will be rejected, repeated at both the start and the end of the prompt."
+     ],
+     "answer": 2,
+     "explain": "C đúng: retry hiệu quả khi model biết chính xác sai ở đâu (trường nào, quy tắc nào) và vẫn có tài liệu gốc để đọc lại giá trị đúng. A sai: khác đi một cách ngẫu nhiên không đồng nghĩa với đúng hơn; model vẫn không biết lỗi là gì. B sai: thiếu tài liệu gốc thì model chỉ có thể đoán hoặc sửa cho khớp quy tắc, dễ bịa ngày. D sai: lời cảnh báo không cung cấp thông tin mới nào về lỗi.",
+     "sc": "s6",
+     "ts": [
+      "4.4"
+     ]
+    },
+    {
+     "q": "An extraction pipeline checks each result by asking a second Claude call, \"Is this extraction valid?\" It has approved results in which the VAT amount does not equal the rate times the net amount, and in which the currency code is not a real ISO 4217 code. What is the BEST improvement?",
+     "options": [
+      "Implement these rules as deterministic validators in code, and send failures back for retry with the specific rule that failed.",
+      "Ask the second call to work through its reasoning step by step and write all of it out in the response before it gives its final verdict.",
+      "Replace the second call with a larger model, which is better at arithmetic and at recognizing currency codes.",
+      "Add the rules to the extraction prompt in capital letters, and remove the validation step to save cost."
+     ],
+     "answer": 0,
+     "explain": "A đúng: phép nhân VAT và danh sách mã tiền tệ là quy tắc tất định, kiểm tra bằng code thì đúng 100% và rẻ; khi sai, gửi lại kèm quy tắc cụ thể để retry có thông tin. B sai: dù viết lập luận dài, đó vẫn là phán đoán xác suất của model cho một việc mà code kiểm tra chắc chắn được. C sai: model lớn hơn giảm lỗi nhưng không bảo đảm; vẫn là kiểm tra không tất định. D sai: lời dặn ở bước trích xuất không thay được bước kiểm tra, và bỏ validate thì lỗi đi thẳng xuống hệ thống sau.",
+     "sc": "s6",
+     "ts": [
+      "4.4"
+     ]
+    },
+    {
+     "q": "A pipeline maps payment terms on supplier invoices to an enum: NET_30, NET_60, EOM_30, DUE_ON_RECEIPT, OTHER. Clear phrases work, but wordings such as \"30 days end of month\", \"payable within thirty days of month-end\", and \"30 days EOM\" are mapped inconsistently. What is the MOST effective improvement?",
+     "options": [
+      "Remove the OTHER value so that the model must always choose one of the specific payment terms.",
+      "Add a few examples of these ambiguous wordings, each with the correct enum value and a one-line reason.",
+      "Lower the temperature to 0 so that each wording is always mapped to the same enum value.",
+      "Add the instruction \"Be consistent when mapping payment terms\" at the top of the system prompt and repeat it at the end."
+     ],
+     "answer": 1,
+     "explain": "B đúng: few-shot nhắm đúng các ca mơ hồ, kèm lý do ngắn, dạy model ranh giới giữa EOM_30 và NET_30 và giúp nó khái quát sang cách viết khác. A sai: bỏ lối thoát OTHER buộc các điều khoản lạ bị nhét vào nhãn sai. C sai: temperature thấp không dạy model ánh xạ đúng; các cách viết khác nhau vẫn có thể bị ánh xạ khác nhau. D sai: \"hãy nhất quán\" không nói nhất quán theo quy tắc nào.",
+     "sc": "s6",
+     "ts": [
+      "4.2"
+     ]
+    },
+    {
+     "q": "A team re-extracts 150,000 archived invoices with the Message Batches API. After each batch ends, a validator finds that about 4% of the succeeded results have specific errors, such as totals that do not match. What is the BEST way to handle these within the batch workflow?",
+     "options": [
+      "Resubmit the whole original batch with a stricter prompt, since a 4% error rate means the batch as a whole has failed.",
+      "Have each batch request run the team's validator between turns and retry inside that same request until the output passes.",
+      "Send the failed items to the synchronous Messages API one at a time, since the Batches API cannot accept retried requests.",
+      "Collect the failed items by custom_id and submit a follow-up batch that includes the document, failed output, and specific errors."
+     ],
+     "answer": 3,
+     "explain": "D đúng: kết quả batch được khớp bằng custom_id, nên dễ lọc ra các mục validate thất bại và gửi một batch tiếp theo chỉ cho chúng, kèm lỗi cụ thể để retry có thông tin, vẫn giữ mức giá batch. A sai: chạy lại toàn bộ lãng phí 96% kết quả đã tốt. B sai: docs ghi batch nhận được request nhiều lượt và có tool use, nhưng \"nhiều lượt\" nghĩa là lịch sử hội thoại gửi sẵn trong messages; mỗi request được xử lý độc lập và trả về một kết quả, nên validator chạy ở phía bạn không thể chen vào giữa các lượt bên trong request. C sai: Batches API nhận request mới bất kỳ lúc nào; gửi đồng bộ thì được nhưng mất mức giảm 50% mà không có lý do.",
+     "sc": "s6",
+     "ts": [
+      "4.5"
+     ]
+    },
+    {
+     "q": "A contract pipeline extracts \"material obligations\" for a legal team. The prompt says: \"Only include important obligations; be selective.\" Outputs mix trivial items (\"send notices to the address above\") with key ones, and the selection varies from run to run. What is the BEST improvement?",
+     "options": [
+      "Define which categories to include (payment, delivery, liability caps, termination rights) and which to skip, with an example of each.",
+      "Add \"be even more selective\" and tell the model to include only those obligations that it is very confident are material to the legal team.",
+      "Ask for at most five obligations per contract, so that only the most important ones make it into the output.",
+      "Run the extraction three times and keep only the obligations that appear in every one of the runs."
+     ],
+     "answer": 0,
+     "explain": "A đúng: \"quan trọng\" và \"chọn lọc\" là tiêu chí mơ hồ; liệt kê cụ thể loại cần lấy và loại bỏ qua, kèm ví dụ, cho model một ranh giới rõ nên kết quả vừa chính xác hơn vừa ổn định hơn. B sai: vẫn mơ hồ, và dựa vào độ tự tin model tự đánh giá. C sai: giới hạn số lượng tùy tiện có thể cắt mất nghĩa vụ quan trọng ở hợp đồng có nhiều nghĩa vụ. D sai: lấy giao của nhiều lần chạy giảm dao động nhưng không định nghĩa \"material\", và có thể loại bỏ nghĩa vụ quan trọng chỉ xuất hiện ở một số lần.",
+     "sc": "s6",
+     "ts": [
+      "4.1"
+     ]
+    },
+    {
+     "q": "A CI pipeline has Claude Code implement a small feature on a branch, then sends the same session \"Now review your changes for bugs\" and posts that review on the PR. The reviews rarely find the problems that human reviewers later catch. What is the BEST change?",
+     "options": [
+      "Ask the same session to review its changes three times in a row, and post only the issues that appear in all three reviews.",
+      "Add \"be extremely critical of your own work\" to the review prompt that the implementing session receives after coding.",
+      "Run the review in a separate, fresh instance that sees the diff and the requirements but not the session that wrote the code.",
+      "Drop the review step, because a model can never find bugs in code that the same model has just finished generating."
+     ],
+     "answer": 2,
+     "explain": "Tự review trong cùng phiên yếu vì phiên đó mang theo lập luận đã tạo ra code. Best practices nói reviewer mới giúp ích vì nó chưa thấy lập luận của bạn; /code-review chạy trong subagent mới chưa từng thấy hội thoại, và một phiên thứ hai là reviewer độc lập dễ có nhất (exam guide 4.6: dùng instance độc lập). Lặp lại ba lần trong cùng phiên vẫn cùng một góc nhìn bị neo. Câu \"hãy thật khắt khe\" không xóa được ngữ cảnh tác giả. Bỏ review là kết luận sai: model khác phiên, không thấy lập luận cũ, vẫn bắt được lỗi.",
+     "sc": "s5",
+     "ts": [
+      "4.6"
+     ]
+    },
+    {
+     "q": "A CI review runs several reviewer instances in parallel on each pull request. Developers report many plausible-sounding findings that turn out to be wrong once someone checks the code. Which addition BEST reduces these false positives before comments are posted?",
+     "options": [
+      "Posting every finding immediately and letting developers dismiss the wrong ones, which teaches the reviewers to improve over time.",
+      "Adding more parallel reviewer instances and posting the union of all their findings, so that fewer real issues slip through.",
+      "Asking each reviewer to rate its own confidence and posting everything rated above 0.5, without checking how accurate those scores are.",
+      "A verification step where an independent instance checks each candidate finding against the code and drops what it cannot confirm."
+     ],
+     "answer": 3,
+     "explain": "Docs Code Review của Claude Code mô tả đúng kiến trúc này: nhiều agent tìm lỗi song song, rồi một bước xác minh đối chiếu từng phát hiện với code để loại false positive trước khi báo, sau đó gộp trùng và xếp mức độ. Đăng hết rồi để dev bác bỏ là đẩy chi phí sang người và làm dev mất tin vào bot; reviewer cũng không tự học từ việc bị bác. Thêm reviewer và lấy hợp các phát hiện làm tăng số báo nhầm. Confidence tự báo chưa hiệu chuẩn không phải bộ lọc đáng tin.",
+     "sc": "s5",
+     "ts": [
+      "4.6",
+      "4.1"
+     ]
+    },
+    {
+     "q": "A team sets up an independent Claude review instance in CI for pull requests that another Claude session wrote. Which TWO inputs should the reviewer receive? (Choose TWO.)",
+     "options": [
+      "The diff, together with enough surrounding code to judge each change in its context",
+      "The authoring session's full transcript, including its reasoning for each decision",
+      "A note that the author already tested everything carefully, so the review can be brief",
+      "The authoring session's own self-review, so the reviewer can confirm it instead of starting over",
+      "The spec or acceptance criteria that the change was supposed to satisfy"
+     ],
+     "answer": [
+      0,
+      4
+     ],
+     "explain": "Reviewer độc lập cần thứ để đánh giá: diff kèm code xung quanh để hiểu từng thay đổi, và spec/tiêu chí chấp nhận để kiểm tra yêu cầu đã được đáp ứng (best practices có mẫu \"review the diff against SPEC.md\"). Giá trị của reviewer độc lập là chưa thấy lập luận của tác giả; đưa transcript, lời trấn an \"đã test kỹ\" hay bản tự review của tác giả đều kéo reviewer neo theo kết luận sẵn có, làm mất chính lợi ích của việc review độc lập.",
+     "sc": "s5",
+     "ts": [
+      "4.6"
+     ]
+    },
+    {
+     "q": "A CI review uses one prompt that asks a single instance to check each pull request for security flaws, correctness bugs, performance problems, and missing tests. On large PRs, security issues are often missed while the other categories get most of the attention. Which redesign is BEST?",
+     "options": [
+      "Keep the single pass and move security to the top of the prompt, so that it gets attention before any of the other three categories.",
+      "Remove the performance and missing-test checks from the review, so that the single pass has fewer things it needs to examine.",
+      "Run separate focused passes, including one dedicated to security, in parallel, then merge and deduplicate findings before posting.",
+      "Review only files whose names contain auth or crypto, since security issues are concentrated in files with those names."
+     ],
+     "answer": 2,
+     "explain": "Một lượt ôm nhiều mối quan tâm trên PR lớn làm chú ý bị chia mỏng. Thiết kế nhiều lượt/nhiều instance tập trung (một lượt riêng cho bảo mật) chạy song song rồi gộp, khử trùng là cách exam guide 4.6 và docs SDK gợi ý (ví dụ chạy song song style-checker, security-scanner, test-coverage). Đổi thứ tự trong prompt không tăng chiều sâu cho từng loại. Bỏ bớt hạng mục là bỏ yêu cầu. Lọc theo tên file bỏ sót lỗi bảo mật nằm ở chỗ khác (SQL injection trong handler, lộ secret trong config).",
+     "sc": "s5",
+     "ts": [
+      "4.6"
+     ]
+    },
+    {
+     "q": "An automated CI reviewer posts at least two or three comments on every pull request, including one-line documentation fixes. On small PRs most of its comments are speculative, along the lines of \"this might cause issues if...\". Which prompt change BEST addresses this?",
+     "options": [
+      "Say that an empty findings list is a valid result, and require each finding to describe a concrete failure in the changed code.",
+      "Tell the reviewer to post exactly one comment on every pull request, choosing the most important issue that it can find.",
+      "Tell the reviewer to be conservative, and to report only the issues that seem important enough to be worth mentioning.",
+      "Raise the model's effort level, so that the reviewer thinks for longer before it writes each one of its speculative review comments."
+     ],
+     "answer": 0,
+     "explain": "Best practices cảnh báo: reviewer được yêu cầu tìm vấn đề thì luôn tìm ra \"cái gì đó\". Cần nói rõ không có phát hiện là kết quả hợp lệ và đặt tiêu chí cụ thể: mỗi phát hiện phải nêu kịch bản lỗi cụ thể trong code đã đổi (tool ReportFindings của Claude Code cũng yêu cầu một failure scenario cho mỗi phát hiện). Ép đúng một bình luận mỗi PR vẫn tạo bình luận khi không có gì. \"Be conservative\" là chỉ dẫn mơ hồ mà exam guide 4.1 nói không hiệu quả. Tăng effort không đổi việc prompt ngầm đòi phải có bình luận.",
+     "sc": "s5",
+     "ts": [
+      "4.1"
+     ]
+    },
+    {
+     "q": "A CI reviewer receives the full pull-request diff. Developers complain that it comments on package-lock.json churn and on files under src/generated/ that a code generator produces. What is the BEST fix?",
+     "options": [
+      "Tell the reviewer to use its own judgment about which files matter, without naming any specific paths or file types to skip.",
+      "Raise the severity threshold for every comment, so that comments on these particular files are less likely to clear it.",
+      "Ask developers to stop committing lock files and generated code, so that the reviewer never sees those files in a diff.",
+      "Filter those paths out of the diff before it reaches Claude, and state in the prompt which files are out of scope and why."
+     ],
+     "answer": 3,
+     "explain": "Tiêu chí tường minh (exam guide 4.1): nói rõ loại file nằm ngoài phạm vi và lý do (lock file, code sinh tự động không sửa tay), và với quy tắc chắc chắn như vậy thì lọc luôn bằng code trước khi gửi, vừa chính xác vừa đỡ token. \"Dùng phán đoán của mình\" là chỉ dẫn mơ hồ đang thất bại. Nâng ngưỡng mức độ ảnh hưởng mọi bình luận, có thể chặn cả phát hiện thật mà vẫn không loại đúng hai nhóm file. Bỏ commit lock file là thực hành xấu (mất build tái lập) để vá lỗi của bot.",
+     "sc": "s5",
+     "ts": [
+      "4.1"
+     ]
+    },
+    {
+     "q": "A CI reviewer's findings vary in shape: some name the file and line, some quote the code, some give only a vague description, and borderline style nits still appear. The team already lists explicit report and skip criteria in the prompt. What should they add to make the findings consistent?",
+     "options": [
+      "A longer list of adjectives describing a good finding, such as precise, actionable, concise, specific, and well-grounded.",
+      "One example finding, repeated several times throughout the prompt to emphasize the exact wording the reviewer should copy.",
+      "Two or three example findings in the required format, plus a borderline case marked as not to be reported, with the reason.",
+      "A rule that every finding must be at least 200 words long, so that it has room for the file, the line, and a code quote."
+     ],
+     "answer": 2,
+     "explain": "Few-shot (exam guide 4.2, docs prompting best practices): vài ví dụ liên quan, đa dạng cho thấy định dạng mong muốn rõ hơn mô tả, và ví dụ ở ca mơ hồ (kèm lý do không báo) giúp model khái quát ranh giới. Thêm tính từ vẫn là mô tả trừu tượng. Một ví dụ lặp lại nhiều lần khiến model chép máy móc thay vì khái quát. Ép tối thiểu 200 từ làm bình luận dài dòng mà không bảo đảm có file, dòng, trích code.",
+     "sc": "s5",
+     "ts": [
+      "4.2"
+     ]
+    },
+    {
+     "q": "A CI review job returns findings as JSON with file and line fields. Some findings point at line numbers outside the lines the pull request changed, so the comment-posting API rejects them. What should the pipeline do?",
+     "options": [
+      "Check each finding against the diff's changed line ranges in code; re-ask Claude about failures with the valid ranges and the error.",
+      "Post every out-of-range finding at line 1 of its file instead, so that no finding is ever lost because of a rejected position.",
+      "Lower the sampling temperature, since line numbers outside the diff are random noise that a lower temperature will remove.",
+      "Ask Claude in the prompt to double-check all of its line numbers carefully, and keep posting every result without validating it first."
+     ],
+     "answer": 0,
+     "explain": "Vòng validate rồi retry (exam guide 4.4): code kiểm tra từng phát hiện với các khoảng dòng thay đổi của diff; phát hiện không hợp lệ thì hỏi lại kèm chính phát hiện đó, khoảng hợp lệ và lỗi cụ thể để Claude sửa vị trí (hoặc chuyển vào phần tóm tắt nếu nó thật sự nói về dòng không đổi). Dồn về dòng 1 làm bình luận sai chỗ, gây nhiễu. Nhiệt độ không phải nguyên nhân; số dòng sai thường do model suy vị trí từ diff, không phải ngẫu nhiên. Chỉ dặn trong prompt mà không kiểm tra thì lỗi vẫn lọt tới API.",
+     "sc": "s5",
+     "ts": [
+      "4.4"
+     ]
+    },
+    {
+     "q": "A CI job runs claude -p --output-format json --json-schema with a findings schema in which doc_link is declared with \"format\": \"uri\". Occasionally doc_link holds a value that is not a valid URL, and the comment formatter crashes. What explains this, and what should the team do?",
+     "options": [
+      "The format keyword makes the schema invalid, so Claude Code silently ignores the whole schema and returns unvalidated output.",
+      "Claude Code treats format as an annotation and does not enforce it, so the formatter should validate doc_link before using it.",
+      "Structured output is validated only on the first turn, so values produced in later turns may freely ignore the schema.",
+      "The format keyword applies only to strings shorter than 100 characters, so long URLs skip the check entirely."
+     ],
+     "answer": 1,
+     "explain": "Docs headless và CLI reference ghi: Claude Code chấp nhận schema dùng từ khóa format (như \"format\": \"email\") nhưng coi nó là chú thích, không kiểm tra phía client. Vì vậy giá trị vẫn đúng kiểu string nhưng có thể không phải URL hợp lệ; code downstream phải tự validate. Schema có format không bị coi là không hợp lệ (schema không hợp lệ thì claude thoát với lỗi, không im lặng bỏ qua). Không có quy tắc \"chỉ validate ở lượt đầu\": kết quả được kiểm tra khi agent hoàn tất. Giới hạn 100 ký tự là bịa.",
+     "sc": "s5",
+     "ts": [
+      "4.3",
+      "3.6"
+     ]
     }
+   ],
+   "summary": [
+    "Thay lời dặn mơ hồ ('be conservative', 'chỉ báo cái quan trọng') bằng tiêu chí tường minh: báo gì, bỏ gì, mức độ, kèm ví dụ; giải thích lý do đằng sau chỉ dẫn để Claude khái quát được.",
+    "Few-shot: 3–5 ví dụ liên quan, đa dạng, bọc trong thẻ example; giá trị nhất ở ca mơ hồ, kèm lý do chọn nhãn. Với trích xuất, có ví dụ trường thiếu ra null và ví dụ cho từng định dạng tài liệu.",
+    "Tài liệu dài đặt ở đầu prompt (mỗi tài liệu trong thẻ document kèm source), câu hỏi và chỉ dẫn ở cuối; yêu cầu trích dẫn đoạn liên quan trước khi trả lời. Nói điều cần làm thay vì điều cấm.",
+    "Dặn 'chỉ trả JSON' trong prompt không bảo đảm gì; dùng structured outputs (output_config.format) hoặc tool có input_schema với strict: true. Docs hiện ghi prefill ở lượt assistant cuối trả lỗi 400 từ model 4.6.",
+    "Structured outputs bảo đảm parse được và đúng schema (trừ refusal, max_tokens, chữ hoa/thường của enum) nhưng không bảo đảm ngữ nghĩa; ràng buộc như minimum/maximum, minLength phải kiểm tra trong code.",
+    "Thiết kế schema: trường có thể thiếu thì nullable (vẫn required) để tránh bịa; enum có lối thoát 'other'/'unclear' kèm trường nguyên văn; trích cả stated_total lẫn từng dòng để code tự cộng và so.",
+    "Retry kèm tài liệu, output lỗi và lỗi cụ thể; retry vô ích khi dữ liệu không có trong tài liệu, khi đó trả null và gửi người xem.",
+    "Message Batches API: rẻ 50%, tối đa 24 giờ, kết quả không theo thứ tự nên khớp bằng custom_id, chỉ gửi lại request errored/expired. Hợp việc không ai chờ (audit đêm, backfill), không hợp kiểm tra chặn hay chat; vòng lặp agent chạy tool phía bạn không chạy trọn trong một request.",
+    "Review bằng instance độc lập; PR lớn chia lượt theo file cộng một lượt tích hợp xuyên file, thêm lượt xác minh trước khi đăng.",
+    "Bot review ồn: sửa tiêu chí trước, finding là JSON có rule_id/detected_pattern để đo dev bác bỏ theo quy tắc, tạm tắt quy tắc ồn; confidence tự báo chưa hiệu chuẩn không phải bộ lọc tốt."
    ]
   },
   {
@@ -2694,6 +4600,12 @@ window.CERT_DATA = {
        "t": "Compaction overview",
        "u": "https://platform.claude.com/docs/en/build-with-claude/compaction"
       }
+     ],
+     "ts": [
+      "5.1",
+      "5.3",
+      "5.5",
+      "5.6"
      ]
     },
     {
@@ -2717,6 +4629,9 @@ window.CERT_DATA = {
        "t": "Prompting best practices (long context)",
        "u": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices"
       }
+     ],
+     "ts": [
+      "5.1"
      ]
     },
     {
@@ -2744,6 +4659,10 @@ window.CERT_DATA = {
        "t": "CCAR-F exam guide (task 5.5: human review và hiệu chuẩn confidence)",
        "u": "https://anthropic-partners.skilljar.com/claude-certified-architect-foundations-certification"
       }
+     ],
+     "ts": [
+      "5.5",
+      "5.2"
      ]
     },
     {
@@ -2767,6 +4686,10 @@ window.CERT_DATA = {
        "t": "MCP specification: Tools (error handling)",
        "u": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
       }
+     ],
+     "ts": [
+      "5.3",
+      "5.6"
      ]
     },
     {
@@ -2802,6 +4725,10 @@ window.CERT_DATA = {
        "t": "Prompting best practices (long-horizon tasks)",
        "u": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices"
       }
+     ],
+     "ts": [
+      "5.4",
+      "2.5"
      ]
     },
     {
@@ -2833,6 +4760,9 @@ window.CERT_DATA = {
        "t": "How we built our multi-agent research system",
        "u": "https://www.anthropic.com/engineering/multi-agent-research-system"
       }
+     ],
+     "ts": [
+      "5.6"
      ]
     },
     {
@@ -2872,6 +4802,10 @@ window.CERT_DATA = {
        "t": "Effective context engineering for AI agents",
        "u": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"
       }
+     ],
+     "ts": [
+      "5.1",
+      "5.4"
      ]
     }
    ],
@@ -2951,7 +4885,11 @@ window.CERT_DATA = {
       "Disable summarization and always send the full transcript."
      ],
      "answer": 1,
-     "explain": "Tóm tắt dạng văn xuôi làm rơi giá trị cụ thể. Khối dữ kiện có cấu trúc do code duy trì và đưa vào mọi request giữ được chúng bất kể lịch sử bị tóm tắt thế nào. A chỉ trì hoãn vấn đề. C là lời dặn, không thay đổi được việc dữ liệu bị tóm tắt mất. D cuối cùng sẽ tràn context, và hội thoại rất dài cũng làm chất lượng giảm."
+     "explain": "Tóm tắt dạng văn xuôi làm rơi giá trị cụ thể. Khối dữ kiện có cấu trúc do code duy trì và đưa vào mọi request giữ được chúng bất kể lịch sử bị tóm tắt thế nào. A chỉ trì hoãn vấn đề. C là lời dặn, không thay đổi được việc dữ liệu bị tóm tắt mất. D cuối cùng sẽ tràn context, và hội thoại rất dài cũng làm chất lượng giảm.",
+     "sc": "s1",
+     "ts": [
+      "5.1"
+     ]
     },
     {
      "q": "A document-extraction system reports 97% overall field accuracy. The team proposes removing human review for all outputs the model marks as high confidence. What should the architect recommend FIRST?",
@@ -2962,7 +4900,11 @@ window.CERT_DATA = {
       "Break accuracy down by document type and by field before reducing review, then keep stratified random sampling of auto-approved outputs to catch new error patterns."
      ],
      "answer": 3,
-     "explain": "Con số tổng có thể che phân khúc yếu (một loại tài liệu hoặc một trường sai nhiều). Phải đo theo phân khúc, chỉ giảm review ở phân khúc đã được chứng minh, và giữ lấy mẫu để phát hiện thay đổi. A bỏ qua rủi ro phân khúc. B dựa vào confidence chưa hiệu chuẩn. C dựa vào từ ngữ, không đáng tin."
+     "explain": "Con số tổng có thể che phân khúc yếu (một loại tài liệu hoặc một trường sai nhiều). Phải đo theo phân khúc, chỉ giảm review ở phân khúc đã được chứng minh, và giữ lấy mẫu để phát hiện thay đổi. A bỏ qua rủi ro phân khúc. B dựa vào confidence chưa hiệu chuẩn. C dựa vào từ ngữ, không đáng tin.",
+     "sc": "s6",
+     "ts": [
+      "5.5"
+     ]
     },
     {
      "q": "In a research system, a web-search subagent times out on one of its five queries. It currently returns an empty result list marked as success, and the final report states that \"no research exists\" on that subtopic. How should failures be handled?",
@@ -2973,7 +4915,11 @@ window.CERT_DATA = {
       "Have the coordinator silently drop failed subagents' sections from the report."
      ],
      "answer": 0,
-     "explain": "Truy cập thất bại phải được báo là thất bại, kèm ngữ cảnh để coordinator quyết định (giao lại, dùng kết quả một phần, hoặc ghi chú lỗ hổng). B bỏ phí bốn truy vấn đã thành công. C có thể treo vô hạn. D vẫn khiến người đọc tưởng báo cáo đầy đủ."
+     "explain": "Truy cập thất bại phải được báo là thất bại, kèm ngữ cảnh để coordinator quyết định (giao lại, dùng kết quả một phần, hoặc ghi chú lỗ hổng). B bỏ phí bốn truy vấn đã thành công. C có thể treo vô hạn. D vẫn khiến người đọc tưởng báo cáo đầy đủ.",
+     "sc": "s3",
+     "ts": [
+      "5.3"
+     ]
     },
     {
      "q": "During synthesis, two credible sources disagree: an industry report from 2022 sizes the market at $4.1B, while a 2024 survey reports $6.3B. The synthesis agent currently picks one figure without comment. What is the BEST behavior?",
@@ -2984,7 +4930,11 @@ window.CERT_DATA = {
       "Keep searching until a third credible source agrees with one of the two figures, then report only the figure that has majority support."
      ],
      "answer": 2,
-     "explain": "Giữ cả hai kèm nguồn và ngày giúp người đọc thấy chênh lệch có thể do mốc thời gian hay phạm vi. Không được tự ý chọn một số. A tạo ra con số không nguồn nào nói. B làm mất thông tin, và có thể hai nghiên cứu đo khác phạm vi chứ không phải cập nhật của nhau. D là bỏ phiếu theo số đông, vẫn che mất chênh lệch."
+     "explain": "Giữ cả hai kèm nguồn và ngày giúp người đọc thấy chênh lệch có thể do mốc thời gian hay phạm vi. Không được tự ý chọn một số. A tạo ra con số không nguồn nào nói. B làm mất thông tin, và có thể hai nghiên cứu đo khác phạm vi chứ không phải cập nhật của nhau. D là bỏ phiếu theo số đông, vẫn che mất chênh lệch.",
+     "sc": "s3",
+     "ts": [
+      "5.6"
+     ]
     },
     {
      "q": "After a long Claude Code session exploring a legacy codebase, answers drift from specific references (exact classes and files found earlier) to generic statements like \"typically, systems like this...\". Which TWO actions are MOST effective? (Choose TWO.)",
@@ -2999,7 +4949,11 @@ window.CERT_DATA = {
       1,
       3
      ],
-     "explain": "Câu trả lời chung chung là dấu hiệu context xuống cấp. Giao khám phá cho subagent giữ output đọc file ồn ào ra khỏi phiên chính, nên context chính gọn và tập trung (docs hiện nhấn mạnh lợi ích này hơn là chuyện sợ hết context). Ghi phát hiện ra file giữ được kết quả qua compact hoặc phiên mới. A không đổi được tình trạng context. C nhồi thêm context, làm tệ hơn. E không liên quan (giới hạn output tool MCP) và còn làm context đầy hơn."
+     "explain": "Câu trả lời chung chung là dấu hiệu context xuống cấp. Giao khám phá cho subagent giữ output đọc file ồn ào ra khỏi phiên chính, nên context chính gọn và tập trung (docs hiện nhấn mạnh lợi ích này hơn là chuyện sợ hết context). Ghi phát hiện ra file giữ được kết quả qua compact hoặc phiên mới. A không đổi được tình trạng context. C nhồi thêm context, làm tệ hơn. E không liên quan (giới hạn output tool MCP) và còn làm context đầy hơn.",
+     "sc": "s4",
+     "ts": [
+      "5.4"
+     ]
     },
     {
      "q": "A six-hour multi-agent document-processing job crashed in hour four. Restarting from the beginning wastes the completed work and costs. What design change BEST addresses this?",
@@ -3010,7 +4964,10 @@ window.CERT_DATA = {
       "Use a larger model so the whole job finishes before failures occur."
      ],
      "answer": 2,
-     "explain": "Ghi trạng thái ra ngoài cho phép tiếp tục từ chỗ dừng thay vì chạy lại, đúng với cách tiếp cận mà bài viết về hệ nghiên cứu nhiều agent của Anthropic mô tả. A, B và D không giải quyết việc mất tiến độ khi process sập."
+     "explain": "Ghi trạng thái ra ngoài cho phép tiếp tục từ chỗ dừng thay vì chạy lại, đúng với cách tiếp cận mà bài viết về hệ nghiên cứu nhiều agent của Anthropic mô tả. A, B và D không giải quyết việc mất tiến độ khi process sập.",
+     "ts": [
+      "5.4"
+     ]
     },
     {
      "q": "A customer writes: \"I'm really frustrated, this is the third time I'm contacting you,\" and asks to update the shipping address on an order that has not shipped yet. The agent has a tool that can make this change. What should the agent do?",
@@ -3021,7 +4978,11 @@ window.CERT_DATA = {
       "Ignore the emotional content and reply only with the steps of the address-change procedure."
      ],
      "answer": 1,
-     "explain": "Cảm xúc tiêu cực đứng riêng không phải lý do chuyển người khi vấn đề nằm trong khả năng của agent. Ghi nhận, giải quyết, và để ngỏ lựa chọn gặp người. A chuyển không cần thiết, khách còn phải chờ thêm. C máy móc và gây khó chịu. D bỏ qua trải nghiệm khách hàng."
+     "explain": "Cảm xúc tiêu cực đứng riêng không phải lý do chuyển người khi vấn đề nằm trong khả năng của agent. Ghi nhận, giải quyết, và để ngỏ lựa chọn gặp người. A chuyển không cần thiết, khách còn phải chờ thêm. C máy móc và gây khó chịu. D bỏ qua trải nghiệm khách hàng.",
+     "sc": "s1",
+     "ts": [
+      "5.2"
+     ]
     },
     {
      "q": "Reviewers of a multi-agent research report cannot verify many of its claims: by the time findings pass through synthesis, the links between statements and their sources are gone. What is the BEST fix?",
@@ -3032,7 +4993,11 @@ window.CERT_DATA = {
       "After the report is written, run a new round of searches to find a supporting source for each sentence and attach the best match as its citation."
      ],
      "answer": 0,
-     "explain": "Nguồn phải đi cùng claim từ lúc thu thập, qua mọi bước tổng hợp. Hệ của Anthropic còn có CitationAgent để gắn trích dẫn cụ thể. B dễ gán sai hoặc bịa nguồn. C không cho biết claim nào đến từ đâu. D là gán nguồn sau khi viết, dễ chọn nguồn 'trông có vẻ ủng hộ' mà không phải nguồn gốc thật."
+     "explain": "Nguồn phải đi cùng claim từ lúc thu thập, qua mọi bước tổng hợp. Hệ của Anthropic còn có CitationAgent để gắn trích dẫn cụ thể. B dễ gán sai hoặc bịa nguồn. C không cho biết claim nào đến từ đâu. D là gán nguồn sau khi viết, dễ chọn nguồn 'trông có vẻ ủng hộ' mà không phải nguồn gốc thật.",
+     "sc": "s3",
+     "ts": [
+      "5.6"
+     ]
     }
    ],
    "bank": [
@@ -3045,7 +5010,11 @@ window.CERT_DATA = {
       "Call lookup_order only once at the start of the conversation and never refresh the data afterward."
      ],
      "answer": 1,
-     "explain": "Đúng: docs Define tools (best practices) và bài \"Writing effective tools for agents\" khuyên tool chỉ trả thông tin tín hiệu cao, chỉ những trường Claude cần cho bước tiếp theo; response phình làm tốn context và khó trích điều quan trọng. Bài \"Effective context engineering\" gọi context là tài nguyên hữu hạn với \"attention budget\". Sai: context lớn hơn chỉ hoãn vấn đề, các trường nhiễu vẫn tranh sự chú ý. Dặn bỏ qua không làm token biến mất khỏi context. Không làm mới dữ liệu thì agent trả lời theo trạng thái cũ."
+     "explain": "Đúng: docs Define tools (best practices) và bài \"Writing effective tools for agents\" khuyên tool chỉ trả thông tin tín hiệu cao, chỉ những trường Claude cần cho bước tiếp theo; response phình làm tốn context và khó trích điều quan trọng. Bài \"Effective context engineering\" gọi context là tài nguyên hữu hạn với \"attention budget\". Sai: context lớn hơn chỉ hoãn vấn đề, các trường nhiễu vẫn tranh sự chú ý. Dặn bỏ qua không làm token biến mất khỏi context. Không làm mới dữ liệu thì agent trả lời theo trạng thái cũ.",
+     "sc": "s1",
+     "ts": [
+      "5.1"
+     ]
     },
     {
      "q": "A team adds prompt caching to an agent whose system prompt starts with \"Current time: <timestamp>\" followed by 30,000 tokens of static policy text, with cache_control on the last system block. Which TWO statements are correct? (Choose TWO.)",
@@ -3060,7 +5029,10 @@ window.CERT_DATA = {
       0,
       4
      ],
-     "explain": "Đúng: docs Prompt caching: cache tham chiếu cả prompt theo thứ tự tools → system → messages tới khối có cache_control; thay đổi ở một cấp làm mất cache cấp đó và mọi cấp sau; docs khuyên đặt nội dung tĩnh ở đầu và đặt cache_control ở khối cuối cùng còn giống nhau giữa các request (ví dụ timestamp thay đổi làm hash prefix khác ở mỗi request). Sai: TTL mặc định là 5 phút (có tùy chọn 1 giờ giá cao hơn), không phải 24 giờ. Prompt dưới ngưỡng tối thiểu chỉ không được cache, không báo lỗi. Đổi tin nhắn cuối không làm mất cache phần system đứng trước nó."
+     "explain": "Đúng: docs Prompt caching: cache tham chiếu cả prompt theo thứ tự tools → system → messages tới khối có cache_control; thay đổi ở một cấp làm mất cache cấp đó và mọi cấp sau; docs khuyên đặt nội dung tĩnh ở đầu và đặt cache_control ở khối cuối cùng còn giống nhau giữa các request (ví dụ timestamp thay đổi làm hash prefix khác ở mỗi request). Sai: TTL mặc định là 5 phút (có tùy chọn 1 giờ giá cao hơn), không phải 24 giờ. Prompt dưới ngưỡng tối thiểu chỉ không được cache, không báo lỗi. Đổi tin nhắn cuối không làm mất cache phần system đứng trước nó.",
+     "ts": [
+      "5.1"
+     ]
     },
     {
      "q": "An Agent SDK application passes its persistent rules (\"never promise delivery dates,\" \"always cite the order ID\") in the initial prompt of each long session. After automatic compaction, the agent sometimes breaks those rules. What does the SDK documentation recommend?",
@@ -3071,7 +5043,10 @@ window.CERT_DATA = {
       "Raise max_turns, since compaction only happens when a session approaches its turn limit."
      ],
      "answer": 2,
-     "explain": "Đúng: trang Agent loop (Automatic compaction): compaction thay tin nhắn cũ bằng bản tóm tắt nên chỉ dẫn cụ thể ở đầu hội thoại có thể không được giữ; quy tắc bền vững nên nằm trong CLAUDE.md (nạp qua settingSources) thay vì prompt ban đầu, vì nội dung CLAUDE.md được đưa lại ở mỗi request. Sai: tắt compaction không phải khuyến nghị và có thể làm cạn context. Chèn quy tắc vào mọi tool result làm nhiễu và tốn token. Compaction kích hoạt khi context gần giới hạn, không phải theo số turn."
+     "explain": "Đúng: trang Agent loop (Automatic compaction): compaction thay tin nhắn cũ bằng bản tóm tắt nên chỉ dẫn cụ thể ở đầu hội thoại có thể không được giữ; quy tắc bền vững nên nằm trong CLAUDE.md (nạp qua settingSources) thay vì prompt ban đầu, vì nội dung CLAUDE.md được đưa lại ở mỗi request. Sai: tắt compaction không phải khuyến nghị và có thể làm cạn context. Chèn quy tắc vào mọi tool result làm nhiễu và tốn token. Compaction kích hoạt khi context gần giới hạn, không phải theo số turn.",
+     "ts": [
+      "5.1"
+     ]
     },
     {
      "q": "An autonomous coding agent works on a large feature across many context windows. Each time it starts a fresh window, it repeats setup work and loses track of which tests were already fixed. Which practice from Anthropic's prompting guide BEST addresses this?",
@@ -3082,7 +5057,10 @@ window.CERT_DATA = {
       "Keep state outside the context: a structured tests file, free-form progress notes, and git history to read on start."
      ],
      "answer": 3,
-     "explain": "Đúng: docs Prompting best practices (Workflows across multiple context windows, State management): dùng định dạng có cấu trúc (ví dụ tests.json) cho dữ liệu trạng thái, ghi chú tiến độ tự do (progress.txt), dùng git để theo dõi trạng thái và checkpoint; có thể bắt đầu cửa sổ mới và bảo Claude đọc progress.txt, tests.json, git log, vì model mới rất giỏi khám phá trạng thái từ filesystem. Sai: dán cả transcript cũ làm đầy cửa sổ mới ngay từ đầu. \"Làm nhanh hơn\" không khả thi với việc dài. Xóa test đúng là điều docs cảnh báo (\"không chấp nhận được việc xóa hoặc sửa test\")."
+     "explain": "Đúng: docs Prompting best practices (Workflows across multiple context windows, State management): dùng định dạng có cấu trúc (ví dụ tests.json) cho dữ liệu trạng thái, ghi chú tiến độ tự do (progress.txt), dùng git để theo dõi trạng thái và checkpoint; có thể bắt đầu cửa sổ mới và bảo Claude đọc progress.txt, tests.json, git log, vì model mới rất giỏi khám phá trạng thái từ filesystem. Sai: dán cả transcript cũ làm đầy cửa sổ mới ngay từ đầu. \"Làm nhanh hơn\" không khả thi với việc dài. Xóa test đúng là điều docs cảnh báo (\"không chấp nhận được việc xóa hoặc sửa test\").",
+     "ts": [
+      "5.4"
+     ]
     },
     {
      "q": "A research agent's conversation is dominated by raw search results and page contents from dozens of earlier tool calls that it has already summarized in its notes. Quality drops as the context grows. According to Anthropic's context-engineering guidance, what is one of the safest, lightest-touch remedies?",
@@ -3093,7 +5071,10 @@ window.CERT_DATA = {
       "Move the raw results into the system prompt so that they are treated as more authoritative."
      ],
      "answer": 0,
-     "explain": "Đúng: bài \"Effective context engineering for AI agents\" nêu tool call và kết quả nằm sâu trong lịch sử thường không cần xem lại nguyên văn; xóa tool result (tool result clearing) là một trong những dạng compaction an toàn và nhẹ nhất, và đã có trên Claude Developer Platform (context editing). Sai: chạy lại tìm kiếm còn thêm token. Trích lại mọi kết quả nhân đôi lượng nội dung. Đưa nội dung thô vào system prompt vừa không giảm token vừa trao quyền cao cho nội dung không đáng tin."
+     "explain": "Đúng: bài \"Effective context engineering for AI agents\" nêu tool call và kết quả nằm sâu trong lịch sử thường không cần xem lại nguyên văn; xóa tool result (tool result clearing) là một trong những dạng compaction an toàn và nhẹ nhất, và đã có trên Claude Developer Platform (context editing). Sai: chạy lại tìm kiếm còn thêm token. Trích lại mọi kết quả nhân đôi lượng nội dung. Đưa nội dung thô vào system prompt vừa không giảm token vừa trao quyền cao cho nội dung không đáng tin.",
+     "ts": [
+      "5.1"
+     ]
     },
     {
      "q": "A customer gives only the name \"Maria Garcia\" when asking about an order, and get_customer returns four accounts with that name. What should the agent do?",
@@ -3104,7 +5085,11 @@ window.CERT_DATA = {
       "Escalate immediately to a human, because ambiguous identity always requires manual handling."
      ],
      "answer": 1,
-     "explain": "Đúng (lời khuyên thiết kế): khi tra cứu trả về nhiều kết quả khớp, agent nên hỏi thêm định danh để xác định đúng khách thay vì đoán theo heuristic; thao tác nhầm tài khoản là lỗi nghiêm trọng. Sai: chọn theo đơn gần nhất là đoán, có thể lộ hoặc sửa dữ liệu của người khác. Hiện dữ liệu cả bốn tài khoản là lộ thông tin cá nhân của người khác. Escalate ngay là không cần thiết khi một câu hỏi đơn giản giải quyết được."
+     "explain": "Đúng (lời khuyên thiết kế): khi tra cứu trả về nhiều kết quả khớp, agent nên hỏi thêm định danh để xác định đúng khách thay vì đoán theo heuristic; thao tác nhầm tài khoản là lỗi nghiêm trọng. Sai: chọn theo đơn gần nhất là đoán, có thể lộ hoặc sửa dữ liệu của người khác. Hiện dữ liệu cả bốn tài khoản là lộ thông tin cá nhân của người khác. Escalate ngay là không cần thiết khi một câu hỏi đơn giản giải quyết được.",
+     "sc": "s1",
+     "ts": [
+      "5.2"
+     ]
     },
     {
      "q": "A claims-extraction system outputs a confidence score per field, and the team wants to send only low-confidence fields to human reviewers. Spot checks show many fields scored 0.95 are wrong. What should the team do before using the scores for routing?",
@@ -3115,7 +5100,11 @@ window.CERT_DATA = {
       "Average field-level scores into one document score so that individual errors cancel out."
      ],
      "answer": 2,
-     "explain": "Đúng (lời khuyên thiết kế): điểm tự tin do mô hình tự báo không tự động phản ánh xác suất đúng; cần đối chiếu với tập có nhãn (theo loại tài liệu, theo trường) để biết ngưỡng nào thực sự tương ứng độ chính xác mong muốn, rồi mới dùng để định tuyến. Sai: nâng ngưỡng mà không có dữ liệu hiệu chuẩn vẫn là đoán, có thể vẫn sai ở 0.99. Yêu cầu \"trung thực hơn\" không phải hiệu chuẩn. Lấy trung bình che mất lỗi ở từng trường."
+     "explain": "Đúng (lời khuyên thiết kế): điểm tự tin do mô hình tự báo không tự động phản ánh xác suất đúng; cần đối chiếu với tập có nhãn (theo loại tài liệu, theo trường) để biết ngưỡng nào thực sự tương ứng độ chính xác mong muốn, rồi mới dùng để định tuyến. Sai: nâng ngưỡng mà không có dữ liệu hiệu chuẩn vẫn là đoán, có thể vẫn sai ở 0.99. Yêu cầu \"trung thực hơn\" không phải hiệu chuẩn. Lấy trung bình che mất lỗi ở từng trường.",
+     "sc": "s6",
+     "ts": [
+      "5.5"
+     ]
     },
     {
      "q": "During a market report, one subagent could not access a paywalled industry database, so one of five requested regions has no primary data. The current report presents all five regions in the same confident tone. What is the BEST behavior?",
@@ -3126,7 +5115,12 @@ window.CERT_DATA = {
       "Mark the gap in the report: say which region lacks primary data and why, and qualify those conclusions."
      ],
      "answer": 3,
-     "explain": "Đúng (lời khuyên thiết kế, khớp tinh thần bài multi-agent research về đánh giá độ đầy đủ và độ chính xác trích dẫn): khi một phần thiếu nguồn, báo cáo nên ghi chú phạm vi phủ — phần nào được hỗ trợ đầy đủ, phần nào thiếu và vì sao — để người đọc biết mức tin cậy. Sai: lặng lẽ bỏ vùng đó khiến người đọc tưởng đã được nghiên cứu hoặc không quan trọng. Lấy trung bình là bịa số liệu. Hủy cả báo cáo bỏ phí bốn phần có dữ liệu tốt."
+     "explain": "Đúng (lời khuyên thiết kế, khớp tinh thần bài multi-agent research về đánh giá độ đầy đủ và độ chính xác trích dẫn): khi một phần thiếu nguồn, báo cáo nên ghi chú phạm vi phủ — phần nào được hỗ trợ đầy đủ, phần nào thiếu và vì sao — để người đọc biết mức tin cậy. Sai: lặng lẽ bỏ vùng đó khiến người đọc tưởng đã được nghiên cứu hoặc không quan trọng. Lấy trung bình là bịa số liệu. Hủy cả báo cáo bỏ phí bốn phần có dữ liệu tốt.",
+     "sc": "s3",
+     "ts": [
+      "5.3",
+      "5.6"
+     ]
     },
     {
      "q": "A team runs long-lived research agents that may be mid-task for many minutes. Each deployment of updated prompts and tool code breaks some agents that were in the middle of their work. What deployment approach does Anthropic describe for this situation?",
@@ -3137,7 +5131,11 @@ window.CERT_DATA = {
       "Hot-patch the prompts of running agents in place so that they pick up the new version mid-task."
      ],
      "answer": 0,
-     "explain": "Đúng: bài multi-agent research ghi hệ agent là mạng trạng thái chạy gần như liên tục, agent có thể ở bất kỳ bước nào khi deploy; vì không thể cập nhật mọi agent cùng lúc, họ dùng rainbow deployment, chuyển dần lưu lượng từ bản cũ sang bản mới trong khi cả hai cùng chạy. Sai: dừng mọi agent đang chạy chính là thứ gây lỗi và bắt khởi động lại tốn kém. Ghim mãi bản cũ nghĩa là không bao giờ cập nhật. Vá nóng giữa chừng tạo trạng thái không nhất quán, đúng nguyên nhân làm hỏng agent."
+     "explain": "Đúng: bài multi-agent research ghi hệ agent là mạng trạng thái chạy gần như liên tục, agent có thể ở bất kỳ bước nào khi deploy; vì không thể cập nhật mọi agent cùng lúc, họ dùng rainbow deployment, chuyển dần lưu lượng từ bản cũ sang bản mới trong khi cả hai cùng chạy. Sai: dừng mọi agent đang chạy chính là thứ gây lỗi và bắt khởi động lại tốn kém. Ghim mãi bản cũ nghĩa là không bao giờ cập nhật. Vá nóng giữa chừng tạo trạng thái không nhất quán, đúng nguyên nhân làm hỏng agent.",
+     "sc": "s3",
+     "ts": [
+      "5.4"
+     ]
     },
     {
      "q": "A team building a multi-agent research system struggles to evaluate and debug it: identical prompts produce different tool sequences, and users report that agents \"missed obvious information.\" Which TWO practices does Anthropic recommend? (Choose TWO.)",
@@ -3152,7 +5150,11 @@ window.CERT_DATA = {
       2,
       3
      ],
-     "explain": "Đúng: bài multi-agent research: agent ra quyết định động và không tất định giữa các lần chạy; thêm tracing đầy đủ trong production giúp chẩn đoán nguyên nhân (truy vấn tồi, nguồn kém, lỗi tool); và vì có nhiều đường đi hợp lệ, cần đánh giá kết quả/trạng thái cuối thay vì kiểm tra các bước định sẵn (end-state evaluation cho agent thay đổi trạng thái). Sai: ép một chuỗi tool cố định ngược với bản chất agent. Bài viết khuyên bắt đầu đánh giá ngay với mẫu nhỏ (khoảng 20 truy vấn). Temperature 0 không biến hệ agent nhiều bước, nhiều tool thành tất định và không phải điều bài viết đề xuất."
+     "explain": "Đúng: bài multi-agent research: agent ra quyết định động và không tất định giữa các lần chạy; thêm tracing đầy đủ trong production giúp chẩn đoán nguyên nhân (truy vấn tồi, nguồn kém, lỗi tool); và vì có nhiều đường đi hợp lệ, cần đánh giá kết quả/trạng thái cuối thay vì kiểm tra các bước định sẵn (end-state evaluation cho agent thay đổi trạng thái). Sai: ép một chuỗi tool cố định ngược với bản chất agent. Bài viết khuyên bắt đầu đánh giá ngay với mẫu nhỏ (khoảng 20 truy vấn). Temperature 0 không biến hệ agent nhiều bước, nhiều tool thành tất định và không phải điều bài viết đề xuất.",
+     "sc": "s3",
+     "ts": [
+      "1.2"
+     ]
     },
     {
      "q": "Early in development of a new agent, a team delays building any evaluation because they believe only a suite of hundreds of test cases would be meaningful. What does Anthropic's experience suggest?",
@@ -3163,7 +5165,10 @@ window.CERT_DATA = {
       "Use a single test query repeated many times, which measures variance more precisely than many queries."
      ],
      "answer": 1,
-     "explain": "Đúng: bài multi-agent research (Start evaluating immediately with small samples): giai đoạn đầu có nhiều \"quả ngọt dễ hái\", một chỉnh prompt có thể nâng tỉ lệ thành công từ 30% lên 80%, nên vài test case là thấy rõ; họ bắt đầu với khoảng 20 truy vấn đại diện cho cách dùng thật. Sai: chờ hoàn thiện là trì hoãn đúng thứ bài viết khuyên tránh. Bài viết dùng LLM-as-judge để đánh giá output tự do, kèm kiểm tra thủ công. Một truy vấn lặp lại không đại diện cho cách dùng thật."
+     "explain": "Đúng: bài multi-agent research (Start evaluating immediately with small samples): giai đoạn đầu có nhiều \"quả ngọt dễ hái\", một chỉnh prompt có thể nâng tỉ lệ thành công từ 30% lên 80%, nên vài test case là thấy rõ; họ bắt đầu với khoảng 20 truy vấn đại diện cho cách dùng thật. Sai: chờ hoàn thiện là trì hoãn đúng thứ bài viết khuyên tránh. Bài viết dùng LLM-as-judge để đánh giá output tự do, kèm kiểm tra thủ công. Một truy vấn lặp lại không đại diện cho cách dùng thật.",
+     "ts": [
+      "5.5"
+     ]
     },
     {
      "q": "A team wants automated grading of free-form research reports for factual accuracy, citation accuracy, completeness, source quality, and tool efficiency. Which setup matches what Anthropic found most consistent with human judgment?",
@@ -3174,7 +5179,11 @@ window.CERT_DATA = {
       "Counting the number of citations per report, since citation count is a reliable proxy for quality."
      ],
      "answer": 2,
-     "explain": "Đúng: bài multi-agent research ghi họ dùng LLM judge chấm theo rubric (độ chính xác dữ kiện, độ chính xác trích dẫn, độ đầy đủ, chất lượng nguồn, hiệu quả dùng tool); họ thử nhiều judge cho từng thành phần nhưng thấy một lần gọi LLM với một prompt, cho điểm 0.0–1.0 và pass/fail, là nhất quán và khớp đánh giá con người nhất. Sai: nhiều judge riêng là cách họ đã thử và thấy kém nhất quán hơn. Output nghiên cứu hiếm khi có một đáp án đúng duy nhất nên so khớp chuỗi không dùng được. Số trích dẫn không đo độ chính xác."
+     "explain": "Đúng: bài multi-agent research ghi họ dùng LLM judge chấm theo rubric (độ chính xác dữ kiện, độ chính xác trích dẫn, độ đầy đủ, chất lượng nguồn, hiệu quả dùng tool); họ thử nhiều judge cho từng thành phần nhưng thấy một lần gọi LLM với một prompt, cho điểm 0.0–1.0 và pass/fail, là nhất quán và khớp đánh giá con người nhất. Sai: nhiều judge riêng là cách họ đã thử và thấy kém nhất quán hơn. Output nghiên cứu hiếm khi có một đáp án đúng duy nhất nên so khớp chuỗi không dùng được. Số trích dẫn không đo độ chính xác.",
+     "sc": "s3",
+     "ts": [
+      "5.5"
+     ]
     },
     {
      "q": "A web-research subagent returns the full text of every page it read (about 15,000 tokens per task) to the coordinator, which then struggles to synthesize across subagents. What should the subagent return instead?",
@@ -3185,7 +5194,12 @@ window.CERT_DATA = {
       "A condensed set of the most relevant findings, each with its source."
      ],
      "answer": 3,
-     "explain": "Đúng: bài multi-agent research mô tả bản chất tìm kiếm là nén: subagent làm việc song song trong context riêng rồi cô đọng những token quan trọng nhất cho lead agent, đóng vai \"bộ lọc thông minh\"; giữ nguồn cho từng phát hiện để còn trích dẫn và kiểm chứng. Sai: chia nhỏ tin nhắn không giảm tổng token. Kết luận một dòng không nguồn làm mất khả năng kiểm chứng và tổng hợp. Trả kết quả tìm kiếm thô đẩy toàn bộ việc lọc ngược về coordinator."
+     "explain": "Đúng: bài multi-agent research mô tả bản chất tìm kiếm là nén: subagent làm việc song song trong context riêng rồi cô đọng những token quan trọng nhất cho lead agent, đóng vai \"bộ lọc thông minh\"; giữ nguồn cho từng phát hiện để còn trích dẫn và kiểm chứng. Sai: chia nhỏ tin nhắn không giảm tổng token. Kết luận một dòng không nguồn làm mất khả năng kiểm chứng và tổng hợp. Trả kết quả tìm kiếm thô đẩy toàn bộ việc lọc ngược về coordinator.",
+     "sc": "s3",
+     "ts": [
+      "5.1",
+      "5.6"
+     ]
     },
     {
      "q": "Mid-conversation, while the support agent is investigating a delivery problem it could likely solve, the customer writes: \"Stop. I want to talk to a human, now.\" What should the agent do?",
@@ -3196,7 +5210,11 @@ window.CERT_DATA = {
       "Reply that human agents are only available for complex cases and continue troubleshooting the issue."
      ],
      "answer": 0,
-     "explain": "Đúng (lời khuyên thiết kế về escalation): yêu cầu gặp người một cách rõ ràng là tín hiệu escalate đáng tin nhất; agent nên tôn trọng ngay, không cố điều tra tiếp, và bàn giao kèm tóm tắt để khách không phải kể lại. Sai: cố hoàn tất trước khi chuyển là phớt lờ yêu cầu rõ ràng. Bắt khách giải thích lý do là cản trở. Từ chối và tiếp tục xử lý đi ngược mong muốn của khách và làm mất niềm tin."
+     "explain": "Đúng (lời khuyên thiết kế về escalation): yêu cầu gặp người một cách rõ ràng là tín hiệu escalate đáng tin nhất; agent nên tôn trọng ngay, không cố điều tra tiếp, và bàn giao kèm tóm tắt để khách không phải kể lại. Sai: cố hoàn tất trước khi chuyển là phớt lờ yêu cầu rõ ràng. Bắt khách giải thích lý do là cản trở. Từ chối và tiếp tục xử lý đi ngược mong muốn của khách và làm mất niềm tin.",
+     "sc": "s1",
+     "ts": [
+      "5.2"
+     ]
     },
     {
      "q": "A synthesis agent combines subagent findings that include quarterly revenue figures by segment and a narrative of recent news events. It renders everything as uniform bullet points, and readers find the financial comparison hard to follow. What is the BEST guidance?",
@@ -3207,7 +5225,11 @@ window.CERT_DATA = {
       "Remove the financial figures and summarize them in words, since numbers are hard to read in reports."
      ],
      "answer": 1,
-     "explain": "Đúng (lời khuyên thiết kế): dữ liệu số cần so sánh đọc tốt nhất ở dạng bảng, còn diễn biến tin tức cần văn xuôi; ép một định dạng duy nhất làm mất cấu trúc của từng loại nội dung. Docs Prompting best practices cũng khuyên nói cụ thể định dạng output mong muốn. Sai: biến tin tức thành bảng làm mất mạch kể. Thêm bullet càng phân mảnh. Bỏ số liệu là mất thông tin cốt lõi."
+     "explain": "Đúng (lời khuyên thiết kế): dữ liệu số cần so sánh đọc tốt nhất ở dạng bảng, còn diễn biến tin tức cần văn xuôi; ép một định dạng duy nhất làm mất cấu trúc của từng loại nội dung. Docs Prompting best practices cũng khuyên nói cụ thể định dạng output mong muốn. Sai: biến tin tức thành bảng làm mất mạch kể. Thêm bullet càng phân mảnh. Bỏ số liệu là mất thông tin cốt lõi.",
+     "sc": "s3",
+     "ts": [
+      "5.6"
+     ]
     },
     {
      "q": "An agent runs inside a harness that compacts context automatically when it approaches the limit. As the context fills, the agent often wraps up early with a partial summary instead of continuing the task. What does Anthropic's prompting guide suggest?",
@@ -3218,7 +5240,10 @@ window.CERT_DATA = {
       "Instruct the agent to always finish the whole task within its first context window."
      ],
      "answer": 2,
-     "explain": "Đúng: docs Prompting best practices (Context awareness and multiwindow workflows): nếu agent chạy trong harness tự compact hoặc cho lưu context ra file ngoài (như Claude Code), nên nói điều đó trong prompt; nếu không, Claude đôi khi tự kết thúc công việc khi gần giới hạn context; docs đưa prompt mẫu: context sẽ được compact tự động, đừng dừng sớm vì lo token, lưu tiến độ và trạng thái trước khi cửa sổ làm mới. Sai: đổi ngưỡng không cho agent biết rằng nó có thể tiếp tục. Bỏ tool ép kết thúc, ngược mục tiêu. Hoàn tất trong một cửa sổ không khả thi với việc dài."
+     "explain": "Đúng: docs Prompting best practices (Context awareness and multiwindow workflows): nếu agent chạy trong harness tự compact hoặc cho lưu context ra file ngoài (như Claude Code), nên nói điều đó trong prompt; nếu không, Claude đôi khi tự kết thúc công việc khi gần giới hạn context; docs đưa prompt mẫu: context sẽ được compact tự động, đừng dừng sớm vì lo token, lưu tiến độ và trạng thái trước khi cửa sổ làm mới. Sai: đổi ngưỡng không cho agent biết rằng nó có thể tiếp tục. Bỏ tool ép kết thúc, ngược mục tiêu. Hoàn tất trong một cửa sổ không khả thi với việc dài.",
+     "ts": [
+      "5.4"
+     ]
     },
     {
      "q": "A data-analysis agent loads entire database tables and all log files into context at the start of each task \"so it has everything.\" It frequently runs out of context and loses focus. Which approach does Anthropic's context-engineering guidance describe?",
@@ -3229,7 +5254,10 @@ window.CERT_DATA = {
       "Keep lightweight references (paths, queries, links) and load data just in time with tools when needed."
      ],
      "answer": 3,
-     "explain": "Đúng: bài \"Effective context engineering for AI agents\" mô tả chiến lược \"just in time\": agent giữ định danh nhẹ (đường dẫn file, truy vấn đã lưu, link) và dùng tool để nạp dữ liệu vào context lúc cần; Claude Code dùng cách này cho phân tích dữ liệu lớn (viết truy vấn có mục tiêu, dùng head/tail). Sai: base64 tốn nhiều token hơn và khó đọc. Nạp hết rồi tóm tắt vẫn làm tràn context ngay từ đầu. Nhồi vào system prompt không giảm token, còn tốn ở mọi request."
+     "explain": "Đúng: bài \"Effective context engineering for AI agents\" mô tả chiến lược \"just in time\": agent giữ định danh nhẹ (đường dẫn file, truy vấn đã lưu, link) và dùng tool để nạp dữ liệu vào context lúc cần; Claude Code dùng cách này cho phân tích dữ liệu lớn (viết truy vấn có mục tiêu, dùng head/tail). Sai: base64 tốn nhiều token hơn và khó đọc. Nạp hết rồi tóm tắt vẫn làm tràn context ngay từ đầu. Nhồi vào system prompt không giảm token, còn tốn ở mọi request.",
+     "ts": [
+      "5.1"
+     ]
     },
     {
      "q": "A compliance team requires a verbatim record of every long Agent SDK session, but automatic compaction replaces older messages with a summary. What is the BEST way to satisfy the requirement without disabling compaction?",
@@ -3240,9 +5268,516 @@ window.CERT_DATA = {
       "Rely on the compact_boundary system message, which contains the full text of the removed messages."
      ],
      "answer": 0,
-     "explain": "Đúng: trang Agent loop (Automatic compaction) liệt kê PreCompact hook để chạy logic tùy chỉnh trước khi compaction diễn ra, với ví dụ lưu trữ toàn bộ transcript; hook nhận trường trigger (manual hoặc auto). Sai: bắt agent trích lại cả hội thoại tốn token và vẫn có thể thiếu phần đã bị compact trước đó. Compaction tóm tắt cả lịch sử cũ, không chỉ tool result, nên chép tool result là không đủ. compact_boundary chỉ là sự kiện báo compaction đã xảy ra, docs không nói nó chứa toàn văn tin nhắn bị thay."
+     "explain": "Đúng: trang Agent loop (Automatic compaction) liệt kê PreCompact hook để chạy logic tùy chỉnh trước khi compaction diễn ra, với ví dụ lưu trữ toàn bộ transcript; hook nhận trường trigger (manual hoặc auto). Sai: bắt agent trích lại cả hội thoại tốn token và vẫn có thể thiếu phần đã bị compact trước đó. Compaction tóm tắt cả lịch sử cũ, không chỉ tool result, nên chép tool result là không đủ. compact_boundary chỉ là sự kiện báo compaction đã xảy ra, docs không nói nó chứa toàn văn tin nhắn bị thay.",
+     "ts": [
+      "5.1"
+     ]
+    },
+    {
+     "q": "A customer asks the support agent for a refund on an annual software subscription paid eight months ago, saying she has used it only once. The company's refund policy covers physical orders only and says nothing about subscriptions. What should the agent do?",
+     "options": [
+      "Apply the 30-day rule for physical orders by analogy and deny the refund, since eight months is far beyond that window.",
+      "Approve a prorated refund for the unused months, since prorating is the fairest outcome for both sides.",
+      "Tell the customer that subscriptions cannot be refunded, since they are not listed anywhere in the policy.",
+      "Escalate to a human with a summary of the request, since the policy does not cover subscription refunds."
+     ],
+     "answer": 3,
+     "explain": "D đúng: đây là khoảng trống chính sách. Agent không có căn cứ để quyết, nên chuyển người kèm bản tóm tắt (khách, gói, ngày thanh toán, yêu cầu) để người có thẩm quyền quyết định. A sai: suy diễn quy tắc của hàng vật lý sang gói đăng ký là tự tạo chính sách. B sai: tự đưa ra cách hoàn tiền theo tỉ lệ cũng là tự tạo chính sách, và có thể gây thiệt hại tài chính. C sai: \"không được liệt kê\" không có nghĩa là \"bị cấm\"; khẳng định như vậy là bịa chính sách theo hướng ngược lại.",
+     "sc": "s1",
+     "ts": [
+      "5.2"
+     ]
+    },
+    {
+     "q": "After launch, the support agent escalates about 40% of conversations to humans, including routine requests such as resending a tracking link. Its system prompt says only: \"Escalate when the situation is complex or you are unsure.\" What is the MOST effective fix?",
+     "options": [
+      "Have the agent rate its own confidence from 1 to 10 on every request, and escalate only when that self-rating comes out at 4 or lower.",
+      "Escalate only when sentiment analysis shows the customer is angry, since angry customers are the ones who need humans.",
+      "Replace the vague rule with explicit escalation criteria, plus a few examples of cases to resolve and cases to escalate.",
+      "Set a hard cap so that the agent may escalate no more than 10% of conversations on any given day."
+     ],
+     "answer": 2,
+     "explain": "C đúng: \"phức tạp\" và \"không chắc\" là tiêu chí mơ hồ nên agent escalate cả việc thường ngày. Tiêu chí tường minh (khách yêu cầu gặp người, chính sách không bao quát, không thể tiến triển) cùng vài ví dụ ranh giới cho agent biết khi nào tự xử lý. A sai: confidence model tự báo không được hiệu chuẩn, nên ngưỡng 4 không tương ứng với độ khó thật. B sai: cảm xúc tiêu cực không phải tiêu chí escalate; khách bực vì đơn chậm vẫn có thể được agent giải quyết. D sai: hạn mức tùy tiện sẽ chặn cả những ca thật sự cần người khi đã hết hạn mức.",
+     "sc": "s1",
+     "ts": [
+      "5.2"
+     ]
+    },
+    {
+     "q": "A customer says a package marked as delivered never arrived. The support agent calls lookup_order (status: delivered) and a carrier-tracking tool (status: in transit) several times; the two systems keep disagreeing, and none of the agent's tools can resolve the conflict. The customer has been waiting ten minutes. What should the agent do?",
+     "options": [
+      "Keep re-querying both tools until they agree, since the carrier data may simply be catching up with the order system.",
+      "Escalate with a structured summary of the conflicting statuses and what was checked, since it cannot progress with its tools.",
+      "Tell the customer the package was delivered, since the order system is the company's official system of record.",
+      "Issue a refund right away, since a refund settles the customer's problem regardless of which of the two systems turns out to be right."
+     ],
+     "answer": 1,
+     "explain": "B đúng: agent đã thử hết công cụ mà không tiến triển được, đó là một tiêu chí escalate rõ ràng. Bản tóm tắt có cấu trúc (mã đơn, hai trạng thái mâu thuẫn, những gì đã kiểm tra) giúp người tiếp nhận không phải hỏi lại khách. A sai: gọi lặp lại vô ích, khách tiếp tục chờ mà không có hướng giải quyết. C sai: khẳng định một bên khi dữ liệu mâu thuẫn là đưa thông tin có thể sai cho khách. D sai: hoàn tiền khi chưa xác minh vượt quá những gì chính sách cho phép agent tự quyết, và có thể trùng nếu sau đó gói hàng tới.",
+     "sc": "s1",
+     "ts": [
+      "5.2"
+     ]
+    },
+    {
+     "q": "The support agent resolves 92% of conversations without a human, and QA reviews a random 2% of all conversations. Complaints suggest that refunds on international orders are often handled wrongly, but those orders are only about 3% of volume. What should the team change FIRST?",
+     "options": [
+      "Measure accuracy per category and sample enough conversations from each one, including small ones like international refunds.",
+      "Double the overall random sample to 4%, since a bigger sample will surface the problems with international orders all on its own over time.",
+      "Review only the conversations in which the customer expressed negative sentiment, since that is where errors tend to show up.",
+      "Trust the 92% figure, since an error rate concentrated in 3% of the volume barely affects the overall quality of service."
+     ],
+     "answer": 0,
+     "explain": "A đúng: con số tổng có thể che một phân khúc yếu. Đo theo từng loại và lấy mẫu phân tầng bảo đảm phân khúc nhỏ như hoàn tiền quốc tế có đủ mẫu để đánh giá. B sai: mẫu ngẫu nhiên 4% trên tổng vẫn chỉ có rất ít ca quốc tế, khó kết luận. C sai: lỗi xử lý không phải lúc nào cũng đi kèm cảm xúc tiêu cực; nhiều ca sai trôi qua lặng lẽ. D sai: 3% lượng đơn vẫn là rất nhiều khách bị xử lý sai, và vấn đề có thể lan rộng nếu không ai đo.",
+     "sc": "s1",
+     "ts": [
+      "5.5"
+     ]
+    },
+    {
+     "q": "In a multi-agent research system, a search subagent gets HTTP 403 \"subscription required\" from a journal site. It reports only a generic \"search failed\", and the coordinator re-dispatches the same query to a new subagent three times, hitting the same 403 each time. What is the BEST fix?",
+     "options": [
+      "Have the coordinator retry every failed query with exponential backoff, up to a fixed number of attempts per query.",
+      "Report a structured error (access denied, not retryable, the source, any partial results) so the coordinator picks another source or notes the gap.",
+      "Have the subagent return an empty result marked as success, so the coordinator moves on without wasting more attempts.",
+      "Give the search subagent more turns, so that it can keep retrying the journal site itself until it finally gets through."
+     ],
+     "answer": 1,
+     "explain": "B đúng: lỗi thiếu quyền truy cập không tự hết khi thử lại. Báo loại lỗi, cờ không nên retry, nguồn đã thử và kết quả một phần cho coordinator đủ thông tin để đổi nguồn hoặc ghi chú lỗ hổng trong báo cáo. A sai: backoff chỉ hợp với lỗi tạm thời; với 403 thì chỉ lặp lại thất bại chậm hơn. C sai: nuốt lỗi thành kết quả rỗng khiến báo cáo có thể kết luận sai là chủ đề không có tài liệu. D sai: thêm lượt cho subagent tự thử lại vẫn đụng cùng bức tường 403, chỉ tốn thêm chi phí.",
+     "sc": "s3",
+     "ts": [
+      "5.3"
+     ]
+    },
+    {
+     "q": "A research subagent was asked to collect 2023–2025 deployment figures for five countries. It found sourced figures for three, then hit repeated timeouts for the other two, and returned only an error. The coordinator discards the whole subtask and re-runs it from scratch. What is the BEST design?",
+     "options": [
+      "Have the subagent keep retrying the two failing countries until all five succeed, so that it never hands back incomplete work to the coordinator.",
+      "Have the coordinator re-run the subtask from scratch, but on a larger model that is less likely to time out.",
+      "Have the subagent estimate the two missing figures from regional averages, so that the table is complete.",
+      "Return the three sourced figures as partial results with the failure details, and re-dispatch only the two missing countries."
+     ],
+     "answer": 3,
+     "explain": "D đúng: trả kết quả một phần kèm chi tiết lỗi giữ lại phần việc đã xong, và coordinator chỉ giao lại đúng phần còn thiếu. A sai: thử lại vô hạn có thể không bao giờ kết thúc, và coordinator không biết chuyện gì đang xảy ra. B sai: timeout nằm ở nguồn dữ liệu, không do model; chạy lại từ đầu còn bỏ phí ba kết quả đã có nguồn. C sai: số ước lượng trình bày như số liệu thật là bịa dữ liệu trong báo cáo nghiên cứu.",
+     "sc": "s3",
+     "ts": [
+      "5.3"
+     ]
+    },
+    {
+     "q": "A subagent in a multi-agent research system could not complete its assigned search. Which TWO items are MOST useful to include in the failure report it returns to the coordinator? (Choose TWO.)",
+     "options": [
+      "The exact queries and sources it tried, and the type of failure for each (timeout, access denied, no matches).",
+      "The full stack trace from its HTTP client library, so that the coordinator can debug the network code.",
+      "Any partial findings it did obtain, with their sources, plus suggested alternative sources or queries.",
+      "A short apology addressed to the end user, which the coordinator can paste into the final report.",
+      "Only a boolean success: false, so that the coordinator's context stays as small as possible."
+     ],
+     "answer": [
+      0,
+      2
+     ],
+     "explain": "A và C đúng: coordinator cần biết đã thử gì và hỏng kiểu gì (để quyết định thử lại, đổi nguồn hay bỏ qua), cùng kết quả một phần và gợi ý thay thế (để không mất việc đã làm và có hướng đi tiếp). B sai: stack trace là chi tiết kỹ thuật vô ích cho việc ra quyết định nghiên cứu, chỉ làm đầy context. D sai: lời xin lỗi không giúp coordinator quyết định gì, và báo cáo không phải chỗ cho nó. E sai: một cờ thất bại trần trụi buộc coordinator đoán mò hoặc chạy lại mù quáng.",
+     "sc": "s3",
+     "ts": [
+      "5.3"
+     ]
+    },
+    {
+     "q": "A research subagent searched a scholarly database for field trials of a niche battery chemistry. The queries ran successfully and returned zero matches, but the subagent reported this as an error, so the coordinator retried with new subagents several times and finally labeled the subtopic \"failed\" in the report. What should change?",
+     "options": [
+      "Report a successful zero-match search as a finding (e.g. \"no trials found in database X\"), distinct from an access failure.",
+      "Have the coordinator keep retrying zero-result searches with new subagents until at least one matching document finally turns up somewhere.",
+      "Drop any subtopic with zero results from the report, since an empty search tells the reader nothing useful.",
+      "Mark every zero-result search as a timeout, so that the coordinator's existing retry logic is applied consistently."
+     ],
+     "answer": 0,
+     "explain": "A đúng: truy vấn chạy thành công mà không có kết quả là một phát hiện có giá trị (chưa có thử nghiệm nào được công bố trong nguồn đó), khác hẳn với việc không truy cập được nguồn. Hai trường hợp phải được báo khác nhau. B sai: thử lại một truy vấn đã thành công chỉ tốn chi phí, kết quả vẫn rỗng. C sai: việc không tìm thấy bằng chứng là thông tin người đọc cần biết; bỏ đi khiến báo cáo trông như chưa ai xem tới chủ đề. D sai: gắn nhãn sai loại lỗi làm hỏng cả cơ chế xử lý lỗi và khiến báo cáo ghi sai sự thật.",
+     "sc": "s3",
+     "ts": [
+      "5.3",
+      "2.2"
+     ]
+    },
+    {
+     "q": "A research subagent's fetch_page tool returns HTTP 200 for paywalled articles, but the body is the site's login page. The subagent summarizes that page, and the final report cites the article as saying \"subscribe to continue reading.\" Which change BEST fixes the error handling?",
+     "options": [
+      "Ask the synthesis agent to delete any sentences that look like website navigation text before it writes the report.",
+      "Increase the fetch timeout so that the tool waits longer for the full article to load behind the paywall.",
+      "Have fetch_page detect login, paywall, or CAPTCHA pages and return them as an access failure, so the source is reported as unavailable.",
+      "Have the subagent retry the fetch five times, since paywalls often disappear when the same request is repeated."
+     ],
+     "answer": 2,
+     "explain": "C đúng: trang đăng nhập là một thất bại truy cập trá hình dưới mã 200. Tool nên nhận diện và trả nó như lỗi truy cập, để subagent báo nguồn không đọc được (và coordinator có thể đổi nguồn hoặc ghi chú lỗ hổng) thay vì coi nội dung rác là phát hiện. A sai: lọc ở bước cuối là chữa triệu chứng; bài báo vẫn bị coi là đã đọc và nguồn vẫn bị trích sai. B sai: paywall không phải vấn đề thời gian chờ. D sai: gửi lại cùng request vẫn nhận cùng trang đăng nhập.",
+     "sc": "s3",
+     "ts": [
+      "5.3",
+      "2.2"
+     ]
+    },
+    {
+     "q": "A research report states that \"40% of mid-size firms use the technology\" next to 2025 adoption figures from other sources. The 40% figure came from a 2019 survey, but the subagent's findings did not record publication or data-collection dates, so readers took it as current. Which change BEST prevents this?",
+     "options": [
+      "Have the synthesis agent drop every statistic older than two years, so that only recent figures appear in the report.",
+      "Require each finding to carry its publication and data-collection dates, and show them in the report next to the statistic.",
+      "Have the synthesis agent average older and newer figures for the same metric, to smooth out the differences between the various sources.",
+      "Ask the synthesis agent to judge from each source's wording whether it is recent, and mention that in the report."
+     ],
+     "answer": 1,
+     "explain": "B đúng: ngày là một phần của nguồn gốc dữ liệu. Ghi ngày ngay từ lúc thu thập và hiển thị cạnh số liệu giúp người đọc phân biệt số cũ với số mới, và hiểu chênh lệch có thể do thời điểm. A sai: số cũ vẫn có thể hữu ích (làm mốc so sánh); vấn đề là thiếu ngày, không phải tuổi của số. C sai: lấy trung bình hai số đo ở hai thời điểm tạo ra một con số không nguồn nào nói. D sai: đoán độ mới qua câu chữ không đáng tin; ngày phải là dữ liệu được ghi lại.",
+     "sc": "s3",
+     "ts": [
+      "5.6"
+     ]
+    },
+    {
+     "q": "An invoice-extraction pipeline auto-posts results to the ERP and sends the rest to a human review queue. Which TWO signals are the MOST reliable reasons to route an invoice to a human? (Choose TWO.)",
+     "options": [
+      "The line items still do not sum to the stated total after a retry that included the specific error.",
+      "The model's self-reported confidence for the document is below 0.8, using an uncalibrated score.",
+      "The document is longer than three pages, since longer invoices are harder to read.",
+      "A required field such as the supplier tax ID is null because it could not be found in the document.",
+      "The extraction took longer than usual, which suggests the model struggled with the document."
+     ],
+     "answer": [
+      0,
+      3
+     ],
+     "explain": "A và D đúng: đây là tín hiệu xác định, kiểm tra được bằng code. Tổng không khớp sau retry nghĩa là hoặc trích sai hoặc chứng từ có vấn đề, và trường bắt buộc bị trống nghĩa là không thể ghi sổ an toàn. B sai: confidence model tự báo chưa hiệu chuẩn không tương ứng với tỉ lệ đúng thật. C sai: độ dài không phải bằng chứng có lỗi; nhiều hóa đơn dài vẫn trích đúng. E sai: thời gian xử lý phụ thuộc nhiều yếu tố hạ tầng, không nói lên chất lượng trích xuất.",
+     "sc": "s6",
+     "ts": [
+      "5.5"
+     ]
+    },
+    {
+     "q": "In a large TypeScript monorepo, a developer's Claude Code sessions spend many turns and file reads working out where a symbol is defined and which code calls it. What does Claude Code's large-codebase guidance suggest to cut down these reads?",
+     "options": [
+      "Install a code intelligence plugin, so Claude finds definitions and references through the language server.",
+      "List every symbol with its file location in the root CLAUDE.md, so Claude never has to search for any of them.",
+      "Raise MAX_MCP_OUTPUT_TOKENS so each search returns more results and Claude needs fewer search calls in total.",
+      "Disable the Explore subagent, so the main session does all of the searching and keeps every result for itself."
+     ],
+     "answer": 0,
+     "explain": "Trang large-codebases (mục Reduce file reads with code intelligence): code intelligence plugin nối Claude với language server để nhảy tới định nghĩa, tìm tham chiếu và báo lỗi kiểu trực tiếp, thay vì quét cây thư mục; trang best practices cũng nhắc điều này cho ngôn ngữ có kiểu. Liệt kê mọi symbol vào CLAUDE.md làm file phình to, chiếm context mọi phiên và nhanh lỗi thời; best practices còn khuyên không mô tả cấu trúc file trong CLAUDE.md. MAX_MCP_OUTPUT_TOKENS chỉ áp dụng cho output tool MCP, không giảm số lần đọc file. Tắt Explore khiến output tìm kiếm dồn vào phiên chính, ngược với mục tiêu.",
+     "sc": "s4",
+     "ts": [
+      "5.4",
+      "2.5"
+     ]
+    },
+    {
+     "q": "Claude Code sessions in a repository keep opening committed generated code under src/gen/ and a vendored SDK under third_party/, spending context on files nobody edits by hand. Both directories are checked in, so .gitignore does not cover them. What should the team do?",
+     "options": [
+      "Add a note to CLAUDE.md asking Claude to avoid those folders whenever it reasonably can.",
+      "Add the two paths to claudeMdExcludes, which stops Claude from reading files under them.",
+      "Ask developers to run /compact after any session that has opened files in those folders.",
+      "Add Read deny rules for those paths to permissions.deny in the committed .claude/settings.json."
+     ],
+     "answer": 3,
+     "explain": "Trang large-codebases: tìm kiếm nội dung của Claude đã tôn trọng .gitignore; với đường dẫn được commit như SDK vendored hay code sinh ra, thêm deny rule Read(...) vào permissions.deny, commit trong .claude/settings.json để áp dụng cho cả nhóm. Đây là cấu hình do harness áp dụng, phủ tool đọc file built-in (Grep/Glob theo kiểu best-effort) và các lệnh Bash đọc file mà Claude Code nhận ra như cat, head; docs lưu ý nó không phủ lệnh đọc file mà không nêu tên file (như grep -r từ thư mục cha) hay script tự mở file. Ghi chú trong CLAUDE.md chỉ là lời khuyên. claudeMdExcludes chỉ bỏ qua file CLAUDE.md/rule, không chặn đọc file code. /compact chỉ dọn sau khi context đã bị tốn, không ngăn việc mở file.",
+     "sc": "s4",
+     "ts": [
+      "5.4"
+     ]
+    },
+    {
+     "q": "A team lead is updating her team's Claude Code habits and asks which uses of subagents the current Claude Code best-practices guide still recommends. Which TWO are recommended? (Choose TWO.)",
+     "options": [
+      "Routing every file read through a subagent, because the context window is the main constraint",
+      "Running independent pieces of work, such as researching three unrelated modules, at the same time",
+      "Handing a hard task to a subagent because a subagent produces a smarter answer than the main session",
+      "Making a rule that can't have exceptions, such as never editing src/gen/, reliable through a subagent's prompt",
+      "Keeping long output, such as a full test run or a wide search, out of the main conversation"
+     ],
+     "answer": [
+      1,
+      4
+     ],
+     "explain": "Best practices hiện tại (mục Know what subagents cost) liệt kê subagent đáng dùng khi: chạy song song các phần việc độc lập; giữ output dài (chạy test đầy đủ, tìm kiếm rộng) khỏi hội thoại chính; có reviewer chưa thấy cách code được viết; giới hạn tool. Bảng \"What you can stop doing\" gọi \"dùng subagent để bảo vệ context window\" là lời khuyên cũ, vì hết context hiếm khi còn là vấn đề; và \"giao cho subagent để có câu trả lời tốt hơn\" cũng bị bỏ: cùng model, cùng task thì không thông minh hơn. Quy tắc không có ngoại lệ phải cưỡng chế bằng hook hoặc deny rule; prompt của subagent vẫn là chỉ dẫn không xác định.",
+     "sc": "s4",
+     "ts": [
+      "5.4",
+      "1.3"
+     ]
     }
+   ],
+   "summary": [
+    "Mọi thứ trong request đều tính vào context (system, messages kể cả tool result, định nghĩa tool, output, thinking). Context rot: càng nhiều token càng nhớ lại kém, nên giữ tập token nhỏ nhất, giàu tín hiệu nhất.",
+    "Tóm tắt văn xuôi làm rơi số tiền, ngày, mã đơn: giữ khối case facts có cấu trúc do code duy trì, đưa vào mọi request, tách khỏi lịch sử bị tóm tắt.",
+    "Output tool dài thì trích gọn các trường cần thiết trước khi đưa vào context; quy tắc lâu dài để trong CLAUDE.md (được đưa lại mỗi request) thay vì chỉ ở prompt đầu.",
+    "Khám phá codebase lớn: tìm theo tên và nội dung trước, đọc chọn lọc sau; giao khám phá dài dòng cho subagent (như Explore); ghi phát hiện chính ra file ghi chú để dùng lại sau /compact hoặc ở phiên mới.",
+    "Khách đòi gặp người thì chuyển ngay; khách bực mà vấn đề nằm trong khả năng của agent thì giải quyết; đặt checkpoint người ở chỗ rủi ro hoặc khi agent bị chặn.",
+    "Độ chính xác tổng (vd. 97%) có thể che phân khúc yếu: đo theo loại tài liệu và theo trường trước khi giảm review, và giữ lấy mẫu ngẫu nhiên phân tầng trên kết quả tự duyệt để bắt mẫu lỗi mới.",
+    "Confidence model tự báo không được hiệu chuẩn; nếu dùng thì lấy theo từng trường và hiệu chuẩn trên tập có nhãn.",
+    "Lỗi trong hệ nhiều agent: không nuốt lỗi (trả rỗng như thành công) và không làm sập cả luồng; subagent retry cục bộ, không được thì báo loại lỗi, truy vấn đã thử, kết quả một phần, gợi ý thay thế; coordinator quyết định và ghi chú lỗ hổng. Ghi trạng thái để chạy tiếp từ chỗ lỗi.",
+    "Provenance: giữ ánh xạ claim–nguồn (URL, đoạn trích, ngày) qua mọi bước tổng hợp; nguồn mâu thuẫn thì giữ cả hai, ghi nguồn và ngày.",
+    "Citations API bảo đảm trích dẫn trỏ hợp lệ vào tài liệu nhưng không dùng cùng output_config.format; context editing xóa kết quả tool cũ, memory tool lưu ghi chú qua phiên trong /memories."
    ]
   }
- ]
+ ],
+ "scenarios": [
+  {
+   "id": "s1",
+   "name": "Customer Support Resolution Agent",
+   "desc": "Một agent chăm sóc khách hàng dùng tool để tra cứu đơn hàng, hoàn tiền và chuyển cho nhân viên khi cần. Trọng tâm: vòng lặp agent, luật nghiệp vụ phải được cưỡng chế bằng code, thiết kế tool và lỗi tool, giữ đúng các dữ kiện của ca (số tiền, mã đơn) trong hội thoại dài, và lúc nào thì escalate."
+  },
+  {
+   "id": "s2",
+   "name": "Code Generation with Claude Code",
+   "desc": "Một nhóm dùng Claude Code để viết và sửa code hằng ngày. Trọng tâm: CLAUDE.md và rule theo đường dẫn, skill và slash command, plan mode hay làm thẳng, cách cho ví dụ, test và tiêu chí để Claude làm đúng ý."
+  },
+  {
+   "id": "s3",
+   "name": "Multi-Agent Research System",
+   "desc": "Một coordinator chia câu hỏi nghiên cứu cho nhiều subagent tìm kiếm, phân tích rồi tổng hợp báo cáo có trích dẫn. Trọng tâm: chia việc, truyền context cho subagent, báo lỗi từ subagent lên coordinator, giữ liên kết giữa nhận định và nguồn."
+  },
+  {
+   "id": "s4",
+   "name": "Developer Productivity with Claude",
+   "desc": "Xây công cụ giúp lập trình viên khám phá codebase lạ, sinh tài liệu, tự động hóa việc lặp lại bằng Agent SDK và MCP. Trọng tâm: chọn built-in tool và MCP server, phạm vi tool cho mỗi agent, khám phá codebase lớn mà không làm hỏng context."
+  },
+  {
+   "id": "s5",
+   "name": "Claude Code for Continuous Integration",
+   "desc": "Đưa Claude Code vào pipeline CI/CD để review pull request, sinh test và góp ý tự động. Trọng tâm: chạy không tương tác với -p, output có cấu trúc, context nào đưa vào CI, giảm báo nhầm (false positive), review nhiều lượt và review độc lập."
+  },
+  {
+   "id": "s6",
+   "name": "Structured Data Extraction",
+   "desc": "Một luồng trích xuất dữ liệu có cấu trúc từ tài liệu không đồng nhất (hóa đơn, hợp đồng, biểu mẫu). Trọng tâm: JSON schema qua tool use hoặc structured outputs, validate rồi retry, trường tự kiểm, Message Batches API cho khối lượng lớn, và khi nào cần người duyệt."
+  }
+ ],
+ "guide": {
+  "title": "Chiến lược thi",
+  "intro": "<p>Phần này không dạy thêm kiến thức. Nó trả lời ba câu hỏi: đề CCAR-F chấm cái gì, nên chọn đáp án theo những nguyên tắc nào, và ôn thế nào cho đủ trong vài tuần. Các bài trong phần này dẫn ngược về bài học của từng domain (ví dụ <a href=\"#l-1-3\">bài 1.3</a>) thay vì giảng lại.</p>\n<p>Số liệu về đề thi (số câu, thời gian, điểm đậu, lệ phí, chính sách thi lại) lấy từ exam guide v1.0 (hiệu lực tháng 7/2026) và các trang FAQ, Policies trên Anthropic Partner Academy, đọc vào tháng 11/2026. Những thông tin này có thể thay đổi. Trước khi đăng ký, hãy mở lại trang chính thức để kiểm tra.</p>",
+  "lessons": [
+   {
+    "id": "g-1",
+    "title": "Đề thi chấm gì: định dạng, điểm và cách đọc tỉ trọng",
+    "minutes": 10,
+    "html": "<p>Biết rõ đề được dựng thế nào thì bạn sẽ ôn đúng chỗ và chia thời gian hợp lý. Mọi con số dưới đây lấy từ exam guide CCAR-F (bản 1.0, hiệu lực tháng 7/2026) và trang FAQ chứng chỉ trên Partner Academy.</p>\n<h4>Định dạng đề</h4>\n<table>\n<thead><tr><th>Mục</th><th>Exam guide / FAQ ghi</th></tr></thead>\n<tbody>\n<tr><td>Số câu</td><td>60</td></tr>\n<tr><td>Thời gian làm bài</td><td>120 phút. FAQ khuyên dự trù khoảng 135 phút có mặt, tính cả check-in, hướng dẫn và một khảo sát ngắn sau bài thi.</td></tr>\n<tr><td>Dạng câu</td><td>Chọn một đáp án (multiple choice) và chọn nhiều đáp án (multiple response). Mỗi câu ghi rõ cần chọn bao nhiêu đáp án.</td></tr>\n<tr><td>Cấu trúc</td><td>Đề có 4 kịch bản (scenario), rút ngẫu nhiên từ bộ 6 kịch bản công bố trong guide.</td></tr>\n<tr><td>Điểm</td><td>Điểm quy đổi (scaled score) thang 100–1.000, đậu từ <strong>720</strong>.</td></tr>\n<tr><td>Hình thức</td><td>Có giám thị, thi online hoặc tại trung tâm khảo thí của Pearson VUE.</td></tr>\n<tr><td>Ngôn ngữ</td><td>FAQ ghi đề và tài liệu ôn có bản tiếng Anh và tiếng Nhật.</td></tr>\n</tbody>\n</table>\n<p>Lệ phí, thời hạn chứng chỉ và thủ tục đăng ký nằm ở <a href=\"#g-7\">bài G7</a>.</p>\n<h4>Điểm 720 không có nghĩa là đúng 72%</h4>\n<p>Guide mô tả đây là bài thi <em>tham chiếu tiêu chí</em> (criterion-referenced): bạn được so với một chuẩn cố định do hội đồng chuyên gia đặt ra, không so với thí sinh khác. Điểm được quy đổi để cân bằng giữa các bộ đề có độ khó hơi khác nhau. Anthropic không công bố bảng đổi từ số câu đúng sang điểm 100–1.000. Trang thi thử của site dùng mốc khoảng 72% câu đúng chỉ để tham khảo, đừng coi đó là ngưỡng thật.</p>\n<h4>Phiếu điểm cho biết gì</h4>\n<ul>\n<li>Kết quả đậu/trượt và điểm quy đổi 100–1.000.</li>\n<li>Tỉ lệ phần trăm câu đúng trong từng domain. Guide nói rõ các tỉ lệ này chỉ để bạn biết mình yếu ở đâu. Đậu hay trượt chỉ dựa trên tổng điểm quy đổi.</li>\n<li>FAQ ghi điểm hiện trên màn hình ngay khi làm xong. Thi ở trung tâm thì được phát thêm phiếu điểm in. Bản phiếu điểm được gửi qua email, và xem lại được bất cứ lúc nào trong tài khoản Pearson VUE.</li>\n</ul>\n<h4>Từ tỉ trọng domain ra số câu (ước lượng)</h4>\n<p>Guide ghi tỉ trọng là tỉ lệ <em>xấp xỉ</em> số câu được chấm điểm thuộc mỗi domain. Nhân với 60 câu thì ra con số dưới đây. Đây là phép tính của site, không phải con số Anthropic công bố.</p>\n<table>\n<thead><tr><th>Domain</th><th>Tỉ trọng</th><th>≈ số câu</th></tr></thead>\n<tbody>\n<tr><td><a href=\"#d1\">1. Agentic Architecture &amp; Orchestration</a></td><td>27%</td><td>~16</td></tr>\n<tr><td><a href=\"#d2\">2. Tool Design &amp; MCP Integration</a></td><td>18%</td><td>~11</td></tr>\n<tr><td><a href=\"#d3\">3. Claude Code Configuration &amp; Workflows</a></td><td>20%</td><td>~12</td></tr>\n<tr><td><a href=\"#d4\">4. Prompt Engineering &amp; Structured Output</a></td><td>20%</td><td>~12</td></tr>\n<tr><td><a href=\"#d5\">5. Context Management &amp; Reliability</a></td><td>15%</td><td>~9</td></tr>\n</tbody>\n</table>\n<p>Thực tế, số câu của từng domain trong đề bạn gặp còn tùy vào 4 kịch bản được rút. Ví dụ, đề có cả kịch bản Claude Code lẫn CI sẽ nghiêng về Domain 3. Mỗi kịch bản có nhóm \"primary domains\" riêng, xem <a href=\"#g-2\">bài G2</a>.</p>\n<h4>Đề dựng quanh kịch bản</h4>\n<p>Mỗi kịch bản mô tả một bối cảnh sản xuất (một agent chăm sóc khách hàng, một pipeline CI…), rồi một loạt câu hỏi bám vào bối cảnh đó. Có ba hệ quả khi làm bài:</p>\n<ol>\n<li><strong>Đọc kỹ phần mô tả kịch bản một lần.</strong> Tên tool, mục tiêu (ví dụ tỉ lệ giải quyết ngay lần đầu), ràng buộc sẽ được dùng lại trong nhiều câu.</li>\n<li><strong>Mỗi câu vẫn độc lập.</strong> Tình huống cụ thể nằm trong thân câu, như log, số liệu, triệu chứng. Đáp án đúng phải khớp với triệu chứng đó, không chỉ khớp với kịch bản chung.</li>\n<li><strong>Câu hỏi thường không hỏi định nghĩa.</strong> Guide nói thí sinh phải thể hiện khả năng phán đoán về kiến trúc, cấu hình và đánh đổi, không chỉ thuộc khái niệm. Phần lớn câu yêu cầu chọn cách <em>tốt nhất</em> trong vài cách đều \"chạy được\". Cách chọn nằm ở <a href=\"#g-3\">bài G3</a>.</li>\n</ol>\n<h4>Những gì guide nói sẽ không ra</h4>\n<p>Phụ lục guide liệt kê các chủ đề nằm ngoài phạm vi thi. Một số mục đáng chú ý: fine-tuning, xác thực/billing/tài khoản API, computer use, xử lý ảnh (vision), triển khai streaming/SSE, rate limit và tính giá, chi tiết cài đặt prompt caching (chỉ cần biết nó tồn tại), thuật toán đếm token, cấu hình riêng của từng cloud, embedding và vector database, hạ tầng để host MCP server. Lời khuyên của site: phương án nào dựa chủ yếu vào những thứ này thì nhiều khả năng là phương án gây nhiễu.</p>\n<div class=\"tip\">Ngân sách thời gian (gợi ý của site): 120 phút cho 60 câu là 2 phút/câu. Đi một lượt trả lời hết, câu nào phân vân thì chọn tạm một đáp án rồi để dành thời gian quay lại, nếu giao diện thi cho phép xem lại câu trước (các trang chính thức không mô tả chi tiết này). Câu chọn nhiều đáp án tốn thời gian hơn, vì phải xét từng phương án riêng.</div>",
+    "keypoints": [
+     "60 câu, 120 phút, 4 kịch bản rút từ 6; câu chọn một hoặc chọn nhiều (đề ghi rõ số đáp án).",
+     "Điểm quy đổi 100–1.000, đậu 720; không có bảng đổi công khai sang % câu đúng.",
+     "Phiếu điểm: đậu/trượt, điểm quy đổi, % đúng theo domain (chỉ để tham khảo, không quyết định kết quả).",
+     "Tỉ trọng 27/18/20/20/15 ≈ 16/11/12/12/9 câu, nhưng thực tế lệch theo 4 kịch bản được rút.",
+     "Guide liệt kê chủ đề ngoài phạm vi (fine-tuning, vision, computer use, pricing…), phương án dựa vào chúng thường là nhiễu."
+    ],
+    "sources": [
+     {
+      "t": "Claude Certified Architect – Foundations: trang chứng chỉ (link Exam Guide PDF v1.0)",
+      "u": "https://anthropic-partners.skilljar.com/claude-certified-architect-foundations-certification"
+     },
+     {
+      "t": "Certification FAQ (định dạng, thời gian có mặt, điểm, phiếu điểm, ngôn ngữ)",
+      "u": "https://anthropic-partners.skilljar.com/page/faq-certifications"
+     }
+    ]
+   },
+   {
+    "id": "g-2",
+    "title": "Sáu kịch bản: mỗi kịch bản hỏi gì và ôn bài nào",
+    "minutes": 12,
+    "html": "<p>Exam guide công bố sẵn 6 kịch bản. Mỗi đề rút 4 trong số đó. Bạn không biết trước sẽ gặp kịch bản nào, nên phải ôn đủ cả 6. Tin tốt là các kịch bản dùng chung nhiều kiến thức. Cột \"Primary domains\" dưới đây chép theo guide. Cột task statement và bài cần ôn là phân tích của site, dựa trên nội dung từng task statement.</p>\n<h4>Bảng tổng quan</h4>\n<table>\n<thead><tr><th>Kịch bản</th><th>Primary domains (guide)</th><th>Task statement hay gặp (site phân tích)</th><th>Ôn bài</th></tr></thead>\n<tbody>\n<tr><td><strong>S1</strong> Customer Support Resolution Agent</td><td>D1, D2, D5</td><td>1.1, 1.4, 1.5, 2.1, 2.2, 5.1, 5.2</td><td><a href=\"#l-1-1\">1.1</a>, <a href=\"#l-1-3\">1.3</a>, <a href=\"#l-1-7\">1.7</a>, <a href=\"#l-2-1\">2.1</a>, <a href=\"#l-2-3\">2.3</a>, <a href=\"#l-5-1\">5.1</a>, <a href=\"#l-5-2\">5.2</a></td></tr>\n<tr><td><strong>S2</strong> Code Generation with Claude Code</td><td>D3, D5</td><td>3.1–3.5, 5.4</td><td><a href=\"#l-3-1\">3.1</a>, <a href=\"#l-3-2\">3.2</a>, <a href=\"#l-3-3\">3.3</a>, <a href=\"#l-3-5\">3.5</a>, <a href=\"#l-3-6\">3.6</a>, <a href=\"#l-5-4\">5.4</a></td></tr>\n<tr><td><strong>S3</strong> Multi-Agent Research System</td><td>D1, D2, D5</td><td>1.2, 1.3, 1.6, 2.2, 2.3, 5.3, 5.6</td><td><a href=\"#l-1-2\">1.2</a>, <a href=\"#l-1-5\">1.5</a>, <a href=\"#l-1-6\">1.6</a>, <a href=\"#l-2-2\">2.2</a>, <a href=\"#l-5-3\">5.3</a>, <a href=\"#l-5-5\">5.5</a></td></tr>\n<tr><td><strong>S4</strong> Developer Productivity with Claude</td><td>D2, D3, D1</td><td>2.1, 2.4, 2.5, 3.2, 3.4, 1.3, 1.7, 5.4</td><td><a href=\"#l-2-2\">2.2</a>, <a href=\"#l-2-4\">2.4</a>, <a href=\"#l-2-5\">2.5</a>, <a href=\"#l-1-4\">1.4</a>, <a href=\"#l-1-6\">1.6</a>, <a href=\"#l-5-4\">5.4</a></td></tr>\n<tr><td><strong>S5</strong> Claude Code for Continuous Integration</td><td>D3, D4</td><td>3.6, 4.1, 4.2, 4.5, 4.6, 1.6</td><td><a href=\"#l-3-4\">3.4</a>, <a href=\"#l-4-1\">4.1</a>, <a href=\"#l-4-4\">4.4</a>, <a href=\"#l-4-6\">4.6</a>, <a href=\"#l-1-5\">1.5</a></td></tr>\n<tr><td><strong>S6</strong> Structured Data Extraction</td><td>D4, D5</td><td>4.2, 4.3, 4.4, 4.5, 5.5</td><td><a href=\"#l-4-3\">4.3</a>, <a href=\"#l-4-5\">4.5</a>, <a href=\"#l-4-4\">4.4</a>, <a href=\"#l-4-1\">4.1</a>, <a href=\"#l-5-2\">5.2</a></td></tr>\n</tbody>\n</table>\n<p>Lưu ý: số thứ tự task statement (như 1.4) là của exam guide, còn số bài (như bài 1.4) là của site. Hai hệ đánh số này không trùng nhau.</p>\n<h4>S1: Agent chăm sóc khách hàng</h4>\n<p>Hệ thống: một agent viết bằng Agent SDK, xử lý đổi trả, tranh chấp thanh toán, vấn đề tài khoản qua các MCP tool nối vào backend (tra khách hàng, tra đơn, hoàn tiền, chuyển nhân viên). Mục tiêu guide đặt ra: giải quyết ngay lần liên hệ đầu tiên từ 80% ca trở lên, nhưng biết lúc nào phải chuyển người.</p>\n<ul>\n<li>Vòng lặp agent và <code>stop_reason</code>: <a href=\"#l-1-1\">bài 1.1</a>.</li>\n<li>Quy tắc tiền bạc, thứ tự bước bắt buộc: dùng hook hoặc điều kiện tiên quyết trong code, xem <a href=\"#l-1-3\">bài 1.3</a> và <a href=\"#l-1-7\">bài 1.7</a>.</li>\n<li>Tool bị chọn nhầm vì mô tả sơ sài, lỗi tool trả về chung chung: <a href=\"#l-2-1\">bài 2.1</a>, <a href=\"#l-2-3\">bài 2.3</a>.</li>\n<li>Hội thoại dài làm mất số tiền và mã đơn, khi nào escalate và cách bàn giao: <a href=\"#l-5-1\">bài 5.1</a>, <a href=\"#l-5-2\">bài 5.2</a>, <a href=\"#l-1-4\">bài 1.4</a>.</li>\n</ul>\n<h4>S2: Sinh code với Claude Code</h4>\n<p>Hệ thống: một nhóm dùng Claude Code hằng ngày để viết, refactor, debug, viết tài liệu. Câu hỏi xoay quanh việc cấu hình cho cả team và chọn cách làm việc.</p>\n<ul>\n<li>Thứ bậc CLAUDE.md (user / project / thư mục con), <code>@import</code>, <code>.claude/rules/</code> có <code>paths</code>: <a href=\"#l-3-1\">bài 3.1</a>.</li>\n<li>Skill và slash command, phạm vi project hay cá nhân, frontmatter: <a href=\"#l-3-2\">bài 3.2</a>.</li>\n<li>Plan mode hay làm thẳng: <a href=\"#l-3-3\">bài 3.3</a>. Cho ví dụ, test, phỏng vấn: <a href=\"#l-3-5\">bài 3.5</a>.</li>\n<li>Context đầy dần trong phiên dài: <a href=\"#l-3-6\">bài 3.6</a>, <a href=\"#l-5-4\">bài 5.4</a>.</li>\n</ul>\n<h4>S3: Hệ nghiên cứu nhiều agent</h4>\n<p>Hệ thống: một coordinator giao việc cho các subagent chuyên trách (tìm web, phân tích tài liệu, tổng hợp, viết báo cáo), đầu ra là báo cáo có trích dẫn.</p>\n<ul>\n<li>Coordinator chia việc, truyền context, gọi song song: <a href=\"#l-1-2\">bài 1.2</a>, <a href=\"#l-1-6\">bài 1.6</a>, <a href=\"#l-1-5\">bài 1.5</a>.</li>\n<li>Mỗi subagent chỉ có tool đúng vai trò: <a href=\"#l-2-2\">bài 2.2</a>.</li>\n<li>Lỗi từ subagent báo lên thế nào, kết quả rỗng khác thất bại ra sao: <a href=\"#l-5-3\">bài 5.3</a>, <a href=\"#l-2-3\">bài 2.3</a>.</li>\n<li>Giữ liên kết nhận định ↔ nguồn, xử lý số liệu mâu thuẫn: <a href=\"#l-5-5\">bài 5.5</a>, <a href=\"#l-5-3\">bài 5.3</a>.</li>\n</ul>\n<h4>S4: Công cụ năng suất cho developer</h4>\n<p>Hệ thống: một agent viết bằng Agent SDK giúp kỹ sư khám phá codebase lạ, hiểu hệ thống cũ, sinh boilerplate, tự động hóa việc lặp lại. Agent dùng built-in tool (Read, Write, Bash, Grep, Glob) và nối thêm MCP server.</p>\n<ul>\n<li>Chọn đúng built-in tool, tool_choice: <a href=\"#l-2-2\">bài 2.2</a>.</li>\n<li>Cấu hình MCP server (.mcp.json, biến môi trường), resources: <a href=\"#l-2-4\">bài 2.4</a>, <a href=\"#l-2-5\">bài 2.5</a>.</li>\n<li>Khám phá codebase lớn từng bước, scratchpad, subagent Explore: <a href=\"#l-5-4\">bài 5.4</a>.</li>\n<li>Resume hay mở phiên mới, fork phiên: <a href=\"#l-1-4\">bài 1.4</a>. Cấu hình subagent trong SDK: <a href=\"#l-1-6\">bài 1.6</a>.</li>\n</ul>\n<div class=\"warn\">Danh sách built-in tool trong kịch bản S4 có Grep và Glob. Docs Claude Code hiện ghi rằng trên macOS, Linux và WSL, hai tool này không nằm trong bộ tool mặc định (tháng 11/2026). Câu hỏi thi vẫn kiểm tra cách phân biệt Grep (tìm nội dung) với Glob (tìm theo tên file). Chi tiết ở <a href=\"#g-5\">bài G5</a>.</div>\n<h4>S5: Claude Code trong CI</h4>\n<p>Hệ thống: Claude Code chạy trong pipeline CI/CD để review pull request, sinh test và góp ý. Kịch bản nhấn mạnh việc góp ý phải dùng được và ít báo nhầm.</p>\n<ul>\n<li>Chạy không tương tác (<code>-p</code>), output JSON theo schema: <a href=\"#l-3-4\">bài 3.4</a>.</li>\n<li>Tiêu chí review cụ thể, few-shot, đo false positive: <a href=\"#l-4-1\">bài 4.1</a>, <a href=\"#l-4-6\">bài 4.6</a>.</li>\n<li>Batch hay đồng bộ, review nhiều lượt, review độc lập: <a href=\"#l-4-4\">bài 4.4</a>. Chia review theo file rồi thêm lượt tích hợp: <a href=\"#l-1-5\">bài 1.5</a>.</li>\n</ul>\n<h4>S6: Trích xuất dữ liệu có cấu trúc</h4>\n<p>Hệ thống: trích thông tin từ tài liệu không có cấu trúc, kiểm tra bằng JSON schema, giữ độ chính xác cao, xử lý ổn các ca biên và nối với hệ thống phía sau.</p>\n<ul>\n<li>Tool use / structured outputs, thiết kế schema (nullable, enum có \"other\"): <a href=\"#l-4-3\">bài 4.3</a>, <a href=\"#l-4-5\">bài 4.5</a>.</li>\n<li>Vòng validate rồi retry, khi nào retry vô ích: <a href=\"#l-4-3\">bài 4.3</a>.</li>\n<li>Message Batches API cho khối lượng lớn: <a href=\"#l-4-4\">bài 4.4</a>. Few-shot cho tài liệu đa dạng: <a href=\"#l-4-1\">bài 4.1</a>.</li>\n<li>Người duyệt, confidence, lấy mẫu phân tầng: <a href=\"#l-5-2\">bài 5.2</a>.</li>\n</ul>\n<div class=\"tip\">Theo cột primary domains của guide: Domain 1 và 2 cùng có mặt ở S1, S3, S4; Domain 3 ở S2, S4, S5; Domain 4 ở S5, S6; Domain 5 ở bốn kịch bản S1, S2, S3, S6. Nếu thời gian ôn ít, gợi ý của site là nắm chắc <a href=\"#l-1-3\">bài 1.3</a> (cưỡng chế bằng code), <a href=\"#l-2-1\">bài 2.1</a> (mô tả tool) và <a href=\"#l-4-3\">bài 4.3</a> (output có cấu trúc), vì đây là ba nguyên tắc được dùng lại nhiều nhất khi chọn đáp án (xem <a href=\"#g-3\">bài G3</a>).</div>",
+    "keypoints": [
+     "Guide công bố 6 kịch bản, mỗi đề rút 4, nên phải ôn cả 6.",
+     "Primary domains theo guide: S1 D1/D2/D5, S2 D3/D5, S3 D1/D2/D5, S4 D2/D3/D1, S5 D3/D4, S6 D4/D5.",
+     "Mô tả kịch bản cố định (tên tool, mục tiêu), còn chi tiết quyết định đáp án nằm trong từng câu.",
+     "Số task statement của guide (1.1–5.6) khác với số bài của site."
+    ],
+    "sources": [
+     {
+      "t": "Claude Certified Architect – Foundations: trang chứng chỉ (Exam Guide PDF, mục 5–6: kịch bản và task statement)",
+      "u": "https://anthropic-partners.skilljar.com/claude-certified-architect-foundations-certification"
+     },
+     {
+      "t": "Claude Code tools reference (Glob/Grep trên macOS, Linux, WSL)",
+      "u": "https://code.claude.com/docs/en/tools-reference"
+     }
+    ]
+   },
+   {
+    "id": "g-3",
+    "title": "Cách chọn đáp án: nguyên tắc cho câu hỏi “tốt nhất”",
+    "minutes": 13,
+    "html": "<p>Phần lớn câu CCAR-F đưa ra 4 cách đều có lý. Sai lầm thường gặp là chọn cách \"nghe xịn nhất\" thay vì cách đúng với triệu chứng. Các nguyên tắc dưới đây do site rút ra từ phần mô tả kiến thức và kỹ năng trong exam guide (mục 6) cùng phần giải thích của các câu mẫu. Đây là cách diễn đạt và ví dụ của site, không phải câu chữ của guide.</p>\n<h4>0. Đọc xem câu hỏi tối ưu cho cái gì</h4>\n<p>Trước khi đọc phương án, gạch chân cụm từ quyết định trong câu hỏi:</p>\n<ul>\n<li><strong>\"first step\", \"bước đầu tiên\"</strong>: chọn thay đổi rẻ nhất mà vẫn nhắm đúng nguyên nhân, không chọn giải pháp tổng thể.</li>\n<li><strong>\"most reliable\", \"guarantee\"</strong>: ưu tiên cơ chế xác định (code, schema, cấu hình) hơn cơ chế xác suất (lời dặn).</li>\n<li><strong>\"reduce cost\", \"latency\"</strong>: so sánh theo chi phí và độ trễ, không theo độ chính xác.</li>\n<li><strong>\"team-wide\", \"shared\"</strong>: chọn cấu hình cấp project được commit, không chọn cấu hình cá nhân.</li>\n</ul>\n<h4>1. Quy tắc cứng thì cưỡng chế bằng code</h4>\n<p>Khi sai một lần là mất tiền, lộ dữ liệu hoặc sai thứ tự nghiệp vụ, lời dặn trong prompt không đủ, vì model tuân theo lời dặn với xác suất cao nhưng không phải 100%. Hãy chọn hook, điều kiện tiên quyết trong tool, hoặc deny rule. Docs Claude Code cũng khuyên: quy tắc không được phép uốn thì biến thành hook hoặc deny rule.</p>\n<p><em>Ví dụ của site:</em> một agent kế toán tuyệt đối không được tạo giao dịch chuyển khoản tới tài khoản chưa có trong danh bạ đã duyệt. Thêm dòng \"IMPORTANT\" vào system prompt hay thêm few-shot đều chỉ giảm tỉ lệ sai. Một hook trước lời gọi tool <code>create_transfer</code>, kiểm tra tài khoản nhận và chặn nếu không hợp lệ, mới bảo đảm được. Xem <a href=\"#l-1-3\">bài 1.3</a>, <a href=\"#l-1-7\">bài 1.7</a>.</p>\n<p>Ngược lại, với hành vi mang tính phán đoán (giọng văn, khi nào hỏi lại khách), prompt và few-shot là công cụ đúng. Viết hook cho mấy chuyện này là thừa.</p>\n<h4>2. Tìm nguyên nhân gốc trong thân câu, rồi sửa đúng chỗ đó</h4>\n<p>Thân câu thường cài sẵn bằng chứng: log, số liệu, một mô tả tool sơ sài, một bước chia việc thiếu. Đáp án đúng sửa đúng chỗ bằng chứng chỉ ra. Phương án gây nhiễu thường sửa ở tầng khác, nghe hợp lý nhưng không chạm vào nguyên nhân.</p>\n<p><em>Ví dụ của site:</em> báo cáo nghiên cứu về \"năng lượng tái tạo ở Đông Nam Á\" chỉ nói về Việt Nam và Thái Lan. Log cho thấy coordinator chỉ tạo hai nhiệm vụ con cho hai nước đó. Nguyên nhân nằm ở bước chia việc của coordinator, nên sửa ở đó. Chỉnh các subagent phía sau không bù được phần việc chưa từng được giao. Xem <a href=\"#l-1-2\">bài 1.2</a>.</p>\n<h4>3. Sửa đơn giản trước khi thêm tầng phức tạp</h4>\n<p>Nếu một thay đổi nhỏ (viết lại mô tả tool, thêm tiêu chí cụ thể, chuyển file cấu hình sang đúng phạm vi) đủ giải quyết triệu chứng, thì đó thường là đáp án. Thêm bộ phân loại, router, model thứ hai hay gộp tool là những phương án nặng nề. Phần giải thích câu mẫu trong guide cũng xếp kiểu phương án này vào nhóm sai khi cách đơn giản chưa được thử. Xem <a href=\"#l-2-1\">bài 2.1</a>.</p>\n<h4>4. Quyền tối thiểu, công cụ cụ thể nhất</h4>\n<ul>\n<li>Mỗi agent chỉ nhận tool đúng vai trò. Nếu cần thêm khả năng cho một agent, cấp một tool hẹp cho nhu cầu hay gặp, đừng cấp cả bộ tool của agent khác. Xem <a href=\"#l-2-2\">bài 2.2</a>.</li>\n<li>Một tool chung chung (đọc mọi URL, chạy mọi lệnh) kém hơn một tool có ràng buộc rõ, kiểm tra đầu vào.</li>\n<li>Cấu hình cũng vậy: cái gì cả team cần thì để ở project, cái gì thử nghiệm cá nhân thì để ở user. Xem <a href=\"#l-3-1\">bài 3.1</a>, <a href=\"#l-2-4\">bài 2.4</a>.</li>\n</ul>\n<h4>5. Loại phương án \"to hơn\" khi nguyên nhân ở chỗ khác</h4>\n<p>Các phương án như đổi sang model lớn hơn, mở context window rộng hơn, tăng <code>max_tokens</code>, retry nhiều lần hơn hay bật suy luận sâu hơn là phương án nhiễu điển hình. Chúng hấp dẫn vì có vẻ \"nâng cấp\". Hãy tự hỏi: triệu chứng có thật sự do thiếu năng lực hay thiếu chỗ chứa không?</p>\n<ul>\n<li>Review bỏ sót lỗi khi đưa quá nhiều file vào một lượt: vấn đề là sự chú ý bị loãng. Cách đúng là chia lượt (<a href=\"#l-1-5\">bài 1.5</a>). Context lớn hơn không chữa được.</li>\n<li>Trích xuất ra <code>null</code> vì tài liệu thật sự không chứa thông tin đó: retry bao nhiêu lần cũng vô ích (<a href=\"#l-4-3\">bài 4.3</a>).</li>\n<li>Model tự review code của chính nó trong cùng phiên: dù bật suy luận sâu, nó vẫn mang theo lập luận cũ. Cần một instance độc lập (<a href=\"#l-4-6\">bài 4.6</a>).</li>\n</ul>\n<h4>6. Tiêu chí cụ thể và ví dụ thắng lời dặn chung chung</h4>\n<p>\"Hãy cẩn thận\", \"chỉ báo khi chắc chắn\", \"be conservative\" là những lời dặn không đo được, và guide nêu rõ chúng không cải thiện precision (tỉ lệ finding báo ra là đúng) bằng tiêu chí phân loại cụ thể. Phương án tốt định nghĩa rõ cái gì cần báo, cái gì bỏ qua, kèm 2–4 ví dụ cho các ca mập mờ. Xem <a href=\"#l-4-1\">bài 4.1</a>.</p>\n<h4>7. Biết mỗi cơ chế bảo đảm được gì</h4>\n<table>\n<thead><tr><th>Cơ chế</th><th>Bảo đảm</th><th>Không bảo đảm</th></tr></thead>\n<tbody>\n<tr><td>JSON schema qua tool use / structured outputs</td><td>Đúng cú pháp, đúng cấu trúc</td><td>Đúng nghĩa (tổng có khớp không, giá trị có đặt đúng trường không)</td></tr>\n<tr><td>Hook / gate trong code</td><td>Hành động bị chặn hoặc cho qua một cách xác định</td><td>Model hiểu vì sao bị chặn (phải trả thông điệp rõ)</td></tr>\n<tr><td>Prompt, few-shot</td><td>Định hướng phán đoán</td><td>Tuân thủ 100%</td></tr>\n<tr><td>Subagent</td><td>Context riêng, tách output dài khỏi luồng chính</td><td>Tự biết những gì coordinator biết</td></tr>\n<tr><td>Message Batches API</td><td>Rẻ hơn cho việc không gấp</td><td>Thời gian xong có cam kết (docs: phần lớn batch xong dưới 1 giờ, nhưng có thể tới 24 giờ)</td></tr>\n</tbody>\n</table>\n<h4>8. Escalation: theo tiêu chí, không theo cảm xúc</h4>\n<p>Khách yêu cầu gặp người thật thì chuyển ngay. Chính sách không nói gì về trường hợp của khách thì escalate. Mức độ bực bội của khách hay điểm tự tin model tự báo không phải thước đo tốt cho độ khó của ca. Xem <a href=\"#l-5-2\">bài 5.2</a>.</p>\n<h4>Kỹ thuật làm câu</h4>\n<ol>\n<li>Đọc câu hỏi trước, rồi mới đọc lại thân câu để tìm bằng chứng.</li>\n<li>Loại ngay phương án không chạm vào triệu chứng, hoặc dựa vào chủ đề ngoài phạm vi thi.</li>\n<li>Còn hai phương án thì so theo nguyên tắc 1–3: cái nào xác định hơn, sửa gốc hơn, đơn giản hơn.</li>\n<li>Câu chọn nhiều đáp án: xét từng phương án như một câu đúng/sai riêng, và chọn đúng số lượng đề yêu cầu.</li>\n<li>Trả lời theo \"thế giới của đề\": dùng khái niệm và tên gọi như trong exam guide. Nếu sản phẩm hiện tại đã đổi tên hay đổi hành vi, xem <a href=\"#g-5\">bài G5</a> để biết cách xử lý.</li>\n</ol>",
+    "keypoints": [
+     "Gạch chân thứ câu hỏi tối ưu (first step, most reliable, cost, team-wide) trước khi đọc phương án.",
+     "Quy tắc cứng (tiền, bảo mật, thứ tự bước) dùng hook/gate trong code; prompt chỉ cho hành vi mang tính phán đoán.",
+     "Tìm nguyên nhân trong thân câu và sửa đúng chỗ; thay đổi đơn giản trước khi thêm router, classifier hay model khác.",
+     "Loại phương án “to hơn” (model lớn hơn, context rộng hơn, retry nhiều hơn) khi nguyên nhân là chú ý bị loãng, thiếu dữ liệu hoặc tự review.",
+     "Tiêu chí cụ thể + ví dụ thắng lời dặn chung; schema bảo đảm cú pháp chứ không bảo đảm đúng nghĩa."
+    ],
+    "sources": [
+     {
+      "t": "Claude Certified Architect – Foundations: trang chứng chỉ (Exam Guide PDF, mục 6 và 9)",
+      "u": "https://anthropic-partners.skilljar.com/claude-certified-architect-foundations-certification"
+     },
+     {
+      "t": "Claude Code best practices (quy tắc không được uốn thì dùng hook hoặc deny rule)",
+      "u": "https://code.claude.com/docs/en/best-practices"
+     }
+    ]
+   },
+   {
+    "id": "g-4",
+    "title": "Bẫy theo từng kịch bản",
+    "minutes": 14,
+    "html": "<p>Mỗi kịch bản có vài kiểu phương án sai lặp đi lặp lại. Nhận ra kiểu bẫy giúp loại phương án nhanh hơn. Đây là phân tích của site dựa trên task statement trong exam guide. Câu thật có thể khác.</p>\n<h4>S1: Agent chăm sóc khách hàng</h4>\n<table>\n<thead><tr><th>Bẫy</th><th>Vì sao sai</th><th>Ôn</th></tr></thead>\n<tbody>\n<tr><td>Ép quy tắc nghiệp vụ (giới hạn hoàn tiền, xác minh danh tính trước) chỉ bằng system prompt hoặc few-shot</td><td>Lời dặn có tỉ lệ thất bại khác 0. Với thao tác tài chính, phải chặn bằng hook hoặc điều kiện tiên quyết trong code.</td><td><a href=\"#l-1-3\">1.3</a>, <a href=\"#l-1-7\">1.7</a></td></tr>\n<tr><td>Escalate theo cảm xúc của khách hoặc theo điểm tự tin model tự báo</td><td>Đó là những thước đo kém cho độ khó của ca. Nên dùng tiêu chí rõ: khách đòi gặp người, chính sách không nói tới, không tiến triển được.</td><td><a href=\"#l-5-2\">5.2</a></td></tr>\n<tr><td>Khách đã đòi gặp người mà agent vẫn cố điều tra thêm, hoặc tool trả về nhiều khách trùng tên mà agent tự chọn một</td><td>Yêu cầu gặp người thì làm ngay. Nhiều kết quả khớp thì phải hỏi thêm thông tin định danh, không đoán.</td><td><a href=\"#l-5-2\">5.2</a></td></tr>\n<tr><td>Tóm tắt dần lịch sử hội thoại dài, để số tiền và mã đơn bị nhòe đi</td><td>Dữ kiện giao dịch nên tách thành khối \"case facts\" đưa vào mỗi lượt, nằm ngoài phần tóm tắt.</td><td><a href=\"#l-5-1\">5.1</a></td></tr>\n</tbody>\n</table>\n<h4>S2: Sinh code với Claude Code</h4>\n<table>\n<thead><tr><th>Bẫy</th><th>Vì sao sai</th><th>Ôn</th></tr></thead>\n<tbody>\n<tr><td>Đặt quy ước cho cả team trong <code>~/.claude/CLAUDE.md</code></td><td>File cấp user chỉ áp dụng cho một người, không đi theo git. Quy ước team phải nằm ở CLAUDE.md cấp project.</td><td><a href=\"#l-3-1\">3.1</a></td></tr>\n<tr><td>Dùng CLAUDE.md trong thư mục con cho quy ước áp dụng cho file rải khắp repo (ví dụ mọi file test)</td><td>CLAUDE.md thư mục con gắn với một cây thư mục. Rule trong <code>.claude/rules/</code> có <code>paths</code> dạng glob thì bắt theo loại file, ở thư mục nào cũng được.</td><td><a href=\"#l-3-1\">3.1</a></td></tr>\n<tr><td>Bật plan mode cho sửa một dòng có stack trace rõ, hoặc làm thẳng một cuộc di chuyển kiến trúc lớn</td><td>Plan mode dành cho việc lớn, nhiều cách làm, ảnh hưởng nhiều file. Việc nhỏ và rõ phạm vi thì làm thẳng.</td><td><a href=\"#l-3-3\">3.3</a></td></tr>\n<tr><td>Viết thêm đoạn mô tả dài khi Claude hiểu sai phép biến đổi mong muốn</td><td>2–3 ví dụ input/output cụ thể, hoặc test viết trước, truyền đạt rõ hơn văn xuôi.</td><td><a href=\"#l-3-5\">3.5</a></td></tr>\n<tr><td>Nhét quy trình dùng thỉnh thoảng vào CLAUDE.md</td><td>CLAUDE.md luôn được nạp. Quy trình theo nhu cầu nên làm thành skill để gọi khi cần.</td><td><a href=\"#l-3-2\">3.2</a></td></tr>\n</tbody>\n</table>\n<h4>S3: Hệ nghiên cứu nhiều agent</h4>\n<table>\n<thead><tr><th>Bẫy</th><th>Vì sao sai</th><th>Ôn</th></tr></thead>\n<tbody>\n<tr><td>Cho rằng subagent tự biết những gì coordinator đã thấy</td><td>Subagent bắt đầu với context riêng (docs hiện tại có ngoại lệ là fork, xem <a href=\"#g-5\">bài G5</a>). Kết quả của bước trước phải được đưa thẳng vào prompt giao việc.</td><td><a href=\"#l-1-2\">1.2</a>, <a href=\"#l-1-6\">1.6</a></td></tr>\n<tr><td>Đổ lỗi cho subagent khi báo cáo thiếu mảng, trong khi coordinator chia việc quá hẹp</td><td>Đọc log của coordinator trước. Nếu bước phân rã đã thiếu, sửa ở đó.</td><td><a href=\"#l-1-2\">1.2</a>, <a href=\"#l-1-5\">1.5</a></td></tr>\n<tr><td>Subagent lỗi thì trả về rỗng như thành công, hoặc dừng cả pipeline</td><td>Cả hai đều là anti-pattern. Nên báo lỗi có cấu trúc: loại lỗi, đã thử gì, kết quả một phần, hướng thay thế. Coordinator quyết định tiếp.</td><td><a href=\"#l-5-3\">5.3</a>, <a href=\"#l-2-3\">2.3</a></td></tr>\n<tr><td>Cấp mọi tool cho mọi subagent \"cho linh hoạt\"</td><td>Nhiều tool làm việc chọn tool kém tin cậy hơn, và agent dễ làm việc ngoài vai trò. Chỉ cấp tool đúng vai trò, thêm tool hẹp nếu cần.</td><td><a href=\"#l-2-2\">2.2</a></td></tr>\n<tr><td>Gặp hai nguồn uy tín cho số liệu khác nhau thì chọn một, hoặc tóm tắt làm mất nguồn</td><td>Giữ cả hai giá trị kèm nguồn và ngày, ghi chú mâu thuẫn. Giữ ánh xạ nhận định ↔ nguồn qua mọi bước.</td><td><a href=\"#l-5-5\">5.5</a>, <a href=\"#l-5-3\">5.3</a></td></tr>\n</tbody>\n</table>\n<h4>S4: Công cụ năng suất cho developer</h4>\n<table>\n<thead><tr><th>Bẫy</th><th>Vì sao sai</th><th>Ôn</th></tr></thead>\n<tbody>\n<tr><td>Đọc hết các file ngay từ đầu để \"hiểu toàn bộ\" codebase</td><td>Làm đầy context bằng thứ không cần. Nên tìm điểm vào bằng tìm kiếm nội dung, rồi đọc lần theo import.</td><td><a href=\"#l-5-4\">5.4</a></td></tr>\n<tr><td>Nhầm Grep và Glob</td><td>Grep tìm <em>nội dung</em> trong file (tên hàm, thông báo lỗi). Glob tìm <em>đường dẫn</em> theo mẫu tên.</td><td><a href=\"#l-2-2\">2.2</a></td></tr>\n<tr><td>Tự viết MCP server cho tích hợp phổ biến, hoặc ghi token thẳng vào <code>.mcp.json</code></td><td>Tích hợp chuẩn nên dùng server có sẵn. Bí mật nên dùng biến môi trường trong <code>.mcp.json</code> (dạng <code>${TOKEN}</code>), không commit giá trị thật.</td><td><a href=\"#l-2-4\">2.4</a>, <a href=\"#l-2-5\">2.5</a></td></tr>\n<tr><td>Agent cứ dùng built-in tool thay cho MCP tool mạnh hơn, và phương án đề xuất thêm luật cấm trong prompt</td><td>Gốc rễ thường là mô tả MCP tool quá sơ sài. Viết rõ tool làm được gì, trả về gì.</td><td><a href=\"#l-2-4\">2.4</a>, <a href=\"#l-2-1\">2.1</a></td></tr>\n<tr><td>Resume phiên cũ khi code đã đổi nhiều</td><td>Kết quả tool cũ đã lỗi thời. Hoặc báo cho phiên biết file nào đã đổi, hoặc mở phiên mới kèm bản tóm tắt.</td><td><a href=\"#l-1-4\">1.4</a></td></tr>\n</tbody>\n</table>\n<h4>S5: Claude Code trong CI</h4>\n<table>\n<thead><tr><th>Bẫy</th><th>Vì sao sai</th><th>Ôn</th></tr></thead>\n<tbody>\n<tr><td>Chạy <code>claude</code> trong pipeline mà không có <code>-p</code>, hoặc tìm cách \"giả lập bàn phím\"</td><td><code>-p</code> (<code>--print</code>) là chế độ không tương tác được tài liệu hóa. Muốn output máy đọc được thì thêm <code>--output-format json</code> với <code>--json-schema</code>.</td><td><a href=\"#l-3-4\">3.4</a></td></tr>\n<tr><td>Giảm báo nhầm bằng \"be conservative\" hoặc \"chỉ báo khi chắc chắn\"</td><td>Cần tiêu chí cụ thể theo loại lỗi. Có thể tạm tắt hạng mục hay báo nhầm trong lúc sửa prompt.</td><td><a href=\"#l-4-1\">4.1</a>, <a href=\"#l-4-6\">4.6</a></td></tr>\n<tr><td>Dùng Message Batches API cho kiểm tra chặn merge</td><td>Batch không có cam kết độ trễ, chỉ hợp với việc chờ được (chạy đêm, chạy hằng tuần).</td><td><a href=\"#l-4-4\">4.4</a></td></tr>\n<tr><td>Để chính phiên đã sinh code tự review</td><td>Phiên đó mang theo lập luận của chính nó. Review bằng một instance độc lập.</td><td><a href=\"#l-4-4\">4.4</a>, <a href=\"#l-4-6\">4.6</a></td></tr>\n<tr><td>Chạy lại review sau commit mới và đăng lại toàn bộ góp ý</td><td>Đưa các finding cũ vào context, chỉ báo lỗi mới hoặc lỗi chưa sửa.</td><td><a href=\"#l-4-6\">4.6</a></td></tr>\n</tbody>\n</table>\n<h4>S6: Trích xuất dữ liệu có cấu trúc</h4>\n<table>\n<thead><tr><th>Bẫy</th><th>Vì sao sai</th><th>Ôn</th></tr></thead>\n<tbody>\n<tr><td>Để trường \"bắt buộc\" cho thông tin tài liệu có thể không có</td><td>Model dễ bịa giá trị cho đủ schema. Trường đó nên cho phép null.</td><td><a href=\"#l-4-3\">4.3</a>, <a href=\"#l-4-5\">4.5</a></td></tr>\n<tr><td>Tin rằng schema chặt thì dữ liệu chắc đúng</td><td>Schema chỉ chặn lỗi cú pháp. Lỗi nghĩa (tổng không khớp, giá trị sai trường) cần validate thêm, ví dụ so tổng tự tính với tổng ghi trên tài liệu.</td><td><a href=\"#l-4-3\">4.3</a></td></tr>\n<tr><td>Retry khi thông tin không có trong tài liệu</td><td>Retry kèm lỗi validate có tác dụng với lỗi định dạng hay cấu trúc. Thiếu dữ liệu nguồn thì retry vô ích.</td><td><a href=\"#l-4-3\">4.3</a></td></tr>\n<tr><td>Thấy độ chính xác tổng 9x% là bỏ bớt người duyệt</td><td>Con số tổng có thể che một loại tài liệu hoặc một trường rất kém. Đo theo từng loại và từng trường, lấy mẫu phân tầng.</td><td><a href=\"#l-5-2\">5.2</a></td></tr>\n<tr><td>Batch lỗi thì gửi lại cả lô</td><td>Dùng <code>custom_id</code> để gửi lại đúng những request lỗi, có điều chỉnh (ví dụ chia nhỏ tài liệu quá dài).</td><td><a href=\"#l-4-4\">4.4</a></td></tr>\n</tbody>\n</table>\n<div class=\"warn\">Bẫy chung cho mọi kịch bản: phương án viết rất dài, nhiều thuật ngữ, đề xuất kiến trúc mới. Độ dài không phải dấu hiệu đúng. Hỏi lại: nó có sửa đúng triệu chứng trong thân câu không?</div>",
+    "keypoints": [
+     "S1: quy tắc tiền bạc phải nằm trong code; escalate theo tiêu chí, không theo cảm xúc hay tự tin; giữ case facts ngoài phần tóm tắt.",
+     "S2: quy ước team ở cấp project; quy ước theo loại file dùng .claude/rules với paths; plan mode chỉ cho việc lớn.",
+     "S3: subagent không thừa hưởng context; lỗi báo có cấu trúc kèm kết quả một phần; giữ nguồn và giữ cả số liệu mâu thuẫn.",
+     "S4/S5: tìm rồi mới đọc; không commit bí mật; CI dùng -p; batch không dùng cho kiểm tra chặn merge; review bằng instance độc lập.",
+     "S6: trường có thể thiếu thì nullable; schema không bảo đảm đúng nghĩa; retry vô ích khi nguồn không có dữ liệu."
+    ],
+    "sources": [
+     {
+      "t": "Claude Certified Architect – Foundations: trang chứng chỉ (Exam Guide PDF, mục 6: task statement)",
+      "u": "https://anthropic-partners.skilljar.com/claude-certified-architect-foundations-certification"
+     },
+     {
+      "t": "Run Claude Code programmatically (-p, --output-format json, --json-schema)",
+      "u": "https://code.claude.com/docs/en/headless"
+     }
+    ]
+   },
+   {
+    "id": "g-5",
+    "title": "Exam guide và docs hiện tại khác nhau ở đâu",
+    "minutes": 13,
+    "html": "<p>Exam guide CCAR-F bản 1.0 có hiệu lực từ tháng 7/2026. Claude Code, Agent SDK, Claude API và MCP thay đổi nhanh hơn thế. Bảng dưới đây liệt kê những chỗ docs chính thức hiện tại (đọc tháng 11/2026) khác với cách exam guide hoặc tài liệu ôn cũ mô tả. Khi bài nói \"guide ghi\" thì đó là nội dung có trong exam guide. Khi bài nói \"tài liệu ôn cũ thường giả định\" thì đó là giả định phổ biến mà guide không nói thẳng.</p>\n<h4>Nguyên tắc chung</h4>\n<ul>\n<li><strong>Trong phòng thi:</strong> câu hỏi được viết theo task statement của guide. Hãy trả lời theo khái niệm mà guide kiểm tra. Đừng loại một phương án chỉ vì nó dùng tên cũ.</li>\n<li><strong>Ngoài phòng thi:</strong> khi viết code hoặc cấu hình thật, làm theo docs hiện tại.</li>\n<li>Nếu thấy một câu hỏi có nhiều hơn một đáp án bảo vệ được vì sản phẩm đã đổi, trang Policies cho phép báo lỗi câu hỏi với Pearson (xem <a href=\"#g-7\">bài G7</a>).</li>\n</ul>\n<h4>Bảng khác biệt</h4>\n<table>\n<thead><tr><th>Chủ đề</th><th>Guide / tài liệu ôn cũ</th><th>Docs hiện ghi (tháng 11/2026)</th><th>Trả lời thế nào</th></tr></thead>\n<tbody>\n<tr><td>Tên tool tạo subagent</td><td>Guide gọi là <strong>Task tool</strong> và ghi <code>allowedTools</code> của coordinator phải có <code>\"Task\"</code>.</td><td>Từ Claude Code v2.1.63, tool được đổi tên thành <code>Agent</code>. Trong khối <code>tool_use</code> tên là <code>\"Agent\"</code>, nhưng trong danh sách tool của message <code>system:init</code> vẫn là <code>\"Task\"</code>. Tham chiếu <code>Task(...)</code> cũ trong settings và định nghĩa agent vẫn chạy như alias. Code phát hiện subagent nên khớp cả hai tên. <a href=\"https://code.claude.com/docs/en/agent-sdk/subagents\">Agent SDK: Subagents</a>, <a href=\"https://code.claude.com/docs/en/sub-agents\">Claude Code: Subagents</a></td><td>Coi \"Task tool\" và \"Agent tool\" là một. Câu hỏi kiểm tra ý: coordinator phải được cấp tool này mới tạo được subagent.</td></tr>\n<tr><td>Subagent lồng nhau</td><td>Tài liệu ôn cũ thường giả định subagent không tự tạo subagent con.</td><td>Mặc định một subagent được tạo subagent của riêng nó, tối đa 3 tầng dưới hội thoại chính. Biến <code>CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH</code> đổi giới hạn, đặt <code>1</code> thì tắt lồng nhau. <a href=\"https://code.claude.com/docs/en/sub-agents\">Claude Code: Subagents</a></td><td>Guide vẫn kiểm tra mô hình hub-and-spoke: mọi giao tiếp đi qua coordinator để dễ quan sát và xử lý lỗi thống nhất. Nếu câu hỏi nói về khả năng quan sát hay kiểm soát luồng thông tin, chọn phương án đi qua coordinator.</td></tr>\n<tr><td>Subagent có thừa hưởng context của cha không</td><td>Guide (task statement 1.2, 1.3) ghi subagent không tự động thừa hưởng lịch sử hội thoại hay context của coordinator, nên phải đưa đủ thông tin vào prompt.</td><td>Subagent thường vẫn bắt đầu với context mới, chỉ nhận chuỗi prompt của tool Agent. Ngoại lệ là <em>fork</em>: một subagent sao chép toàn bộ hội thoại đến thời điểm đó. Fork mode bật mặc định từ v2.1.302 (phiên terminal tương tác từ v2.1.232), khi đó Claude có thể tự mở fork. Tắt bằng <code>CLAUDE_CODE_FORK_SUBAGENT=0</code>, hoặc trong Agent SDK bằng deny rule <code>Agent(fork)</code>. <a href=\"https://code.claude.com/docs/en/sub-agents\">Claude Code: Subagents</a>, <a href=\"https://code.claude.com/docs/en/agent-sdk/subagents\">Agent SDK: Subagents</a></td><td>Trả lời theo guide: muốn subagent biết kết quả của bước trước thì đưa thẳng vào prompt giao việc. Đừng nhầm fork subagent với <code>fork_session</code> mà guide nhắc ở task statement 1.7 (tách nhánh một session).</td></tr>\n<tr><td>Ép gọi tool bằng <code>tool_choice</code></td><td>Guide dạy dùng <code>\"any\"</code> hoặc ép một tool cụ thể để bảo đảm có output có cấu trúc.</td><td><code>any</code> và <code>tool</code> trả lỗi 400 trên Claude Fable 5.2, Mythos 5.2, Opus 5.5, Sonnet 5.5, Fable 5.1, Mythos 5.1. Khi bật extended thinking thủ công (<code>thinking: {type: \"enabled\"}</code>), <code>any</code> và <code>tool</code> cũng lỗi. Docs khuyên dùng <code>auto</code> kèm strict tool use, hoặc structured outputs. <a href=\"https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools\">Define tools</a>, <a href=\"https://platform.claude.com/docs/en/api/errors\">API errors</a></td><td>Trong đề, phân biệt <code>auto</code> / <code>any</code> / ép tool đúng như guide. Ngoài đời, kiểm tra model trước khi dùng forced tool use.</td></tr>\n<tr><td>Prefill câu trả lời của assistant</td><td>Tài liệu ôn cũ thường dạy prefill (ví dụ mở sẵn <code>{</code>) để ép JSON.</td><td>Claude 4.6 trở về sau và Claude Mythos Preview không hỗ trợ prefill. Request kết thúc bằng message assistant được điền sẵn sẽ nhận lỗi 400 <code>invalid_request_error</code>. Thay bằng structured outputs hoặc lời dặn trong system prompt. <a href=\"https://platform.claude.com/docs/en/api/errors\">API errors</a></td><td>Guide không dựa vào prefill. Câu hỏi về JSON tin cậy thì chọn schema (tool use / structured outputs).</td></tr>\n<tr><td>Grep và Glob</td><td>Kịch bản S4 và task statement 2.5 coi Read, Write, Edit, Bash, Grep, Glob là built-in tool.</td><td>Trên macOS, Linux và WSL, Claude Code bỏ Glob và Grep khỏi bộ tool mặc định. Claude tìm bằng <code>find</code> và <code>grep</code> qua Bash. Hai tool này quay lại nếu bạn ghi tên chúng trong <code>--tools</code> / <code>--allowedTools</code> (hoặc option tương đương của Agent SDK), hoặc khi một subagent liệt kê chúng mà không có Bash. Trên Windows chúng vẫn mặc định có. <a href=\"https://code.claude.com/docs/en/tools-reference\">Tools reference</a></td><td>Đề vẫn hỏi: tìm nội dung dùng Grep, tìm theo tên file dùng Glob. Trả lời theo phân biệt đó.</td></tr>\n<tr><td>Custom slash command</td><td>Guide tách riêng <code>.claude/commands/</code> (command) và <code>.claude/skills/</code> (skill).</td><td>Custom command đã được gộp vào skill. <code>.claude/commands/deploy.md</code> và <code>.claude/skills/deploy/SKILL.md</code> đều tạo <code>/deploy</code>. File command cũ vẫn chạy. Nếu trùng tên, skill được ưu tiên. <a href=\"https://code.claude.com/docs/en/skills\">Skills</a></td><td>Điều đề kiểm tra là phạm vi: thư mục trong project (commit lên git, cả team dùng) hay trong <code>~/.claude/</code> (cá nhân).</td></tr>\n<tr><td><code>allowed-tools</code> trong frontmatter skill</td><td>Guide mô tả <code>allowed-tools</code> là cách giới hạn tool khi skill chạy.</td><td>Docs ghi <code>allowed-tools</code> <em>cấp quyền trước</em> cho các tool liệt kê trong lượt gọi skill, để khỏi hỏi lại. Nó không giới hạn tool nào được gọi. Muốn bỏ tool khỏi tầm dùng khi skill chạy thì dùng <code>disallowed-tools</code>, hoặc deny rule trong settings. <a href=\"https://code.claude.com/docs/en/skills\">Skills</a></td><td>Đề viết theo guide, nên nếu câu hỏi coi <code>allowed-tools</code> là cách giới hạn tool cho skill thì hiểu theo nghĩa đó. Khi cấu hình thật, nhớ khác biệt này.</td></tr>\n<tr><td>Lỗi kiểm tra input của MCP tool</td><td>Tài liệu ôn dựa trên spec cũ hơn thường coi tham số sai là protocol error (lỗi JSON-RPC).</td><td>Từ spec 2025-11-25, lỗi kiểm tra input được trả như tool execution error trong kết quả (<code>isError: true</code>) để model tự sửa. Spec hiện tại 2026-07-28 vẫn giữ cách này. <a href=\"https://modelcontextprotocol.io/specification/2025-11-25/changelog\">MCP changelog 2025-11-25</a>, <a href=\"https://modelcontextprotocol.io/specification/2026-07-28/server/tools\">MCP Tools (2026-07-28)</a></td><td>Khớp với guide (mẫu cờ <code>isError</code>). Chọn phương án trả lỗi có cấu trúc trong kết quả tool.</td></tr>\n<tr><td>Chế độ quyền khi khởi động Claude Code</td><td>Tài liệu ôn cũ thường giả định Claude Code luôn hỏi trước từng thao tác.</td><td>Từ v2.1.283, phiên tương tác trong terminal và VS Code mặc định khởi động ở auto mode (một classifier quyết định phần lớn yêu cầu cấp quyền), nếu phiên đủ điều kiện dùng auto mode. <code>claude -p</code> và Agent SDK không đặt chế độ thì khởi động ở <code>default</code> (tên hiển thị là Manual; docs ghi rõ từ v2.1.302). Ở chế độ này, lời gọi cần duyệt bị từ chối nếu không có allow rule, hook hay cơ chế duyệt khác. <a href=\"https://code.claude.com/docs/en/permission-modes\">Permission modes</a></td><td>Guide không kiểm tra chế độ quyền. Khi dựng CI thật, nhớ rằng <code>-p</code> không tự vào auto mode. Lời khuyên của site: khai báo tường minh tool và quyền mà job cần.</td></tr>\n<tr><td>\"Dùng subagent để bảo vệ context window\"</td><td>Guide (task statement 3.4, 5.4) coi việc tách khám phá dài dòng sang subagent (như Explore) là cách tránh cạn context.</td><td>Trang best practices của Claude Code xếp \"Use subagents to protect your context window\" vào mục lời khuyên cũ có thể bỏ: phần lớn model hiện tại có cửa sổ 1M token và tự compact, nên hiếm khi cạn context. Subagent vẫn tốt cho việc song song, cho việc tách output ồn ào, và cho review độc lập, nhưng tốn thêm token. <a href=\"https://code.claude.com/docs/en/best-practices\">Best practices</a></td><td>Trong đề, phương án \"giao phần khám phá dài cho subagent, nhận lại bản tóm tắt\" vẫn đúng theo guide. Khi làm thật, cân nhắc chi phí token.</td></tr>\n<tr><td>Các giá trị <code>stop_reason</code></td><td>Guide chỉ nêu hai giá trị <code>\"tool_use\"</code> (chạy tiếp) và <code>\"end_turn\"</code> (dừng). Phụ lục có nhắc <code>max_tokens</code>, nhưng như một khái niệm API riêng, không liệt kê là giá trị <code>stop_reason</code>.</td><td>Docs liệt kê thêm <code>stop_sequence</code>, <code>pause_turn</code>, <code>refusal</code>, <code>model_context_window_exceeded</code>. Khi <code>refusal</code>, trường <code>stop_details</code> cho biết nhóm chính sách đã kích hoạt (với các stop reason khác thì là <code>null</code>). Docs gợi ý thử lại trên model dự phòng. <a href=\"https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons\">Handling stop reasons</a></td><td>Đề hỏi logic vòng lặp: tiếp tục khi <code>tool_use</code>, kết thúc khi <code>end_turn</code>, không dựa vào việc đọc chữ trong câu trả lời. Code thật cần xử lý đủ các giá trị.</td></tr>\n</tbody>\n</table>\n<div class=\"warn\">Đừng mang tên model hay số phiên bản Claude Code vào câu trả lời nếu đề không hỏi. Guide đưa \"so sánh benchmark, so sánh model\" vào danh sách ngoài phạm vi. Những khác biệt ở trên giúp bạn khỏi bối rối khi đọc docs mới, chứ không phải để \"bắt lỗi\" đề.</div>",
+    "keypoints": [
+     "Task tool = Agent tool (đổi tên ở v2.1.63; tool_use ghi \"Agent\", system:init vẫn ghi \"Task\").",
+     "Subagent lồng được tối đa 3 tầng theo mặc định; fork subagent thừa hưởng cả hội thoại (subagent thường thì không); tool_choice any/tool lỗi 400 trên một số model mới và khi bật extended thinking thủ công; prefill lỗi 400 từ Claude 4.6.",
+     "Glob/Grep vắng mặc định trên macOS/Linux/WSL; command đã gộp vào skill; allowed-tools cấp quyền trước chứ không giới hạn tool.",
+     "MCP: lỗi kiểm tra input là tool execution error (isError) từ spec 2025-11-25; Claude Code tương tác mặc định auto mode từ v2.1.283, -p/SDK vẫn default.",
+     "Trong phòng thi trả lời theo khái niệm guide kiểm tra; ngoài đời làm theo docs hiện tại."
+    ],
+    "sources": [
+     {
+      "t": "Agent SDK: Subagents (Agent vs Task, giới hạn depth, fork)",
+      "u": "https://code.claude.com/docs/en/agent-sdk/subagents"
+     },
+     {
+      "t": "Claude Code: Subagents (đổi tên Task → Agent, subagent lồng nhau, fork)",
+      "u": "https://code.claude.com/docs/en/sub-agents"
+     },
+     {
+      "t": "Define tools (forcing tool use)",
+      "u": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools"
+     },
+     {
+      "t": "Claude API errors (prefill not supported, forced tool use not supported)",
+      "u": "https://platform.claude.com/docs/en/api/errors"
+     },
+     {
+      "t": "Claude Code tools reference (Glob/Grep)",
+      "u": "https://code.claude.com/docs/en/tools-reference"
+     },
+     {
+      "t": "Claude Code skills (custom commands merged, allowed-tools)",
+      "u": "https://code.claude.com/docs/en/skills"
+     },
+     {
+      "t": "MCP specification 2025-11-25 changelog",
+      "u": "https://modelcontextprotocol.io/specification/2025-11-25/changelog"
+     },
+     {
+      "t": "MCP specification 2026-07-28: Tools",
+      "u": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
+     },
+     {
+      "t": "Claude Code permission modes",
+      "u": "https://code.claude.com/docs/en/permission-modes"
+     },
+     {
+      "t": "Claude Code best practices (What you can stop doing)",
+      "u": "https://code.claude.com/docs/en/best-practices"
+     },
+     {
+      "t": "Handling stop reasons",
+      "u": "https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons"
+     },
+     {
+      "t": "Claude Certified Architect – Foundations: trang chứng chỉ (Exam Guide PDF)",
+      "u": "https://anthropic-partners.skilljar.com/claude-certified-architect-foundations-certification"
+     }
+    ]
+   },
+   {
+    "id": "g-6",
+    "title": "Kế hoạch ôn và cách dùng site này",
+    "minutes": 10,
+    "html": "<p>Guide mô tả ứng viên lý tưởng là người đã có khoảng 6 tháng trở lên làm thực tế với Claude API, Agent SDK, Claude Code và MCP. Phần còn lại của bài là gợi ý của site: nếu bạn đã có nền đó, khoảng 2 tuần là đủ để hệ thống lại; nếu còn mới, hãy dành 4 tuần và tự tay làm các bài thực hành.</p>\n<h4>Vòng học trên site</h4>\n<ol>\n<li><strong>Bài học:</strong> đọc theo domain, bắt đầu từ bài nền tảng (<code>N.0</code>) của mỗi domain. Đánh dấu bài đã học. Tiến độ được lưu trong trình duyệt.</li>\n<li><strong>Quiz cuối domain:</strong> làm ngay sau khi đọc xong domain. Đọc phần giải thích cho cả câu đúng lẫn câu sai.</li>\n<li><strong>Luyện tập</strong> (nút Thi thử ở thanh trên cùng): lọc câu theo domain hoặc theo kịch bản. Đáp án hiện ngay sau mỗi câu và không tính giờ. Dùng để vá chỗ yếu.</li>\n<li><strong>Thi thử đầy đủ:</strong> đúng khuôn đề thật, 4 kịch bản × 15 câu, 120 phút, không xem đáp án cho tới khi nộp. Lưu ý: chia đều 15 câu mỗi kịch bản là cách site dựng đề, guide không công bố số câu cho từng kịch bản.</li>\n<li><strong>Sổ câu sai:</strong> mọi câu bạn trả lời sai (ở quiz, luyện tập hay thi thử) đều được ghi vào sổ, kèm số lần sai. Bạn có thể lọc và làm lại riêng những câu này. Câu sẽ rời sổ khi bạn trả lời đúng liên tiếp đủ số lần, hoặc khi bạn tự đánh dấu đã thuộc.</li>\n<li><strong>Đọc lại bài liên quan:</strong> với mỗi câu sai, mở lại bài học được dẫn tới và đọc phần ý chính. Sai cùng một kiểu từ hai lần trở lên thì đọc lại cả bài và đối chiếu bảng bẫy ở <a href=\"#g-4\">bài G4</a>.</li>\n</ol>\n<h4>Lịch 4 tuần (rút xuống 2 tuần nếu đã có kinh nghiệm)</h4>\n<table>\n<thead><tr><th>Tuần</th><th>Việc chính</th><th>Mốc kiểm tra</th></tr></thead>\n<tbody>\n<tr><td>1</td><td>Đọc <a href=\"#g-1\">G1</a>–<a href=\"#g-3\">G3</a>. Học <a href=\"#d1\">Domain 1</a> (nặng nhất, 27%) và <a href=\"#d2\">Domain 2</a>. Dựng một agent nhỏ có vòng lặp tool, hook chặn một quy tắc, lỗi tool có cấu trúc.</td><td>Quiz D1, D2 đạt trên 80%</td></tr>\n<tr><td>2</td><td>Học <a href=\"#d3\">Domain 3</a>. Cấu hình Claude Code cho một repo thật: CLAUDE.md cấp project, một rule có <code>paths</code>, một skill, một MCP server, thử chạy <code>-p</code>.</td><td>Quiz D3. Luyện tập theo kịch bản S2, S4, S5</td></tr>\n<tr><td>3</td><td>Học <a href=\"#d4\">Domain 4</a> và <a href=\"#d5\">Domain 5</a>. Làm một pipeline trích xuất nhỏ có schema nullable, vòng validate rồi retry, thử Message Batches API.</td><td>Quiz D4, D5. Luyện tập S1, S3, S6</td></tr>\n<tr><td>4</td><td>Đọc <a href=\"#g-4\">G4</a>, <a href=\"#g-5\">G5</a>. Làm 2–3 đề thi thử đầy đủ, cách nhau ít nhất một ngày. Sau mỗi đề, xử lý hết Sổ câu sai và đọc lại bảng cheat của từng domain.</td><td>Thi thử ổn định quanh mốc tham khảo trở lên ở cả 5 domain</td></tr>\n</tbody>\n</table>\n<div class=\"tip\">Kết quả thi thử chỉ có ý nghĩa với câu bạn chưa từng thấy. Khi bắt đầu thuộc đáp án, hãy dựa nhiều hơn vào phần luyện theo kịch bản và vào việc tự giải thích vì sao từng phương án sai.</div>\n<h4>Tài nguyên chính thức</h4>\n<ul>\n<li><strong>Exam guide</strong> (link trên <a href=\"https://anthropic-partners.skilljar.com/claude-certified-architect-foundations-certification\">trang chứng chỉ CCAR-F</a>): FAQ gọi đây là nguồn chính thức về phạm vi thi. Guide có danh sách task statement, 4 bài thực hành (agent nhiều tool có escalation, cấu hình Claude Code cho team, pipeline trích xuất, hệ nghiên cứu nhiều agent) và 12 câu hỏi mẫu. Hãy làm các bài thực hành: theo nhận định của site, chúng gần với các kịch bản S1, S2, S6 và S3.</li>\n<li><strong>Đề thi thử chính thức:</strong> FAQ ghi đề thi thử trên nền tảng cũ đã bị gỡ khi chuyển sang Pearson, và chỉ dẫn tới các câu mẫu trong guide để xem định dạng và văn phong của đề.</li>\n<li><strong>Khóa ôn trên Anthropic Partner Academy</strong> (<a href=\"https://anthropic-partners.skilljar.com/page/claude-certified-architect-foundations-prep-courses\">trang khóa ôn CCAR-F</a>, ghi là miễn phí): AI Fluency: Framework &amp; Foundations, Building with the Claude API, Claude on Google Cloud, <a href=\"https://anthropic-partners.skilljar.com/claude-code-in-action\">Claude Code in Action</a>, Claude 101, Claude with Amazon Bedrock, <a href=\"https://anthropic-partners.skilljar.com/introduction-to-model-context-protocol\">Introduction to Model Context Protocol</a> (danh sách tháng 11/2026).</li>\n<li><strong>Claude Academy</strong> (<a href=\"https://academy.claude.com/\">academy.claude.com</a>, công khai, trang chủ ghi là khóa học miễn phí): có các khóa liên quan như <a href=\"https://academy.claude.com/courses/claude-code-in-action\">Claude Code in action</a>, <a href=\"https://academy.claude.com/courses/building-with-the-claude-api\">Building with the Claude API</a>, <a href=\"https://academy.claude.com/courses/introduction-to-model-context-protocol\">Introduction to Model Context Protocol</a>, <a href=\"https://academy.claude.com/courses/introduction-to-agent-skills\">Introduction to agent skills</a>, <a href=\"https://academy.claude.com/courses/introduction-to-subagents\">Introduction to subagents</a>. Đây là chứng nhận hoàn thành khóa học, không phải chứng chỉ.</li>\n<li><strong>Docs chính thức:</strong> platform.claude.com/docs (API), code.claude.com/docs (Claude Code, Agent SDK), modelcontextprotocol.io (MCP). Mỗi bài học trên site đều dẫn tới trang gốc.</li>\n</ul>\n<div class=\"warn\">Không học từ \"đề rò rỉ\". Exam Policy cấm tìm kiếm hay sử dụng nội dung đề bị công bố trái phép. Vi phạm có thể dẫn tới hủy kết quả và cấm thi.</div>",
+    "keypoints": [
+     "Vòng học: bài học → quiz domain → luyện tập theo domain/kịch bản → thi thử 4 × 15 câu, 120 phút → Sổ câu sai → đọc lại bài liên quan.",
+     "Guide nhắm tới người có khoảng 6 tháng trở lên làm thực tế; ôn 2 tuần nếu đã có nền, 4 tuần nếu còn mới.",
+     "Đề thi thử chính thức đã bị gỡ khi chuyển sang Pearson; FAQ chỉ dẫn tới câu mẫu trong guide, guide còn có 4 bài thực hành.",
+     "Khóa ôn miễn phí: trang khóa ôn CCAR-F trên Partner Academy; Claude Academy (academy.claude.com) công khai.",
+     "Không dùng đề rò rỉ: Exam Policy cấm, có thể bị hủy kết quả."
+    ],
+    "sources": [
+     {
+      "t": "Claude Certified Architect – Foundations: trang chứng chỉ (Exam Guide PDF mục 2, 7, 8, 9; Exam Policy PDF)",
+      "u": "https://anthropic-partners.skilljar.com/claude-certified-architect-foundations-certification"
+     },
+     {
+      "t": "Claude Certified Architect – Foundations Prep Courses",
+      "u": "https://anthropic-partners.skilljar.com/page/claude-certified-architect-foundations-prep-courses"
+     },
+     {
+      "t": "Certification FAQ (practice exam, how to prepare)",
+      "u": "https://anthropic-partners.skilljar.com/page/faq-certifications"
+     },
+     {
+      "t": "Claude Academy",
+      "u": "https://academy.claude.com/"
+     },
+     {
+      "t": "Who can take a Claude certification exam (certificate of completion vs certification)",
+      "u": "https://anthropic-partners.skilljar.com/page/certification-eligibility"
+     }
+    ]
+   },
+   {
+    "id": "g-7",
+    "title": "Đăng ký, đặt lịch và ngày thi",
+    "minutes": 11,
+    "html": "<p>Mọi thông tin dưới đây lấy từ trang chứng chỉ, FAQ, Policies và trang \"Who can take an exam\" trên Anthropic Partner Academy, cùng exam guide và Exam Policy (PDF) được link từ trang chứng chỉ. Đọc vào tháng 11/2026. Chính sách có thể đổi, nên hãy kiểm tra lại trước khi đăng ký.</p>\n<h4>Ai được thi</h4>\n<ul>\n<li>Chỉ người làm việc tại tổ chức thuộc <strong>Claude Partner Network</strong>. Phải đăng nhập bằng email công ty, trên domain có trong hồ sơ đối tác của tổ chức. Email cá nhân không dùng được.</li>\n<li>Từ <strong>18 tuổi</strong> trở lên. Tuổi được kiểm tra lúc check-in theo giấy tờ tùy thân.</li>\n<li>Nếu đăng nhập báo email không được nhận, nguyên nhân thường là domain chưa có trong hồ sơ đối tác. Gửi email cho partner-support@anthropic.com. Trang ghi việc thêm domain mất 7–10 ngày.</li>\n<li>Tổ chức không thuộc mạng lưới đối tác thì không đăng ký được. Claude Academy công khai, nhưng chỉ cấp chứng nhận hoàn thành khóa học, không phải chứng chỉ.</li>\n</ul>\n<h4>Lệ phí (docs hiện ghi, tháng 11/2026)</h4>\n<ul>\n<li>CCAR-F: <strong>125 USD</strong>, trước chiết khấu theo hạng đối tác. FAQ ghi giá tăng từ 99 lên 125 USD kể từ 30/6/2026.</li>\n<li>Đối tác hạng Registered trả đủ giá. Hạng Select, Preferred và Global Premier được giảm 50%, tự áp dụng khi thanh toán. Đến hết 31/12/2026, Global Premier được giảm 100%.</li>\n<li>Thanh toán bằng thẻ tín dụng trên Partner Academy trước khi được chuyển sang Pearson để đặt lịch. Mỗi lần thi lại tính phí đủ, chiết khấu hạng đối tác vẫn áp dụng.</li>\n</ul>\n<h4>Quy trình đăng ký</h4>\n<ol>\n<li>Mở trang chứng chỉ CCAR-F trên Partner Academy. Tải exam guide, đọc Certification Terms and Conditions và Exam Policy.</li>\n<li>Bấm đăng ký, đăng nhập bằng email công ty, rồi thanh toán. Giá hiển thị đã gồm chiết khấu theo hạng.</li>\n<li>Pearson VUE gửi email tài khoản. Đăng nhập Pearson, chấp nhận Candidate Agreement, rồi chọn lịch thi online (OnVUE) hoặc tại trung tâm Pearson.</li>\n<li>FAQ ghi lượt đăng ký có hiệu lực 5 năm, còn trang Policies ghi không có hạn chót để thi. Hai trang diễn đạt khác nhau; để an toàn, hãy coi mốc 5 năm là giới hạn. Trong khoảng đó, bạn đặt lịch khi đã sẵn sàng.</li>\n</ol>\n<h4>Đổi lịch, hủy, vắng mặt</h4>\n<ul>\n<li>FAQ và trang Policies hiện ghi: đổi lịch hoặc hủy phải làm <strong>trước ít nhất 48 giờ</strong>. Đổi hoặc hủy trong vòng 48 giờ, hoặc vắng mặt, thì mất lệ phí. Trang Policies ghi thêm: đổi lịch hay hủy trong khung hợp lệ là miễn phí, và hủy thì được hoàn tiền đủ.</li>\n<li>Exam guide bản 1.0 lại ghi mốc 24 giờ. Các nguồn chính thức đang lệch nhau; lời khuyên của site là theo mốc 48 giờ cho an toàn.</li>\n<li>Hủy lịch trên Pearson không tự hoàn tiền. Muốn hoàn tiền thì gửi email cho certifications-support@anthropic.com.</li>\n<li>Đổi lịch xong phải nhận được email xác nhận. Nếu không có, đăng nhập Pearson kiểm tra lại.</li>\n</ul>\n<h4>Thi online hay tại trung tâm</h4>\n<table>\n<thead><tr><th></th><th>Online (OnVUE)</th><th>Trung tâm Pearson</th></tr></thead>\n<tbody>\n<tr><td>Chuẩn bị máy</td><td>Chạy system test của Pearson trên đúng máy và mạng sẽ dùng. Mạng phải truy cập được các domain Pearson yêu cầu. Tắt các ứng dụng chặn bài thi (trang setup liệt kê nhiều app điều khiển từ xa, họp trực tuyến, kể cả ứng dụng Claude desktop trên Windows). Với máy hoặc mạng công ty, trang setup khuyên nhờ IT mở domain và tắt ứng dụng từ sớm; nếu vẫn không được thì dùng máy cá nhân trên mạng cá nhân, hoặc thi tại trung tâm.</td><td>Thiết bị do trung tâm cung cấp.</td></tr>\n<tr><td>Môi trường</td><td>Phòng riêng, mạng ổn định, luôn ở trong khung hình webcam và tầm quan sát của giám thị.</td><td>Theo quy định của trung tâm.</td></tr>\n<tr><td>Hạn chế quốc gia</td><td>FAQ ghi người dùng giấy tờ tùy thân của một số quốc gia và vùng không được thi online và phải thi tại trung tâm. Riêng cư dân Iran: Pearson tạm ngừng tổ chức thi cả online lẫn tại trung tâm từ 8/9/2026.</td><td>Xem FAQ.</td></tr>\n</tbody>\n</table>\n<h4>Giấy tờ tùy thân</h4>\n<ul>\n<li>Giấy tờ tùy thân có ảnh do chính phủ cấp, còn hạn. Tên phải khớp <strong>chính xác</strong> với tên trong hồ sơ thi. Danh sách giấy tờ được chấp nhận nằm trên trang của Pearson.</li>\n<li>Tên tự sửa trong mục <em>Update Exam Profile</em> trên Partner Academy, nhập bằng chữ Latin, có dấu đúng như trên giấy tờ. Mỗi năm chỉ tự sửa được một lần, và tên bị khóa ngay khi bạn xác nhận hồ sơ. Thi tại trung tâm thì sửa trước ít nhất 24 giờ. Đã dùng hết lượt tự sửa thì gửi yêu cầu tới certifications-support@anthropic.com (exam guide chỉ nêu cách liên hệ email này, trước khi đặt lịch).</li>\n<li>Lệch tên lúc check-in thì không được thi và mất lệ phí.</li>\n</ul>\n<h4>Quy định trong phòng thi</h4>\n<ul>\n<li>Thi đóng tài liệu. Không ghi chú, không tài liệu, không công cụ dịch trên trình duyệt, không trợ lý AI. Exam Policy cấm dùng sản phẩm hay dịch vụ AI để hỗ trợ trong lúc thi.</li>\n<li>Guide liệt kê vật bị cấm: điện thoại, đồng hồ thông minh, tai nghe, tài liệu học, thiết bị ghi âm ghi hình, màn hình phụ. Giấy nháp (nếu có) do Pearson quy định.</li>\n<li>Không nói chuyện với ai, không chụp hay chép nội dung đề. Exam Policy cấm nghỉ giữa giờ ngoài lịch, trừ khi đã xin và được duyệt trước.</li>\n<li>Trước khi vào bài phải chấp nhận thỏa thuận bảo mật (NDA). Không chấp nhận thì phiên thi kết thúc và không hoàn tiền. Không được chia sẻ câu hỏi dưới mọi hình thức, kể cả trong nhóm học hay diễn đàn.</li>\n<li>Gian lận có thể dẫn tới hủy kết quả, thu hồi chứng chỉ, cấm thi về sau.</li>\n<li>Cần hỗ trợ đặc biệt (accommodation) thì phải xin qua Pearson và được duyệt <em>trước khi</em> đặt lịch. FAQ khuyên gửi yêu cầu sớm ít nhất 10 ngày.</li>\n</ul>\n<h4>Sau khi thi</h4>\n<ul>\n<li>Điểm hiện trên màn hình ngay khi làm xong. Đậu thì nhận email từ Credly để nhận badge.</li>\n<li><strong>Thi lại:</strong> phải chờ 14 ngày sau lần trượt thứ nhất, 30 ngày sau lần thứ hai, 90 ngày sau lần thứ ba. Tối đa 4 lần cho cùng một bài thi trong 12 tháng cuốn chiếu. Giới hạn tính riêng cho từng bài thi. Trang Policies ghi thời gian chờ và số lần thi được đặt lại khi bài thi lên phiên bản mới, và đã đậu thì không được thi lại để nâng điểm.</li>\n<li><strong>Hiệu lực:</strong> 12 tháng kể từ ngày đạt. Gia hạn miễn phí trước khi hết hạn bằng một bài đánh giá online không giám thị (trang Policies ghi là mở tài liệu, làm lại bao nhiêu lần cũng được), được thêm 12 tháng tính từ ngày hết hạn hiện tại. Để chứng chỉ hết hạn thì phải thi lại đầy đủ với giá đủ. FAQ ghi chi tiết gia hạn sẽ được công bố trước khi những chứng chỉ đầu tiên đến hạn. Guide và trang Policies cũng ghi: nếu đề thi được cập nhật lớn, người đang giữ chứng chỉ có thể phải thi bản hiện hành.</li>\n<li><strong>Phúc khảo:</strong> trong vòng 14 ngày (tính từ ngày được thông báo quyết định, hoặc từ ngày thi nếu khiếu nại kết quả), gửi qua Pearson. Trang Policies ghi phúc khảo bao gồm cả kết quả trượt mà bạn cho là do câu hỏi lỗi; nếu xác nhận câu hỏi lỗi và lỗi đó ảnh hưởng tới kết quả, bạn được thi lại miễn phí chứ không được sửa điểm. Exam guide thì ghi điểm chuẩn và nội dung từng câu hỏi không thuộc diện phúc khảo. Hai nguồn đang diễn đạt khác nhau.</li>\n<li><strong>Báo lỗi câu hỏi</strong> (sai, mơ hồ, có hơn một đáp án bảo vệ được, lệch exam guide) là việc riêng với phúc khảo: gửi cho Pearson, ai cũng báo được dù đậu hay trượt, và việc báo không ảnh hưởng kết quả.</li>\n</ul>\n<div class=\"tip\">Ba việc nên làm một tuần trước ngày thi: kiểm tra tên trong hồ sơ thi khớp giấy tờ, chạy system test của Pearson trên đúng máy và mạng sẽ dùng, xác nhận lịch thi vẫn còn trong tài khoản Pearson.</div>",
+    "keypoints": [
+     "Chỉ dành cho người thuộc Claude Partner Network, từ 18 tuổi, đăng ký bằng email công ty; 125 USD trước chiết khấu (docs hiện ghi, tháng 11/2026).",
+     "Đăng ký và trả phí trên Partner Academy, đặt lịch trên Pearson VUE (OnVUE hoặc trung tâm); đổi hay hủy trước 48 giờ theo FAQ/Policies (guide v1.0 ghi 24 giờ, các nguồn đang lệch nhau).",
+     "Giấy tờ tùy thân còn hạn, tên khớp chính xác; thi đóng tài liệu, cấm công cụ dịch và trợ lý AI; phải chấp nhận NDA.",
+     "Thi lại: chờ 14/30/90 ngày, tối đa 4 lần trong 12 tháng cho mỗi bài; đậu rồi không thi lại để nâng điểm.",
+     "Hiệu lực 12 tháng; gia hạn miễn phí bằng bài đánh giá online trước khi hết hạn; phúc khảo trong 14 ngày qua Pearson."
+    ],
+    "sources": [
+     {
+      "t": "Claude Certified Architect – Foundations: trang chứng chỉ (Exam Guide PDF mục 11–16, Exam Policy PDF)",
+      "u": "https://anthropic-partners.skilljar.com/claude-certified-architect-foundations-certification"
+     },
+     {
+      "t": "Certification FAQ",
+      "u": "https://anthropic-partners.skilljar.com/page/faq-certifications"
+     },
+     {
+      "t": "Certification policies",
+      "u": "https://anthropic-partners.skilljar.com/page/policies-certifications"
+     },
+     {
+      "t": "Who can take a Claude certification exam",
+      "u": "https://anthropic-partners.skilljar.com/page/certification-eligibility"
+     },
+     {
+      "t": "Earn your Claude certification (bảng giá)",
+      "u": "https://anthropic-partners.skilljar.com/page/partner-certifications"
+     },
+     {
+      "t": "Computer and network setup (OnVUE)",
+      "u": "https://anthropic-partners.skilljar.com/page/computer-and-network-setup"
+     }
+    ]
+   }
+  ]
+ }
 };

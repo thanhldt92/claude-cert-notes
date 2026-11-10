@@ -5,8 +5,9 @@
 //   node tools/review.mjs apply <cert> <fixes.json> [--dry] apply a corrections file (dry run: only check it)
 //
 // A corrections file is a JSON array. Each item:
-//   { "target": "l-5-2" | "d5/quiz/3" | "d5/bank/12" | "d5/cheat/4" | "d5/intro" | "intro",
-//     "field":  "html" | "title" | "keypoints" | "sources" | "q" | "options" | "answer" | "explain" | "0" | "1" ...,
+//   { "target": "l-5-2" | "g-3" | "d5/quiz/3" | "d5/bank/12" | "d5/cheat/4" | "d5/intro" | "intro",
+//     "field":  "html" | "title" | "keypoints" | "sources" | "ts" | "q" | "options" | "answer" | "explain" | "sc" | "0" | "1" ...,
+//               (domain targets like "d5/intro" also accept field "summary" via set: { "target": "d5/summary", "set": [...] })
 //     "find": "exact substring of the current text",  "replace": "new text"      // edit inside a string field
 //     -- or --
 //     "set": <any JSON value>                                                    // replace the whole field
@@ -31,6 +32,11 @@ function load() {
 
 function resolve(D, target) {
   if (target === "intro") return { obj: D, key: "intro" };
+  if (/^g-\d+$/.test(target)) {
+    const l = D.guide && D.guide.lessons.find((x) => x.id === target);
+    if (!l) throw new Error(`no guide lesson ${target}`);
+    return { obj: l };
+  }
   let m = /^l-(\d+)-(\d+)$/.exec(target);
   if (m) {
     const d = D.domains[+m[1] - 1];
@@ -38,11 +44,11 @@ function resolve(D, target) {
     if (!l) throw new Error(`no lesson ${target}`);
     return { obj: l };
   }
-  m = /^(d\d+)\/(intro|quiz|bank|cheat)(?:\/(\d+))?$/.exec(target);
+  m = /^(d\d+)\/(intro|summary|quiz|bank|cheat)(?:\/(\d+))?$/.exec(target);
   if (!m) throw new Error(`bad target ${target}`);
   const d = D.domains.find((x) => x.id === m[1]);
   if (!d) throw new Error(`no domain ${m[1]}`);
-  if (m[2] === "intro") return { obj: d, key: "intro" };
+  if (m[2] === "intro" || m[2] === "summary") return { obj: d, key: m[2] };
   const arr = d[m[2]] || [];
   const i = +m[3];
   if (!(i >= 0 && i < arr.length)) throw new Error(`${target}: index out of range (0..${arr.length - 1})`);
@@ -85,7 +91,8 @@ if (cmd === "apply") {
       const obj = r.key ? r.obj : r.obj;
       const key = r.key || f.field;
       if (key == null) throw new Error("missing field");
-      if (!(key in obj)) throw new Error(`no field ${key}`);
+      // ts / sc / summary may be added to items that don't have them yet
+      if (!(key in obj) && !(["ts", "sc", "summary"].includes(key) && "set" in f)) throw new Error(`no field ${key}`);
       if ("set" in f) { obj[key] = f.set; return; }
       if (typeof f.find !== "string" || typeof f.replace !== "string") throw new Error("need find+replace or set");
       const cur = obj[key];

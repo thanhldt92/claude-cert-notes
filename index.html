@@ -29,7 +29,8 @@
       <div class="cardprog" hidden><span data-text></span><div class="pbar"><i></i></div></div>
       <ul class="links">
         <li><a href="ccar-f/notes.html"><b>Bài học</b><small data-lessons>Bài theo domain, cheatsheet, quiz</small></a></li>
-        <li><a href="ccar-f/exam.html"><b>Thi thử</b><small data-exam>Đề có hẹn giờ, chấm điểm theo domain</small></a></li>
+        <li><a href="ccar-f/exam.html"><b>Thi thử và luyện tập</b><small data-exam>Đề có hẹn giờ, luyện theo domain, luyện câu sai</small></a></li>
+        <li><a href="ccar-f/wrong.html"><b>Sổ câu sai</b><small>Câu bạn từng làm sai, thống kê chỗ yếu, luyện lại</small></a></li>
       </ul>
     </section>
 
@@ -41,7 +42,8 @@
       <div class="cardprog" hidden><span data-text></span><div class="pbar"><i></i></div></div>
       <ul class="links">
         <li><a href="ccao-f/notes.html"><b>Bài học</b><small data-lessons>Bài theo domain, cheatsheet, quiz</small></a></li>
-        <li><a href="ccao-f/exam.html"><b>Thi thử</b><small data-exam>Đề có hẹn giờ, chấm điểm theo domain</small></a></li>
+        <li><a href="ccao-f/exam.html"><b>Thi thử và luyện tập</b><small data-exam>Đề có hẹn giờ, luyện theo domain, luyện câu sai</small></a></li>
+        <li><a href="ccao-f/wrong.html"><b>Sổ câu sai</b><small>Câu bạn từng làm sai, thống kê chỗ yếu, luyện lại</small></a></li>
       </ul>
     </section>
 
@@ -53,7 +55,8 @@
       <div class="cardprog" hidden><span data-text></span><div class="pbar"><i></i></div></div>
       <ul class="links">
         <li><a href="ccdv-f/notes.html"><b>Bài học</b><small data-lessons>Bài theo domain, cheatsheet, quiz</small></a></li>
-        <li><a href="ccdv-f/exam.html"><b>Thi thử</b><small data-exam>Đề có hẹn giờ, chấm điểm theo domain</small></a></li>
+        <li><a href="ccdv-f/exam.html"><b>Thi thử và luyện tập</b><small data-exam>Đề có hẹn giờ, luyện theo domain, luyện câu sai</small></a></li>
+        <li><a href="ccdv-f/wrong.html"><b>Sổ câu sai</b><small>Câu bạn từng làm sai, thống kê chỗ yếu, luyện lại</small></a></li>
       </ul>
     </section>
   </div>
@@ -96,6 +99,9 @@
       total += d.lessons.length; q += d.quiz.length + (d.bank ? d.bank.length : 0);
       d.lessons.forEach(function (l) { mins += l.minutes || 0; });
     });
+    var guideLessons = D.guide && D.guide.lessons ? D.guide.lessons : [];
+    total += guideLessons.length;
+    guideLessons.forEach(function (l) { mins += l.minutes || 0; });
     card.querySelector("[data-lessons]").textContent =
       D.domains.length + " domain · " + total + " bài · ~" + Math.round(mins / 6) / 10 + " giờ · " + q + " câu hỏi";
     card.querySelector("[data-exam]").textContent =
@@ -104,12 +110,14 @@
     var done = CCN.store.get(D.storageKey, {}) || {};
     var n = 0;
     D.domains.forEach(function (d) { d.lessons.forEach(function (l) { if (done[l.id]) n++; }); });
+    guideLessons.forEach(function (l) { if (done[l.id]) n++; });
+    var wrongN = CCN.notebook(D).activeCount();
     var hist = CCN.store.get(D.storageKey + "-exam-history", []) || [];
     var best = hist.reduce(function (m, h) { return Math.max(m, Math.round(h.right / h.n * 100)); }, -1);
-    if (n || best >= 0) {
+    if (n || best >= 0 || wrongN) {
       var cp = card.querySelector(".cardprog");
       cp.hidden = false;
-      cp.querySelector("[data-text]").textContent = "Đã học " + n + "/" + total + " bài" + (best >= 0 ? " · thi thử cao nhất " + best + "%" : "");
+      cp.querySelector("[data-text]").textContent = "Đã học " + n + "/" + total + " bài" + (best >= 0 ? " · thi thử cao nhất " + best + "%" : "") + (wrongN ? " · " + wrongN + " câu trong Sổ câu sai" : "");
       cp.querySelector("i").style.width = (n / total * 100) + "%";
     }
   });

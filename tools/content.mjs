@@ -53,9 +53,25 @@ function applyPart(D, part, file) {
       }
     }
   }
+  // exam-strategy section: { guide: { title, intro, lessons: [...] } } — lessons replace by id
+  if (part.guide) {
+    D.guide = D.guide || { title: "", intro: "", lessons: [] };
+    if (part.guide.title) D.guide.title = part.guide.title;
+    if (part.guide.intro) D.guide.intro = part.guide.intro;
+    for (const l of part.guide.lessons || []) {
+      const at = D.guide.lessons.findIndex((x) => x.id === l.id);
+      if (at === -1) D.guide.lessons.push(l); else D.guide.lessons[at] = l;
+    }
+  }
+  // exam scenarios: [{ id: "s1", name, desc }] — replaces the list
+  if (part.scenarios) D.scenarios = part.scenarios;
 }
 
-const lessonNum = (l) => { const m = /^l-(\d+)-(\d+)$/.exec(l.id); return m ? +m[1] * 1000 + +m[2] : 1e9; };
+const lessonNum = (l) => {
+  const m = /^l-(\d+)-(\d+)$/.exec(l.id); if (m) return +m[1] * 1000 + +m[2];
+  const g = /^g-(\d+)$/.exec(l.id); return g ? +g[1] : 1e9;
+};
+const TS_RE = /^\d+\.\d+$/;
 
 const ALLOWED = new Set("p h4 ul ol li strong em code pre table thead tbody tr th td blockquote a div br".split(" "));
 const OK_HOSTS = ["platform.claude.com", "docs.claude.com", "code.claude.com", "support.claude.com", "www.anthropic.com",
@@ -77,6 +93,9 @@ function checkQuestion(q, where, errs, stats) {
     if (lens[q.answer] === Math.max(...lens)) stats.longest++;
     stats.single++;
   } else stats.multi++;
+  if ("sc" in q && !(stats.scIds || new Set()).has(q.sc)) errs.push(`${where}: unknown scenario "${q.sc}"`);
+  if ("ts" in q && (!Array.isArray(q.ts) || !q.ts.every((t) => TS_RE.test(t)))) errs.push(`${where}: ts must be an array like ["1.1"]`);
+  if (q.sc) stats.sc[q.sc] = (stats.sc[q.sc] || 0) + 1;
   const key = q.q.trim().toLowerCase();
   if (stats.seen.has(key)) errs.push(`${where}: duplicate question text`);
   stats.seen.add(key);
@@ -107,10 +126,34 @@ function checkUrl(u, where, errs) {
 
 function validate(D) {
   const errs = [];
-  const stats = { pos: {}, longest: 0, single: 0, multi: 0, seen: new Set() };
+  const stats = { pos: {}, longest: 0, single: 0, multi: 0, seen: new Set(), sc: {}, scIds: new Set() };
   const ids = new Set();
   let wsum = 0, lessons = 0, quiz = 0, bank = 0;
   for (const k of ["code", "title", "storageKey", "exam", "intro", "domains"]) if (!(k in D)) errs.push(`missing top-level ${k}`);
+  (D.scenarios || []).forEach((s, i) => {
+    if (!/^s\d+$/.test(s.id || "")) errs.push(`scenarios[${i}]: id must be s<n>`);
+    if (!s.name || !s.desc) errs.push(`scenarios[${i}]: needs name and desc`);
+    if (stats.scIds.has(s.id)) errs.push(`scenarios[${i}]: duplicate id`);
+    stats.scIds.add(s.id);
+  });
+  const checkLesson = (l, w) => {
+    for (const k of ["title", "minutes", "html", "keypoints", "sources"]) if (!(k in l)) errs.push(`${w}: missing ${k}`);
+    checkHtml(l.html || "", w, errs);
+    (l.sources || []).forEach((s) => checkUrl(s.u, w, errs));
+    if (!(l.sources || []).length) errs.push(`${w}: no sources`);
+    if ("ts" in l && (!Array.isArray(l.ts) || !l.ts.every((t) => TS_RE.test(t)))) errs.push(`${w}: ts must be an array like ["1.1"]`);
+  };
+  if (D.guide) {
+    if (!D.guide.title) errs.push("guide: missing title");
+    (D.guide.lessons || []).forEach((l) => {
+      lessons++;
+      const w = `guide/${l.id}`;
+      if (!/^g-\d+$/.test(l.id)) errs.push(`${w}: id must be g-<n>`);
+      if (ids.has(l.id)) errs.push(`${w}: duplicate lesson id`);
+      ids.add(l.id);
+      checkLesson(l, w);
+    });
+  }
   D.domains.forEach((d, di) => {
     wsum += d.weight;
     for (const k of ["id", "name", "weight", "intro", "lessons", "cheat", "quiz"]) if (!(k in d)) errs.push(`${d.id || di}: missing ${k}`);
@@ -120,11 +163,9 @@ function validate(D) {
       if (ids.has(l.id)) errs.push(`${w}: duplicate lesson id`);
       ids.add(l.id);
       if (!new RegExp(`^l-${di + 1}-\\d+$`).test(l.id)) errs.push(`${w}: id must be l-${di + 1}-<n>`);
-      for (const k of ["title", "minutes", "html", "keypoints", "sources"]) if (!(k in l)) errs.push(`${w}: missing ${k}`);
-      checkHtml(l.html || "", w, errs);
-      (l.sources || []).forEach((s) => checkUrl(s.u, w, errs));
-      if (!(l.sources || []).length) errs.push(`${w}: no sources`);
+      checkLesson(l, w);
     });
+    if ("summary" in d && (!Array.isArray(d.summary) || !d.summary.every((s) => typeof s === "string" && s.trim()))) errs.push(`${d.id}: summary must be an array of strings`);
     (d.cheat || []).forEach((r, i) => { if (!Array.isArray(r) || r.length !== 2) errs.push(`${d.id}/cheat[${i}]: must be [a, b]`); });
     (d.quiz || []).forEach((q, i) => { quiz++; checkQuestion(q, `${d.id}/quiz[${i}]`, errs, stats); });
     (d.bank || []).forEach((q, i) => { bank++; checkQuestion(q, `${d.id}/bank[${i}]`, errs, stats); });
@@ -139,6 +180,10 @@ function report(D, label) {
   console.log(`${label}: ${D.domains.length} domains, ${lessons} lessons, ${quiz} quiz + ${bank} bank questions`);
   D.domains.forEach((d) => console.log(`  ${d.id} ${d.name}: ${d.lessons.length} lessons, ${d.quiz.length} quiz, ${(d.bank || []).length} bank, ${d.cheat.length} cheat`));
   console.log(`  single-answer positions: ${letters}; correct option is longest in ${stats.longest}/${stats.single}; Choose TWO: ${stats.multi}`);
+  if (D.guide) console.log(`  guide: ${D.guide.lessons.length} lessons`);
+  if (D.scenarios) console.log(`  questions per scenario: ${D.scenarios.map((s) => `${s.id} ${stats.sc[s.id] || 0}`).join(", ")}; untagged ${quiz + bank - Object.values(stats.sc).reduce((a, b) => a + b, 0)}`);
+  const noTs = D.domains.flatMap((d) => d.lessons).filter((l) => !l.ts).length;
+  if (D.domains.some((d) => d.lessons.some((l) => l.ts))) console.log(`  lessons without ts: ${noTs}; domains without summary: ${D.domains.filter((d) => !d.summary).length}`);
   if (errs.length) { console.log(`  ${errs.length} problem(s):`); errs.slice(0, 60).forEach((e) => console.log("   - " + e)); }
   else console.log("  OK: no problems");
   return errs.length;
@@ -158,6 +203,7 @@ if (cmd === "merge") {
   if (!files.length) { console.error(`no part files in ${dir}`); process.exit(1); }
   for (const f of files) applyPart(D, loadPart(path.join(dir, f)), f);
   D.domains.forEach((d) => d.lessons.sort((a, b) => lessonNum(a) - lessonNum(b)));
+  if (D.guide) D.guide.lessons.sort((a, b) => lessonNum(a) - lessonNum(b));
   const bad = report(D, `${cert} merged (${files.join(", ")})`);
   if (bad) { console.error("not written: fix the problems above first"); process.exit(1); }
   fs.writeFileSync(dataFile, "window.CERT_DATA = " + JSON.stringify(D, null, 1) + ";\n");
