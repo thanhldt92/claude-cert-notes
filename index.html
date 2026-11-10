@@ -45,12 +45,16 @@
       </ul>
     </section>
 
-    <section class="card">
+    <section class="card" data-cert="ccdv-f">
       <span class="chip">CCDV-F</span>
-      <h2>Claude Developer – Foundations</h2>
-      <p class="meta">Claude API, SDK, tool use</p>
-      <span class="badge mute">Đang soạn</span>
-      <p class="soon">Phần này sẽ được bổ sung sau.</p>
+      <h2>Claude Certified Developer – Foundations</h2>
+      <p class="meta">Claude API, agent, tool use và MCP, model và chi phí, bảo mật</p>
+      <span class="badge" data-deadline></span>
+      <div class="cardprog" hidden><span data-text></span><div class="pbar"><i></i></div></div>
+      <ul class="links">
+        <li><a href="ccdv-f/notes.html"><b>Bài học</b><small data-lessons>Bài theo domain, cheatsheet, quiz</small></a></li>
+        <li><a href="ccdv-f/exam.html"><b>Thi thử</b><small data-exam>Đề có hẹn giờ, chấm điểm theo domain</small></a></li>
+      </ul>
     </section>
   </div>
 
@@ -60,13 +64,15 @@
 <script src="assets/common.js"></script>
 <script>
   // Exam dates: "YYYY-MM-DD", or null when not booked yet.
-  var EXAM_DATES = { "ccar-f": null, "ccao-f": null };
+  var EXAM_DATES = { "ccar-f": null, "ccao-f": null, "ccdv-f": null };
   var CERTS = {};
 </script>
 <script src="ccar-f/data.js"></script>
 <script>CERTS["ccar-f"] = window.CERT_DATA; window.CERT_DATA = null;</script>
 <script src="ccao-f/data.js"></script>
 <script>CERTS["ccao-f"] = window.CERT_DATA; window.CERT_DATA = null;</script>
+<script src="ccdv-f/data.js"></script>
+<script>CERTS["ccdv-f"] = window.CERT_DATA; window.CERT_DATA = null;</script>
 <script>
 (function () {
   document.querySelectorAll(".card[data-cert]").forEach(function (card) {

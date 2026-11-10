@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ôn thi CCDV-F</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="topbar"><div class="in">
+  <button class="iconbtn sidetoggle" id="sidetoggle" type="button" aria-label="Mục lục">☰</button>
+  <a class="home" href="../">← Mục lục</a>
+  <span class="t" id="bar-title">CCDV-F</span>
+  <span class="prog"><span class="pbar"><i id="bar-prog"></i></span><span id="bar-count"></span></span>
+  <a class="iconbtn" href="exam.html" style="text-decoration:none;color:inherit">Thi thử</a>
+  <button class="iconbtn" type="button" data-theme-toggle>◐ Tự động</button>
+</div></header>
+<div class="layout">
+  <nav class="side" id="side" aria-label="Mục lục bài học">
+    <input id="filter" type="search" placeholder="Lọc bài học…" aria-label="Lọc bài học">
+    <ul class="toc" id="toc"></ul>
+  </nav>
+  <main class="main" id="content"></main>
+</div>
+<script src="../assets/common.js"></script>
+<script src="data.js"></script>
+<script src="../assets/notes.js"></script>
+</body>
+</html>

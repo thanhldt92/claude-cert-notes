@@ -12,7 +12,7 @@ assets/site.css       giao diện chung (sáng / tối)
 assets/common.js      lưu tiến độ, đổi theme, hiển thị câu hỏi
 assets/notes.js       dựng trang bài học từ data.js
 assets/exam.js        đề thi thử: bốc câu theo tỉ trọng domain, đếm giờ, chấm điểm
-ccar-f/, ccao-f/      mỗi chứng chỉ: data.js (nội dung) + notes.html + exam.html
+ccar-f/ ccao-f/ ccdv-f/  mỗi chứng chỉ: data.js (nội dung) + notes.html + exam.html
 CONTENT-SPEC.md       định dạng file data.js và quy tắc viết nội dung
 ```
 
