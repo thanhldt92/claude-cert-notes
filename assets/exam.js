@@ -167,7 +167,8 @@
     wr.innerHTML = "<h3>Luyện câu sai</h3><p>" + (wrongActive.length
       ? "Sổ câu sai đang có <b>" + wrongActive.length + "</b> câu. Một câu rời sổ sau 2 lần trả lời đúng liên tiếp."
       : "Chưa có câu sai nào. Câu làm sai ở quiz, luyện tập và thi thử sẽ được ghi lại ở đây.") + "</p>" +
-      '<div class="qact"><button class="btn" id="wstart" type="button"' + (wrongActive.length ? "" : " disabled") + '>Luyện lại câu sai</button><a class="btn ghost" href="wrong.html" style="text-decoration:none">Mở Sổ câu sai</a></div>';
+      '<div class="qact"><button class="btn" id="wstart" type="button"' + (wrongActive.length ? "" : " disabled") + '>Luyện lại câu sai</button><a class="btn ghost" href="wrong.html" style="text-decoration:none">Mở Sổ câu sai</a>' +
+      (D.code === "CCAR-F" && location.protocol === "file:" ? '<a class="btn ghost" href="certsafari.html" style="text-decoration:none">Sổ ôn certsafari</a>' : "") + "</div>";
     root.appendChild(wr);
     wr.querySelector("#wstart").addEventListener("click", function () {
       if (cur && !confirm("Bỏ bài đang làm dở?")) return;
@@ -251,7 +252,7 @@
       if (practice) {
         var graded = state.graded[id] != null;
         var node = C.renderQuestion(q, {
-          checkable: true, selected: state.answers[id] || [], reveal: graded, meta: C.relatedLinks(D, q, "notes.html"),
+          instant: true, retry: true, selected: state.answers[id] || [], reveal: graded, meta: C.relatedLinks(D, q, "notes.html"),
           onGrade: function (ok, sel) {
             state.answers[id] = sel; state.graded[id] = ok; NB.record(q, ok); save(); paintNav();
           }

@@ -52,6 +52,24 @@
 
   var LETTERS = "ABCDEFGH";
 
+  // Keep only a few inline tags (code, pre, b, i, em, strong, br) from imported HTML; everything else becomes text.
+  var SAFE_TAGS = { CODE: 1, PRE: 1, B: 1, I: 1, EM: 1, STRONG: 1, BR: 1 };
+  function sanitize(html) {
+    var doc = new DOMParser().parseFromString("<div>" + String(html) + "</div>", "text/html");
+    function walk(node) {
+      var out = "";
+      node.childNodes.forEach(function (c) {
+        if (c.nodeType === 3) out += esc(c.nodeValue);
+        else if (c.nodeType === 1) {
+          var inner = walk(c), t = c.tagName;
+          out += SAFE_TAGS[t] ? (t === "BR" ? "<br>" : "<" + t.toLowerCase() + ">" + inner + "</" + t.toLowerCase() + ">") : inner;
+        }
+      });
+      return out;
+    }
+    return walk(doc.body.firstChild);
+  }
+
   function answerSet(q) { return Array.isArray(q.answer) ? q.answer.slice().sort() : [q.answer]; }
   function isMulti(q) { return Array.isArray(q.answer); }
   function sameSet(a, b) {
@@ -65,30 +83,36 @@
    *   selected   – initial selection (array of indices)
    *   onChange   – called with the selection array whenever it changes
    *   reveal     – true to render already graded (read-only)
-   *   checkable  – true to add a "Kiểm tra" button (notes quiz)
-   *   onGrade    – called with (ok, selection) when the user checks an answer
+   *   instant    – learning mode: clicking an option grades it at once (Choose TWO: once both are picked);
+   *                wrong pick turns light red, the right answer light green
+   *   checkable  – older mode with a "Kiểm tra" button
+   *   onGrade    – called with (ok, selection) when the answer is graded by the user
    *   meta       – small HTML line shown under the explanation (e.g. related lessons)
+   *   html       – q.q and q.options are trusted-ish HTML (sanitised to a few inline tags)
+   *   explainHtml – HTML for the explanation box instead of q.explain
    */
   function renderQuestion(q, opts) {
     opts = opts || {};
     var need = answerSet(q).length;
     var sel = (opts.selected || []).slice();
-    var wrap = el("div", { class: "q" });
-    var head = el("p", { class: "qt" }, '<span class="n">' + esc(opts.num || "") + "</span>" + esc(q.q));
+    var txt = opts.html ? sanitize : esc;
+    var wrap = el("div", { class: "q" + (opts.instant ? " instant" : "") });
+    var head = el("p", { class: "qt" }, '<span class="n">' + esc(opts.num || "") + "</span>" + txt(q.q));
     wrap.appendChild(head);
-    if (isMulti(q)) wrap.appendChild(el("p", { class: "hint", text: "Chọn " + need + " đáp án." }));
+    if (isMulti(q)) wrap.appendChild(el("p", { class: "hint", text: "Chọn " + need + " đáp án." + (opts.instant ? " Chọn đủ " + need + " thì chấm." : "") }));
     var list = el("div", { class: "opts" });
     var buttons = q.options.map(function (o, i) {
-      var b = el("button", { type: "button", class: "opt" }, '<span class="l">' + LETTERS[i] + "</span><span>" + esc(o) + "</span>");
+      var b = el("button", { type: "button", class: "opt" }, '<span class="l">' + LETTERS[i] + "</span><span>" + txt(o) + "</span>");
       b.addEventListener("click", function () {
         if (wrap.dataset.locked) return;
         var at = sel.indexOf(i);
-        if (need === 1) sel = at === -1 ? [i] : [];
+        if (need === 1) sel = at === -1 || opts.instant ? [i] : [];
         else if (at !== -1) sel.splice(at, 1);
         else if (sel.length < need) sel.push(i);
         else { sel.shift(); sel.push(i); }
         paint();
         if (opts.onChange) opts.onChange(sel.slice());
+        if (opts.instant && sel.length === need) grade();
       });
       list.appendChild(b);
       return b;
@@ -96,7 +120,15 @@
     wrap.appendChild(list);
 
     var act, checkBtn, verdict, explainBox;
-    if (opts.checkable) {
+    if (opts.instant) {
+      act = el("div", { class: "qact" });
+      verdict = el("span", { class: "verdict" });
+      checkBtn = el("button", { type: "button", class: "btn ghost small", text: "Làm lại" });
+      checkBtn.hidden = true;
+      act.appendChild(verdict); act.appendChild(checkBtn);
+      wrap.appendChild(act);
+      checkBtn.addEventListener("click", function () { reset(); });
+    } else if (opts.checkable) {
       act = el("div", { class: "qact" });
       checkBtn = el("button", { type: "button", class: "btn", text: "Kiểm tra" });
       verdict = el("span", { class: "verdict" });
@@ -110,7 +142,7 @@
 
     function paint() {
       buttons.forEach(function (b, i) { b.classList.toggle("sel", sel.indexOf(i) !== -1); });
-      if (checkBtn && !wrap.dataset.locked) checkBtn.disabled = sel.length !== need;
+      if (checkBtn && !opts.instant && !wrap.dataset.locked) checkBtn.disabled = sel.length !== need;
     }
 
     function grade() {
@@ -124,11 +156,18 @@
       });
       var ok = sameSet(sel, right);
       if (opts.onGrade && !opts.reveal) opts.onGrade(ok, sel.slice());
-      if (verdict) { verdict.textContent = ok ? "✓ Đúng" : "✗ Chưa đúng"; verdict.className = "verdict " + (ok ? "ok" : "bad"); }
-      if (checkBtn) { checkBtn.textContent = "Làm lại"; checkBtn.className = "btn ghost"; checkBtn.disabled = false; }
-      if (q.explain) {
-        explainBox = el("div", { class: "explain" }, "<b>Giải thích: </b>" + esc(q.explain) +
-          (opts.meta ? '<div class="qmeta">' + opts.meta + "</div>" : ""));
+      var rightLetters = right.map(function (i) { return LETTERS[i]; }).join(", ");
+      if (verdict) {
+        verdict.textContent = ok ? "✓ Đúng" : (sel.length ? "✗ Sai · đáp án đúng: " + rightLetters : "Chưa trả lời · đáp án đúng: " + rightLetters);
+        verdict.className = "verdict " + (ok ? "ok" : "bad");
+      }
+      if (checkBtn) {
+        if (opts.instant) checkBtn.hidden = !!opts.reveal && !opts.retry;
+        else { checkBtn.textContent = "Làm lại"; checkBtn.className = "btn ghost"; checkBtn.disabled = false; }
+      }
+      var ex = opts.explainHtml || (q.explain ? "<b>Giải thích: </b>" + esc(q.explain) : "");
+      if (ex || opts.meta) {
+        explainBox = el("div", { class: "explain" }, ex + (opts.meta ? '<div class="qmeta">' + opts.meta + "</div>" : ""));
         wrap.appendChild(explainBox);
       }
       return ok;
@@ -139,8 +178,12 @@
       sel = [];
       buttons.forEach(function (b) { b.disabled = false; b.classList.remove("right", "wrong", "sel"); });
       if (verdict) { verdict.textContent = ""; verdict.className = "verdict"; }
-      if (checkBtn) { checkBtn.textContent = "Kiểm tra"; checkBtn.className = "btn"; }
+      if (checkBtn) {
+        if (opts.instant) checkBtn.hidden = true;
+        else { checkBtn.textContent = "Kiểm tra"; checkBtn.className = "btn"; }
+      }
       if (explainBox) { explainBox.remove(); explainBox = null; }
+      if (opts.onReset) opts.onReset();
       paint();
     }
 
@@ -218,7 +261,7 @@
 
   window.CCN = {
     lessonNum: lessonNum, relatedLinks: relatedLinks, scenarioOf: scenarioOf,
-    store: store, esc: esc, el: el, renderQuestion: renderQuestion,
+    store: store, esc: esc, el: el, renderQuestion: renderQuestion, sanitize: sanitize,
     answerSet: answerSet, sameSet: sameSet, LETTERS: LETTERS,
     qid: qid, allQuestions: allQuestions, notebook: notebook
   };

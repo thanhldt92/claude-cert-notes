@@ -214,3 +214,79 @@ footer{margin-top:32px;font-size:.8rem;color:var(--muted)}
 .wq .q{border-top:0;padding-top:4px}
 @media (max-width:560px){.lesson>summary .tags{display:none}}
 @media (max-width:560px){.topbar .nb{display:none}}
+
+/* ---- answer feedback: light green for the right answer, light red for a wrong pick ---- */
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.right .l{background:transparent;border-color:var(--ok);color:var(--ok)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt.wrong .l{background:transparent;border-color:var(--bad);color:var(--bad)}
+.opt:disabled{color:inherit;opacity:1}
+.q.instant .opt.sel{border-color:var(--accent);background:var(--surface-2)}
+.q.instant .opt.sel .l{background:transparent;border-color:var(--accent);color:var(--accent)}
+.btn.small{padding:3px 10px;font-size:.8rem}
+.q .qact .verdict{margin-right:auto}
+
+/* ---- certsafari notebook ---- */
+.cs-layout{max-width:1240px;margin:0 auto;padding:0 16px;display:grid;grid-template-columns:260px minmax(0,1fr);gap:28px}
+.cs-side{position:sticky;top:58px;align-self:start;max-height:calc(100vh - 58px);overflow-y:auto;padding:18px 0 32px}
+.cs-main{padding:24px 0 80px;min-width:0;max-width:880px}
+.cs-statbtn{width:100%;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:10px 12px;font-weight:600}
+.cs-statbtn.on,.cs-statbtn:hover{border-color:var(--accent);background:var(--accent-soft)}
+.cs-label{font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:16px 0 6px}
+.cs-de{border:1px solid var(--line);border-radius:10px;background:var(--surface);margin-bottom:8px;padding:0 10px}
+.cs-de>summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:8px;padding:9px 0;font-size:.9rem}
+.cs-de>summary::-webkit-details-marker{display:none}
+.cs-de>summary span{color:var(--muted);font-size:.8rem}
+.cs-de.cur{border-color:var(--accent)}
+.cs-de.cur>summary b{color:var(--accent)}
+.cs-de .hint{margin:0 0 6px}
+.cs-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;padding-bottom:10px}
+.cs-grid button{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:4px 0;font-size:.8rem}
+.cs-grid button.right{background:var(--ok-soft);border-color:var(--ok)}
+.cs-grid button.wrong{background:var(--bad-soft);border-color:var(--bad)}
+.cs-head h1{margin:0 0 6px;font-size:1.6rem}
+.cs-bar{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin:14px 0 6px;font-size:.9rem}
+.cs-bar label{display:flex;gap:6px;align-items:center}
+.cs-card .cs-meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 6px}
+.cs-card .q{border-top:0;padding-top:0}
+.cs-card .qt{font-weight:600}
+.cs-scen{margin-top:20px}
+.cs-x{margin-top:12px;border-top:1px dashed var(--line);padding-top:6px;font-size:.93rem}
+.cs-x h4{margin:14px 0 4px}
+.cs-x ul{margin:4px 0;padding-left:20px}
+.cs-opt{border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin:6px 0}
+.cs-opt.ok{border-color:var(--ok);background:var(--ok-soft)}
+.cs-opt.ok>b{color:var(--ok)}
+.cs-opt.no>b{color:var(--bad)}
+.cs-toggle{display:none}
+@media (max-width:1000px){
+  .cs-layout{grid-template-columns:1fr;gap:0}
+  .cs-side{position:fixed;inset:52px 0 0 0;max-height:none;z-index:15;background:var(--bg);padding:16px;display:none}
+  .cs-drawer .cs-side{display:block}
+  .cs-toggle{display:inline-block}
+}
+
+/* ---- stat cards, study plan, learn / cheatsheet-only mode ---- */
+.statcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:14px 0}
+.statcards .stat .v{font-size:1.3rem}
+.plan{margin-top:16px}
+.pfields{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px 16px;margin:10px 0}
+.pf{display:flex;flex-direction:column;gap:4px;font-size:.88rem;color:var(--muted)}
+.pf input{font:inherit;padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.pf small{font-weight:600;color:var(--ink)}
+.pweek{border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-top:10px;background:var(--surface-2)}
+.pweek.last{border-color:var(--warn);background:var(--warn-soft)}
+.pwhead{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:.92rem}
+.pwhead span{color:var(--muted);font-size:.82rem}
+.pweek ul{margin:6px 0 0;padding-left:20px;font-size:.9rem}
+.pweek a{color:var(--ink)}
+.pweek p{margin:6px 0 0;font-size:.9rem}
+.toc .modes{margin-bottom:14px}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}
+.seg button{border:1px solid var(--line);background:var(--surface);border-radius:9px;padding:7px 6px;font-size:.85rem;font-weight:600}
+.seg button.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.toc ul a .tt{flex:1}
+.toc ul a .tts{flex:none;font-size:.68rem;font-weight:600;color:var(--info);white-space:nowrap;margin-top:2px}
+body.cheat-only .lesson,body.cheat-only .dintro,body.cheat-only [id^="quiz-"],body.cheat-only .plan,body.cheat-only .guide,
+body.cheat-only .toc li[data-domain="guide"],body.cheat-only .toc ul li:not(.extra){display:none}
+body.cheat-only .summary,body.cheat-only [id^="cheat-"]{margin-top:12px}

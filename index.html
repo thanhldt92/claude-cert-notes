@@ -31,6 +31,7 @@
         <li><a href="ccar-f/notes.html"><b>Bài học</b><small data-lessons>Bài theo domain, cheatsheet, quiz</small></a></li>
         <li><a href="ccar-f/exam.html"><b>Thi thử và luyện tập</b><small data-exam>Đề có hẹn giờ, luyện theo domain, luyện câu sai</small></a></li>
         <li><a href="ccar-f/wrong.html"><b>Sổ câu sai</b><small>Câu bạn từng làm sai, thống kê chỗ yếu, luyện lại</small></a></li>
+        <li data-local hidden><a href="ccar-f/certsafari.html"><b>Sổ ôn certsafari</b><small>Bộ đề team đã mua, phân tích từng câu · chỉ có trên máy này</small></a></li>
       </ul>
     </section>
 
@@ -78,11 +79,15 @@
 <script>CERTS["ccdv-f"] = window.CERT_DATA; window.CERT_DATA = null;</script>
 <script>
 (function () {
+  // the purchased certsafari notebook is local-only: show its link only when the site is opened from disk
+  if (location.protocol === "file:") document.querySelectorAll("[data-local]").forEach(function (n) { n.hidden = false; });
   document.querySelectorAll(".card[data-cert]").forEach(function (card) {
     var key = card.dataset.cert, D = CERTS[key];
 
     var badge = card.querySelector("[data-deadline]");
-    var date = EXAM_DATES[key];
+    // exam date: the one set in the notes page study plan wins over EXAM_DATES
+    var planned = D ? (CCN.store.get(D.storageKey + "-plan", {}) || {}).exam : null;
+    var date = planned || EXAM_DATES[key];
     if (date) {
       var p = date.split("-");
       var days = Math.ceil((new Date(+p[0], +p[1] - 1, +p[2]) - new Date().setHours(0, 0, 0, 0)) / 864e5);
